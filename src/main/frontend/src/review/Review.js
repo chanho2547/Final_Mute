@@ -10,9 +10,6 @@ import ReviewTotal from "./ReviewTotal";
 import ReviewSeat from "./ReviewSeat";
 import Theater from "../theaterInfo/Theater";
 
-
-// 후기 view - 도연 작업중
-
 const TmpBox = styled.div`
    
     width: 90%;
@@ -39,16 +36,12 @@ const Review = () => {
     const [musical, setMusical] = useState(''); // 공연 ID
     const [member, setMember] = useState(''); // 회원번호
     const [writeDate, setWriteDate] = useState(''); // 작성일
-
     const [scoreTotal, setscoreTotal] = useState(''); // 별점 총점
-
     const [scoreStory, setScoreStory] = useState(''); // 스토리 별점
     const [scoreDirect, setScoreDirect] = useState(''); // 연출 별점
     const [scoreCast, setScoreCast] = useState(''); // 캐스팅 별점
     const [scoreNumber, setScoreNumber] = useState(''); // 넘버 별점
-
     const [reviewMuTxt, setReviewMuTxt] = useState(''); // 뮤지컬 후기 텍스트
-
     const [submit, setSubmit] = useState(false); // 서버로 전송할 수 있는 조건 체크
     const [resData, setResData] = useState(''); // 서버에서 받는 결과 데이터
 
