@@ -25,4 +25,13 @@ SpringBoot + React 뮤지컬 정보 및 예매 사이트
 - Server : Tomcat9.0
 - Framework : Spring Boot, Spring MVC
 
+ ## 라이브러리 설치
+yarn install
+yarn add react-router-dom
+yarn add styled-components
+yarn add react-icons
+yarn add moment
+yarn add react-calendar
+yarn add react-daum-postcode
+
 
