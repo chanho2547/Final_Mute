@@ -1,0 +1,372 @@
+
+
+/* 샤롯데씨어터 */
+#charlottetheater.A1A1 .row,#charlottetheater.A1A2 .row{
+  justify-content: flex-end;
+}
+#charlottetheater.A1A1, #charlottetheater.A1A2{
+  padding-left: 50px;
+}
+#charlottetheater.C1C1, #charlottetheater.C1C2{
+  padding-right: 50px;
+}
+#charlottetheater.B1B1 .row,#charlottetheater.B1B2 .row{
+  justify-content : center;
+} 
+#charlottetheater.AA1, #charlottetheater.BB1, #charlottetheater.AA2, #charlottetheater.BB2{
+  margin-top : 50px;
+}
+#charlottetheater.A1A1, #charlottetheater.B1B1, #charlottetheater.A1A2, #charlottetheater.B1B2{
+  padding-right : 20px;
+}
+#charlottetheater.B1B1, #charlottetheater.C1C1, #charlottetheater.B1B2, #charlottetheater.C1C2{
+  padding-left : 20px;
+}
+
+
+/* 충무아트 대극장 */
+#chungmu_grand.AA1 .row {
+  justify-content: flex-end;
+  padding-right: 25px;
+  padding-left: 50px;
+}
+
+#chungmu_grand.BB1 {
+  display: block;  
+}
+
+#chungmu_grand.BB1 .row {
+  justify-content: center;
+  padding-left : 25px;
+  padding-right : 25px;   
+}
+
+#chungmu_grand.CC1 .row {
+  justify-content : flex-start;
+  padding-left : 25px;
+  padding-right: 50px;
+}
+
+#chungmu_grand.AA2 .row {
+  justify-content: flex-end;
+  padding-left: 50px;
+  padding-right : 25px;
+}
+
+#chungmu_grand.BB2 .row {
+  justify-content: center;
+  padding-left : 25px;
+  padding-right : 25px;   
+}
+
+#chungmu_grand.CC2 .row {
+  justify-content : flex-start;
+  padding-left : 25px;
+  padding-right: 50px;
+}
+
+#chungmu_grand.AA3 .row {
+  justify-content: flex-end;
+  padding-left: 50px;
+  padding-right : 25px;
+
+}
+
+#chungmu_grand.BB3 .row {
+  justify-content: center;
+  padding-left : 25px;
+  padding-right : 25px;   
+}
+
+#chungmu_grand.CC3 .row {
+  justify-content : flex-start;
+  padding-left : 25px;
+  padding-right: 50px;
+}
+
+
+
+
+
+
+
+/* 샤롯데 */
+/* .A1A1 .row,.A1A2 .row{
+    justify-content: flex-end;
+}
+.A1A1, .A1A2{
+    padding-left: 50px;ㅁ
+}
+.C1C1, .C1C2{
+    padding-right: 50px;
+}
+.B1B1 .row,.B1B2 .row{
+    justify-content : center;
+} 
+.AA1, .BB1, .AA2, .BB2{
+    margin-top : 50px;
+}
+.A1A1, .B1B1, .A1A2, .B1B2{
+    padding-right : 20px;
+}
+.B1B1, .C1C1, .B1B2, .C1C2{
+    padding-left : 20px;
+} */
+
+
+
+
+
+/* 충무아트 좌석 정보 */
+/* .AA1 .row {
+  justify-content: flex-end;
+  padding-right: 25px;
+  padding-left: 50px;
+}
+
+.AA1 {
+  margin-top: 0;
+} 
+
+.BB1 {
+  display: block;  
+  margin-top: 0;
+}
+
+.BB1 .row {
+  justify-content: center;
+  padding-left : 25px;
+  padding-right : 25px;   
+}
+
+.CC1 .row {
+  justify-content : flex-start;
+  padding-left : 25px;
+  padding-right: 50px;
+}
+
+
+
+.AA2 .row {
+  justify-content: flex-end;
+  padding-left: 50px;
+  padding-right : 25px;
+}
+
+.AA2 {
+  margin-top: 0;
+}
+
+.BB2 .row {
+  justify-content: center;
+  padding-left : 25px;
+  padding-right : 25px;   
+}
+
+.BB2 {
+  margin-top: 0;
+}
+
+.CC2 .row {
+  justify-content : flex-start;
+  padding-left : 25px;
+  padding-right: 50px;
+}
+
+.AA3 .row {
+  justify-content: flex-end;
+  padding-left: 50px;
+  padding-right : 25px;
+
+}
+
+.BB3 .row {
+  justify-content: center;
+  padding-left : 25px;
+  padding-right : 25px;   
+}
+
+.CC3 .row {
+  justify-content : flex-start;
+  padding-left : 25px;
+  padding-right: 50px;
+} */
+
+
+
+
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+  
+  /* 스크롤바 안보이게 */
+  body {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    overflow-y: scroll;
+    zoom: normal;
+  }
+  body::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
+  
+  .seat_all {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .seat_all::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
+  
+  /*baseseeya 메뉴바 a 태그 */
+  .dropdown-list a {
+    color: #74809d;
+    display: block;
+  }
+  
+  .seat-all {
+    width: max-content;
+    overflow: auto;
+    margin: 0 auto;
+    display: block;
+  }
+  
+  /* 스크롤바 안보이게 */
+  .floor {
+    padding-bottom: 40px;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    overflow-y: scroll;
+    zoom: normal;
+  }
+  .floor::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
+  
+  .seattable_zone_container {
+    height: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+  /* 열 flex */
+  .row {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  
+  .seats {
+    cursor: pointer;
+  }
+
+  /* 좌석 크기 */
+  #seat,
+  #row_zone {
+    height: 22px;
+    /* a태그가 seat 전체를 클릭할 수 있도록 하기 위해 */
+    float: left;
+    /* seat 안의 좌석 번호 중앙 정렬 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 10%;
+    margin: 2.5px;
+  }
+  
+  #seat {
+    width: 22px;
+  }
+  
+  #row_zone {
+    min-width: 20px;
+  }
+  
+  /* 실제 좌석 */
+  .real {
+    border: 1px solid black;
+  }
+  .disabled {
+
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+  
+  /* 좌석 색상 */
+  .red {
+    background-color: #f22713;
+    opacity: 80%;
+  }
+  .orange {
+    background-color: #ffd29f;
+  }
+  .yellow {
+    background-color: #ffe647;
+  }
+  .lightgreen {
+    background-color: #87d37c;
+  }
+  .green {
+    background-color: #00b16a;
+  }
+  .skyblue {
+    background-color: skyblue;
+  }
+  .purple {
+    background-color: rgb(246, 159, 246);
+  }
+  .no_review {
+    background-color: #ebebeb;
+  }
+  .seats > .btn {
+    margin: 60px;
+    padding: 20px 40px;
+    font-size: 30px;
+    border-radius: 40px;
+  }
+  
+  
+
+  
+  /*좌석표*/
+  .seating_table_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px;
+    font-weight: bolder;
+  }
+  .rating-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px;
+  }
+  .floor_container {
+    display: flex;
+    justify-content: center;
+
+  }
+  #seattable_zone {
+    color: black;
+    font-weight: bolder;
+  }
+  .row_zone p {
+    font-size: 1em;
+    color: black;
+  }
+  #seat p {
+    font-size: 0.7em;
+  }
+  
+ 
+ 
+  
+  
