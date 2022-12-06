@@ -38,6 +38,14 @@ const ReviewSeat = () => {
 
     
 
+    const OnClickBefore = () => {   
+        window.location.replace('/ReviewTotal');
+    }
+
+    const CancelButton = () => {   
+        window.location.replace('/ReviewTotal');
+    }
+
     // 후기 작성 버튼
     const WriteSeatButton = (props) => {
         return (
@@ -46,11 +54,6 @@ const ReviewSeat = () => {
             </>
         );
     }
-
-    const OnClickToList = () => {   
-        window.location.replace('/ReviewList');
-    }
-
 
     // Api 호출
     // 후기 작성 버튼이 눌려지면 동작하는 함수
@@ -68,6 +71,7 @@ const ReviewSeat = () => {
     return(
         <>
             <div>좌석 후기</div>
+            <button onClick={OnClickBefore}>이전으로</button>
             <div>
                 <fieldset>
                     <div> 좌석 <Rating/></div>
@@ -81,6 +85,7 @@ const ReviewSeat = () => {
                     <textarea placeholder="관람하신 좌석의 후기를 작성해주세요."></textarea>
                 </fieldset>
                 <button onClick={WriteSeatButton}>확인</button>
+                <button onClick={CancelButton}>취소</button>
             </div>
         </>
     );

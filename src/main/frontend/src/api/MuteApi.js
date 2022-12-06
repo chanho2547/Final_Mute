@@ -28,8 +28,8 @@ const MuteApi =  {
             return await axios.post(MUTE_DOMAIN + "member/signup", signUpObj, HEADER);
         },
 
-    // 후기 작성 - 도연
-    WriteReview: async function(reviewMuId, musical, member, writeDate, scoreStory, scoreDirect, scoreCast, scoreNumber, reviewMuTxt) {
+    // 총평 후기 작성 - 도연
+    WriteTotal: async function(reviewMuId, musical, member, writeDate, scoreStory, scoreDirect, scoreCast, scoreNumber, reviewMuTxt) {
         const reviewObj = {
             reviewMuId : reviewMuId, // 뮤지컬 후기 글 번호
             musical : musical, // 공연 ID
@@ -41,34 +41,50 @@ const MuteApi =  {
             scoreNumber : scoreNumber, // 넘버 별점
             reviewMuTxt : reviewMuTxt // 뮤지컬 후기 텍스트
         }
-        return await axios.post(MUTE_DOMAIN + "review/writeReview", reviewObj, HEADER);
+        return await axios.post(MUTE_DOMAIN + "review/writeTotal", reviewObj, HEADER);
     },
 
-    // 후기 삭제 - 도연
-    DeleteReview : async function(reviewMuId, musical, member) {
-        const reviewObj = {
-            reviewMuId : reviewMuId, // 뮤지컬 후기 글 번호
-            musical : musical, // 공연 ID
-            member : member // 회원번호
-        }
-        return await axios.post(MUTE_DOMAIN + "review/deleteReview", reviewObj, HEADER);
-    },
-
-    // 뮤지컬 후기 view - 도연
-    ReviewInfo : async function(reviewMuId, musical, member, writeDate, scoreStory, scoreDirect, scoreCast, scoreNumber, reviewMuTxt) {
+     // 좌석 후기 작성 - 도연
+     WriteSeat: async function(reviewMuId, musical, member, writeDate, seatRating, viewRating, soundRating, lightRating, seatReview) {
         const reviewObj = {
             reviewMuId : reviewMuId, // 뮤지컬 후기 글 번호
             musical : musical, // 공연 ID
             member: member, // 회원번호
             writeDate : writeDate, // 작성일
-            scoreStory: scoreStory,// 스토리 별점
-            scoreDirect: scoreDirect, // 연출 별점
-            scoreCast : scoreCast, // 캐스팅 별점
-            scoreNumber : scoreNumber, // 넘버 별점
-            reviewMuTxt : reviewMuTxt // 뮤지컬 후기 텍스트
+            scoreStory: seatRating,// 좌석 별점
+            scoreDirect: viewRating, // 시야 별점
+            scoreCast : soundRating, // 음향 별점
+            scoreNumber : lightRating, // 조명 별점
+            reviewMuTxt : seatReview // 뮤지컬 후기 텍스트
         }
-        return await axios.post(MUTE_DOMAIN + "review/ReviewInfo", reviewObj, HEADER);
-    }
+        return await axios.post(MUTE_DOMAIN + "review/writeSeat", reviewObj, HEADER);
+    },
+
+    // // 후기 삭제 - 도연
+    // DeleteReview : async function(reviewMuId, musical, member) {
+    //     const reviewObj = {
+    //         reviewMuId : reviewMuId, // 뮤지컬 후기 글 번호
+    //         musical : musical, // 공연 ID
+    //         member : member // 회원번호
+    //     }
+    //     return await axios.post(MUTE_DOMAIN + "review/deleteReview", reviewObj, HEADER);
+    // },
+
+    // // 뮤지컬 후기 view - 도연
+    // ReviewInfo : async function(reviewMuId, musical, member, writeDate, scoreStory, scoreDirect, scoreCast, scoreNumber, reviewMuTxt) {
+    //     const reviewObj = {
+    //         reviewMuId : reviewMuId, // 뮤지컬 후기 글 번호
+    //         musical : musical, // 공연 ID
+    //         member: member, // 회원번호
+    //         writeDate : writeDate, // 작성일
+    //         scoreStory: scoreStory,// 스토리 별점
+    //         scoreDirect: scoreDirect, // 연출 별점
+    //         scoreCast : scoreCast, // 캐스팅 별점
+    //         scoreNumber : scoreNumber, // 넘버 별점
+    //         reviewMuTxt : reviewMuTxt // 뮤지컬 후기 텍스트
+    //     }
+    //     return await axios.post(MUTE_DOMAIN + "review/ReviewInfo", reviewObj, HEADER);
+    // }
 
 
 }
