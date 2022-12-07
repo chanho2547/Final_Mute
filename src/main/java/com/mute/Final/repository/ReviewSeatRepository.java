@@ -12,7 +12,6 @@ public interface ReviewSeatRepository extends JpaRepository<ReviewSeat,Long> {
 
     // 좌석번호별 후기 개수
     // select count(*) from review_seat where seat_num = 8450; //  => 만들어야 하는 쿼리
-
     // Long countBySeatNum(int seatNum); // Long타입..?     // JPA쿼리
     // @Query(value = "count")     // native쿼리
 
