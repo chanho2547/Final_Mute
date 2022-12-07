@@ -4,10 +4,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import MuteApi from "../api/MuteApi";
 import Rating from "../util/Rating";
-import ReviewModal from "../review/ReviewModal";
-import ReviewList from "./ReviewList";
-import ReviewSeat from "./ReviewSeat";
-import Theater from "../theaterInfo/Theater";
+
 
 const ReviewTotal = () => {
 
@@ -24,18 +21,20 @@ const ReviewTotal = () => {
        
     }
 
-    const [reviewMuId, setReviewMuId] = useState(''); // 뮤지컬 후기 글 번호
-    const [musical, setMusical] = useState(''); // 공연 ID
-    const [member, setMember] = useState(''); // 회원번호
-    const [writeDate, setWriteDate] = useState(''); // 작성일
     const [scoreStory, setScoreStory] = useState(''); // 스토리 별점
     const [scoreDirect, setScoreDirect] = useState(''); // 연출 별점
     const [scoreCast, setScoreCast] = useState(''); // 캐스팅 별점
     const [scoreNumber, setScoreNumber] = useState(''); // 넘버 별점
     const [totalReview, setTotalReview] = useState(''); // 뮤지컬 후기 텍스트
-    const [submit, setSubmit] = useState(false); // 서버로 전송할 수 있는 조건 체크
-    const [resData, setResData] = useState(''); // 서버에서 받는 결과 데이터
 
+
+    const OnClickBefore = () => {   
+        window.location.replace('/ReviewList');
+    }
+
+    const CancelButton = () => {   
+        window.location.replace('/Review');
+    }
 
     // // 후기 작성 버튼
     // const WriteTotalButton = (props) => {
@@ -46,29 +45,16 @@ const ReviewTotal = () => {
     //     );
     // }
 
-    const OnClickBefore = () => {   
-        window.location.replace('/ReviewList');
-    }
-
-    const CancelButton = () => {   
-        window.location.replace('/ReviewList');
-    }
-
-    // 후기 작성 버튼
-    const WriteTotalButton = (props) => {
-        return (
-            <>
-                <button onClick={OnClickTotalWrite} >{props.text}</button>
-            </>
-        );
-    }
-
     // Api 호출
     // 후기 작성 버튼이 눌려지면 동작하는 함수
-    const OnClickTotalWrite = async() => {
+    const WriteTotalButton = async() => {
         try {
-            const res =  await MuteApi.WriteReview(reviewMuId, musical, member, writeDate, scoreStory, scoreDirect, scoreCast, scoreNumber, totalReview);
-            setResData(res.data);
+            const res =  await MuteApi.WriteTotal(scoreStory, scoreDirect, scoreCast, scoreNumber, totalReview);
+            setScoreStory(res.data);
+            setScoreDirect(res.data);
+            setScoreCast(res.data);
+            setScoreNumber(res.data);
+            setTotalReview(res.data);
 
         } catch (e) {
             alert("오류 : " + e);

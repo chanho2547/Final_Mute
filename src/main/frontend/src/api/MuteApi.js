@@ -29,12 +29,8 @@ const MuteApi =  {
         },
 
     // 총평 후기 작성 - 도연
-    WriteTotal: async function(reviewMuId, musical, member, writeDate, scoreStory, scoreDirect, scoreCast, scoreNumber, reviewMuTxt) {
+    WriteTotal: async function(scoreStory, scoreDirect, scoreCast, scoreNumber, reviewMuTxt) {
         const reviewObj = {
-            reviewMuId : reviewMuId, // 뮤지컬 후기 글 번호
-            musical : musical, // 공연 ID
-            member: member, // 회원번호
-            writeDate : writeDate, // 작성일
             scoreStory: scoreStory,// 스토리 별점
             scoreDirect: scoreDirect, // 연출 별점
             scoreCast : scoreCast, // 캐스팅 별점
@@ -45,12 +41,8 @@ const MuteApi =  {
     },
 
      // 좌석 후기 작성 - 도연
-     writeSeat: async function(reviewMuId, musical, member, writeDate, seatRating, viewRating, soundRating, lightRating, seatReview) {
+     WriteSeat: async function(seatRating, viewRating, soundRating, lightRating, seatReview) {
         const reviewObj = {
-//            reviewMuId : reviewMuId, // 뮤지컬 후기 글 번호
-//            musical : musical, // 공연 ID
-//            member: member, // 회원번호
-//            writeDate : writeDate, // 작성일
             scoreStory: seatRating,// 좌석 별점
             scoreDirect: viewRating, // 시야 별점
             scoreCast : soundRating, // 음향 별점
