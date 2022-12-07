@@ -1,5 +1,5 @@
 package com.mute.Final.service;
-import com.mute.Final.entity.ReviewMusical;
+import com.mute.Final.entity.ReviewTotal;
 import com.mute.Final.entity.ReviewSeat;
 import com.mute.Final.repository.ReviewSeatRepository;
 import com.mute.Final.repository.ReviewTotalRepository;
@@ -18,13 +18,13 @@ public class WriteService {
 
     // 총평 후기 작성
     public boolean writeTotal(String scoreStory, String scoreDirect, String scoreCast, String scoreNumber, String reviewMuTxt){
-        ReviewMusical reviewMusical  = new ReviewMusical();
-        reviewMusical.setScoreStory(Integer.parseInt(scoreStory));
-        reviewMusical.setScoreDirect(Integer.parseInt(scoreDirect));
-        reviewMusical.setScoreCast(Integer.parseInt(scoreCast));
-        reviewMusical.setScoreNumber(Integer.parseInt(scoreNumber));
-        reviewMusical.setReviewMuTxt(reviewMuTxt);
-        reviewTotalRepository.save(reviewMusical);
+        ReviewTotal reviewTotal = new ReviewTotal();
+        reviewTotal.setScoreStory(Integer.parseInt(scoreStory));
+        reviewTotal.setScoreDirect(Integer.parseInt(scoreDirect));
+        reviewTotal.setScoreCast(Integer.parseInt(scoreCast));
+        reviewTotal.setScoreNumber(Integer.parseInt(scoreNumber));
+        reviewTotal.setReviewMuTxt(reviewMuTxt);
+        reviewTotalRepository.save(reviewTotal);
         return true;
     }
 

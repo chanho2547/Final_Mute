@@ -3,6 +3,8 @@ import com.mute.Final.service.WriteService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
 import java.util.Map;
 
 // 좌석 후기 등록 - 도연 작업중..
@@ -21,10 +23,10 @@ public class WriteController {
     // 총평 후기 작성
     @PostMapping("/writeTotal")
     public ResponseEntity<Boolean> writeTotal(@RequestBody Map<String, String> writeTotalData) {
-        String  scoreStory = writeTotalData.get("scoreStory");
-        String  scoreDirect = writeTotalData.get("scoreDirect");
-        String  scoreCast = writeTotalData.get("scoreCast");
-        String  scoreNumber = writeTotalData.get("scoreNumber");
+        String scoreStory = writeTotalData.get("scoreStory");
+        String scoreDirect = writeTotalData.get("scoreDirect");
+        String scoreCast = writeTotalData.get("scoreCast");
+        String scoreNumber = writeTotalData.get("scoreNumber");
         String reviewMuTxt = writeTotalData.get("reviewMuTxt");
 
         boolean result = writeService.writeTotal(scoreStory, scoreDirect, scoreCast, scoreNumber, reviewMuTxt);
@@ -41,10 +43,10 @@ public class WriteController {
     // 좌석 후기 작성
     @PostMapping("/writeSeat")
     public ResponseEntity<Boolean> writeSeat(@RequestBody Map<String, String> writeSeatData) {
-        String  scoreSeat = writeSeatData.get("scoreSeat");
-        String  scoreView = writeSeatData.get("scoreView");
-        String  scoreSound = writeSeatData.get("scoreSound");
-        String  scoreLight = writeSeatData.get("scoreLight");
+        String scoreSeat = writeSeatData.get("scoreSeat");
+        String scoreView = writeSeatData.get("scoreView");
+        String scoreSound = writeSeatData.get("scoreSound");
+        String scoreLight = writeSeatData.get("scoreLight");
         String reviewSeTxt = writeSeatData.get("reviewSeTxt");
 
         boolean result = writeService.writeSeat(scoreSeat, scoreView, scoreSound, scoreLight, reviewSeTxt);

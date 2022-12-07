@@ -8,10 +8,10 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "review_musical") // 뮤지컬 후기 테이블
-public class ReviewMusical {
+public class ReviewTotal {
     @Id
     @GeneratedValue
-    private Long reviewMuId; // 뮤지컬후기 글 번호
+    private Long reviewMuId; // 총평 후기 글 번호
 
     @ManyToOne
     @JoinColumn(name = "musical_id")
@@ -29,6 +29,6 @@ public class ReviewMusical {
     private double scoreAvgMusical; // 평균 별점
 
     @Lob
-    private String reviewMuTxt; // 뮤지컬 후기 텍스트
+    private String reviewMuTxt; // 총평 후기 텍스트
 
 }

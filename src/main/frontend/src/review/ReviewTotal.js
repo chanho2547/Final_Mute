@@ -47,36 +47,39 @@ const ReviewTotal = () => {
     //     );
     // }
 
-    const OnClickToList = () => {   
+    const OnClickBefore = () => {   
         window.location.replace('/ReviewList');
     }
 
+    const CancelButton = () => {   
+        window.location.replace('/ReviewList');
+    }
 
-    // // Api 호출
-    // // 후기 작성 버튼이 눌려지면 동작하는 함수
-    // const OnClickTotalWrite = () => {
-    //     setMuModalOpen(true);
-    // };
+    // 후기 작성 버튼
+    const WriteTotalButton = (props) => {
+        return (
+            <>
+                <button onClick={OnClickTotalWrite} >{props.text}</button>
+            </>
+        );
+    }
 
+    // Api 호출
+    // 후기 작성 버튼이 눌려지면 동작하는 함수
+    const OnClickTotalWrite = async() => {
+        try {
+            const res =  await MuteApi.WriteReview(reviewMuId, musical, member, writeDate, scoreStory, scoreDirect, scoreCast, scoreNumber, totalReview);
+            setResData(res.data);
 
-    // const closeModal = () => {
-    //     setMuModalOpen(false);
-    // };
-
-    // const confirmModal = async() => {
-    //     try {
-    //         const res =  await MuteApi.WriteReview(reviewMuId, musical, member, writeDate, scoreStory, scoreDirect, scoreCast, scoreNumber, reviewMuTxt);
-    //         setResData(res.data);
-
-    //     } catch (e) {
-    //         alert("오류 : " + e);
-    //     }
-    // };
+        } catch (e) {
+            alert("오류 : " + e);
+        }
+    };
 
     return(
         <>
             <div>총평 후기</div>
-
+            <button onClick={OnClickBefore}>이전으로</button>
             <div>
                 <fieldset>
                     {/* 총점은 평균내서 기본적으로 색깔 나와있게 수정하기 !!! */}
@@ -90,6 +93,8 @@ const ReviewTotal = () => {
                     <div>후기 작성</div>
                     <textarea placeholder="관람하신 뮤지컬의 총평을 작성해주세요."></textarea>
                 </fieldset>
+                <button onClick={WriteTotalButton}>확인</button>
+                <button onClick={CancelButton}>취소</button>
             </div>
 
         </>
