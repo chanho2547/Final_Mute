@@ -28,7 +28,6 @@ const ReviewTotal = () => {
     const [musical, setMusical] = useState(''); // 공연 ID
     const [member, setMember] = useState(''); // 회원번호
     const [writeDate, setWriteDate] = useState(''); // 작성일
-    // const [scoreTotal, setscoreTotal] = useState(''); // 별점 총점
     const [scoreStory, setScoreStory] = useState(''); // 스토리 별점
     const [scoreDirect, setScoreDirect] = useState(''); // 연출 별점
     const [scoreCast, setScoreCast] = useState(''); // 캐스팅 별점
@@ -83,15 +82,14 @@ const ReviewTotal = () => {
             <div>
                 <fieldset>
                     {/* 총점은 평균내서 기본적으로 색깔 나와있게 수정하기 !!! */}
-                    <div> 총점 <Rating/></div> 
-                    <div> 연출 <Rating/></div>
-                    <div> 스토리 <Rating/></div>
-                    <div> 캐스팅 <Rating/></div>
-                    <div> 넘버 <Rating/></div>
+                    <div> 연출 <Rating onClick={setScoreStory}/></div>
+                    <div> 스토리 <Rating onClick={setScoreDirect}/></div>
+                    <div> 캐스팅 <Rating onClick={setScoreCast}/></div>
+                    <div> 넘버 <Rating onClick={setScoreNumber}/></div>
                 </fieldset>
                 <fieldset>
                     <div>후기 작성</div>
-                    <textarea placeholder="관람하신 뮤지컬의 총평을 작성해주세요."></textarea>
+                    <textarea placeholder="관람하신 뮤지컬의 총평을 작성해주세요." onChange={setTotalReview}></textarea>
                 </fieldset>
                 <button onClick={WriteTotalButton}>확인</button>
                 <button onClick={CancelButton}>취소</button>

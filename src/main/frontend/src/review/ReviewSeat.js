@@ -36,6 +36,10 @@ const ReviewSeat = () => {
     const [submit, setSubmit] = useState(false); // 서버로 전송할 수 있는 조건 체크
     const [resData, setResData] = useState(''); // 서버에서 받는 결과 데이터
 
+    const [hovered, setHovered] = useState(null);
+    const [clicked, setClicked] = useState(null);
+  
+
     
 
     const OnClickBefore = () => {   
@@ -45,6 +49,8 @@ const ReviewSeat = () => {
     const CancelButton = () => {   
         window.location.replace('/ReviewTotal');
     }
+
+    
 
     // 후기 작성 버튼
     const WriteSeatButton = (props) => {
