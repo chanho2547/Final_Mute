@@ -26,6 +26,7 @@ public class ReviewMusical {
     private int scoreDirect; // 연출 별점
     private int scoreCast; // 캐스팅 별점
     private int scoreNumber; // 넘버 별점
+    private double scoreAvgMusical; // 평균 별점
 
     @Lob
     private String reviewMuTxt; // 뮤지컬 후기 텍스트

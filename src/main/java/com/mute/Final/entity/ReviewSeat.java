@@ -29,6 +29,7 @@ public class ReviewSeat {
     private int scoreView; // 시야 별점
     private int scoreSound; // 음향 별점
     private int scoreLight; // 조명 별점
+    private double scoreAvgSeat; // 평균 별점
 
     @Lob
     private String reviewSeTxt; // 좌석 후기 내용

@@ -19,7 +19,7 @@ public class ReviewSeatDTO {
     private int scoreView; // 시야 별점
     private int scoreSound; // 음향 별점
     private int scoreLight; // 조명 별점
-    private double scoreAvg; // 평균 좌석 별점
+    private double scoreAvgSeat; // 평균 좌석 별점
     private String reviewSeTxt; // 좌석 후기 내용
 
 }
