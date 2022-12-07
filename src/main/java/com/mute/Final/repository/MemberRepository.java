@@ -5,5 +5,8 @@ import java.util.List;
 public interface MemberRepository extends JpaRepository<Member, Long> {
     // 도연 - 로그인
     List<Member> findByUserIdAndPwd(String userId, String pwd);
-    List<Member> findByUserId (String userId);
+    //List<Member> findByUserId (String userId);
+    Member findByUserId(String userId);
+    Member findByMail (String mail);
+    Member findByPhone (String phone);
 }

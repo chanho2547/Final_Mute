@@ -2,6 +2,7 @@ package com.mute.Final.entity;
 import lombok.Data;
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 // 도연 작업완료
 @Data
@@ -22,4 +23,5 @@ public class Member {
     private String address; // 주소
     private LocalDateTime regData; // 가입일
     private LocalDateTime unRegData; // 탈퇴일
+
 }
