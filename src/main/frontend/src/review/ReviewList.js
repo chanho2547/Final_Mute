@@ -7,6 +7,7 @@ const ReviewList = () => {
    
 // 검색창
 const [muInput, setMuInput] = useState("");
+
 const onChangeInput = (e) => {
     setMuInput(e.target.value)
   };

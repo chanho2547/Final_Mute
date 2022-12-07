@@ -8,29 +8,24 @@ import Rating from "../util/Rating";
 
 const ReviewSeat = () => {
 
-    useEffect(()=>{
-        window.localStorage.setItem("seatInfoMode","NONE");
-    })
+    // useEffect(()=>{
+    //     window.localStorage.setItem("seatInfoMode","NONE");
+    // })
 
-    const [count, setCount] = useState(0)
+    // const [count, setCount] = useState(0)
     
 
-    const onClickNext = () => {
-        console.log("현재 카운트 : "+count);
-        setCount(count + 1);
+    // const onClickNext = () => {
+    //     console.log("현재 카운트 : "+count);
+    //     setCount(count + 1);
        
-    }
+    // }
 
     const [seatRating, setSeatRating] = useState(''); // 좌석 별점
     const [viewRating, setViewRating] = useState(''); // 시야 별점
     const [soundRating, setSoundRating] = useState(''); // 음향 별점
     const [lightRating, setLightRating] = useState(''); // 조명 별점
     const [seatReview, setSeatReview] = useState(''); // 뮤지컬 후기 텍스트
-
-
-    const OnClickBefore = () => {   
-        window.location.replace('/ReviewTotal');
-    }
 
     const CancelButton = () => {   
         window.location.replace('/Review');
@@ -42,11 +37,19 @@ const ReviewSeat = () => {
     const WriteSeatButton = async() => {
         try {
             const res =  await MuteApi.WriteSeat(seatRating, viewRating, soundRating, lightRating, seatReview);
-            setSeatRating(res.data);
-            setViewRating(res.data);
-            setSoundRating(res.data);
-            setLightRating(res.data);
-            setSeatReview(res.data);
+           
+            console.log(res.data.result);
+            
+            if(res.data.result === "OK") {
+                window.location.replace("/review");
+            } else {
+                console.log("에러....... 다시 해봐.. 토닥토닥..");
+                setSeatRating(res.data.result);
+                setViewRating(res.data.result);
+                setSoundRating(res.data.result);
+                setLightRating(res.data.result);
+                setSeatReview(res.data.result);
+            }
 
         } catch (e) {
             alert("오류 : " + e);
@@ -57,7 +60,6 @@ const ReviewSeat = () => {
     return(
         <>
             <div>좌석 후기</div>
-            <button onClick={OnClickBefore}>이전으로</button>
             <div>
                 <fieldset>
                     <div> 좌석 <Rating onClick={setSeatRating}/></div>

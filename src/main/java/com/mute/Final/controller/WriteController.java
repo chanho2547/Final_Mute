@@ -22,14 +22,14 @@ public class WriteController {
 
     // 총평 후기 작성
     @PostMapping("/writeTotal")
-    public ResponseEntity<Boolean> writeTotal(@RequestBody Map<String, String> writeTotalData) {
-        String scoreStory = writeTotalData.get("scoreStory");
-        String scoreDirect = writeTotalData.get("scoreDirect");
-        String scoreCast = writeTotalData.get("scoreCast");
-        String scoreNumber = writeTotalData.get("scoreNumber");
-        String reviewMuTxt = writeTotalData.get("reviewMuTxt");
+    public ResponseEntity<Boolean> writeTotal(@RequestBody Map<Integer, Integer> writeTotalData) {
+        Integer scoreStory = writeTotalData.get("scoreStory");
+        Integer scoreDirect = writeTotalData.get("scoreDirect");
+        Integer scoreCast = writeTotalData.get("scoreCast");
+        Integer scoreNumber = writeTotalData.get("scoreNumber");
+//        String reviewMuTxt = writeTotalData.get("reviewMuTxt");
 
-        boolean result = writeService.writeTotal(scoreStory, scoreDirect, scoreCast, scoreNumber, reviewMuTxt);
+        boolean result = writeService.writeTotal(scoreStory, scoreDirect, scoreCast, scoreNumber);
         if(result) {
             return new ResponseEntity(true, HttpStatus.OK);
         }

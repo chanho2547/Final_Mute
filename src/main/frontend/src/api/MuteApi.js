@@ -29,13 +29,13 @@ const MuteApi =  {
         },
 
     // 총평 후기 작성 - 도연
-    WriteTotal: async function(scoreStory, scoreDirect, scoreCast, scoreNumber, reviewMuTxt) {
+    WriteTotal: async function(scoreStory, scoreDirect, scoreCast, scoreNumber) {
         const reviewObj = {
             scoreStory: scoreStory,// 스토리 별점
             scoreDirect: scoreDirect, // 연출 별점
             scoreCast : scoreCast, // 캐스팅 별점
             scoreNumber : scoreNumber, // 넘버 별점
-            reviewMuTxt : reviewMuTxt // 뮤지컬 후기 텍스트
+            // reviewMuTxt : reviewMuTxt // 뮤지컬 후기 텍스트
         }
         return await axios.post(MUTE_DOMAIN + "review/writeTotal", reviewObj, HEADER);
     },
@@ -43,11 +43,11 @@ const MuteApi =  {
      // 좌석 후기 작성 - 도연
      WriteSeat: async function(seatRating, viewRating, soundRating, lightRating, seatReview) {
         const reviewObj = {
-            scoreStory: seatRating,// 좌석 별점
-            scoreDirect: viewRating, // 시야 별점
-            scoreCast : soundRating, // 음향 별점
-            scoreNumber : lightRating, // 조명 별점
-            reviewMuTxt : seatReview // 뮤지컬 후기 텍스트
+            scoreSeat: seatRating,// 좌석 별점 
+            scoreView: viewRating, // 시야 별점
+            scoreSound : soundRating, // 음향 별점
+            scoreLight : lightRating, // 조명 별점
+            reviewSeTxt : seatReview // 뮤지컬 후기 텍스트
         }
         return await axios.post(MUTE_DOMAIN + "review/writeSeat", reviewObj, HEADER);
     },
