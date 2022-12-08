@@ -16,30 +16,25 @@ const ReviewSeat = () => {
     const [viewRating, setViewRating] = useState(''); // 시야 별점
     const [soundRating, setSoundRating] = useState(''); // 음향 별점
     const [lightRating, setLightRating] = useState(''); // 조명 별점
-
     const [seatReview, setSeatReview] = useState(''); // 뮤지컬 후기 텍스트
 
     
-
-
-
     // Api 호출
     // 후기 작성 버튼이 눌려지면 동작하는 함수
     const WriteSeatButton = async() => {
+        console.log("좌석 별점" + seatRating);
+        console.log("시야 별점" + viewRating);
+        console.log("음향 별점" + soundRating);
+        console.log("조명 별점" + lightRating);
         try {
             const res =  await MuteApi.WriteSeat(seatRating, viewRating, soundRating, lightRating, seatReview);
-           
-            console.log(res.data.result);
-            
+            // setSeatReview(res.data.result);
+             
             if(res.data.result === "OK") {
-                window.location.replace("/review");
+                console.log("별점 입력 성공");
             } else {
-                console.log("에러....... 다시 해봐.. 토닥토닥..");
-                setSeatRating(res.data.result);
-                setViewRating(res.data.result);
-                setSoundRating(res.data.result);
-                setLightRating(res.data.result);
-                setSeatReview(res.data.result);
+                console.log("별점 입력 실패");
+         
             }
 
         } catch (e) {
@@ -47,9 +42,24 @@ const ReviewSeat = () => {
         }
     };
 
-    const highFunction = (text) => {
-        console.log("ReviewTotal 입니다 , 가져와진 값 : " + text);
-      }
+    const highFunction1 = (text) => {
+        console.log("별점 가져온 값 : " + text);
+        setSeatRating(text);
+    }
+    const highFunction2 = (text) => {
+        console.log("별점 가져온 값 : " + text);
+        setViewRating(text);
+    }
+    const highFunction3 = (text) => {
+        console.log("별점 가져온 값 : " + text);
+        setSoundRating(text);
+    }
+    const highFunction4 = (text) => {
+        console.log("별점 가져온 값 : " + text);
+        setLightRating(text);
+    }
+
+
 
 
     return(
@@ -57,13 +67,12 @@ const ReviewSeat = () => {
             <div>좌석 후기</div>
             <div>
                 <fieldset>
-                    <div> 좌석 <Rating onClick={setSeatRating} propFunction={highFunction}/></div>
-                    <div> 시야 <Rating onClick={setViewRating} propFunction={highFunction}/></div>
-                    <div> 음향 <Rating onClick={setSoundRating} propFunction={highFunction}/></div>
-                    <div> 조명 <Rating onClick={setLightRating} propFunction={highFunction}/></div>
+                    <div> 좌석 <Rating onClick={setSeatRating} propFunction={highFunction1}/></div>
+                    <div> 시야 <Rating onClick={setViewRating} propFunction={highFunction2}/></div>
+                    <div> 음향 <Rating onClick={setSoundRating} propFunction={highFunction3}/></div>
+                    <div> 조명 <Rating onClick={setLightRating} propFunction={highFunction4}/></div>
                 </fieldset>
                 <fieldset>
-                {/* <input / > <button>좌석 선택</button> */}
                     <div>후기 작성</div>
                     <textarea placeholder="관람하신 좌석의 후기를 작성해주세요." onChange={setSeatReview}></textarea>
                 </fieldset>

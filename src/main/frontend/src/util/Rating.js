@@ -3,7 +3,6 @@ import { FaStar } from 'react-icons/fa';
 import styled from 'styled-components';
 
 const Rating = ( props ) => {
-  // console.log("확인용 : " + props.value);
 
   const ARRAY = [0, 1, 2, 3, 4];
 
@@ -30,6 +29,7 @@ const Rating = ( props ) => {
 
   console.log("확인용 : " + count);
   props.propFunction(count);
+
 
   return (
     <Wrap>
