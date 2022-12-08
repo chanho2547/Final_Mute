@@ -85,7 +85,14 @@ const MuteApi =  {
             type:type
         }
         return await axios.post(MUTE_DOMAIN + "member/double_check", doubleObj, HEADER);
+    },
+
+    // 뮤지컬리스트 확인 (임시) - 찬호 
+    musicalList: async function() {
+        return await axios.get(MUTE_DOMAIN + "musical/list");
     }
+
+
 }
 
 export default MuteApi;

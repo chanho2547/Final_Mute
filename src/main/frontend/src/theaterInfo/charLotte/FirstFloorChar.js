@@ -7,18 +7,10 @@ import '../seats.css';
 import SelectSeat from "../../reservation/SelectSeat";
 
 
-
-
-
-
-
 const FirstFloorChar = (props) => {  
 
     let arr = [];
     let arrString;
-
-    // const [checkedSeat,setCheckedSeat] = useState([]);
-
 
 function prevAll(element) { // element 이전의 모든 형제노드의 갯수를 구하는 함수
     let result = []; //빈 배열을 만들어서 앞에있는 모든 형제노드를 넣어줄 예정 
@@ -51,7 +43,7 @@ const onClickSeat = (event) => {
     let parentNode = prevAll(event.currentTarget.parentNode.parentNode);
     let floor = window.localStorage.getItem("floor");
     //alert(floor + "층 "+parentNode + "열 " + seatNum + "번 좌석입니다 \n" + "PK값 : " + pkNum + "\n등급 : " + grade);
-    console.log(parentNode + "열 " + seatNum + "번 좌석입니다 \n" + "PK값 : " + pkNum);
+    //console.log(parentNode + "열 " + seatNum + "번 좌석입니다 \n" + "PK값 : " + pkNum);
 
 
     if(window.localStorage.getItem("seatInfoMode") === "예매") {  // 예매일때 onClick 상황
@@ -84,7 +76,7 @@ const onClickSeat = (event) => {
             arrString = JSON.parse(window.localStorage.getItem('selectedSeats'));
 
             //배열에 추가후 다시 로컬스토리지로
-            arrString.push(floor + "층 "+parentNode + "열 " + seatNum + "번 ");
+            arrString.push(floor + "층 "+parentNode + "열 " + seatNum + "번 " + grade);
             console.log("arrString 타입 : "+ typeof(arrString));
             console.log("arrString 출력 : " + arrString);
             window.localStorage.setItem("selectedSeats", JSON.stringify(arrString));
@@ -98,7 +90,7 @@ const onClickSeat = (event) => {
             arrString = JSON.parse(window.localStorage.getItem('selectedSeats'));
 
             //배열에 추가후 다시 로컬스토리지로
-            arrString = arrString.filter((element)=>element !== floor + "층 "+parentNode + "열 " + seatNum + "번 ");
+            arrString = arrString.filter((element)=> !element.includes(floor + "층 "+parentNode + "열 " + seatNum + "번 ") );
             console.log("arrString 타입 : "+ typeof(arrString));
             console.log("arrString 출력 : " + arrString);
             window.localStorage.setItem("selectedSeats", JSON.stringify(arrString));
@@ -230,8 +222,8 @@ const onClickSeat = (event) => {
         <div className="grid-containder modal-background" id="modal-background">  
         </div>
 
-        {/* 이따가 로컬스토리지 예매로 예매일때만 pk띄우기 */}
-        
+    
+        {/* 아래로는 쭉 좌석 정보 */}
         <div className="floor">
 
         

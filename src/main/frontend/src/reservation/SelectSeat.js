@@ -21,7 +21,7 @@ const SelectSeat = () => {
             <Link to = "/FirstFloorChung">충무 1층보기</Link><br></br>
             <Link to = "/SecondFloorChung">충무 2층보기</Link><br></br>
             <Link to = "/ThirdFloorChung">충무 3층보기</Link><br></br> */}
-            <h2 id="selected">(SelectedSeats Here)</h2>
+            <h2>(SelectedSeats Here)<h2 id="selected">(선택한 좌석이 여기에 표시됩니다)</h2></h2>
             {/* <h1>{JSON.parse(window.localStorage.getItem('selectedSeats'))}</h1> */}
             <FirstFloorChar propFunction={highFunction}/>
 
