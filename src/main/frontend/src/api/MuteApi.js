@@ -11,22 +11,21 @@ const MuteApi =  {
         }
         return await axios.post(MUTE_DOMAIN + "member/login", loginObj, HEADER);
     },
+    // 회원가입
+    signUp: async function(userId, pwd, name, mail) {
+        console.log("이메일 : " + mail);
+        // console.log("주소 : " + addr);
 
-        // 회원가입
-        signUp: async function(id, pwd, name, mail, phone, addr) {
-            console.log("이메일 : " + mail);
-            console.log("주소 : " + addr);
-    
-            const signUpObj = {
-                usdId: id,
-                pwd: pwd,
-                Name: name,
-                Mail: mail,
-                phone: phone,
-                addr: addr
-            }
-            return await axios.post(MUTE_DOMAIN + "member/signup", signUpObj, HEADER);
-        },
+        const signUpObj = {
+            userId: userId,
+            pwd: pwd,
+            name: name,
+            mail: mail,
+            // phone: phone,
+            // addr: addr
+        }
+        return await axios.post(MUTE_DOMAIN + "member/signup", signUpObj, HEADER);
+    },
 
     // 총평 후기 작성 - 도연
     WriteTotal: async function(scoreStory, scoreDirect, scoreCast, scoreNumber, totalReview) {
@@ -79,6 +78,14 @@ const MuteApi =  {
     // }
 
 
+    // 가입 중복 확인
+    memberJoinCheck: async function(uni,type) {
+        const doubleObj = {
+            uni : uni,
+            type:type
+        }
+        return await axios.post(MUTE_DOMAIN + "member/double_check", doubleObj, HEADER);
+    }
 }
 
 export default MuteApi;
