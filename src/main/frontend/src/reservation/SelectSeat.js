@@ -1,10 +1,16 @@
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import FirstFloorChar from "../theaterInfo/charLotte/FirstFloorChar";
 import FirstFloorChung from "../theaterInfo/chungmuArt/FirstFloorChung";
 
 const SelectSeat = () => {
 
+    //const [text,setText] = useState('');
+    const highFunction = (text) => {
+        //setText(text);
+        //console.log(document.getElementById("selected").innerText);
+        document.getElementById("selected").innerText = text;
+      }
     
 
     return(
@@ -15,12 +21,15 @@ const SelectSeat = () => {
             <Link to = "/FirstFloorChung">충무 1층보기</Link><br></br>
             <Link to = "/SecondFloorChung">충무 2층보기</Link><br></br>
             <Link to = "/ThirdFloorChung">충무 3층보기</Link><br></br> */}
-            <p>SelectedSeats : <p className="selectedSeats"></p></p>
+            <h2 id="selected">(SelectedSeats Here)</h2>
             {/* <h1>{JSON.parse(window.localStorage.getItem('selectedSeats'))}</h1> */}
-            <FirstFloorChar />
+            <FirstFloorChar propFunction={highFunction}/>
 
         </>
     );
 }
 
 export default SelectSeat;
+
+
+

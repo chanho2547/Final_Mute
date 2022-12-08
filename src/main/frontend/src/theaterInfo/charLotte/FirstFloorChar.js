@@ -12,7 +12,7 @@ import SelectSeat from "../../reservation/SelectSeat";
 
 
 
-const FirstFloorChar = () => {  
+const FirstFloorChar = (props) => {  
 
     let arr = [];
     let arrString;
@@ -60,6 +60,20 @@ const onClickSeat = (event) => {
         arr = [];
         // arrString = [];
 
+        // onClick 누면 SelectSeat에 있는 값 바꾸기
+        //일단 현재 localStorage값을 가져온다
+        
+
+
+        //배열에 추가후 다시 로컬스토리지로
+        //document.getElementById("selectedSeats").innerText = document.getElementById("selectedSeats").innerText + arrString;
+        // console.log("arrString 타입 : "+ typeof(arrString));
+        // console.log("arrString 출력 : " + arrString);
+
+        //window.localStorage.setItem("selectedSeats", JSON.stringify(arrString));
+
+        
+
         if(window.localStorage.getItem(pkNum) === null ){
             console.log("빈좌석 선택");
             event.currentTarget.setAttribute("class","selected");
@@ -79,6 +93,7 @@ const onClickSeat = (event) => {
         }
         else{
             console.log("선택 취소");
+            
 
             arrString = JSON.parse(window.localStorage.getItem('selectedSeats'));
 
@@ -90,6 +105,8 @@ const onClickSeat = (event) => {
 
             
 
+
+                // 다시 색 돌려놓기 (VIP, R)
                 if((pkNum>=8414 && pkNum<= 8568)){    // VIP좌석
                     try{
                         document.getElementById(pkNum).parentNode.setAttribute('class','real purple');
@@ -105,7 +122,7 @@ const onClickSeat = (event) => {
 
                     } catch{}
                 }
-            window.localStorage.setItem(pkNum,null);
+                window.localStorage.removeItem(pkNum);
         }
        
     }
@@ -118,6 +135,12 @@ const onClickSeat = (event) => {
 
         }
     }
+
+    // 상위 컴포넌트로 값 전송
+    arrString = JSON.parse(window.localStorage.getItem('selectedSeats'));
+    props.propFunction(arrString);
+
+    
     console.log("arr 현재 상황 : " + arr);
     //console.log("arrString 현재 상황 : " + arrString);
     console.log("arrString[localStorage] 현재 상황 : " + JSON.parse(window.localStorage.getItem('selectedSeats')));
@@ -184,8 +207,8 @@ const onClickSeat = (event) => {
         //document.getElementById('8452').parentNode.setAttribute('class','real red');
     })
 
-    let newArr = JSON.parse(window.localStorage.getItem('selectedSeats'));
-    let selectedList = newArr.map((arr)=>(<h1>{arr}</h1>));
+    //let newArr = JSON.parse(window.localStorage.getItem('selectedSeats'));
+    //let selectedList = newArr.map((arr)=>(<h1>{arr}</h1>));
     
    
 
