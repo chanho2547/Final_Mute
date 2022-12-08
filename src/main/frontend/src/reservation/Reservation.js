@@ -20,6 +20,7 @@ const Reservation = () => {
     useEffect(() => {
         window.localStorage.setItem("seatInfoMode","예매");
         console.log("현재 seatInfoMode : " + window.localStorage.getItem("seatInfoMode"));
+        
     })
 
     const [count, setCount] = useState(0)

@@ -1,12 +1,24 @@
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import { useState } from "react";
 import styled from "styled-components";
 import { ReactDOM, useEffect } from "react";
 import { Link } from "react-router-dom";
 import '../seats.css';
-import { flushSync } from "react-dom";
+import SelectSeat from "../../reservation/SelectSeat";
 
-let arr = [];
-let arrString = [];
+
+
+
+
+
+
+const FirstFloorChar = () => {  
+
+    let arr = [];
+    let arrString;
+
+    // const [checkedSeat,setCheckedSeat] = useState([]);
+
 
 function prevAll(element) { // element 이전의 모든 형제노드의 갯수를 구하는 함수
     let result = []; //빈 배열을 만들어서 앞에있는 모든 형제노드를 넣어줄 예정 
@@ -18,6 +30,8 @@ function prevAll(element) { // element 이전의 모든 형제노드의 갯수�
     return result.length; 
 }
 
+
+// ------ 여기부터 onClickSeat ---------------------
 const onClickSeat = (event) => {
 
 
@@ -42,65 +56,85 @@ const onClickSeat = (event) => {
 
     if(window.localStorage.getItem("seatInfoMode") === "예매") {  // 예매일때 onClick 상황
         
-        
+        // 처음 onclick 들어갈때 초기화 (밑에서 처음부터 셀)
         arr = [];
-        arrString = [];
+        // arrString = [];
 
         if(window.localStorage.getItem(pkNum) === null ){
-            console.log("예매 onclick 진입 - 선택 안되어있음");
+            console.log("빈좌석 선택");
             event.currentTarget.setAttribute("class","selected");
-            window.localStorage.setItem(pkNum,"selected")
+            window.localStorage.setItem(pkNum,"selected");
+            
+          
+            // 로컬스토리지에 현재상태 배열형식으로 가져오기
+            arrString = JSON.parse(window.localStorage.getItem('selectedSeats'));
+
+            //배열에 추가후 다시 로컬스토리지로
+            arrString.push(floor + "층 "+parentNode + "열 " + seatNum + "번 ");
+            console.log("arrString 타입 : "+ typeof(arrString));
+            console.log("arrString 출력 : " + arrString);
+            window.localStorage.setItem("selectedSeats", JSON.stringify(arrString));
+
+           
         }
         else{
-            console.log("예매 onclick 진입 - 선택 되어있음");
-            // event.currentTarget.setAttribute("class","selected");
-            
+            console.log("선택 취소");
 
+            arrString = JSON.parse(window.localStorage.getItem('selectedSeats'));
+
+            //배열에 추가후 다시 로컬스토리지로
+            arrString = arrString.filter((element)=>element !== floor + "층 "+parentNode + "열 " + seatNum + "번 ");
+            console.log("arrString 타입 : "+ typeof(arrString));
+            console.log("arrString 출력 : " + arrString);
+            window.localStorage.setItem("selectedSeats", JSON.stringify(arrString));
+
+            
 
                 if((pkNum>=8414 && pkNum<= 8568)){    // VIP좌석
                     try{
                         document.getElementById(pkNum).parentNode.setAttribute('class','real purple');
-                        
+
                     } catch{
-                        
+
                     }
                 }
 
                 if((pkNum>=8193 && pkNum<=8391) || (pkNum>=8756 && pkNum<= 8954) || (pkNum>=8569 && pkNum<= 8733) ){    //  R 좌석
                     try{
                         document.getElementById(pkNum).parentNode.setAttribute('class','real lightgreen');
-                        
+
                     } catch{}
                 }
-            
             window.localStorage.setItem(pkNum,null);
-            console.log("좌석 취소후 상황 : " + window.localStorage.getItem(pkNum));
         }
        
     }
+
+    // 현 선택된 좌석 확인 
     for(let i = 8193; i<=8954 ; i++) {
         if(window.localStorage.getItem(`${i}`) === "selected") {
             arr.push(i);
-            arrString.push(floor + "층 "+parentNode + "열 " + seatNum + "번");
+            //arrString.push(floor + "층 "+parentNode + "열 " + seatNum + "번");
+
         }
     }
     console.log("arr 현재 상황 : " + arr);
-    console.log("arrString 현재 상황 : " + arrString);
+    //console.log("arrString 현재 상황 : " + arrString);
+    console.log("arrString[localStorage] 현재 상황 : " + JSON.parse(window.localStorage.getItem('selectedSeats')));
+    // document.getElementById(SelectSeat);
+    
 
-    window.localStorage.setItem("arrString",arrString);
 
 }
 
-
-
-
-const FirstFloorChar = () => {  
+// ------- 여기까지 onClickSeat ---------------------
     
 
     useEffect(() => {
         window.localStorage.setItem("floor",1);
         window.localStorage.removeItem("arrString");
         let seatInfoMode = window.localStorage.getItem("seatInfoMode");
+        localStorage.setItem('selectedSeats','[]');
         console.log("seatInfoMode : " + seatInfoMode)
 
         // 이 페이지가 시작되면 일단 모든 좌석 선택 locatStorage를 지우고 시작한다
@@ -109,7 +143,8 @@ const FirstFloorChar = () => {
         }
 
         if(seatInfoMode === "예매") {    
-
+            
+            // 예매 상황에 맞게 색깔 뿌려주기
              for(let i = 8193 ; i <= 8954 ; i++) {
 
 
@@ -149,6 +184,11 @@ const FirstFloorChar = () => {
         //document.getElementById('8452').parentNode.setAttribute('class','real red');
     })
 
+    let newArr = JSON.parse(window.localStorage.getItem('selectedSeats'));
+    let selectedList = newArr.map((arr)=>(<h1>{arr}</h1>));
+    
+   
+
 
     return (
         <>
@@ -157,8 +197,13 @@ const FirstFloorChar = () => {
         <Link to = "/"> Home으로 돌아가기</Link> <br></br>
         <Link to = "/FirstFloorChar">1층보기</Link> <br></br>
         <Link to = "/SecondFloorChar">2층보기</Link>
-        <h1>Selectd :{arrString.map( arr => arr )}</h1>
+
+      
+       
         
+           
+        
+
         <div className="grid-containder modal-background" id="modal-background">  
         </div>
 

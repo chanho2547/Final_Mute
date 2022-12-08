@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 import FirstFloorChar from "../theaterInfo/charLotte/FirstFloorChar";
 import FirstFloorChung from "../theaterInfo/chungmuArt/FirstFloorChung";
 
 const SelectSeat = () => {
+
+    
+
     return(
         <>
             {/* <h1>좌석 선택 페이지 입니다</h1> */}
@@ -11,7 +15,9 @@ const SelectSeat = () => {
             <Link to = "/FirstFloorChung">충무 1층보기</Link><br></br>
             <Link to = "/SecondFloorChung">충무 2층보기</Link><br></br>
             <Link to = "/ThirdFloorChung">충무 3층보기</Link><br></br> */}
-            <FirstFloorChung />
+            <p>SelectedSeats : <p className="selectedSeats"></p></p>
+            {/* <h1>{JSON.parse(window.localStorage.getItem('selectedSeats'))}</h1> */}
+            <FirstFloorChar />
 
         </>
     );

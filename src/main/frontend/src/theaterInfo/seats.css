@@ -325,6 +325,9 @@
   .no_review {
     background-color: #ebebeb;
   }
+  .selected {
+    background-color: gray;
+  }
   .seats > .btn {
     margin: 60px;
     padding: 20px 40px;
