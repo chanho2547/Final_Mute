@@ -15,6 +15,8 @@ const TmpBox = styled.div`
 
 
 
+
+
 const Reservation = () => {
 
     useEffect(() => {
@@ -23,7 +25,11 @@ const Reservation = () => {
         
     })
 
-    const [count, setCount] = useState(0)
+    const [count, setCount] = useState(0);
+
+    const highFunction = () => {
+        setCount(count + 1);
+    }
     
 
     const onClickNext = () => {
@@ -39,10 +45,10 @@ const Reservation = () => {
         <h1>예매 페이지 입니다</h1>
         <button onClick={onClickNext}>다음으로</button>
         <TmpBox>
-        {count === 0 ? <SelectMusical /> : null}
-        {count === 1 ? <SelectDate /> : null }
-        {count === 2 ? <SelectSeat /> : null }
-        {count === 3 ? <Pay /> : null}
+        {count === 0 ? <SelectMusical propFunction={highFunction}/> : null}
+        {count === 1 ? <SelectDate propFunction={highFunction}/> : null }
+        {count === 2 ? <SelectSeat propFunction={highFunction}/> : null }
+        {count === 3 ? <Pay propFunction={highFunction}/> : null}
         {count === 4 ? <h1>끝</h1> : null}
         {count === 5 ? setCount(0) : null}
         </TmpBox>
