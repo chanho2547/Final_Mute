@@ -4,7 +4,6 @@ import styled from "styled-components";
 import MuteApi from "../api/MuteApi";
 import Rating from "../util/Rating";
 
-// 부모 컴포넌트
 const ReviewSeat = () => {
 
      // 취소 버튼 누르면 첫 화면으로..

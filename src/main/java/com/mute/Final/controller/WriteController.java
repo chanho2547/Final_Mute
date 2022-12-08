@@ -36,9 +36,7 @@ public class WriteController {
         else {
             return new ResponseEntity(false, HttpStatus.BAD_REQUEST);
         }
-
     }
-
 
     // 좌석 후기 작성
     @PostMapping("/writeSeat")

@@ -28,7 +28,6 @@ public class WriteService {
         return true;
     }
 
-
     // 좌석 후기 작성
     public boolean writeSeat(String scoreSeat, String scoreView, String scoreSound, String scoreLight, String reviewSeTxt){
         ReviewSeat reviewSeat  = new ReviewSeat();
