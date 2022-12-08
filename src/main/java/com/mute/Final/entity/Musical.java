@@ -4,10 +4,8 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -24,4 +22,20 @@ public class Musical {
     private String theaterName; // 공연장 이름
     private Date musicalTicketStart; // 공연 예매 시작일
     private String musicalPoster; // 공연 포스터
+
+    public Musical (String mt20id, String prfnm,
+                    String fcltynm, Date prfpdfrom, Date prfpdto,
+                    String poster) {
+        this.musicalId = mt20id;
+        this.musicalName = prfnm;
+        this.theaterName = fcltynm;
+        this.musicalStart = prfpdfrom;
+        this.musicalEnd = prfpdto;
+        this.musicalPoster = poster;
+    }
+
+    public Musical() {
+
+    }
 }
+
