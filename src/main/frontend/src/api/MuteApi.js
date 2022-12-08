@@ -86,7 +86,6 @@ const MuteApi =  {
         }
         return await axios.post(MUTE_DOMAIN + "member/double_check", doubleObj, HEADER);
     }
-
 }
 
 export default MuteApi;
