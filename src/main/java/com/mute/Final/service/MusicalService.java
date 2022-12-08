@@ -2,7 +2,6 @@ package com.mute.Final.service;
 
 import com.mute.Final.dto.MusicalDTO;
 import com.mute.Final.entity.Musical;
-import com.mute.Final.entity.ReviewTotal;
 import com.mute.Final.repository.MusicalRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

@@ -18,13 +18,20 @@ public class ReviewTotalService {
     }
 
     // 뮤지컬 TOP3 별점 순 조회
+
     public List<ReviewTotalDTO> searchTopStar() {
         List<ReviewTotalDTO> reviewTotalDTOS = new ArrayList<>();
         List<ReviewTotal> reviewTotalList = reviewTotalRepository.findTopStar();
         for(ReviewTotal e : reviewTotalList) {
             ReviewTotalDTO reviewTotalDTO = new ReviewTotalDTO();
-            reviewTotalDTO.setMusicalName(e.getMusical().getMusicalName());
-            reviewTotalDTO.setReviewMuCnt(reviewTotalRepository.count());
+
+            reviewTotalDTO.setReviewMuId(reviewTotalDTO.getReviewMuId());
+            reviewTotalDTO.setReviewMuTxt(reviewTotalDTO.getReviewMuTxt());
+            reviewTotalDTO.setReviewMuId(e.getReviewMuId());
+            reviewTotalDTO.setReviewMuTxt(e.getReviewMuTxt());
+//            reviewTotalDTO.setReviewMuId(e.getReviewMuId());
+//            reviewTotalDTO.setMusicalName(e.getMusical().getMusicalName());
+//            reviewTotalDTO.setReviewMuCnt(reviewTotalRepository.count());
             reviewTotalDTOS.add(reviewTotalDTO);
         }
         return reviewTotalDTOS;
