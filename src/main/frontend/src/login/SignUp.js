@@ -45,6 +45,7 @@ const SingUp = () => {
     }
     // ID 중복 체크
     const IdCheck = async() => {
+
         // 가입 여부 확인
         const memberCheck = await MuteApi.memberJoinCheck(inputId, "TYPE_ID");
         if(memberCheck.data && isId) {
@@ -176,7 +177,7 @@ const SingUp = () => {
         if(memberReg.data.result === "OK") {
             window.localStorage.setItem("userId",  inputId);
             window.localStorage.setItem("isLogin", "true");
-            navigate("/home");
+            navigate("/Home");
         }
     }
 

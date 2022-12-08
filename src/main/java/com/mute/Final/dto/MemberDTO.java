@@ -16,9 +16,12 @@ public class MemberDTO {
     private String name; // 이름
     private String phone; // 전화번호
     private String mail; // 메일
-//    private String addr; // 주소
-//    private Date regDate; // 가입일
-//    private Date unRegDate; // 탈퇴일
+    private String addr; // 주소
+    private Date regDate; // 가입일
+    private Date unRegDate; // 탈퇴일
+    private boolean isOk;
+    private boolean isMember;
+    private boolean isReg; // 아이디 비밀번호 찾을 때 true/false 응답
 
     public static MemberDTO toMemberDTO(Member member) {
         MemberDTO memberDTO = new MemberDTO();

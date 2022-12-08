@@ -12,9 +12,9 @@ const MuteApi =  {
         return await axios.post(MUTE_DOMAIN + "member/login", loginObj, HEADER);
     },
     // 회원가입
-    signUp: async function(userId, pwd, name, mail, phone, company) {
+    signUp: async function(userId, pwd, name, mail, phone, addr) {
         console.log("이메일 : " + mail);
-        console.log("주소 : " + company);
+        console.log("주소 : " + addr);
 
         const signUpObj = {
             userId: userId,
@@ -22,7 +22,7 @@ const MuteApi =  {
             name: name,
             mail: mail,
             phone: phone,
-            addr: company
+            addr: addr
         }
         return await axios.post(MUTE_DOMAIN + "member/signup", signUpObj, HEADER);
     },
