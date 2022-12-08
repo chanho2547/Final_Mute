@@ -1,25 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import MuteApi from "../api/MuteApi";
 import Rating from "../util/Rating";
 
 
 const ReviewSeat = () => {
-
-    // useEffect(()=>{
-    //     window.localStorage.setItem("seatInfoMode","NONE");
-    // })
-
-    // const [count, setCount] = useState(0)
-    
-
-    // const onClickNext = () => {
-    //     console.log("현재 카운트 : "+count);
-    //     setCount(count + 1);
-       
-    // }
 
     const [seatRating, setSeatRating] = useState(''); // 좌석 별점
     const [viewRating, setViewRating] = useState(''); // 시야 별점

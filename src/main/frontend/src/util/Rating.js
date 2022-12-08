@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 const ARRAY = [0, 1, 2, 3, 4];
 function Rating() {
+
   const [clicked, setClicked] = useState([false, false, false, false, false]);
   const [count, setCount] = useState("");
 
@@ -25,6 +26,12 @@ function Rating() {
   //   let count = clicked.filter(Boolean).length;
   // };
 
+
+  useEffect(() => {
+    window.localStorage.setItem('scoreStory', JSON.stringify({count}));
+  }, ['scoreStory', {count}]);
+
+
   return (
     <Wrap>
       <RatingText>별점</RatingText>
@@ -41,6 +48,7 @@ function Rating() {
         })}
       </Stars>
       <p onChange={setCount}>{count}</p>
+      
     </Wrap>
   );
 }

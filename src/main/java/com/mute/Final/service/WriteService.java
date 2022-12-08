@@ -17,13 +17,13 @@ public class WriteService {
     private final ReviewSeatRepository reviewSeatRepository; // 좌석 후기
 
     // 총평 후기 작성
-    public boolean writeTotal(int scoreStory, int scoreDirect, int scoreCast, int scoreNumber){
+    public boolean writeTotal(String scoreStory, String scoreDirect, String scoreCast, String scoreNumber, String reviewMuTxt){
         ReviewTotal reviewTotal = new ReviewTotal();
-        reviewTotal.setScoreStory(scoreStory);
-        reviewTotal.setScoreDirect(scoreDirect);
-        reviewTotal.setScoreCast(scoreCast);
-        reviewTotal.setScoreNumber(scoreNumber);
-//        reviewTotal.setReviewMuTxt(reviewMuTxt);
+        reviewTotal.setScoreStory(Integer.parseInt(scoreStory));
+        reviewTotal.setScoreDirect(Integer.parseInt(scoreDirect));
+        reviewTotal.setScoreCast(Integer.parseInt(scoreCast));
+        reviewTotal.setScoreNumber(Integer.parseInt(scoreNumber));
+        reviewTotal.setReviewMuTxt(reviewMuTxt);
         reviewTotalRepository.save(reviewTotal);
         return true;
     }

@@ -1,8 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import MuteApi from "../api/MuteApi";
 import ReviewList from "./ReviewList";
 import ReviewTotal from "./ReviewTotal";
 import ReviewSeat from "./ReviewSeat";
