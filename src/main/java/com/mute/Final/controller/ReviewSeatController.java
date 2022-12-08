@@ -49,12 +49,12 @@ public class ReviewSeatController {
                     totalSound += e.getScoreSound(); // 좌석별 개인 음향 별점 누적
                     totalLight += e.getScoreLight(); // 좌석별 개인 조명 별점 누적
                     count ++;
-                    reviewSeatDTO.setAvgAll(totalScore/count);
+                    reviewSeatDTO.setAvgSeAll(totalScore/count);
                     reviewSeatDTO.setAvgSeat(totalSeat/count);
                     reviewSeatDTO.setAvgView(totalView/count);
                     reviewSeatDTO.setAvgSound(totalSound/count);
                     reviewSeatDTO.setAvgLight(totalLight/count);
-                    reviewSeatDTO.setReviewCnt(count);
+                    reviewSeatDTO.setReviewSeCnt(count);
                 }
                 reviewSeatDTOS.add(reviewSeatDTO);
             }

@@ -2,6 +2,7 @@ package com.mute.Final.service;
 
 import com.mute.Final.dto.MusicalDTO;
 import com.mute.Final.entity.Musical;
+import com.mute.Final.entity.ReviewTotal;
 import com.mute.Final.repository.MusicalRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ public class MusicalService {
     public MusicalService(MusicalRepository musicalRepository) {
         this.musicalRepository = musicalRepository;
     }
+
         // 뮤지컬 검색
         public List<MusicalDTO> searchMusicalList(String musicalName) {
             List<MusicalDTO> musicalDTOS = new ArrayList<>();
@@ -69,10 +71,6 @@ public class MusicalService {
             }
             return musicalDTOS;
         }
-
-
-
-
 
 
 

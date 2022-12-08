@@ -22,8 +22,8 @@ public class ReviewSeatDTO {
     private int scoreLight; // 조명 별점
     private String reviewSeTxt; // 좌석 후기 내용
 
-    private long reviewCnt; // 좌석 리뷰 개수
-    private double avgAll; // 전체 평균 별점
+    private long reviewSeCnt; // 좌석 리뷰 개수
+    private double avgSeAll; // 전체 평균 별점
     private double avgSeat; // 좌석 평균 별점
     private double avgView; // 시야 평균 별점
     private double avgSound; // 음향 평균 별점

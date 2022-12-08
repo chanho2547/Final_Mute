@@ -15,4 +15,5 @@ public class MusicalDTO {
     private Date musicalTicketStart; // 티켓 예매 시작일
     private String theaterName; // 공연장 이름
     private String musicalPoster; // 공연 포스터
+
 }
