@@ -15,7 +15,7 @@ public class ReviewTotal {
 
     @ManyToOne
     @JoinColumn(name = "musical_id")
-    private Musical musical; // 공연 ID
+    private Musical musicalId; // 공연 ID
 
     @ManyToOne
     @JoinColumn(name = "user_num")
@@ -26,7 +26,7 @@ public class ReviewTotal {
     private int scoreDirect; // 연출 별점
     private int scoreCast; // 캐스팅 별점
     private int scoreNumber; // 넘버 별점
-    private double scoreAvgMusical; // 평균 별점
+    private double scoreAvgTotal; // 평균 별점
 
     @Lob
     private String reviewMuTxt; // 총평 후기 텍스트

@@ -40,7 +40,7 @@ const Review = () => {
 
     return (
         <div className="container">
-
+{/* 
             {/*<button onClick={onClickBefore}>{ (count === 0) ? "후기 작성하기" : "다음으로" }</button>
             <TmpBox>
             {count === 4 ? <ReviewSeat /> : null} 
