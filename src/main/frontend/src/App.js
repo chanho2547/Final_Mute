@@ -18,6 +18,7 @@ import Like from './util/Like';
 import SeatView from './review/SeatView';
 import Membership from './membership/Membership';
 import Mypage from './mypage/Mypage';
+import MusicalDetail from './musical/MusicalDetail';
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
         <Route path='/SeatView' element={<SeatView />} />
         <Route path='/Mypage' element={<Mypage />} />
         <Route path='/Membership' element={<Membership/>} />
+        <Route path='/MusicalDetail' element={<MusicalDetail/>}></Route>
       </Routes>
       <Footer/>
     </Router>
