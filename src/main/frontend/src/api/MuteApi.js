@@ -27,15 +27,6 @@ const MuteApi =  {
         return await axios.post(MUTE_DOMAIN + "member/signup", signUpObj, HEADER);
     },
 
-    // 가입 중복 확인
-    memberJoinCheck: async function(uni,type) {
-        const doubleObj = {
-            uni : uni,
-            type:type
-        }
-        return await axios.post(MUTE_DOMAIN + "member/double_check", doubleObj, HEADER);
-    },
-
     // 총평 후기 작성 - 도연
     WriteTotal: async function(scoreStory, scoreDirect, scoreCast, scoreNumber, totalReview) {
         const reviewObj = {
@@ -86,6 +77,15 @@ const MuteApi =  {
     //     return await axios.post(MUTE_DOMAIN + "review/ReviewInfo", reviewObj, HEADER);
     // }
 
+
+    // 가입 중복 확인
+    memberJoinCheck: async function(uni,type) {
+        const doubleObj = {
+            uni : uni,
+            type:type
+        }
+        return await axios.post(MUTE_DOMAIN + "member/double_check", doubleObj, HEADER);
+    }
 
 }
 
