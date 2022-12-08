@@ -37,7 +37,8 @@ public class MemberController {
             String name = signupData.get("name");
             String phone = signupData.get("phone");
             String mail = signupData.get("mail");
-            boolean result = memberService.memberjoin(userId, pwd, name, phone, mail);
+            String addr = signupData.get("company");
+            boolean result = memberService.memberjoin(userId, pwd, name, phone, mail,addr);
             log.warn(String.valueOf(result));
             if(result) {
                 return new ResponseEntity(true, HttpStatus.OK);

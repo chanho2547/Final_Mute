@@ -37,11 +37,12 @@ const Post = (props) => {
     }
 
     return (
-        
-             <DaumPostcode
+        <div >
+            <DaumPostcode
+                className="postmodal"
                 autoClose
                 onComplete={complete} />
-    
+        </div>
     );
 };
 

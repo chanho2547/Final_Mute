@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MuteApi from '../api/MuteApi';
 import Header from '../components/Header';
 import Modal from './Modal';
 import Post from './Post';
 
 const SingUp = () => {
+    const navigate = useNavigate();
     // 회원정보 입력받는 부분
     const [inputId, setId] = useState('');
     const [inputPwd, setPwd] = useState('');
@@ -81,6 +82,7 @@ const SingUp = () => {
         setPwdCheck(passwordCurrent)
         if (passwordCurrent !== inputPwd) {
             setPwdCheckMsg("비밀번호가 일치하지 않습니다.")
+            setIsPwdCheck(false);
         } else {
             setPwdCheckMsg("비밀번호가 일치합니다.")
             setIsPwdCheck(true);
@@ -94,7 +96,7 @@ const SingUp = () => {
             setNameMsg("이름을 확인해주세요.")
             setIsName(false)
         } else {
-            setNameMsg(false);
+            setNameMsg("이름이 확인되었습니다.");
             setIsName(true)
         }
     }
@@ -104,7 +106,7 @@ const SingUp = () => {
         setPhone(e.target.value.replace(/[^0-9]/g, '').replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`));
     }
 
-    const pwdCheck = async() => {
+    const phoneCheck = async() => {
         // 가입 여부 확인
         const memberCheck = await MuteApi.memberJoinCheck(inputPhone, "TYPE_PHONE");
         if (memberCheck.data) {
@@ -115,9 +117,10 @@ const SingUp = () => {
         }
     }
 
-    // 주소 입력
-    const [enroll_addr, setEnroll_addr] = useState({
-        address: '',
+
+    // 주소
+    const [enroll_company, setEnroll_company] = useState({
+        address:'',
     });
 
     const [popup, setPopup] = useState(false);
@@ -125,9 +128,9 @@ const SingUp = () => {
     const handleInput = (e) => {
         console.log(e.target.value);
         setAddr(e.target.value);
-        setEnroll_addr({
-            ...enroll_addr,
-            [e.target.name]: e.target.value,
+        setEnroll_company({
+            ...enroll_company,
+            [e.target.name]:e.target.value,
         })
         console.log(e.target.name);
     }
@@ -155,8 +158,6 @@ const SingUp = () => {
         const memberCheck = await MuteApi.memberJoinCheck(inputMail, "TYPE_MAIL");
         if (memberCheck.data && isMail) {
             setMailMsg("사용가능한 Mail입니다.")
-        } else if(memberCheck.data.result === "OK" && !isMail) {
-            setMailMsg("이메일 형식이 올바르지 않습니다.")
         } else {
             setMailMsg("이미 사용중인 Mail입니다.")
             setIsMail(false);
@@ -175,7 +176,7 @@ const SingUp = () => {
         if(memberReg.data.result === "OK") {
             window.localStorage.setItem("userId",  inputId);
             window.localStorage.setItem("isLogin", "true");
-            window.localStorage.replace("/Home")
+            navigate("/home");
         }
     }
 
@@ -210,22 +211,22 @@ const SingUp = () => {
                 <p>이메일
                     {inputMail.length > 0 && <span>{mailMsg}</span>}
                 </p>
-                <input type='mail' placeholder='메일' value={inputMail} onChange={onChangeMail} />
+                <input type='mail' placeholder='메일' value={inputMail} onChange={onChangeMail} onBlur={mailCheck}/>
             </div>
             <div>
                 <p>전화번호
                     {inputPhone.length > 0 && <span>{phoneMsg}</span>}
                 </p>
-                <input type='phone' placeholder="'-'제외" value={inputPhone} onChange={onChangePhone} />
+                <input type='phone' placeholder="'-'제외" value={inputPhone} onChange={onChangePhone} onBlur={phoneCheck}/>
             </div>
             <div>
                 <label className="address_search">주소</label>
-                <input className="addr" type="text" required={true} name="address" onChange={handleInput} value={enroll_addr.address} />
+                <input className="addr" type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
                 <button onClick={handleComplete}>주소 검색</button>
-                {popup && <Post company={enroll_addr} setcompany={setEnroll_addr}></Post>}
+                {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}
             </div>
             <div>
-                <button onClick={onKeyDownJoin} disabled={!(isId && isPwd && isPwdCheck && isName && isMail && isPhone)}>JOIN</button>
+                <button onClick={onClickJoin} disabled={!(isId && isPwd && isPwdCheck && isName && isMail && isPhone)}>JOIN</button>
                 <div className='footer'>이미 아이디가 있으신가요? <button><div><Link to="/Login" className="link_item">＞ 로그인</Link></div></button></div>
             </div>
         </>

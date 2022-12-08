@@ -41,7 +41,7 @@ public class MemberService {
 //        else {return 400;}
 //    }
     // 회원가입
-    public boolean memberjoin(String userId, String pwd, String name, String phone, String mail) {
+    public boolean memberjoin(String userId, String pwd, String name, String phone, String mail, String addr) {
         try {
             Member member = new Member();
             member.setUserId(userId);
@@ -49,6 +49,7 @@ public class MemberService {
             member.setName(name);
             member.setPhone(phone);
             member.setMail(mail);
+            member.setAddress(addr);
             member.setRegData(LocalDateTime.now());
             log.warn("회원정보 입력완료");
             memberRepository.save(member);
