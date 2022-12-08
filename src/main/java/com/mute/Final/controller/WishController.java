@@ -1,15 +1,14 @@
 package com.mute.Final.controller;
 
+import com.mute.Final.constant.AlarmStatus;
 import com.mute.Final.dto.WishDTO;
 import com.mute.Final.service.WishService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -26,5 +25,20 @@ public class WishController {
         List<WishDTO> list = wishService.getWishList(userNum);
         return new ResponseEntity(list, HttpStatus.OK);
     }
+    // 찜 데이터 추가
+    @PostMapping("/wish/insert")
+    public ResponseEntity<Map<String, String>> wish(@RequestBody Map<String, String> wishData) {
+        String userNum = wishData.get("userNum");
+        String musicalId = wishData.get("musicalId");
+        boolean result = wishService.postWishList(userNum, musicalId);
+        if(result) {
+            return new ResponseEntity(true, HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity(false, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
 
 }
