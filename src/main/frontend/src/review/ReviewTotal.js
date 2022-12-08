@@ -4,9 +4,9 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import MuteApi from "../api/MuteApi";
 import Rating from "../util/Rating";
-import Modal from "../util/Modal";
+import TotalModal from "./TotalModal";
 
-const ReviewTotal = () => {
+const ReviewTotal = (props) => {
 
     // 취소 버튼 누르면 첫 화면으로..
     const CancelButton = () => {   
@@ -27,11 +27,17 @@ const ReviewTotal = () => {
     const [isTotalReview, setIsTotalReview] = useState(false);
 
     // 모달
-    const [modalText, setModelText] = useState(false); // 확인 버튼 눌렀을 때
+    const [modalText, setModelText] = useState(false); // 확인 버튼 눌렀을 
     
-    const closeModal = () => { // 모달 창 닫기
-        setModelText(false);     
+    const confirmModal = () => { // 좌석 후기 작성하러 가기
+        props.propFunction(); // 상위 컴포넌트의 함수를 불러 count ++
     }
+    
+    const closeModal = () => { // 아니오 눌렀을 때 => 리뷰 리스트로 이동
+        window.location.replace('/Review'); 
+    }
+
+    
 
 
     // Api 호출
@@ -45,9 +51,9 @@ const ReviewTotal = () => {
         try {
             const res = await MuteApi.WriteTotal(scoreStory, scoreDirect, scoreCast, scoreNumber, totalReview);
   
-            console.log("res.data.result : " + res.data.result);
-            console.log("res.data : " + res.data);
-            console.log("res : " + res);
+            // console.log("res.data.result : " + res.data.result);
+            // console.log("res.data : " + res.data);
+            // console.log("res : " + res);
 
             if(res.data === true) {
                 console.log("텍스트 입력 성공");
@@ -104,7 +110,7 @@ const ReviewTotal = () => {
                 </fieldset>
                 <button onClick={WriteTotalButton}>확인</button>
                 <button onClick={CancelButton}>취소</button>
-                {modalText && <Modal open={modalText} close={closeModal} header="확인">뮤지컬 후기를 작성해주셔서 감사합니다.<br/>좌석 후기도 작성해주실거죠?^^</Modal>}
+                {modalText && <TotalModal open={modalText} confirm={confirmModal} close={closeModal} type={true} header="확인">뮤지컬 후기 작성 완료♥</TotalModal>}
             </div>
 
         </>

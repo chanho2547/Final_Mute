@@ -31,12 +31,17 @@ const Review = () => {
         setCount(count + 1);
     }
 
+    const highFunction = () => {
+        setCount(count + 1);
+    }
+
+
 
 
     return (
         <div className="container">
-{/* 
-            <button onClick={onClickBefore}>{ (count === 0) ? "후기 작성하기" : "다음으로" }</button>
+
+            {/*<button onClick={onClickBefore}>{ (count === 0) ? "후기 작성하기" : "다음으로" }</button>
             <TmpBox>
             {count === 4 ? <ReviewSeat /> : null} 
             {count === 3 ? <ReviewTotal /> : null }
@@ -55,10 +60,10 @@ const Review = () => {
             {count === -3 ? <ReviewList /> : null }
             {count === -2 ? <Theater /> : null }
             {count === -1 ? <ReviewTotal /> : null } */}
-            {count === 0 ? <ReviewList /> : null} 
-            {count === 1 ? <Theater /> : null }
-            {count === 2 ? <ReviewTotal /> : null }
-            {count === 3 ? <ReviewSeat/> : null}
+            {count === 0 ? <ReviewList propFunction={highFunction}/> : null} 
+            {count === 1 ? <Theater propFunction={highFunction}/> : null }
+            {count === 2 ? <ReviewTotal propFunction={highFunction}/> : null }
+            {count === 3 ? <ReviewSeat propFunction={highFunction}/> : null}
             {/* {count === 4 ? setCount(0) : null} */}
             </TmpBox>
             
