@@ -225,7 +225,7 @@ const SingUp = () => {
                 {popup && <Post company={enroll_addr} setcompany={setEnroll_addr}></Post>}
             </div>
             <div>
-                <button onClick={onClickJoin} disabled={!(isId && isPwd && isPwdCheck && isName && isMail && isPhone)}>JOIN</button>
+                <button onClick={onKeyDownJoin} disabled={!(isId && isPwd && isPwdCheck && isName && isMail && isPhone)}>JOIN</button>
                 <div className='footer'>이미 아이디가 있으신가요? <button><div><Link to="/Login" className="link_item">＞ 로그인</Link></div></button></div>
             </div>
         </>
