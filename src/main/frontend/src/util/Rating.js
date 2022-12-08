@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 import styled from 'styled-components';
 
-const ARRAY = [0, 1, 2, 3, 4];
-function Rating() {
+const Rating = ( props ) => {
+  // console.log("확인용 : " + props.value);
+
+  const ARRAY = [0, 1, 2, 3, 4];
 
   const [clicked, setClicked] = useState([false, false, false, false, false]);
   const [count, setCount] = useState("");
@@ -26,11 +28,8 @@ function Rating() {
   //   let count = clicked.filter(Boolean).length;
   // };
 
-
-  useEffect(() => {
-    window.localStorage.setItem('scoreStory', JSON.stringify({count}));
-  }, ['scoreStory', {count}]);
-
+  console.log("확인용 : " + count);
+  props.propFunction(count);
 
   return (
     <Wrap>
