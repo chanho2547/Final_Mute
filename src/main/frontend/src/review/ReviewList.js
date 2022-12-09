@@ -23,17 +23,6 @@ const ReviewList = () => {
     // }
 
 
-    let whoLoginNow = window.localStorage.getItem("whoLogin");
-
-    let scoreStory = window.localStorage.getItem("story");
-    let scoreDirect = window.localStorage.getItem("Direct");
-    let scoreCast = window.localStorage.getItem("Cast");
-    let scoreNumber = window.localStorage.getItem("Number");
-
-    let totalReview = window.localStorage.getItem("ToTaltext"); // 텍스트
-
-   
-    
 
 
     return(
@@ -45,15 +34,14 @@ const ReviewList = () => {
             <p>회원 총 평점 [{}]</p>
         </fieldset>
         <fieldset>
-            <span>아이디 [{whoLoginNow}]</span><p>총점 {}</p>
-            <span>스토리 [{scoreStory}]</span> 
-            <span>연출 {scoreDirect}</span> 
-            <span>캐스팅 {scoreCast}</span> 
-            <span>넘버 {scoreNumber}</span>
-            <p>텍스트 {totalReview}</p>
+            <span>아이디 []</span><p>총점 [{}]</p>
+            <span>스토리 []</span> 
+            <span>연출 []</span> 
+            <span>캐스팅 []</span> 
+            <span>넘버 []</span>
+            <p>텍스트 []</p>
         </fieldset>
-        
-
+    
         </>
     )
 }

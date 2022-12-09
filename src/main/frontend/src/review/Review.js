@@ -23,13 +23,13 @@ const Review = () => {
     const [count, setCount] = useState(0)
 
     const onClickBefore = () => {
-        console.log("현재 카운트 : "+ count);
+        console.log("현재 카운트 : " + count);
         setCount(count - 1);
 
     }
     
     const onClickNext = () => {
-        console.log("현재 카운트 : "+ count);
+        console.log("현재 카운트 : " + count);
         setCount(count + 1);
     }
 
@@ -61,15 +61,11 @@ const Review = () => {
             {count === -2 ? <Theater /> : null }
             {count === -1 ? <ReviewTotal /> : null } */}
             {count === 0 ? <ReviewList propFunction={highFunction}/> : null} 
-            {count === 1 ? <Theater propFunction={highFunction}/> : null }
-            {count === 2 ? <ReviewTotal propFunction={highFunction}/> : null }
+            {count === 1 ? <Theater propFunction={highFunction}/> : null}
+            {count === 2 ? <ReviewTotal propFunction={highFunction}/> : null}
             {count === 3 ? <ReviewSeat propFunction={highFunction}/> : null}
             {/* {count === 4 ? setCount(0) : null} */}
             </TmpBox>
-
-    
-            
-
  
         </div>
     );
