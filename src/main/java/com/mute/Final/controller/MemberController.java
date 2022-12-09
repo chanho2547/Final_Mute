@@ -14,11 +14,11 @@ import java.util.Map;
 @RestController
 @RequestMapping("/member")
 public class MemberController {
-    // 로그인 - 도연 작업완료
-    private MemberService memberService;
+    private final MemberService memberService;
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
     }
+    // 로그인
     @PostMapping("/login")
     public Boolean memberLogin(@RequestBody Map<String, String> loginData) {
         String userId = loginData.get("userId");
@@ -38,7 +38,7 @@ public class MemberController {
             String phone = signupData.get("phone");
             String mail = signupData.get("mail");
             String addr = signupData.get("addr");
-            boolean result = memberService.memberjoin(userId, pwd, name, phone, mail,addr);
+            boolean result = memberService.memberJoin(userId, pwd, name, phone, mail,addr);
             log.warn(String.valueOf(result));
             if(result) {
                 return new ResponseEntity(true, HttpStatus.OK);
@@ -71,31 +71,31 @@ public class MemberController {
             return new ResponseEntity(false, HttpStatus.OK);
         }
     }
-    // ID, PWD 찾기
-    @PostMapping("/find")
-    public ResponseEntity<List<MemberDTO>> memberFind(@RequestBody Map<String, String> find) {
-        String uni = find.get("uni");
-        String mail = find.get("mail");
-        String type = find.get("type");
-
-        MemberDTO memberDTO = memberService.findCheck(uni, mail, type);
-        if(memberDTO.isOk()) return  new ResponseEntity(memberDTO, HttpStatus.OK);
-        else return new ResponseEntity(false, HttpStatus.OK);
-    }
-    // 새 비밀번호 설정
-    @PostMapping("/new_pwd")
-    public ResponseEntity<Boolean> memberNewPwd(@RequestBody Map<String, String> newPwd) {
-        String id = newPwd.get("id");
-        String pwd = newPwd.get("pwd");
-
-        boolean result = memberService.regNewPwd(id, pwd);
-        if(result) {
-            return new ResponseEntity(true, HttpStatus.OK);
-        }
-        else {
-            return new ResponseEntity(false, HttpStatus.OK);
-        }
-    }
+//    // ID, PWD 찾기
+//    @PostMapping("/find")
+//    public ResponseEntity<List<MemberDTO>> memberFind(@RequestBody Map<String, String> find) {
+//        String uni = find.get("uni");
+//        String mail = find.get("mail");
+//        String type = find.get("type");
+//
+//        MemberDTO memberDTO = memberService.findCheck(uni, mail, type);
+//        if(memberDTO.isOk()) return  new ResponseEntity(memberDTO, HttpStatus.OK);
+//        else return new ResponseEntity(false, HttpStatus.OK);
+//    }
+//    // 새 비밀번호 설정
+//    @PostMapping("/new_pwd")
+//    public ResponseEntity<Boolean> memberNewPwd(@RequestBody Map<String, String> newPwd) {
+//        String id = newPwd.get("id");
+//        String pwd = newPwd.get("pwd");
+//
+//        boolean result = memberService.regNewPwd(id, pwd);
+//        if(result) {
+//            return new ResponseEntity(true, HttpStatus.OK);
+//        }
+//        else {
+//            return new ResponseEntity(false, HttpStatus.OK);
+//        }
+//    }
 
     // 회원정보 전체 조회
     @GetMapping("/list")

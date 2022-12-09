@@ -90,8 +90,25 @@ const MuteApi =  {
     // 뮤지컬리스트 확인 (임시) - 찬호 
     musicalList: async function() {
         return await axios.get(MUTE_DOMAIN + "musical/list");
-    }
+    },
 
+    // ID, PWD 찾기
+    memberFind: async function (uni, email, type) {
+        const reg = {
+            uni: uni,
+            email: email,
+            type: type
+        };
+        return await axios.post(MUTE_DOMAIN + "member/find", reg, HEADER);
+    },
+    // 새 비밀번호 저장
+    memberNewPwd: async function (id, pwd) {
+        const reg = {
+            id: id,
+            pwd: pwd
+        };
+        return await axios.post(MUTE_DOMAIN + "member/new_pwd", reg, HEADER);
+    },
 
 }
 

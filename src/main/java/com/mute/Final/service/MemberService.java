@@ -4,6 +4,7 @@ import com.mute.Final.entity.Member;
 import com.mute.Final.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
@@ -11,9 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 // 로그인 - 도연 작업완료
+@Slf4j
 @Service
 @Transactional
-@Slf4j
 @RequiredArgsConstructor
 public class MemberService {
     private final MemberRepository memberRepository;
@@ -41,7 +42,7 @@ public class MemberService {
 //        else {return 400;}
 //    }
     // 회원가입
-    public boolean memberjoin(String userId, String pwd, String name, String phone, String mail, String addr) {
+    public boolean memberJoin(String userId, String pwd, String name, String phone, String mail, String addr) {
         try {
             Member member = new Member();
             member.setUserId(userId);
@@ -102,49 +103,49 @@ public class MemberService {
         return memberDTOS;
     }
 
-    // ID, PWD 찾기
-    public MemberDTO findCheck(String uni, String mail, String type) {
-        MemberDTO memberDTO = new MemberDTO();
-        try{
-            char c = type.charAt(5);
-            Member member;
-
-            switch (c) {
-                case 'I' :
-                    member = memberRepository.findByNameAndMail(uni, mail);
-                    if(member != null) {
-                        memberDTO.setReg(true);
-                        memberDTO.setUserId(member.getUserId());
-                    } else {
-                        memberDTO.setReg(false);
-                    }
-                    memberDTO.setOk(true);
-                    break;
-                case 'P' :
-                    member = memberRepository.findByIdAndMail(uni, mail);
-                    if(member != null) {
-                        memberDTO.setReg(true);
-                    } else {
-                        memberDTO.setReg(false);
-                    }
-                    memberDTO.setOk(true);
-                    break;
-            }
-        } catch (Exception e) {
-            memberDTO.setOk(false);
-        }
-        return memberDTO;
-    }
-    // 비밀번호 찾기 시 새 비밀번호 설정
-    public boolean regNewPwd(String userId, String pwd) {
-        try{
-            Member member = memberRepository.findByUserId(userId);
-            member.setPwd(pwd);
-            Member rst = memberRepository.save(member);
-            log.warn(rst.toString());
-        } catch(Exception e) {
-            return false;
-        }
-        return true;
-    }
+//    // ID, PWD 찾기
+//    public MemberDTO findCheck(String uni, String mail, String type) {
+//        MemberDTO memberDTO = new MemberDTO();
+//        try{
+//            char c = type.charAt(5);
+//            Member member;
+//
+//            switch (c) {
+//                case 'I' :
+//                    member = memberRepository.findByNameAndMail(uni, mail);
+//                    if(member != null) {
+//                        memberDTO.setReg(true);
+//                        memberDTO.setUserId(member.getUserId());
+//                    } else {
+//                        memberDTO.setReg(false);
+//                    }
+//                    memberDTO.setOk(true);
+//                    break;
+//                case 'P' :
+//                    member = memberRepository.findByIdAndMail(uni, mail);
+//                    if(member != null) {
+//                        memberDTO.setReg(true);
+//                    } else {
+//                        memberDTO.setReg(false);
+//                    }
+//                    memberDTO.setOk(true);
+//                    break;
+//            }
+//        } catch (Exception e) {
+//            memberDTO.setOk(false);
+//        }
+//        return memberDTO;
+//    }
+//    // 비밀번호 찾기 시 새 비밀번호 설정
+//    public boolean regNewPwd(String userId, String pwd) {
+//        try{
+//            Member member = memberRepository.findByUserId(userId);
+//            member.setPwd(pwd);
+//            Member rst = memberRepository.save(member);
+//            log.warn(rst.toString());
+//        } catch(Exception e) {
+//            return false;
+//        }
+//        return true;
+//    }
 }
