@@ -197,7 +197,7 @@ const SignUp = () => {
 
     // 회원가입
     const onClickJoin = async() => {
-        const memberReg = await MuteApi.signUp(inputId, inputPwd, inputName, inputMail, inputPhone, inputAddr)
+        const memberReg = await MuteApi.signUp(inputId, inputPwd, inputName, inputMail, inputPhone, enroll_company.address)
         console.log(memberReg.data.result);
         if(memberReg.data.result === "OK") {
             console.log("Mute 회원가입이 완료되었습니다.")
@@ -207,7 +207,6 @@ const SignUp = () => {
             // window.localStorage.setItem("userId",  inputId);
             // window.localStorage.setItem("isLogin", "true");
             // navigate("/SignUp");
-
 
         // } else {
         //     console.log("회원가입에 실패했습니다. 다시 확인해주세요")
@@ -255,6 +254,7 @@ const SignUp = () => {
                 </p>
                 <input type='phone' placeholder="'-'제외" value={inputPhone} onChange={onChangePhone} onBlur={phoneCheck}/>
             </div>
+            {/* 주소 입력*/}
             <div>
                 <label className="address_search">주소</label>
                 <input className="addr" type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
@@ -264,12 +264,14 @@ const SignUp = () => {
             <div>
                 <button onClick={onClickJoin} disabled={!(isId && isPwd && isPwdCheck && isName && isMail && isPhone)}>회원가입</button>
                 <div className='footer'>이미 아이디가 있으신가요? <button><div><Link to="/Login" className="link_item">＞ 로그인</Link></div></button></div>
+
                 {/* 모달 */}
                 {modalOpenIdCheck && <Modal open={modalOpenIdCheck} close={closeModalIdCheck} header="확인">이미 가입된 아이디입니다.</Modal>}
                 {modalOpenIdOK && <Modal open={modalOpenIdOK} close={closeModalIdOK} header="확인">사용 가능한 아이디입니다.</Modal>}
                 {modalOpenSignUp2 && <Modal open={modalOpenSignUp2} close={closeModalSignUp2} header="확인">
                     <Link to="/Login">Mute 회원가입이 완료되었습니다.</Link></Modal>}
                 {modalOpenSignUp && <Modal open={modalOpenSignUp} close={closeModalSignUp} header="확인">회원가입에 실패했습니다. 다시 확인해주세요.</Modal>}
+                {/*<p>{enroll_company}</p>*/}
             </div>
         </>
     )

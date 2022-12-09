@@ -1,6 +1,4 @@
 import axios from "axios";
-const HEADER = "application/json";
-const MUTE_DOMAIN = "http://localhost:8282/";
 
 const MuteApi =  {
     // 로그인 - 도연
@@ -9,7 +7,7 @@ const MuteApi =  {
             userId: id,
             pwd: pwd
         }
-        return await axios.post(MUTE_DOMAIN + "member/login", loginObj, HEADER);
+        return await axios.post( "member/login", loginObj);
     },
     // 회원가입
     signUp: async function(userId, pwd, name, mail, phone, addr) {
@@ -24,7 +22,7 @@ const MuteApi =  {
             phone: phone,
             addr: addr
         }
-        return await axios.post(MUTE_DOMAIN + "member/signup", signUpObj, HEADER);
+        return await axios.post("member/signup", signUpObj);
     },
 
     // 뮤지컬 총평 후기 작성 - 도연
@@ -37,7 +35,7 @@ const MuteApi =  {
             scoreAvgTotal : scoreAvgTotal, // 뮤지컬 총평 별점 총점
             reviewMuTxt : totalReview // 뮤지컬 총평 후기 텍스트
         }
-        return await axios.post(MUTE_DOMAIN + "review/writeTotal", reviewObj, HEADER);
+        return await axios.post( "review/writeTotal", reviewObj);
     },
 
      // 좌석 후기 작성 - 도연
@@ -49,7 +47,7 @@ const MuteApi =  {
             scoreLight : lightRating, // 조명 별점
             reviewSeTxt : seatReview // 뮤지컬 후기 텍스트
         }
-        return await axios.post(MUTE_DOMAIN + "review/writeSeat", reviewObj, HEADER);
+        return await axios.post("review/writeSeat", reviewObj);
     },
 
     // // 후기 삭제 - 도연
@@ -59,7 +57,7 @@ const MuteApi =  {
     //         musical : musical, // 공연 ID
     //         member : member // 회원번호
     //     }
-    //     return await axios.post(MUTE_DOMAIN + "review/deleteReview", reviewObj, HEADER);
+    //     return await axios.post("review/deleteReview", reviewObj);
     // },
 
     // // 뮤지컬 후기 view - 도연
@@ -75,7 +73,7 @@ const MuteApi =  {
     //         scoreNumber : scoreNumber, // 넘버 별점
     //         reviewMuTxt : reviewMuTxt // 뮤지컬 후기 텍스트
     //     }
-    //     return await axios.post(MUTE_DOMAIN + "review/ReviewInfo", reviewObj, HEADER);
+    //     return await axios.post("review/ReviewInfo", reviewObj);
     // }
 
 
@@ -85,12 +83,12 @@ const MuteApi =  {
             uni : uni,
             type:type
         }
-        return await axios.post(MUTE_DOMAIN + "member/double_check", doubleObj, HEADER);
+        return await axios.post( "member/double_check", doubleObj);
     },
 
     // 뮤지컬리스트 확인 (임시) - 찬호 
     musicalList: async function() {
-        return await axios.get(MUTE_DOMAIN + "musical/list");
+        return await axios.get( "musical/list");
     },
 
     // ID, PWD 찾기
@@ -100,7 +98,7 @@ const MuteApi =  {
             email: email,
             type: type
         };
-        return await axios.post(MUTE_DOMAIN + "member/find", reg, HEADER);
+        return await axios.post("member/find", reg);
     },
     // 새 비밀번호 저장
     memberNewPwd: async function (id, pwd) {
@@ -108,8 +106,8 @@ const MuteApi =  {
             id: id,
             pwd: pwd
         };
-        return await axios.post(MUTE_DOMAIN + "member/new_pwd", reg, HEADER);
-    },
+        return await axios.post("member/new_pwd", reg);
+    }
 
 }
 
