@@ -201,7 +201,7 @@ const SignUp = () => {
         if(memberReg.data.result === "OK") {
             console.log("Mute 회원가입이 완료되었습니다.")
             setModalOpenSignUp2(true);
-            navigate("/Login");
+            navigate('/Login');
 
             // window.localStorage.setItem("userId",  inputId);
             // window.localStorage.setItem("isLogin", "true");

@@ -36,7 +36,7 @@ const Modal = (props) => {
                     <main>{props.children}</main>
                     <footer>
                         <button className='close' onClick={close}>확인</button>
-                        <button  onClick={onClickMemDelete}>yes</button>
+                        <button  onClick={onClickMemDelete}></button>
                     </footer>
                 </section>
             }

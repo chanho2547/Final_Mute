@@ -66,7 +66,7 @@ const Login = () => {
                 window.localStorage.setItem("whoLogin",inputId);
                 window.localStorage.setItem("whoPwd",inputPwd); 
                 console.log("로그인 성공");
-                navigate("/");
+                navigate('/');
 
             } else if(res.data === 300) {
                 setModelText("패스워드를 다시 확인해주세요.");

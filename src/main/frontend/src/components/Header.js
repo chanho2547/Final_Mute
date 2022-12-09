@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import { FaBell } from 'react-icons/fa';
 import React from "react";
 
@@ -35,6 +35,7 @@ const Nav = styled.div``;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 const Header = () => {
+    const navigate = useNavigate();
 
     // 로그인했을 경우 현재 ID 표시
     let whoLoginNow = window.localStorage.getItem("whoLogin");
@@ -42,7 +43,7 @@ const Header = () => {
     // 현재 ID에서 로그아웃하기
     const onClickLogout = () => {
         window.localStorage.removeItem("whoLogin");
-        window.location.replace("/");
+        navigate("/");
       }
 
     return(

@@ -11,7 +11,7 @@ const MyPage = () => {
         setModalOpen(false);
     };
     const onClickMemDelete = () => {
-    setModalOpen(false);
+    setModalOpen(true);
     setCommnet("탈퇴 하시겠습니까?");
     }
 
