@@ -51,7 +51,7 @@ const Header = () => {
             // 로그인하지 않았을 때 => 로그인, 회원가입, 찜하기
             (<>
             <Link to={"/Login"} className="menu_item">로그인</Link>
-            <Link to={"/SignUp"} className="menu_item">회원가입</Link>
+            <Link to={"/Agree"} className="menu_item">회원가입</Link>
             <Link to={"/Login"} className="menu_item">찜하기</Link>
             </>) 
             : 

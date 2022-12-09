@@ -18,6 +18,8 @@ const ReviewTotal = (props) => {
     const [scoreDirect, setScoreDirect] = useState(''); // 연출 별점
     const [scoreCast, setScoreCast] = useState(''); // 캐스팅 별점
     const [scoreNumber, setScoreNumber] = useState(''); // 넘버 별점
+    const [scoreAvgTotal, setScoreAvgTotal] = useState(''); // 넘버 별점
+    
     const [totalReview, setTotalReview] = useState(''); // 뮤지컬 후기 텍스트
 
     // 오류 메세지
@@ -83,6 +85,7 @@ const ReviewTotal = (props) => {
         console.log("별점 가져온 값 : " + text);
         setScoreNumber(text);
     }
+
 
     const onChangeTotalReview = (e) => {
         setTotalReview(e.target.value)

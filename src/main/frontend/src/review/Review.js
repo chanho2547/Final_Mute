@@ -6,6 +6,8 @@ import ReviewTotal from "./ReviewTotal";
 import ReviewSeat from "./ReviewSeat";
 import Theater from "../theaterInfo/Theater";
 
+// 후기 탭 전체 틀 - 도연 작업 중
+
 const TmpBox = styled.div`
     width: 90%;
     height: fit-content;
@@ -36,8 +38,6 @@ const Review = () => {
     }
 
 
-
-
     return (
         <div className="container">
 {/* 
@@ -66,6 +66,8 @@ const Review = () => {
             {count === 3 ? <ReviewSeat propFunction={highFunction}/> : null}
             {/* {count === 4 ? setCount(0) : null} */}
             </TmpBox>
+
+    
             
 
  
