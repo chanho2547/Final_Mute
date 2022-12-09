@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import { useState } from "react";
 import MuteApi from "../api/MuteApi";
 import Modal from "../util/Modal";
 import styled from "styled-components";
 
 const Login = () => {
+    const navigate = useNavigate();
        // 아이디, 비밀번호 입력
        const [inputId, setInputId] = useState("");
        const [inputPwd, setInputPwd] = useState("");
@@ -17,10 +18,10 @@ const Login = () => {
        const [isId, setIsId] = useState("");
        const [isPwd, setIsPwd] = useState("");
    
-       // 로그인 오류 팝업
+       // 로그인 버튼 클릭시 로그인 오류 팝업창
        const [modalOpen, setModalOpen] = useState(false); 
        
-       // 모달
+       // 모달이 뜰 때 문구 출력
        const [modalText, setModelText] = useState("");
 
        const closeModal = () => {
@@ -33,7 +34,7 @@ const Login = () => {
        const onChangeId = (e) => {
            setInputId(e.target.value);
            if(e.target.value.length < 4 || e.target.value.length > 20){
-               setIdMessage("4자리 이상 20자리 이하로 입력하세요.");
+               setIdMessage("4자리 이상 20자리 미만으로 입력하세요.");
                setIsId(false);
            } else {
                setIdMessage("올바른 형식입니다.");
@@ -47,7 +48,7 @@ const Login = () => {
            const pwdCurrent = e.target.value;
            setInputPwd(pwdCurrent)
            if(!pwdRegex.test(pwdCurrent)) {
-               setPwdMessage("숫자, 영문자, 특수문자 포함 8자리 이상 입력하세요.");
+               setPwdMessage("숫자+영문자+특수문자를 포함하여 8자 이상 입력해주세요.");
                setIsPwd(false);
            } else {
                setPwdMessage("올바른 형식입니다.");
@@ -65,7 +66,7 @@ const Login = () => {
                 window.localStorage.setItem("whoLogin",inputId);
                 window.localStorage.setItem("whoPwd",inputPwd); 
                 console.log("로그인 성공");
-                window.location.replace("/");
+                navigate("/");
 
             } else if(res.data === 300) {
                 setModelText("패스워드를 다시 확인해주세요.");
@@ -105,6 +106,11 @@ const Login = () => {
                 <button className="loginButton" onClick={onClickLogin}>LOGIN</button>
                 <br/>
             </>
+            <div>
+                <Link to="/Agree" className="link_item">회원가입</Link>
+                <Link to="/ForgotId" className="link_item">아이디 찾기</Link>
+                <Link to="/ForgotPwd" className="link_item">비밀번호 찾기</Link>
+            </div>
 
             {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">{modalText}</Modal>}
         </div>

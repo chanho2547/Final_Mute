@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import Modal from './Modal';
 import Post from './Post';
 
+
 const SingUp = () => {
     const navigate = useNavigate();
     // 회원정보 입력받는 부분
@@ -45,23 +46,27 @@ const SingUp = () => {
     }
     // ID 중복 체크
     const IdCheck = async() => {
-
         // 가입 여부 확인
-        const memberCheck = await MuteApi.memberJoinCheck(inputId, "TYPE_ID");
-        if(memberCheck.data && isId) {
-            setIdMsg("사용가능합니다.");
-        } else if(memberCheck.data && !isId) {
-            setIdMsg("4자리 이상으로 입력해주세요.");
-        }
-        else {
-            setIdMsg("이미 사용중인 ID입니다.");
-            setIsId(false);
+        try {
+            const memberCheck = await MuteApi.memberJoinCheck(inputId, "TYPE_ID");
+            if(memberCheck.data && isId) {
+                setIdMsg("사용가능합니다.");
+                setModalOpenIdOK(true);
+            } else if(memberCheck.data && !isId) {
+                setIdMsg("4자리 이상으로 입력해주세요.");
+            }
+            else {
+                setIdMsg("이미 사용중인 ID입니다.");
+                setIsId(false);
+                setModalOpenIdCheck(true);
+            }
+        } catch (e) {
         }
     }
 
     // 비밀번호 입력
     const onChangePwd = (e) => {
-        const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/
         const passwordCurrent = e.target.value;
         setPwd(passwordCurrent);
         if (!passwordRegex.test(passwordCurrent)) {
@@ -118,7 +123,6 @@ const SingUp = () => {
         }
     }
 
-
     // 주소
     const [enroll_company, setEnroll_company] = useState({
         address:'',
@@ -153,7 +157,6 @@ const SingUp = () => {
             setIsMail(true);
         }
     }
-
     const mailCheck = async() => {
         // 가입 여부 확인
         const memberCheck = await MuteApi.memberJoinCheck(inputMail, "TYPE_MAIL");
@@ -171,14 +174,30 @@ const SingUp = () => {
             onClickJoin();
         }
     }
+
     // 회원가입
     const onClickJoin = async() => {
         const memberReg = await MuteApi.signUp(inputId, inputPwd, inputName, inputMail, inputPhone, inputAddr)
         if(memberReg.data.result === "OK") {
             window.localStorage.setItem("userId",  inputId);
             window.localStorage.setItem("isLogin", "true");
-            navigate("/Home");
+            navigate("/SignUp");
         }
+    }
+    // 모달
+    const [modalOpenIdCheck, setModalOpenIdCheck] = useState(false); // 아이디 중복일 때
+    const closeModalIdCheck = () => {
+        setModalOpenIdCheck(false);
+    }
+
+    const [modalOpenIdOK, setModalOpenIdOK] = useState(false); // 아이디 중복 아닐 때
+    const closeModalIdOK = () => {
+        setModalOpenIdOK(false);
+    }
+
+    const [modalOpenSignUp, setModalOpenSignUp] = useState(false); // 회원가입 버튼 눌렀을 때
+    const closeModalSignUp = () => { // 모달 창 닫기
+        setModalOpenSignUp(false);
     }
 
     return (
@@ -188,7 +207,8 @@ const SingUp = () => {
                     아이디
                     {inputId.length > 0 && <span>{idMsg}</span>}
                 </p>
-                <input placeholder='아이디' value={inputId} onChange={onChangeId} type={'text'} onBlur={IdCheck} />
+                <input placeholder='아이디' value={inputId} onChange={onChangeId} />
+                <button onClick={IdCheck}>중복 확인</button>
             </div>
             <div>
                 <p>
@@ -229,6 +249,10 @@ const SingUp = () => {
             <div>
                 <button onClick={onClickJoin} disabled={!(isId && isPwd && isPwdCheck && isName && isMail && isPhone)}>JOIN</button>
                 <div className='footer'>이미 아이디가 있으신가요? <button><div><Link to="/Login" className="link_item">＞ 로그인</Link></div></button></div>
+                {/* 모달 */}
+                {modalOpenIdCheck && <Modal open={modalOpenIdCheck} close={closeModalIdCheck} header="확인">이미 가입된 아이디입니다.</Modal>}
+                {modalOpenIdOK && <Modal open={modalOpenIdOK} close={closeModalIdOK} header="확인">사용 가능한 아이디입니다.</Modal>}
+                {modalOpenSignUp && <Modal open={modalOpenSignUp} close={closeModalSignUp} header="확인">회원가입에 실패했습니다. 다시 확인해주세요.</Modal>}
             </div>
         </>
     )

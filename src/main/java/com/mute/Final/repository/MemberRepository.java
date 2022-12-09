@@ -13,8 +13,8 @@ public interface MemberRepository extends JpaRepository<Member, String> {
 
     Member findByPhone(String phone);
 
-//    Member findByNameAndMail(String name, String mail);
-//
-//    Member findByIdAndMail(String userId, String mail);
+    Member findByNameAndMail(String name, String mail);
+
+    Member findByUserIdAndMail(String userId, String mail);
 }
 
