@@ -3,20 +3,48 @@ package com.mute.Final.service;
 import com.mute.Final.dto.ReviewSeatAvgDTO;
 import com.mute.Final.dto.ReviewSeatDTO;
 import com.mute.Final.entity.ReviewSeat;
-import com.mute.Final.repository.MemberRepository;
+import com.mute.Final.entity.ReviewSeatAvg;
+
+import com.mute.Final.repository.ReviewSeatAvgRepository;
 import com.mute.Final.repository.ReviewSeatRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @Slf4j
+@Transactional
+@RequiredArgsConstructor
 public class ReviewSeatService {
-    private ReviewSeatRepository reviewSeatRepository;
-    public ReviewSeatService(ReviewSeatRepository reviewSeatRepository) {
-        this.reviewSeatRepository = reviewSeatRepository;
+    private final ReviewSeatRepository reviewSeatRepository;
+    private final ReviewSeatAvgRepository reviewSeatAvgRepository;
+
+//    public ReviewSeatService(ReviewSeatAvgRepository reviewSeatAvgRepository) {
+//        this.reviewSeatAvgRepository = reviewSeatAvgRepository;
+//    }
+
+    public List<ReviewSeatAvgDTO> getReviewAvgList() {
+        List<ReviewSeatAvgDTO> reviewSeatAvgDTOS = new ArrayList<>();
+        System.out.println("테스트위치33333");
+        List<ReviewSeatAvg> reviewSeatAvgList = reviewSeatAvgRepository.findAvg();
+        System.out.println("테스트위치");
+        for(ReviewSeatAvg e : reviewSeatAvgList) {
+            ReviewSeatAvgDTO reviewSeatAvgDTO = new ReviewSeatAvgDTO();
+            System.out.println("테스트 좌석번호 : "+e.getSeatId());
+            System.out.println("테스트 좌석별 평균별점 : "+e.getAvgAllSeat());
+            reviewSeatAvgDTO.setSeatId(e.getSeatId());
+            reviewSeatAvgDTO.setAvgAllSeat(e.getAvgAllSeat());
+            reviewSeatAvgDTOS.add(reviewSeatAvgDTO);
+        }
+        return reviewSeatAvgDTOS;
     }
+
+
+
     // 좌석번호별 개인 후기 전체 조회 및 좌석번호별 평균 별점 조회
     public List<ReviewSeatDTO> getReviewSeatList(int seatNum) {
         List<ReviewSeatDTO> reviewSeatDTOS = new ArrayList<>();

@@ -3,6 +3,9 @@ package com.mute.Final.controller;
 import com.mute.Final.dto.ReviewSeatAvgDTO;
 import com.mute.Final.dto.ReviewSeatDTO;
 import com.mute.Final.entity.ReviewSeat;
+import com.mute.Final.entity.ReviewSeatAvg;
+
+import com.mute.Final.repository.ReviewSeatRepository;
 import com.mute.Final.service.ReviewSeatService;
 import org.springframework.http.HttpStatus;
 import org.springframework.data.jpa.repository.Query;
@@ -24,6 +27,12 @@ public class ReviewSeatController {
     public ResponseEntity<List<ReviewSeatDTO>> reviewSeat(@RequestParam int seatNum) {
         List<ReviewSeatDTO> list = reviewSeatService.getReviewSeatList(seatNum);
         return new ResponseEntity(list, HttpStatus.OK);
+    }
+
+    @GetMapping("/reviewSeat/avg/test")
+    public ResponseEntity<List<ReviewSeatAvg>> reviewSeatAvgTest() {
+        List<ReviewSeatAvgDTO> list = reviewSeatService.getReviewAvgList();
+        return new ResponseEntity(list,HttpStatus.OK);
     }
 
     // 좌석번호별 총 평균 별점, 평균 좌석 별점, 평균 시야 별점, 평균 음향 별점, 평균 조명 별점 조회
