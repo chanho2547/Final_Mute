@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import MuteApi from '../api/MuteApi';
-import Header from '../components/Header';
 import Modal from './Modal';
 import Post from './Post';
 
 
-const SingUp = () => {
+const SignUp = () => {
     const navigate = useNavigate();
     // 회원정보 입력받는 부분
     const [inputId, setId] = useState('');
@@ -94,6 +93,7 @@ const SingUp = () => {
             setIsPwdCheck(true);
         }
     }
+    // 이름 입력
     const onChangeName = (e) => {
         const nameRegex = /^[가-힣a-zA-Z]+$/;
         const nameCurrent = e.target.value;
@@ -175,15 +175,6 @@ const SingUp = () => {
         }
     }
 
-    // 회원가입
-    const onClickJoin = async() => {
-        const memberReg = await MuteApi.signUp(inputId, inputPwd, inputName, inputMail, inputPhone, inputAddr)
-        if(memberReg.data.result === "OK") {
-            window.localStorage.setItem("userId",  inputId);
-            window.localStorage.setItem("isLogin", "true");
-            navigate("/SignUp");
-        }
-    }
     // 모달
     const [modalOpenIdCheck, setModalOpenIdCheck] = useState(false); // 아이디 중복일 때
     const closeModalIdCheck = () => {
@@ -195,9 +186,33 @@ const SingUp = () => {
         setModalOpenIdOK(false);
     }
 
-    const [modalOpenSignUp, setModalOpenSignUp] = useState(false); // 회원가입 버튼 눌렀을 때
+    const [modalOpenSignUp, setModalOpenSignUp] = useState(false); // 회원가입 버튼 눌렀을 때(실패시)
     const closeModalSignUp = () => { // 모달 창 닫기
         setModalOpenSignUp(false);
+    }
+    const [modalOpenSignUp2, setModalOpenSignUp2] = useState(false); // 회원가입 버튼 눌렀을 때(실패시)
+    const closeModalSignUp2 = () => { // 모달 창 닫기
+        setModalOpenSignUp2(false);
+    }
+
+    // 회원가입
+    const onClickJoin = async() => {
+        const memberReg = await MuteApi.signUp(inputId, inputPwd, inputName, inputMail, inputPhone, inputAddr)
+        console.log(memberReg.data.result);
+        if(memberReg.data.result === "OK") {
+            console.log("Mute 회원가입이 완료되었습니다.")
+            setModalOpenSignUp2(true);
+            navigate("/Login");
+
+            // window.localStorage.setItem("userId",  inputId);
+            // window.localStorage.setItem("isLogin", "true");
+            // navigate("/SignUp");
+
+
+        // } else {
+        //     console.log("회원가입에 실패했습니다. 다시 확인해주세요")
+        //     setModalOpenSignUp(true);
+        }
     }
 
     return (
@@ -247,14 +262,16 @@ const SingUp = () => {
                 {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}
             </div>
             <div>
-                <button onClick={onClickJoin} disabled={!(isId && isPwd && isPwdCheck && isName && isMail && isPhone)}>JOIN</button>
+                <button onClick={onClickJoin} disabled={!(isId && isPwd && isPwdCheck && isName && isMail && isPhone)}>회원가입</button>
                 <div className='footer'>이미 아이디가 있으신가요? <button><div><Link to="/Login" className="link_item">＞ 로그인</Link></div></button></div>
                 {/* 모달 */}
                 {modalOpenIdCheck && <Modal open={modalOpenIdCheck} close={closeModalIdCheck} header="확인">이미 가입된 아이디입니다.</Modal>}
                 {modalOpenIdOK && <Modal open={modalOpenIdOK} close={closeModalIdOK} header="확인">사용 가능한 아이디입니다.</Modal>}
+                {modalOpenSignUp2 && <Modal open={modalOpenSignUp2} close={closeModalSignUp2} header="확인">
+                    <Link to="/Login">Mute 회원가입이 완료되었습니다.</Link></Modal>}
                 {modalOpenSignUp && <Modal open={modalOpenSignUp} close={closeModalSignUp} header="확인">회원가입에 실패했습니다. 다시 확인해주세요.</Modal>}
             </div>
         </>
     )
 }
-export default SingUp;
+export default SignUp;

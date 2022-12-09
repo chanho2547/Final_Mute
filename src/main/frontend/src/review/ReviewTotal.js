@@ -18,7 +18,7 @@ const ReviewTotal = (props) => {
     const [scoreDirect, setScoreDirect] = useState(''); // 연출 별점
     const [scoreCast, setScoreCast] = useState(''); // 캐스팅 별점
     const [scoreNumber, setScoreNumber] = useState(''); // 넘버 별점
-    const [scoreAvgTotal, setScoreAvgTotal] = useState(''); // 넘버 별점
+    const [scoreAvgTotal, setScoreAvgTotal] = useState(''); // 별점 총점
     
     const [totalReview, setTotalReview] = useState(''); // 뮤지컬 후기 텍스트
 
@@ -29,7 +29,7 @@ const ReviewTotal = (props) => {
     const [isTotalReview, setIsTotalReview] = useState(false);
 
     // 모달
-    const [modalText, setModelText] = useState(false); // 확인 버튼 눌렀을 
+    const [modalText, setModelText] = useState(false); // 확인 버튼 눌렀을 때
     
     const confirmModal = () => { // 좌석 후기 작성하러 가기
         props.propFunction(); // 상위 컴포넌트의 함수를 불러 count ++
@@ -40,8 +40,6 @@ const ReviewTotal = (props) => {
     }
 
     
-
-
     // Api 호출
     // 후기 작성 버튼이 눌려지면 동작하는 함수
     const WriteTotalButton = async() => {
@@ -52,10 +50,6 @@ const ReviewTotal = (props) => {
     
         try {
             const res = await MuteApi.WriteTotal(scoreStory, scoreDirect, scoreCast, scoreNumber, totalReview);
-  
-            // console.log("res.data.result : " + res.data.result);
-            // console.log("res.data : " + res.data);
-            // console.log("res : " + res);
 
             if(res.data === true) {
                 console.log("텍스트 입력 성공");
@@ -70,19 +64,19 @@ const ReviewTotal = (props) => {
     };
 
     const highFunction1 = (text) => {
-        console.log("별점 가져온 값 : " + text);
+        console.log("스토리 별점 가져온 값 : " + text);
         setScoreStory(text);
     }
     const highFunction2 = (text) => {
-        console.log("별점 가져온 값 : " + text);
+        console.log("연출 별점 가져온 값 : " + text);
         setScoreDirect(text);
     }
     const highFunction3 = (text) => {
-        console.log("별점 가져온 값 : " + text);
+        console.log("캐스팅 별점 가져온 값 : " + text);
         setScoreCast(text);
     }
     const highFunction4 = (text) => {
-        console.log("별점 가져온 값 : " + text);
+        console.log("넘버 별점 가져온 값 : " + text);
         setScoreNumber(text);
     }
 

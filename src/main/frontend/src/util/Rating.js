@@ -27,7 +27,7 @@ const Rating = ( props ) => {
   //   let count = clicked.filter(Boolean).length;
   // };
 
-  console.log("확인용 : " + count);
+  // console.log("확인용 : " + count);
   props.propFunction(count);
 
 

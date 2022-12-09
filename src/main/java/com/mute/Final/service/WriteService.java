@@ -39,7 +39,5 @@ public class WriteService {
         reviewSeatRepository.save(reviewSeat);
         return true;
     }
-
-
 }
 

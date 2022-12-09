@@ -108,8 +108,8 @@ const Login = () => {
             </>
             <div>
                 <Link to="/Agree" className="link_item">회원가입</Link>
-                <Link to="/ForgotId" className="link_item">아이디 찾기</Link>
-                <Link to="/ForgotPwd" className="link_item">비밀번호 찾기</Link>
+                <Link to="/FindId" className="link_item">아이디 찾기</Link>
+                <Link to="/FindId" className="link_item">비밀번호 찾기</Link>
             </div>
 
             {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">{modalText}</Modal>}

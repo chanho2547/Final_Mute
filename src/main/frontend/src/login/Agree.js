@@ -3,6 +3,77 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Modal from "./Modal";
 
+
+const Container = styled.div`
+    margin-top: 50px;
+    .text {
+        text-align: left;
+        width: 780px;
+        margin: 0 auto;
+        margin-bottom: 10px;
+        margin-top: 30px;
+        font-size: 15px;
+    }
+    .totalText{
+        text-align: left;
+        width: 780px;
+        margin: 0 auto;
+        padding-left: 21px;
+        margin-bottom: 10px;
+    }
+    .link {
+        color: black;
+        text-decoration: none;
+    }
+    .linkBtn {
+        margin-right: 5px;
+    }
+    .lastBtn {
+        &:hover {
+            color: white;
+            background-color: rgb(0,173,181);
+        }
+    }
+`;
+
+const Header = styled.div`
+    .title {
+        margin-bottom: 30px;
+        color: black;
+        font-weight: bold;
+    }
+    .comment {
+        color: rgb(0,155,171);
+        font-style: italic;
+    }
+`;
+
+const AgreeBox = styled.div`
+    width: 780px;
+    height: 580px;
+    margin: 0 auto;
+    border-radius : 5px;
+    border: solid #eeeeee;
+    margin-bottom: 30px;
+    .check {
+        width : 760px;
+        height : 200px;
+        padding-left: 20px;
+        border-radius : 5px;
+        .text_box {
+            width: 700px;
+            height: 140px;
+        }
+    }
+`;
+
+const Button = styled.button`
+    border: none;
+    margin-bottom: 50px;
+    width: 150px;
+    height: 40px;
+`;
+
 // 이용약관 페이지
 const Agree = () => {
     // 하위 메뉴 새로고침
@@ -95,24 +166,24 @@ const Agree = () => {
         setModalOpenSignUp(false);
     }
 
-    const istrue = () =>{
+    const istrue = () => {
         if(serviceCheck === true && userCheck === true && ageCheck === true){
-            navigate("./Signup");
-        }else{
+            navigate("/SignUp");
+        } else {
             setModalOpenSignUp(true);
         }
     }
 
     return(
-        <>
+        <Container>
             {/* 회원가입 */}
-            <Header><h1 className='title'>JOIN US</h1></Header>
+            <Header><h1 className='title'></h1></Header>
             <div className='totalText'><input type="checkbox" checked={allCheck} onClick={allBtnEvent}/> 전체 약관에 동의합니다.</div>
-            <div className='AgreeBox'>
+            <AgreeBox>
                 <div>
                     <div className='check'>
                         <div className='text'><input type="checkbox" checked={serviceCheck} onClick={serviceBtnEvent}/> 서비스 이용 약관에 동의합니다.<b>(필수)</b></div>
-                        <textarea className='text_box'>Sa shoe 서비스 이용 약관동의
+                        <textarea className='text_box'>MUTE 서비스 이용 약관동의
 
                         제 1조 (목적)
 
@@ -152,7 +223,7 @@ const Agree = () => {
 
                         제 10조 ("서비스"의 내용)
 
-                        1. 정보 서비스 “회사”가 제공하는 발매정보와 “회원”에 대한 응모정보, 회원정보 등 “회원”의 기록을 모아 각 “회원”이 신속하고 편리하게 이용하도록 하기 위하여 제공하는 서비스를 말합니다. 3. 기타 정보 서비스 홈페이지 이외에 “회사”가 제공하는 서비스를 통하여 “회원”에게 온라인으로 제공하는 정보서비스, 커뮤니티등의 인터넷 서비스를 말합니다.
+                        1. 정보 서비스 “회사”가 제공하는 뮤지컬정보, 회원정보 등 “회원”의 기록을 모아 각 “회원”이 신속하고 편리하게 이용하도록 하기 위하여 제공하는 서비스를 말합니다. 3. 기타 정보 서비스 홈페이지 이외에 “회사”가 제공하는 서비스를 통하여 “회원”에게 온라인으로 제공하는 정보서비스, 커뮤니티등의 인터넷 서비스를 말합니다.
 
                         제 11조 ("서비스"의 변경 및 중지)
 
@@ -207,7 +278,7 @@ const Agree = () => {
                     </div>
                     <div className='check'>
                         <div className='text'><input type="checkbox" checked={userCheck} onClick={userBtnEvent}/> 개인정보 이용 약관에 동의합니다.<b>(필수)</b></div>
-                        <textarea className='text_box'>(주)MUTE('https://www.MUTE.com/'이하 '회사') 는 고객의 개인정보보호를 소중하게 생각하고, 고객의 개인정보를 보호하기 위하여 항상 최선을 다해 노력하고 있습니다. 회사 는 「개인정보보호법」, 「정보통신망 이용촉진 및 정보보호 등에 관한 법률」을 비롯한 모든 개인정보보호 관련 법률규정을 준수하고 있습니다.
+                        <textarea className='text_box'>(주)MUTE('https://www.mute.com/'이하 '회사') 는 고객의 개인정보보호를 소중하게 생각하고, 고객의 개인정보를 보호하기 위하여 항상 최선을 다해 노력하고 있습니다. 회사 는 「개인정보보호법」, 「정보통신망 이용촉진 및 정보보호 등에 관한 법률」을 비롯한 모든 개인정보보호 관련 법률규정을 준수하고 있습니다.
                         1. 수집하는 개인정보의 항목 및 수집방법
 
                         개인정보 수집에 대한 동의
@@ -377,11 +448,11 @@ const Agree = () => {
 
                         회사 가 개인정보의 수집을 위해 "이용자"의 동의를 받아야 하는 경우에는 개인 정보 관리 책임자의 신원 (소속, 성명 및 전화번호, 기타 연락처), 정보의 수집 목적 및 이용 목적, 제 3자에 대한 정보 제공 관련 사항 (제공 받은 자, 제공 목적 및 제공할 정보의 내용)등 정보통신망 이용촉진 및 정보보호 등에 관한 법률 등의 요구하는 사항을 명시하거나 고지해야 하며 "이용자"는 언제든지 이 동의를 철회할 수 있습니다.
 
-                        이와 관련한 각종 문의 및 요청은 서비스 담당자(support@sashoe.com)에게 메일을 보내 변경 및 열람을 신청 하셔야 합니다.
+                        이와 관련한 각종 문의 및 요청은 서비스 담당자(support@mute.com)에게 메일을 보내 변경 및 열람을 신청 하셔야 합니다.
 
                         회원 정보는 로그인 후 회원 정보 페이지 상에서 "이용자"가 직접 자신 혹은 당해 만 14세 미만 아동의 개인 정보를 변경 또는 열람할 수 있습니다.
 
-                        "이용자"의 법정 대리인이 "이용자"의 개인 정보의 열람 및 변경을 원할 경우 서비스 담당자(support@sashoe.com)에게 메일로 문의하시고 서비스 담당자의 지시에 따라 법정 대리인임을 증명할 자료 및 증표를 제시 하셔야 합니다.
+                        "이용자"의 법정 대리인이 "이용자"의 개인 정보의 열람 및 변경을 원할 경우 서비스 담당자(support@mute.com)에게 메일로 문의하시고 서비스 담당자의 지시에 따라 법정 대리인임을 증명할 자료 및 증표를 제시 하셔야 합니다.
 
 
 
@@ -538,12 +609,12 @@ const Agree = () => {
                             <input type="checkbox" checked={marketingSMSCheck} onClick={marketingSMSBtnEvent}/><span> SMS )</span><br/> </div>
                         <div className='text'><input type="checkbox" checked={ageCheck} onClick={ageBtnEvent}/> 만 14세 이상입니다.<b>(필수)</b></div>
                     </div>
-                </div> </div>
-            <button className='linkBtn'><Link to='/' className='link'>취소하기</Link></button>
-            <button onClick={istrue} className='lastBtn'>다음단계</button>
+                </div> </AgreeBox>
+            <Button className='linkBtn'><Link to='/' className='link'>취소하기</Link></Button>
+            <Button onClick={istrue} className='lastBtn'>다음단계</Button>
             {/* 모달 */}
             {modalOpenSignUp && <Modal open={modalOpenSignUp} close={closeModalSignUp} header="확인">필수 항목을 모두 체크해주세요.</Modal>}
-        </>
+        </Container>
     )
 }
 export default Agree;

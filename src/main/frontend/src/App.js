@@ -10,16 +10,17 @@ import FirstFloorChung from './theaterInfo/chungmuArt/FirstFloorChung';
 import SecondFloorChung from './theaterInfo/chungmuArt/SecondFloorChung';
 import ThirdFloorChung from './theaterInfo/chungmuArt/ThirdFloorChung';
 import Review from './review/Review';
-
 import Reservation from './reservation/Reservation';
 import Cs from './cs/Cs';
-import SingUp from './login/SignUp';
 import Like from './util/Like';
 import SeatView from './review/SeatView';
 import Membership from './membership/Membership';
 import Mypage from './mypage/Mypage';
 import MusicalDetail from './musical/MusicalDetail';
-
+import SignUp from "./login/SignUp";
+import Agree from "./login/Agree";
+import SignCom from "./login/SignCom";
+import FindId from "./login/FindId";
 
 function App() {
   return (
@@ -34,7 +35,7 @@ function App() {
         <Route path="/SecondFloorChung" element={<SecondFloorChung />} />
         <Route path="/ThirdFloorChung" element={<ThirdFloorChung />} />
         <Route path='/Login' element={<Login />} />
-        <Route path='/SignUp' element={<SingUp />} />
+        <Route path='/SignUp' element={<SignUp />} />
         <Route path='/Review' element={<Review />} />
         <Route path='/Reservation' element={<Reservation />} />
         <Route path='/Like' element={<Like />} />
@@ -43,6 +44,9 @@ function App() {
         <Route path='/Mypage' element={<Mypage />} />
         <Route path='/Membership' element={<Membership/>} />
         <Route path='/MusicalDetail' element={<MusicalDetail/>}></Route>
+        <Route path='/Agree' element={<Agree/>} />
+        <Route path='/SignCom' element={<SignCom />} />
+        <Route path='/FindId' element={<FindId />} />
       </Routes>
       <Footer/>
     </Router>

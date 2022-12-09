@@ -28,7 +28,7 @@ public class MemberController {
         return result;
     }
 
-    // 회원가입
+    // 회원가입 주소ㅠㅠ왜안돼
     @PostMapping("/signup")
     public ResponseEntity<Map<String, String>> signup(@RequestBody Map<String, String> signupData) {
         try {
