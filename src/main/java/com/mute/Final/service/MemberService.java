@@ -148,4 +148,15 @@ public class MemberService {
         }
         return true;
     }
+
+    // 회원탈퇴
+    public boolean deleteMem(String id) {
+        try {
+            Member member = memberRepository.findByUserId(id);
+            return true;
+        } catch (Exception e) {
+            log.warn("실패");
+            return false;
+        }
+    }
 }

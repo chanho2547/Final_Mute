@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import MuteApi from '../api/MuteApi';
-import Modal from './Modal';
 import Post from './Post';
-
+import Modal from "../util/Modal";
 
 const SignUp = () => {
     const navigate = useNavigate();
@@ -271,7 +270,6 @@ const SignUp = () => {
                 {modalOpenSignUp2 && <Modal open={modalOpenSignUp2} close={closeModalSignUp2} header="확인">
                     <Link to="/Login">Mute 회원가입이 완료되었습니다.</Link></Modal>}
                 {modalOpenSignUp && <Modal open={modalOpenSignUp} close={closeModalSignUp} header="확인">회원가입에 실패했습니다. 다시 확인해주세요.</Modal>}
-                {/*<p>{enroll_company}</p>*/}
             </div>
         </>
     )

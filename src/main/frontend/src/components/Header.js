@@ -61,7 +61,7 @@ const Header = () => {
              <FaBell color="white"/>
              <div className="menu_item">{whoLoginNow}님</div>
              <button onClick={onClickLogout} className="menu_item">로그아웃</button>
-             <Link to={"/Mypage"} className="menu_item">마이페이지</Link>
+             <Link to={"/MyPage"} className="menu_item">마이페이지</Link>
              <Link to = {"/Membership"} className="menu_item">멤버십</Link>
             </>)
             }

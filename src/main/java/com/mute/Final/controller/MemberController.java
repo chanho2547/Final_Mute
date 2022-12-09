@@ -28,7 +28,7 @@ public class MemberController {
         return result;
     }
 
-    // 회원가입 주소ㅠㅠ왜안돼
+    // 회원가입
     @PostMapping("/signup")
     public ResponseEntity<Map<String, String>> signup(@RequestBody Map<String, String> signupData) {
         try {
@@ -102,6 +102,18 @@ public class MemberController {
     public ResponseEntity<List<MemberDTO>> memberList() {
         List<MemberDTO> list = memberService.getMemberList();
         return new ResponseEntity(list, HttpStatus.OK);
+    }
+
+    // 회원 탈퇴
+    @PostMapping("/delete_mem")
+    public ResponseEntity<Boolean> memberDelete(@RequestBody Map<String, String> delete) {
+        String id = delete.get("userId");
+        boolean member = memberService.deleteMem(id);
+        if(member) {
+            return new ResponseEntity(true,HttpStatus.OK);
+        } else {
+            return new ResponseEntity(false, HttpStatus.OK);
+        }
     }
 }
 

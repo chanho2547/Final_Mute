@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const MuteApi =  {
-    // 로그인 - 도연
+
     Login: async function(id, pwd) {
         const loginObj = {
             userId: id,
@@ -92,21 +92,27 @@ const MuteApi =  {
     },
 
     // ID, PWD 찾기
-    memberFind: async function (uni, email, type) {
+    memberFind: async function (uni, mail, type) {
         const reg = {
             uni: uni,
-            email: email,
+            mail: mail,
             type: type
         };
         return await axios.post("member/find", reg);
     },
     // 새 비밀번호 저장
-    memberNewPwd: async function (id, pwd) {
+    memberNewPwd: async function (userId, pwd) {
         const reg = {
-            id: id,
+            userId: userId,
             pwd: pwd
         };
         return await axios.post("member/new_pwd", reg);
+    },
+    // 회원탈퇴
+    memberDelete: async function (userId){
+        const reg = {
+            userId: userId
+        };
     }
 
 }

@@ -1,14 +1,31 @@
 import React from 'react';
 import '../App';
 import './Modal.css';
+import {useNavigate} from "react-router-dom";
+import MuteApi from "../api/MuteApi";
 
 // 도연 작업 완료! (조원들 공동으로 사용하세요~)
 
 const Modal = (props) => {
-    const { open, confirm, close, header } = props; 
+    const navigate = useNavigate();
+
+    const { open, confirm, close, header } = props;
+
+    const localId = window.localStorage.getItem("userId");
+    const localPw = window.localStorage.getItem("userPw");
+    const isLogin = window.localStorage.getItem("isLogin");
+
+    const onClickMemDelete = async () => { // 탈퇴한다고 했을때
+        await MuteApi.memberDelete(localId, localPw);
+        window.localStorage.setItem("userId", "");
+        window.localStorage.setItem("userPwd", "");
+        window.localStorage.setItem("isLogin", "false")
+        navigate("/");
+    }
+
     return (
         <div className={open ? 'openModal modal' : 'modal'}>
-            {open && 
+            {open &&
                 <section>
                     <header>
                         {header}
@@ -19,6 +36,7 @@ const Modal = (props) => {
                     <main>{props.children}</main>
                     <footer>
                         <button className='close' onClick={close}>확인</button>
+                        <button  onClick={onClickMemDelete}>yes</button>
                     </footer>
                 </section>
             }

@@ -15,12 +15,12 @@ import Cs from './cs/Cs';
 import Like from './util/Like';
 import SeatView from './review/SeatView';
 import Membership from './membership/Membership';
-import Mypage from './mypage/Mypage';
 import MusicalDetail from './musical/MusicalDetail';
 import SignUp from "./login/SignUp";
 import Agree from "./login/Agree";
 import SignCom from "./login/SignCom";
 import FindId from "./login/FindId";
+import MyPage from "./mypage/Mypage";
 
 function App() {
   return (
@@ -41,7 +41,7 @@ function App() {
         <Route path='/Like' element={<Like />} />
         <Route path='/Cs' element={<Cs />} />
         <Route path='/SeatView' element={<SeatView />} />
-        <Route path='/Mypage' element={<Mypage />} />
+        <Route path='/MyPage' element={<MyPage />} />
         <Route path='/Membership' element={<Membership/>} />
         <Route path='/MusicalDetail' element={<MusicalDetail/>}></Route>
         <Route path='/Agree' element={<Agree/>} />
