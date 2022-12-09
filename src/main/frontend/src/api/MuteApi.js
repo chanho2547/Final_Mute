@@ -27,14 +27,15 @@ const MuteApi =  {
         return await axios.post(MUTE_DOMAIN + "member/signup", signUpObj, HEADER);
     },
 
-    // 총평 후기 작성 - 도연
-    WriteTotal: async function(scoreStory, scoreDirect, scoreCast, scoreNumber, totalReview) {
+    // 뮤지컬 총평 후기 작성 - 도연
+    WriteTotal: async function(scoreStory, scoreDirect, scoreCast, scoreNumber, scoreAvgTotal, totalReview) {
         const reviewObj = {
             scoreStory: scoreStory,// 스토리 별점
             scoreDirect: scoreDirect, // 연출 별점
             scoreCast : scoreCast, // 캐스팅 별점
             scoreNumber : scoreNumber, // 넘버 별점
-            reviewMuTxt : totalReview // 뮤지컬 후기 텍스트
+            scoreAvgTotal : scoreAvgTotal, // 뮤지컬 총평 별점 총점
+            reviewMuTxt : totalReview // 뮤지컬 총평 후기 텍스트
         }
         return await axios.post(MUTE_DOMAIN + "review/writeTotal", reviewObj, HEADER);
     },
