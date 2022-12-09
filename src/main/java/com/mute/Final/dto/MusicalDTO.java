@@ -18,9 +18,9 @@ public class MusicalDTO {
     private String musicalName; // 공연 이름
     private String theaterName; // 공연장 이름
 
-    @DateTimeFormat(pattern = "yyyy.MM.dd")
+//    @DateTimeFormat(pattern = "yyyy.MM.dd")
     private Date musicalStart; // 공연 시작일
-    @DateTimeFormat(pattern = "yyyy.MM.dd")
+//    @DateTimeFormat(pattern = "yyyy.MM.dd")
     private Date musicalEnd; // 공연 종료일
 
     private Date musicalTicketStart; // 티켓 예매 시작일
