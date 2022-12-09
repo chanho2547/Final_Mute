@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaBell } from 'react-icons/fa';
+import React from "react";
 
 const Menu = styled.div`
   background-color: #CF0A0A;

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import MuteApi from "../api/MuteApi";
 
 
-const Find = () =>{
+const FindId = () =>{
     const [findInName,setFindInName] = useState("");
     const [findInId,setFindInId] = useState("");
     const [findInEmail,setFindInEmail] = useState("");
@@ -207,4 +207,4 @@ const Find = () =>{
     );
 }
 
-export default Find;
+export default FindId;
