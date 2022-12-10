@@ -39,8 +39,6 @@ const SelectMusical = (props) => {
         const MusicalData = async () => {
             try {
                 let response = await MuteApi.musicalList(); // 뮤지컬 리스트 불러오기
-                
-                console.log(response.data);
                 setMusicalInfo(response.data);
                 
             } catch (e) {  
@@ -52,7 +50,8 @@ const SelectMusical = (props) => {
 
     });
 
-    const OnClickPoster = () => {
+    const OnClickPoster = (e) => {
+        props.addMusical(e);
         props.propFunction(); // 상위 컴포넌트의 함수를 불러 count ++
     }
 
@@ -60,7 +59,7 @@ const SelectMusical = (props) => {
         <Container>
        
         {musicalInfo && musicalInfo.map(e => (        
-            <MusicalContainer onClick={() => OnClickPoster() }>
+            <MusicalContainer onClick={() => OnClickPoster(e.prfnm) }>
             <img alt="poster" src={e.poster}/>
             
             <p className="title">{e.prfnm}</p>

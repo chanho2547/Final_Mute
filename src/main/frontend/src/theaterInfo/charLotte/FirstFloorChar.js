@@ -203,15 +203,17 @@ const onClickSeat = (event) => {
     //let selectedList = newArr.map((arr)=>(<h1>{arr}</h1>));
     
    
+   
 
 
     return (
         <>
         
+        
         <h1>샤롯데 FirstFloor 입장 성공</h1> 
-        <Link to = "/"> Home으로 돌아가기</Link> <br></br>
+        {/* <Link to = "/"> Home으로 돌아가기</Link> <br></br>
         <Link to = "/FirstFloorChar">1층보기</Link> <br></br>
-        <Link to = "/SecondFloorChar">2층보기</Link>
+        <Link to = "/SecondFloorChar">2층보기</Link> */}
 
       
        

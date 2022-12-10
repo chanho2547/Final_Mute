@@ -1,23 +1,30 @@
 import { Link } from "react-router-dom";
-import { useEffect,useState } from "react";
+import { useEffect,useRef,useState } from "react";
 import FirstFloorChar from "../theaterInfo/charLotte/FirstFloorChar";
 import FirstFloorChung from "../theaterInfo/chungmuArt/FirstFloorChung";
 
-const SelectSeat = () => {
+const SelectSeat = (props) => {
 
-    //const [text,setText] = useState('');
+    //const [text,setText] = useState();
+    const textRef = useRef();
     const highFunction = (text) => {
-        //setText(text);
-        //console.log(document.getElementById("selected").innerText);
         document.getElementById("selected").innerText = text;
-      }
+        textRef.current = text;
+    }
+    const onClickNext = () => {
+        console.log(textRef.current);
+        props.addSeat(textRef.current);
+        props.propFunction();
+    }
     
 
     return(
         <>
             
-            <h2>(SelectedSeats Here)<h2 id="selected">(선택한 좌석이 여기에 표시됩니다)</h2></h2>
+            <h2 id="selected">(선택한 좌석이 여기에 표시됩니다)</h2>
+            <button onClick={()=>onClickNext()}>선택완료</button>
             
+            {/* 모든 층수, 극장 다 만들어놓아야함 */}
             <FirstFloorChar propFunction={highFunction}/>
 
         </>

@@ -2,15 +2,30 @@ import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; 
 import moment from 'moment';
-const SelectDate = () => {
+import styled from 'styled-components';
+
+
+const Container = styled.div`
+  
+`;
+
+
+
+
+const SelectDate = (props) => {
     const [value, onChange] = useState(new Date());
+    const onClickNext = () => {
+      props.addDate(moment(value).format("YYYY년 MM월 DD일 19:00"));
+      props.propFunction();
+    }
     return(
-        <div>
-      <Calendar onChange={onChange} value={value} />
-         <div className="text-gray-500 mt-4">
-           {moment(value).format("YYYY년 MM월 DD일")} 
-         </div>
-    </div>
+        <Container>
+        <Calendar onChange={onChange} value={value} />
+        <div className="text-gray-500 mt-4">
+          {moment(value).format("YYYY년 MM월 DD일 19:00")} 
+        </div>
+        <button onClick={onClickNext}>선택완료</button>
+        </Container>
     );
 }
 
