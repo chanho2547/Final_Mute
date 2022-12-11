@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public interface MusicalRepository extends JpaRepository<Musical, Long> {
+public interface MusicalRepository extends JpaRepository<Musical, String> {
     // 뮤지컬 이름으로 뮤지컬 검색
     List<Musical> findByMusicalNameLike(String musicalName);
 

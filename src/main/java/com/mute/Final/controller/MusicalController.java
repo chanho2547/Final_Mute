@@ -13,23 +13,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.transaction.Transactional;
 import java.util.List;
-
-@CrossOrigin(origins = "http://localhost:3000")
-@RestController
 @RequiredArgsConstructor
+@Transactional
+@RestController
 @Slf4j
 public class MusicalController {
-    private MusicalService musicalService;
-    public MusicalController(MusicalService musicalService) {
-        this.musicalService = musicalService;
-    }
+    private final MusicalService musicalService;
+//    public MusicalController(MusicalService musicalService) {
+//        this.musicalService = musicalService;
+//    }
 
-
-    private MusicalApiService musicalApiService;
-    public MusicalController(MusicalApiService musicalApiService) {
-        this.musicalApiService = musicalApiService;
-    }
+// => 윤정언니 내일 말씀드리기!!!!! + 언니꺼 잘 돌아가시는지 확인
+    private  final MusicalApiService musicalApiService;
+//    public MusicalController(MusicalApiService musicalApiService) {
+//        this.musicalApiService = musicalApiService;
+//    }
 
 
     // 뮤지컬 검색

@@ -23,10 +23,7 @@ public class ReviewSeatService {
     private final ReviewSeatRepository reviewSeatRepository;
     private final ReviewSeatAvgRepository reviewSeatAvgRepository;
 
-//    public ReviewSeatService(ReviewSeatAvgRepository reviewSeatAvgRepository) {
-//        this.reviewSeatAvgRepository = reviewSeatAvgRepository;
-//    }
-
+    // 전체 좌석 평균 별점 조회
     public List<ReviewSeatAvgDTO> getReviewAvgList() {
         List<ReviewSeatAvgDTO> reviewSeatAvgDTOS = new ArrayList<>();
         System.out.println("테스트위치33333");
@@ -36,8 +33,13 @@ public class ReviewSeatService {
             ReviewSeatAvgDTO reviewSeatAvgDTO = new ReviewSeatAvgDTO();
             System.out.println("테스트 좌석번호 : "+e.getSeatId());
             System.out.println("테스트 좌석별 평균별점 : "+e.getAvgAllSeat());
-            reviewSeatAvgDTO.setSeatId(e.getSeatId());
-            reviewSeatAvgDTO.setAvgAllSeat(e.getAvgAllSeat());
+            reviewSeatAvgDTO.setSeatId(e.getSeatId()); // 좌석 번호
+            reviewSeatAvgDTO.setAvgAllSeat(e.getAvgAllSeat()); // 총 평균 별점
+            reviewSeatAvgDTO.setReviewCnt(e.getReviewCnt()); // 후기 개수
+            reviewSeatAvgDTO.setAvgSeat(e.getAvgSeat()); // 평균 좌석 별점
+            reviewSeatAvgDTO.setAvgView(e.getAvgView()); // 평균 시야 별점
+            reviewSeatAvgDTO.setAvgSound(e.getAvgSound()); // 평균 음향 별점
+            reviewSeatAvgDTO.setAvgLight(e.getAvgLight()); // 평균 조명 별점
             reviewSeatAvgDTOS.add(reviewSeatAvgDTO);
         }
         return reviewSeatAvgDTOS;
@@ -45,16 +47,14 @@ public class ReviewSeatService {
 
 
 
-    // 좌석번호별 개인 후기 전체 조회 및 좌석번호별 평균 별점 조회
+    // 좌석번호별 개인 후기 전체 조회
     public List<ReviewSeatDTO> getReviewSeatList(int seatNum) {
         List<ReviewSeatDTO> reviewSeatDTOS = new ArrayList<>();
         List<ReviewSeat> reviewSeatList = reviewSeatRepository.findBySeatNum(seatNum);
         for (ReviewSeat e : reviewSeatList) {
             ReviewSeatDTO reviewSeatDTO = new ReviewSeatDTO();
-            reviewSeatDTO.setReviewMuId(e.getReviewSeId());
-            reviewSeatDTO.setTheaterId(e.getTheater().getTheaterId()); // 공연장 ID
-            reviewSeatDTO.setMusicalId(e.getMusical().getMusicalId()); // 공연 ID
-            reviewSeatDTO.setMemberNum(e.getMember().getUserNum()); // 회원 고유 번호
+            reviewSeatDTO.setTheaterName(e.getTheater().getTheaterName()); // 공연장 ID
+            reviewSeatDTO.setMusicalName(e.getMusical().getMusicalName()); // 공연 ID
             reviewSeatDTO.setUserId(e.getMember().getUserId());// 회원 ID
             reviewSeatDTO.setSeatId(e.getSeatNum()); // 좌석 번호
             reviewSeatDTO.setWriteDate(e.getWriteDate()); // 작성일
