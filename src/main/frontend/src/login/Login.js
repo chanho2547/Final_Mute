@@ -80,6 +80,13 @@ const Login = () => {
         } catch (e) {
         } 
         }
+
+    // 엔터 키를 눌렀을 때 로그인 인식
+    const onKeyDownLogin = (e) => {
+        if(e.key === 'Enter'){
+            onClickLogin();
+        }
+    }
    
        return(
         <div className="container">
@@ -95,7 +102,7 @@ const Login = () => {
                 </div>
 
                 {/* 패스워드 입력창 */}
-                <input className="input" value={inputPwd} type="password" placeholder="비밀번호" onChange={onChangePwd}></input>
+                <input className="input" value={inputPwd} type="password" placeholder="비밀번호" onChange={onChangePwd} onKeyDown={onKeyDownLogin}></input>
 
                 {/* 비밀번호 제한 메시지 */}
                 <div className="hint">
@@ -103,7 +110,7 @@ const Login = () => {
                 </div>
 
                 {/* 로그인 버튼 */}
-                <button className="loginButton" onClick={onClickLogin}>LOGIN</button>
+                <button className="loginButton" onClick={onClickLogin} >LOGIN</button>
                 <br/>
             </>
             <div>

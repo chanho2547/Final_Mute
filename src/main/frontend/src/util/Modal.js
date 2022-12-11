@@ -15,12 +15,13 @@ const Modal = (props) => {
     const localPw = window.localStorage.getItem("userPw");
     const isLogin = window.localStorage.getItem("isLogin");
 
+    // 회원 탈퇴
     const onClickMemDelete = async () => { // 탈퇴한다고 했을때
         await MuteApi.memberDelete(localId, localPw);
         window.localStorage.setItem("userId", "");
         window.localStorage.setItem("userPwd", "");
         window.localStorage.setItem("isLogin", "false")
-        navigate("/");
+        navigate('/');
     }
 
     return (
@@ -28,15 +29,15 @@ const Modal = (props) => {
             {open &&
                 <section>
                     <header>
-                        {header}
-                        <button onClick={close}>
+                        &nbsp;
+                        <button className='close' onClick={close}>
                             &times;
                         </button>
                     </header>
                     <main>{props.children}</main>
                     <footer>
-                        <button className='close' onClick={close}>확인</button>
-                        <button  onClick={onClickMemDelete}></button>
+                        {(header === '탈퇴') ?<button onClick={onClickMemDelete}>네</button>: ''}
+                        <button className='close' onClick={close}>close</button>
                     </footer>
                 </section>
             }
