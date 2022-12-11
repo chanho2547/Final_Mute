@@ -44,30 +44,31 @@ public class WishService {
         return wishDTOS;
     }
 
+    // 찜 데이터 insert
     public boolean postWishList(String userNum, String musicalId) {
         Wish wish = new Wish();
-//        wish.setMember().setMemberId(userNum);
         System.out.println("userNum: " + userNum);
         System.out.println("userNum Type : " + userNum.getClass().getName());
         System.out.println("musicalId: " + musicalId);
-//        wish.setMusical().setMusicalId(musicalId);
-
-//        wish.getMember().setUserNum(Long.parseLong(userNum));
-//            wish.getMusical().getMusicalId();
-
-
-//            Member member = memberRepository.getReferenceById(userNum);
-            Member member = memberRepository.findByUserNum(Long.parseLong(userNum));
-            wish.setMember(member);
-            log.info(String.valueOf(member));
-//            Musical musical = musicalRepository.getReferenceById(Long.parseLong(musicalId));
-            Musical musical = musicalRepository.findByMusicalId(musicalId);
-            wish.setMusical(musical);
-            log.info(String.valueOf(musical));
-
-            wish.setAlarmStatus(AlarmStatus.ON);
-            Wish test = wishRepository.save(wish);
-            log.info(String.valueOf(test));
-            return true;
+        Member member = memberRepository.findByUserNum(Long.parseLong(userNum));
+        wish.setMember(member);
+        log.info(String.valueOf(member));
+        Musical musical = musicalRepository.findByMusicalId(musicalId);
+        wish.setMusical(musical);
+        log.info(String.valueOf(musical));
+        wish.setAlarmStatus(AlarmStatus.ON);
+        Wish test = wishRepository.save(wish);
+        log.info(String.valueOf(test));
+        return true;
     }
+
+    // 찜 데이터 upddate
+//    public List<WishDTO> updateAlarm(int userNum, String musicalId) {
+//        List<WishDTO> wishDTOS = new ArrayList<>();
+//        List<Wish> wishList = wishRepository.updateAlarm(userNum, musicalId);
+//
+//    }
+
+
+
 }

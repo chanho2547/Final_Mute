@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-//@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class WishController {
     // Service 로직 연결
@@ -19,7 +18,7 @@ public class WishController {
         this.wishService = wishService;
     }
 
-    // ID별 alarm = on Select
+    // ID별 alarm = "on" Select
     @GetMapping("/wish/on")
     public ResponseEntity<List<WishDTO>> wish(@RequestParam int userNum) {
         List<WishDTO> list = wishService.getWishList(userNum);
