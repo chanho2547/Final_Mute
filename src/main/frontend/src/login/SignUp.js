@@ -14,6 +14,8 @@ const SignUp = () => {
     const [inputMail, setMail] = useState('');
     const [inputPhone, setPhone] = useState('');
     const [inputAddr, setAddr] = useState('');
+    const [inputAuth, setInputAuth] = useState('');
+    const [serverAuth, setServerAuth] = useState('');
 
     // 오류 메세지
     const [idMsg, setIdMsg] = useState('');
@@ -22,6 +24,7 @@ const SignUp = () => {
     const [nameMsg, setNameMsg] = useState('');
     const [mailMsg, setMailMsg] = useState('');
     const [phoneMsg, setPhoneMsg] = useState('');
+    const [authMsg, setAuthMsg] = useState('');
 
     // 유효성 검사
     const [isId, setIsId] = useState(false);
@@ -30,6 +33,7 @@ const SignUp = () => {
     const [isName, setIsName] = useState(false);
     const [isMail, setIsMail] = useState(false);
     const [isPhone, setIsPhone] = useState(true);
+    const [isAuth, setIsAuth] = useState(false);
 
     // ID 입력
     const onChangeId = (e) => {
@@ -166,6 +170,26 @@ const SignUp = () => {
             setIsMail(false);
         }
     }
+    // 이메일 인증번호 받기
+    const getAuth = async() => {
+        const mailAuth = await MuteApi.mailAuth(inputMail);
+        setServerAuth(mailAuth.data);
+    }
+    // 이메일 인증번호 확인하기
+    const authCheck = async() => {
+        if(serverAuth === inputAuth) {
+            setIsAuth(true);
+            setAuthMsg("인증번호가 일치합니다.");
+        }
+        else {
+            setIsAuth(false);
+            setAuthMsg("인증번호가 일치하지않습니다.");
+        }
+    }
+    // 인증번호 입력 받기(사용자가 입력하는 인증번호)
+    const onChangeAuth = (e) => {
+        setInputAuth(e.target.value);
+    }
 
     // Enter키로 회원가입 전송
     const onKeyDownJoin = (e) => {
@@ -196,11 +220,10 @@ const SignUp = () => {
 
     // 회원가입
     const onClickJoin = async() => {
-        const memberReg = await MuteApi.signUp(inputId, inputPwd, inputName, inputMail, inputPhone, enroll_company.address)
-        console.log(memberReg.data.result);
-        if(memberReg.data.result === "OK") {
+        const memberReg = await MuteApi.signUp(inputId, inputPwd, inputName, inputMail, inputPhone, enroll_company.address);
+        if(memberReg.data) {
             console.log("Mute 회원가입이 완료되었습니다.")
-            setModalOpenSignUp2(true);
+            //setModalOpenSignUp2(true);
             navigate('/Login');
 
             // window.localStorage.setItem("userId",  inputId);
@@ -245,7 +268,16 @@ const SignUp = () => {
                 <p>이메일
                     {inputMail.length > 0 && <span>{mailMsg}</span>}
                 </p>
-                <input type='mail' placeholder='메일' value={inputMail} onChange={onChangeMail} onBlur={mailCheck}/>
+                <div>
+                    <input type='mail' placeholder='메일' value={inputMail} onChange={onChangeMail} onBlur={mailCheck}/>
+                    <button type='button' onClick={getAuth}>인증번호 받기</button>
+                </div>
+                <div>
+                    <input type='text' placeholder='인증번호' value={inputAuth} onChange={onChangeAuth} />
+                    <button type='button' onClick={authCheck} >인증번호 확인하기</button>
+                    {inputAuth.length > 0 && <span>{authMsg}</span>}
+                </div>
+
             </div>
             <div>
                 <p>전화번호
@@ -261,7 +293,7 @@ const SignUp = () => {
                 {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}
             </div>
             <div>
-                <button onClick={onClickJoin} disabled={!(isId && isPwd && isPwdCheck && isName && isMail && isPhone)}>회원가입</button>
+                <button onClick={onClickJoin} disabled={!(isId && isPwd && isPwdCheck && isName && isMail && isPhone && isAuth)}>회원가입</button>
                 <div className='footer'>이미 아이디가 있으신가요? <button><div><Link to="/Login" className="link_item">＞ 로그인</Link></div></button></div>
 
                 {/* 모달 */}

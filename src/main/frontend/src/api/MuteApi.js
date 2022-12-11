@@ -25,6 +25,14 @@ const MuteApi =  {
         return await axios.post("member/signup", signUpObj);
     },
 
+    // 이메일 인증
+    mailAuth: async function(mail) {
+        const mailAuthObj = {
+            email: mail
+        }
+        return await axios.post("login/mailConfirm", mailAuthObj);
+    },
+
     // 뮤지컬 총평 후기 작성 - 도연
     WriteTotal: async function(scoreStory, scoreDirect, scoreCast, scoreNumber, scoreAvgTotal, totalReview) {
         const reviewObj = {
@@ -113,6 +121,7 @@ const MuteApi =  {
         const reg = {
             userId: userId
         };
+        return await axios.post("delete_mem", reg);
     }
 
 }

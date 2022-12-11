@@ -9,6 +9,7 @@ import java.util.List;
 @Entity
 @Table(name="member")
 public class Member {
+    // 프론트엔드에 뿌려줄 값과 받아올 값을 정의하는 곳
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userNum; // 회원번호 - pk

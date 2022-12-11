@@ -150,9 +150,10 @@ public class MemberService {
     }
 
     // 회원탈퇴
-    public boolean deleteMem(String id) {
+    public boolean deleteMem(String userId) {
         try {
-            Member member = memberRepository.findByUserId(id);
+            Member member = memberRepository.findByUserId(userId);
+
             return true;
         } catch (Exception e) {
             log.warn("실패");
