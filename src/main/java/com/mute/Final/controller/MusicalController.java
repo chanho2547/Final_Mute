@@ -1,20 +1,21 @@
 package com.mute.Final.controller;
 
 import com.mute.Final.dto.MusicalDTO;
+import com.mute.Final.dto.MusicalDetailDTO;
 import com.mute.Final.service.MusicalApiService;
+import com.mute.Final.service.MusicalDetailApiService;
 import com.mute.Final.service.MusicalService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Map;
+
 @RequiredArgsConstructor
 @Transactional
 @RestController
@@ -31,6 +32,7 @@ public class MusicalController {
 //        this.musicalApiService = musicalApiService;
 //    }
 
+    private final MusicalDetailApiService musicalDetailApiService;
 
     // 뮤지컬 검색
     @GetMapping("/musical/search")
@@ -54,11 +56,17 @@ public class MusicalController {
     }
 
     // 뮤지컬 목록 api 불러오기
-    @GetMapping("/api/list")
+    @GetMapping("/musical/list")
     public List<MusicalDTO> getMusicalList() {
         String resultString = musicalApiService.MusicalListApi();
         return musicalApiService.fromJSONtoItems(resultString);
     }
 
+    // 선택한 뮤지컬 상세정보 불러오기
+//    @GetMapping("/musical/{musicalID}")
+//    public Map<String, Object> getMusicalDetail(@PathVariable String musicalID) {
+//        String result = musicalDetailApiService.MusicalDetailApi();
+//        return musicalDetailApiService.getMapFromJsonObj(result);
+//    }
 
 }
