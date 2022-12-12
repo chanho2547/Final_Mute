@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MuteApi from "../api/MuteApi";
 import Rating from "../util/Rating";
 import TotalModal from "./TotalModal";
@@ -10,7 +10,7 @@ const ReviewTotal = (props) => {
 
     // 취소 버튼 누르면 첫 화면으로..
     const CancelButton = () => {   
-        window.location.replace('/Review');
+        // window.location.replace('/Review');
     }
 
     // 입력받는 부분
@@ -35,7 +35,7 @@ const ReviewTotal = (props) => {
     }
     
     const closeModal = () => { // 아니오 눌렀을 때 => 리뷰 리스트로 이동
-        window.location.replace('/Review'); 
+        // window.location.replace('/Review'); 
     }
 
     
@@ -48,7 +48,6 @@ const ReviewTotal = (props) => {
         console.log("넘버 별점" + scoreNumber);
         console.log("평균 별점" + scoreAvgTotal);
   
-    
         try {
             const res = await MuteApi.WriteTotal(scoreStory, scoreDirect, scoreCast, scoreNumber, scoreAvgTotal, totalReview);
 
@@ -70,7 +69,6 @@ const ReviewTotal = (props) => {
     const highFunction1 = (text) => {
         console.log("스토리 별점 가져온 값 : " + text);
         setScoreStory(text);
-        console.log("setScoreStory 타입 확인 :" + text);
     }
     const highFunction2 = (text) => {
         console.log("연출 별점 가져온 값 : " + text);
@@ -84,11 +82,10 @@ const ReviewTotal = (props) => {
         console.log("넘버 별점 가져온 값 : " + text);
         setScoreNumber(text);
 
-        // 별점 평균
-    const arr = [scoreStory, scoreDirect, scoreCast, scoreNumber];
-    const avg = arr.reduce((a, c) => a + c) / arr.length
-    console.log("평균 값 : " + avg);
-    setScoreAvgTotal(avg);
+        const arr = [scoreStory, scoreDirect, scoreCast, scoreNumber];
+        const avg = arr.reduce((a, c) => a + c) / arr.length
+        console.log("평균 값 : " + avg);
+        setScoreAvgTotal(avg);
     }
 
     

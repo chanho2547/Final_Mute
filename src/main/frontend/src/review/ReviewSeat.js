@@ -29,7 +29,7 @@ const ReviewSeat = () => {
         console.log("조명 별점" + lightRating);
         try {
             const res =  await MuteApi.WriteSeat(seatRating, viewRating, soundRating, lightRating, seatReview);
-            // setSeatReview(res.data.result);
+            setSeatReview(res.data.result);
              
             if(res.data.result === "OK") {
                 console.log("별점 입력 성공");

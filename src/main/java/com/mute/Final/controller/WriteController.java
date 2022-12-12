@@ -8,7 +8,7 @@ import java.util.Map;
 
 // 좌석 후기 등록 - 도연 작업중..
 
-@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/review")
 public class WriteController {
@@ -22,8 +22,8 @@ public class WriteController {
     // 총평 후기 작성
     @PostMapping("/writeTotal")
     public ResponseEntity<Boolean> writeTotal(@RequestBody Map<String, String> writeTotalData) {
-//        String member = writeTotalData.get("member");
-//        String musicalId = writeTotalData.get("musicalId");
+        String userNum = writeTotalData.get("userNum");
+        String musicalId = writeTotalData.get("musicalId");
         String scoreStory = writeTotalData.get("scoreStory");
         String scoreDirect = writeTotalData.get("scoreDirect");
         String scoreCast = writeTotalData.get("scoreCast");
@@ -32,7 +32,7 @@ public class WriteController {
         String reviewMuTxt = writeTotalData.get("reviewMuTxt");
 
 
-        boolean result = writeService.writeTotal(scoreStory, scoreDirect, scoreCast, scoreNumber, scoreAvgTotal, reviewMuTxt);
+        boolean result = writeService.writeTotal(userNum, musicalId, scoreStory, scoreDirect, scoreCast, scoreNumber, scoreAvgTotal, reviewMuTxt);
         if(result) {
             return new ResponseEntity(true, HttpStatus.OK);
         }
@@ -49,7 +49,7 @@ public class WriteController {
         String scoreSound = writeSeatData.get("scoreSound");
         String scoreLight = writeSeatData.get("scoreLight");
         String reviewSeTxt = writeSeatData.get("reviewSeTxt");
-
+        //System.out.println("테스트 1234 : " + scoreSeat + scoreView + scoreSound + scoreLight + reviewSeTxt);
         boolean result = writeService.writeSeat(scoreSeat, scoreView, scoreSound, scoreLight, reviewSeTxt);
         if(result) {
             return new ResponseEntity(true, HttpStatus.OK);
