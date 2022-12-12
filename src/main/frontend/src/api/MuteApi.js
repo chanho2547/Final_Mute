@@ -130,9 +130,17 @@ const MuteApi =  {
         };
         return await axios.post("delete_mem", reg);
     },
-    //좌석 후기 평균별점
+    // 좌석 후기 평균 별점
     seatReviewAvg: async function() {
         return await axios.get("reviewSeat/avg/test");
+    },
+
+    // 좌석별 후기
+    seatReview: async function(pkNum) {
+        const seatReviewInfo = {
+            seatId : pkNum
+        };
+        return await axios.get("reviewSeat/each", seatReviewInfo)
     }
 
 }

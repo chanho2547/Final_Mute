@@ -121,9 +121,6 @@ const onClickSeat = (event) => {
     }
 
     else if (window.localStorage.getItem("seatInfoMode") === "후기") {
-
-
-
         props.propsFunction(pkNum);
 
 
@@ -155,8 +152,6 @@ const onClickSeat = (event) => {
         // }
     }
 
-
-
     // 현 선택된 좌석 확인 
     for(let i = 8193; i<=8954 ; i++) {
         if(window.localStorage.getItem(`${i}`) === "selected") {
@@ -179,8 +174,8 @@ const onClickSeat = (event) => {
 
 
 }
-
 // ------- 여기까지 onClickSeat ---------------------
+
     const [seatReviewInfo,setSeatReviewInfo] = useState();
 
     useEffect(() => {
@@ -223,11 +218,9 @@ const onClickSeat = (event) => {
 
         } else if(seatInfoMode === "후기"){
 
-            
-
-            const MusicalData = async () => {
+            const SeatData = async () => {
                 try {
-                    let response = await MuteApi.seatReviewAvg(); // 뮤지컬 리스트 불러오기
+                    let response = await MuteApi.seatReviewAvg(); // 좌석 총 평균 별점 불러오기
                     setSeatReviewInfo(response.data);
                     
                 } catch (e) {  
@@ -235,8 +228,7 @@ const onClickSeat = (event) => {
                 }
                
             };
-            MusicalData(); // 첫 페이지 로딩시 목록을 다 끌어온다
-
+            SeatData(); // 첫 페이지 로딩시 목록을 다 끌어온다
             seatReviewInfo && seatReviewInfo.map(e=>{
 
                 if(e.avgAllSeat < 2) {
