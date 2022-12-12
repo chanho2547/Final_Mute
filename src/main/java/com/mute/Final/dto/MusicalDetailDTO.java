@@ -20,7 +20,10 @@ public class MusicalDetailDTO {
     private String musicalCast; // 공연 출연진 (박효신, 박은태, 조정은, 옥주현)
     private String musicalAge; // 공연 관람 연령 (만 0세 이상)
     private String musicalPrice; // 좌석별 가격 (R석 170,000원, S석 140,000원, A석 110,000원, B석 80,000원)
-    private String musicalDescImg; // 상세이미지
+    private String musicalDescImg1; // 상세이미지1
+    private String musicalDescImg2; // 상세이미지2
+    private String musicalDescImg3; // 상세이미지3
+    private String musicalDescImg4; // 상세이미지4
     private String musicalPlan; // 공연 스케줄(화요일(19:30), 수요일(14:30,19:30), 목요일(19:30), 금요일 ~ 토요일(14:30,19:30), 일요일(15:00))
 
 //     api DTO에 저장
@@ -39,7 +42,9 @@ public class MusicalDetailDTO {
         this.musicalCast = item.getString("prfcast");
         this.musicalAge = item.getString("prfage");
         this.musicalPrice = item.getString("pcseguidance");
-//        this.musicalDescImg = item.getString("styurls");
+//        this.musicalDescImg1 = item.getString("styurl");
+//        this.musicalDescImg2 = item.getString("styurl");
+//        this.musicalDescImg3 = item.getString("styurl");
         this.musicalPlan = item.getString("dtguidance");
     }
 }

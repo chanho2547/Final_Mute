@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mute.Final.dto.MusicalDetailDTO;
 import com.mute.Final.repository.MusicalRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.XML;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,8 +67,21 @@ public class MusicalDetailApiService {
             JSONObject jsonObj = xmlToJson.getJSONObject("dbs");
             // JSONObject로 가져오기
             JSONObject item = jsonObj.getJSONObject("db");
+
             // 상세이미지 가져오기.. 못가져옴
             JSONObject item2 = item.getJSONObject("styurls");
+
+//            JSONArray item2 = item.getJSONArray("styurls");
+//            String str = item2.toString();
+//            String[] splitImgUrl = str.split(",");
+//
+//            for (int i = 0; i <splitImgUrl.length; i++) {
+//                log.error(splitImgUrl.toString());
+//            }
+
+//            log.warn(item2.toString());
+//            JSONArray item3 = item2.getJSONArray("styurl");
+//            log.error(item3.toString());
 
             // DTO에 저장하기
             MusicalDetailDTO musicalDetailDTO = new MusicalDetailDTO(item);
