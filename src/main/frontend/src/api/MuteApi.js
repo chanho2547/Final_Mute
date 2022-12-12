@@ -141,6 +141,16 @@ const MuteApi =  {
             seatId : pkNum
         };
         return await axios.get("reviewSeat/each", seatReviewInfo)
+    },
+
+    // 비밀번호 재설정
+    rePwd: async function(id, pwd, pwdCheck) {
+        const rePwdObj = {
+            userId: id,
+            pwd: pwd,
+            pwdCheck: pwdCheck
+        }
+        return await axios.post("", rePwdObj)
     }
 
 }

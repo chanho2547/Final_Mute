@@ -12,6 +12,9 @@ const FindId = () =>{
     const [mailMsg, setMailMsg] = useState("");
     const [isMail, setIsMail] = useState(false);
 
+    const [inputAuth, setInputAuth] = useState('');
+    const [serverAuth, setServerAuth] = useState('');
+
     // 아이디 찾기 버튼 클릭시 팝업창 띄우기
     const [comment, setComment] = useState("");
     const [modalOpen, setModalOpen] = useState(false);
