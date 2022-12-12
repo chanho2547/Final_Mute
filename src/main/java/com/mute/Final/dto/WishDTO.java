@@ -7,6 +7,7 @@ import java.util.Date;
 
 @Data
 public class WishDTO {
+    private int userNum; // 회원 고유 번호
     private String userId; // 회원ID
     private String musicalName; // 공연 이름
     private LocalDate musicalTicketStart; // 티켓 예매 오픈일

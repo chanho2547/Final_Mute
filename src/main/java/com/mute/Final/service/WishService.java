@@ -27,8 +27,6 @@ public class WishService {
     private final MemberRepository memberRepository;
     private final MusicalRepository musicalRepository;
 
-    MemberDTO memberDTO;
-
     // ID별 알림 상태 ON인 경우 조회
     public List<WishDTO> getWishList(int userNum) {
         List<WishDTO> wishDTOS = new ArrayList<>();
@@ -62,12 +60,16 @@ public class WishService {
         return true;
     }
 
-    // 찜 데이터 upddate
-//    public List<WishDTO> updateAlarm(int userNum, String musicalId) {
-//        List<WishDTO> wishDTOS = new ArrayList<>();
-//        List<Wish> wishList = wishRepository.updateAlarm(userNum, musicalId);
-//
-//    }
+    // 망함!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // 찜 데이터 update 
+    // userNum과 musicalId과 일치하는 alarmStatus를 "OFF"로 바꿔주고 싶음
+    public boolean updateAlarm(int userNum, String musicalId) {
+        Wish wish = new Wish();
+        System.out.println("userNum : " + userNum);
+        System.out.println("musicalId : " + musicalId);
+        wishRepository.updateAlarm(userNum, musicalId);
+        return true;
+    }
 
 
 

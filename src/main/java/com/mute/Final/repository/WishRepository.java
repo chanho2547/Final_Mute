@@ -4,6 +4,7 @@ import com.mute.Final.entity.Wish;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import javax.transaction.Transactional;
 import java.util.List;
 
 public interface WishRepository extends JpaRepository<Wish, Long> {
@@ -13,8 +14,9 @@ public interface WishRepository extends JpaRepository<Wish, Long> {
     List<Wish> findUserNumON(int userNum);
 
     // alarm = "on" => "update"
-//    @Modifying(clearAutomactically = true)
-//    @Query(value = "update wish set alarm_status = 'OFF' where user_num = ?1 and musical_id ='2' and alarm_status = 'on'", nativeQuery = true)
-//    List<Wish> updateAlarm(int userNum, String musicalId);
+    @Modifying
+    @Transactional
+    @Query(value = "update wish set alarm_status = 'OFF' where user_num = ?1 and musical_id = ?2 and alarm_status = 'ON'", nativeQuery = true)
+    Integer updateAlarm(int userNum, String musicalId);
 
 }

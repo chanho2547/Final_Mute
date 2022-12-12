@@ -119,6 +119,8 @@ const onClickSeat = (event) => {
        
     }
 
+    else if ()
+
     // 현 선택된 좌석 확인 
     for(let i = 8193; i<=8954 ; i++) {
         if(window.localStorage.getItem(`${i}`) === "selected") {
@@ -185,9 +187,7 @@ const onClickSeat = (event) => {
 
         } else if(seatInfoMode === "후기"){
 
-        }
-        else {} // seatInfoMode가 NONE인 경우
-        
+
         //seatInfoMode === "후기"인 경우
         // 등록된 후기가 있을 경우
         // 1-2 : red
@@ -197,6 +197,14 @@ const onClickSeat = (event) => {
         // 등록된 후기가 없을 경우
         // grey
         //document.getElementById('8452').parentNode.setAttribute('class','real red');
+
+
+
+
+        }
+        // seatInfoMode가 NONE인 경우 => 도연언니
+        else {}
+
     })
 
     //let newArr = JSON.parse(window.localStorage.getItem('selectedSeats'));
@@ -208,8 +216,6 @@ const onClickSeat = (event) => {
 
     return (
         <>
-        
-        
         <h1>샤롯데 FirstFloor 입장 성공</h1> 
         {/* <Link to = "/"> Home으로 돌아가기</Link> <br></br>
         <Link to = "/FirstFloorChar">1층보기</Link> <br></br>

@@ -122,6 +122,10 @@ const MuteApi =  {
             userId: userId
         };
         return await axios.post("delete_mem", reg);
+    },
+    //좌석 후기 평균별점
+    seatReviewAvg: async function() {
+        return await axios.get("reviewSeat/avg/test");
     }
 
 }
