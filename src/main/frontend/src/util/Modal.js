@@ -11,15 +11,15 @@ const Modal = (props) => {
 
     const { open, confirm, close, header } = props;
 
-    const localId = window.localStorage.getItem("userId");
-    const localPw = window.localStorage.getItem("userPw");
-    const isLogin = window.localStorage.getItem("isLogin");
+    const localId =window.localStorage.getItem("userId");
+    const localPw =window.localStorage.getItem("userPw");
+    const isLogin =window.localStorage.getItem("isLogin");
 
     // 회원 탈퇴
-    const onClickMemDelete = async () => { // 탈퇴한다고 했을때
+    const onClickMemDelete = async() => { // 탈퇴한다고 했을때
         await MuteApi.memberDelete(localId);
         window.localStorage.setItem("userId", "");
-        // window.localStorage.setItem("userPwd", "");
+        window.localStorage.setItem("userPwd", "");
         window.localStorage.setItem("isLogin", "false")
         navigate('/');
     }

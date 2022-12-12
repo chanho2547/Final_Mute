@@ -4,7 +4,6 @@ import com.mute.Final.entity.Member;
 import com.mute.Final.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
@@ -15,7 +14,7 @@ import java.util.List;
 @Slf4j
 @Service
 @Transactional
-//@RequiredArgsConstructor // final 혹은 @NotNull이 붙은 필드의 생성자를 자동으로 생성
+@RequiredArgsConstructor // final 혹은 @NotNull이 붙은 필드의 생성자를 자동으로 생성
 public class MemberService {
     private final MemberRepository memberRepository;
     // 로그인 체크
@@ -26,10 +25,11 @@ public class MemberService {
 //            return false;
 //        }
 //    }
-    public MemberService(MemberRepository memberRepository) {
-
-        this.memberRepository = memberRepository;
-    }
+    // 해당부분 @RequiredArgsConstructor 어노테이션으로 대체
+//    public MemberService(MemberRepository memberRepository) {
+//
+//        this.memberRepository = memberRepository;
+//    }
     public Integer loginCheck(String userId, String pwd) {
         System.out.println("here is loginCheck");
         System.out.println("In Service, id/pwd : "+ userId + pwd);
@@ -153,7 +153,6 @@ public class MemberService {
     public boolean deleteMem(String userId) {
         try {
             Member member = memberRepository.findByUserId(userId);
-
             return true;
         } catch (Exception e) {
             log.warn("실패");

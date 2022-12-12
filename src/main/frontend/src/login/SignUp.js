@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import {Link, useNavigate } from "react-router-dom";
 import MuteApi from '../api/MuteApi';
 import Post from './Post';
 import Modal from "../util/Modal";
@@ -52,20 +52,19 @@ const SignUp = () => {
         try {
             const memberCheck = await MuteApi.memberJoinCheck(inputId, "TYPE_ID");
             if(memberCheck.data && isId) {
-                setIdMsg("사용가능합니다.");
+                //setIdMsg("사용가능합니다.");
                 setModalOpenIdOK(true);
             } else if(memberCheck.data && !isId) {
                 setIdMsg("4자리 이상으로 입력해주세요.");
             }
             else {
-                setIdMsg("이미 사용중인 ID입니다.");
+                // setIdMsg("이미 사용중인 ID입니다.");
                 setIsId(false);
                 setModalOpenIdCheck(true);
             }
         } catch (e) {
         }
     }
-
     // 비밀번호 입력
     const onChangePwd = (e) => {
         const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/
@@ -213,26 +212,21 @@ const SignUp = () => {
     const closeModalSignUp = () => { // 모달 창 닫기
         setModalOpenSignUp(false);
     }
-    const [modalOpenSignUp2, setModalOpenSignUp2] = useState(false); // 회원가입 버튼 눌렀을 때(실패시)
-    const closeModalSignUp2 = () => { // 모달 창 닫기
-        setModalOpenSignUp2(false);
-    }
 
     // 회원가입
     const onClickJoin = async() => {
         const memberReg = await MuteApi.signUp(inputId, inputPwd, inputName, inputMail, inputPhone, enroll_company.address);
         if(memberReg.data) {
             console.log("Mute 회원가입이 완료되었습니다.")
-            //setModalOpenSignUp2(true);
             navigate('/Login');
 
             // window.localStorage.setItem("userId",  inputId);
             // window.localStorage.setItem("isLogin", "true");
             // navigate("/SignUp");
 
-        // } else {
-        //     console.log("회원가입에 실패했습니다. 다시 확인해주세요")
-        //     setModalOpenSignUp(true);
+            // } else {
+            //     console.log("회원가입에 실패했습니다. 다시 확인해주세요")
+            //     setModalOpenSignUp(true);
         }
     }
 
@@ -270,7 +264,7 @@ const SignUp = () => {
                 </p>
                 <div>
                     <input type='mail' placeholder='메일' value={inputMail} onChange={onChangeMail} onBlur={mailCheck}/>
-                    <button type='button' onClick={getAuth}>인증번호 받기</button>
+                    <button type='button' onClick={getAuth}>인증하기</button>
                 </div>
                 <div>
                     <input type='text' placeholder='인증번호' value={inputAuth} onChange={onChangeAuth} />
@@ -299,8 +293,7 @@ const SignUp = () => {
                 {/* 모달 */}
                 {modalOpenIdCheck && <Modal open={modalOpenIdCheck} close={closeModalIdCheck} header="확인">이미 가입된 아이디입니다.</Modal>}
                 {modalOpenIdOK && <Modal open={modalOpenIdOK} close={closeModalIdOK} header="확인">사용 가능한 아이디입니다.</Modal>}
-                {modalOpenSignUp2 && <Modal open={modalOpenSignUp2} close={closeModalSignUp2} header="확인">
-                    <Link to="/Login">Mute 회원가입이 완료되었습니다.</Link></Modal>}
+                <Link to="/Login">Mute 회원가입이 완료되었습니다.</Link>
                 {modalOpenSignUp && <Modal open={modalOpenSignUp} close={closeModalSignUp} header="확인">회원가입에 실패했습니다. 다시 확인해주세요.</Modal>}
             </div>
         </>
