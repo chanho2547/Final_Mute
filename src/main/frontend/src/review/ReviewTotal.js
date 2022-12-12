@@ -19,7 +19,6 @@ const ReviewTotal = (props) => {
     const [scoreCast, setScoreCast] = useState(''); // 캐스팅 별점
     const [scoreNumber, setScoreNumber] = useState(''); // 넘버 별점
     const [scoreAvgTotal, setScoreAvgTotal] = useState(''); // 별점 총점
-    
     const [totalReview, setTotalReview] = useState(''); // 뮤지컬 후기 텍스트
 
     // 오류 메세지
@@ -63,9 +62,11 @@ const ReviewTotal = (props) => {
         }
     };
 
+
     const highFunction1 = (text) => {
         console.log("스토리 별점 가져온 값 : " + text);
         setScoreStory(text);
+        console.log("setScoreStory 타입 확인 :" + text);
     }
     const highFunction2 = (text) => {
         console.log("연출 별점 가져온 값 : " + text);
@@ -79,6 +80,25 @@ const ReviewTotal = (props) => {
         console.log("넘버 별점 가져온 값 : " + text);
         setScoreNumber(text);
     }
+;
+
+    // // 별점 총점 계산
+    // parseInt(setScoreStory);
+    // parseInt(setScoreDirect);
+    // parseInt(setScoreCast);
+    // parseInt(setScoreNumber);
+    
+
+    
+
+    const total = setScoreStory + setScoreDirect + setScoreCast + setScoreNumber;
+
+    console.log("total 값 확인 :" + total);
+
+    // // const total = (text) => {
+    // //     setScoreAvgTotal((a + b + c + d) / 4);
+    // //     console.log("토탈:" + setScoreAvgTotal);
+    // // }
 
 
     const onChangeTotalReview = (e) => {
