@@ -5,6 +5,7 @@ import { ReactDOM, useEffect } from "react";
 import { Link } from "react-router-dom";
 import '../seats.css';
 import SelectSeat from "../../reservation/SelectSeat";
+import MuteApi from "../../api/MuteApi";
 
 
 const FirstFloorChar = (props) => {  
@@ -119,7 +120,9 @@ const onClickSeat = (event) => {
        
     }
 
-    else if ()
+    else if (window.localStorage.getItem("seatInfoMode") === "후기") {
+
+    }
 
     // 현 선택된 좌석 확인 
     for(let i = 8193; i<=8954 ; i++) {
@@ -145,7 +148,7 @@ const onClickSeat = (event) => {
 }
 
 // ------- 여기까지 onClickSeat ---------------------
-    
+    const [seatReviewInfo,setSeatReviewInfo] = useState();
 
     useEffect(() => {
         window.localStorage.setItem("floor",1);
@@ -186,6 +189,28 @@ const onClickSeat = (event) => {
         
 
         } else if(seatInfoMode === "후기"){
+
+            
+
+            // const MusicalData = async () => {
+            //     try {
+            //         let response = await MuteApi.seatReviewAvg(); // 뮤지컬 리스트 불러오기
+            //         setSeatReviewInfo(response.data);
+                    
+            //     } catch (e) {  
+            //         console.log(e + "실패 입니다");
+            //     }
+               
+            // };
+            // MusicalData(); // 첫 페이지 로딩시 목록을 다 끌어온다
+
+            // seatReviewInfo.map(e=>{
+
+            // })
+
+            
+
+            
 
 
         //seatInfoMode === "후기"인 경우
