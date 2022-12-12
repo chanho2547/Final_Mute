@@ -60,7 +60,6 @@ public class WishService {
         return true;
     }
 
-    // 망함!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     // 찜 데이터 update 
     // userNum과 musicalId과 일치하는 alarmStatus를 "OFF"로 바꿔주고 싶음
     public boolean updateAlarm(int userNum, String musicalId) {

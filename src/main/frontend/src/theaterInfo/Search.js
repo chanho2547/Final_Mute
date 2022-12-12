@@ -1,21 +1,7 @@
 
 // import { Link } from "react-router-dom";
 // import { useState, useEffect} from "react";
-// import styled from "styled-components";
 // import MuteApi from "../api/MuteApi";
-// // const ItemContainer = styled.div`
-// //     margin: 10px;
-// //     :hover{opacity: 0.5;
-// //     cursor: pointer;}
-// //     .item_img{
-// //         width : 250px;
-// //         height : 210px;
-// //         &:hover {
-           
-// //         }
-// //     }
-// // `;
-
 
 // const OnClick = (e) => {
 //     window.localStorage.setItem("Detail", e);
@@ -25,13 +11,13 @@
 
 // const Search = () => {
 //     const [searchInfo, setSearchInfo] = useState("");
-//     let word = window.localStorage.getItem("input");
+//     let input = window.localStorage.getItem("input");
 
 // useEffect(() => {
 //     const SearchData = async () => {
 //         try {
-//             window.localStorage.getItem(TheaterWord);
-//             let response = await MuteApi.searchTheater(TheaterWord);
+//             window.localStorage.getItem(input);
+//             let response = await MuteApi.searchTheater(input);
 
 //             setSearchInfo(response.data);
 //             console.log(response.data);
@@ -47,15 +33,13 @@
 //     <div>
 //         {searchInfo && searchInfo.map(TheaterWord => (
 //         <>
-//             <div onClick={()=>OnClick(word.proCode)}>
-//                 <div className="item">
-//                 <img className="item_img" src = {word.img1Path}/>
-//                 <div className="item_brand">{word.brand}</div>
-//                 <div className="item_EName">{word.proName}</div>
-//                 <div className="item_KName">{word.proKorName}</div>
-//                 <div className="item_price">{word.price}원</div>
-//                 </div>
-                
+//             <div onClick={()=>OnClick(TheaterWord.theaterName)}>
+//                 <div className="theater">
+//                 <img className="theaterPoster" src = {TheaterWord.theaterPoster}/>
+//                 <div className="theaterName">{TheaterWord.theaterName}</div>
+//                 <div className="theaterAddr">{TheaterWord.theaterAddr}</div>
+//                 <div className="theaterSeats">{TheaterWord.theaterSeats}</div>
+//                 </div> 
 //             </div>
 //         </>
 

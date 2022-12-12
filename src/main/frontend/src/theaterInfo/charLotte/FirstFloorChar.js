@@ -7,6 +7,7 @@ import '../seats.css';
 import SelectSeat from "../../reservation/SelectSeat";
 import MuteApi from "../../api/MuteApi";
 
+let isSeatRender = false; // 무한 루프 Stop
 
 const FirstFloorChar = (props) => {  
 
@@ -120,37 +121,20 @@ const onClickSeat = (event) => {
        
     }
 
-    else if (window.localStorage.getItem("seatInfoMode") === "후기") {
+    else if (window.localStorage.getItem("seatInfoMode") === "후기") { // 후기일 때 onClick상황
         props.propsFunction(pkNum);
-
-
-        //arr = [];
-        // if(window.localStorage.getItem(pkNum) === null ){
-        //     console.log("빈좌석 선택");
-        //     event.currentTarget.setAttribute("class","selected");
-        //     window.localStorage.setItem(pkNum,"selected");
+        // const SeatEach = async () => {
+        //     try {
+        //         let response = await MuteApi.seatReview(pkNum); // 좌석별 후기 불러오기
+        //         setSeatReviewInfo(response.data);
+                
+        //     } catch (e) {  
+        //         console.log(e + "실패 입니다");
+        //     }
+        // };
+    } 
     
-        //     // 로컬스토리지에 현재상태 배열형식으로 가져오기
-        //     arrString = JSON.parse(window.localStorage.getItem('selectedSeats'));
 
-        //     //배열에 추가후 다시 로컬스토리지로
-        //     arrString.push(floor + "층 "+parentNode + "열 " + seatNum + "번 " + grade);
-        //     console.log("arrString 타입 : "+ typeof(arrString));
-        //     console.log("arrString 출력 : " + arrString);
-        //     window.localStorage.setItem("selectedSeats", JSON.stringify(arrString)); 
-        // }
-        // else{
-        //     console.log("선택 취소");
-            
-        //     arrString = JSON.parse(window.localStorage.getItem('selectedSeats'));
-        //     //배열에 추가후 다시 로컬스토리지로
-        //     arrString = arrString.filter((element)=> !element.includes(floor + "층 "+parentNode + "열 " + seatNum + "번 ") );
-        //     console.log("arrString 타입 : "+ typeof(arrString));
-        //     console.log("arrString 출력 : " + arrString);
-        //     window.localStorage.setItem("selectedSeats", JSON.stringify(arrString));
-   
-        // }
-    }
 
     // 현 선택된 좌석 확인 
     for(let i = 8193; i<=8954 ; i++) {
@@ -228,7 +212,10 @@ const onClickSeat = (event) => {
                 }
                
             };
-            SeatData(); // 첫 페이지 로딩시 목록을 다 끌어온다
+            if(!isSeatRender) { // useEffect로 첫 로딩에만 끌어오고 멈춤
+                SeatData(); // 첫 페이지 로딩시 목록을 다 끌어온다
+                isSeatRender = true;
+            }
             seatReviewInfo && seatReviewInfo.map(e=>{
 
                 if(e.avgAllSeat < 2) {
@@ -246,35 +233,26 @@ const onClickSeat = (event) => {
                 } else {
                     document.getElementById(e.seatId).parentNode.setAttribute('class','real green');
                 }
-
             })
-
         }
 
         // seatInfoMode가 NONE인 경우 => 도연언니
         else {}
 
-    },[])
+    },[seatReviewInfo])
+
 
     //let newArr = JSON.parse(window.localStorage.getItem('selectedSeats'));
     //let selectedList = newArr.map((arr)=>(<h1>{arr}</h1>));
-    
-   
-   
 
-
+   // ------- 여기까지 useEffect --------------------- 
+   
     return (
         <>
         <h1>샤롯데 FirstFloor 입장 성공</h1> 
         {/* <Link to = "/"> Home으로 돌아가기</Link> <br></br>
         <Link to = "/FirstFloorChar">1층보기</Link> <br></br>
         <Link to = "/SecondFloorChar">2층보기</Link> */}
-
-      
-       
-        
-           
-        
 
         <div className="grid-containder modal-background" id="modal-background">  
         </div>
