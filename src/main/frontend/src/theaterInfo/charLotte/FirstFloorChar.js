@@ -47,13 +47,13 @@ const onClickSeat = (event) => {
     //console.log(parentNode + "열 " + seatNum + "번 좌석입니다 \n" + "PK값 : " + pkNum);
 
 
-    if(window.localStorage.getItem("seatInfoMode") === "예매") {  // 예매일때 onClick 상황
+    if(window.localStorage.getItem("seatInfoMode") === "예매") {// 예매일때 onClick 상황
         
         // 처음 onclick 들어갈때 초기화 (밑에서 처음부터 셀)
         arr = [];
         // arrString = [];
 
-        // onClick 누면 SelectSeat에 있는 값 바꾸기
+        // onClick 누면 SelectSeat에 있는 값 바꾸기  
         //일단 현재 localStorage값을 가져온다
         
 
@@ -122,7 +122,40 @@ const onClickSeat = (event) => {
 
     else if (window.localStorage.getItem("seatInfoMode") === "후기") {
 
+
+
+        props.propsFunction(pkNum);
+
+
+        //arr = [];
+        // if(window.localStorage.getItem(pkNum) === null ){
+        //     console.log("빈좌석 선택");
+        //     event.currentTarget.setAttribute("class","selected");
+        //     window.localStorage.setItem(pkNum,"selected");
+    
+        //     // 로컬스토리지에 현재상태 배열형식으로 가져오기
+        //     arrString = JSON.parse(window.localStorage.getItem('selectedSeats'));
+
+        //     //배열에 추가후 다시 로컬스토리지로
+        //     arrString.push(floor + "층 "+parentNode + "열 " + seatNum + "번 " + grade);
+        //     console.log("arrString 타입 : "+ typeof(arrString));
+        //     console.log("arrString 출력 : " + arrString);
+        //     window.localStorage.setItem("selectedSeats", JSON.stringify(arrString)); 
+        // }
+        // else{
+        //     console.log("선택 취소");
+            
+        //     arrString = JSON.parse(window.localStorage.getItem('selectedSeats'));
+        //     //배열에 추가후 다시 로컬스토리지로
+        //     arrString = arrString.filter((element)=> !element.includes(floor + "층 "+parentNode + "열 " + seatNum + "번 ") );
+        //     console.log("arrString 타입 : "+ typeof(arrString));
+        //     console.log("arrString 출력 : " + arrString);
+        //     window.localStorage.setItem("selectedSeats", JSON.stringify(arrString));
+   
+        // }
     }
+
+
 
     // 현 선택된 좌석 확인 
     for(let i = 8193; i<=8954 ; i++) {
@@ -155,10 +188,10 @@ const onClickSeat = (event) => {
         window.localStorage.removeItem("arrString");
         let seatInfoMode = window.localStorage.getItem("seatInfoMode");
         localStorage.setItem('selectedSeats','[]');
-        console.log("seatInfoMode : " + seatInfoMode)
+        console.log("seatInfoMode : " + seatInfoMode);
 
         // 이 페이지가 시작되면 일단 모든 좌석 선택 locatStorage를 지우고 시작한다
-        for(let i = 1; i<=20000 ; i++){
+        for(let i = 8000; i<=20000 ; i++){
             window.localStorage.removeItem(`${i}`);
         }
 
@@ -192,45 +225,44 @@ const onClickSeat = (event) => {
 
             
 
-            // const MusicalData = async () => {
-            //     try {
-            //         let response = await MuteApi.seatReviewAvg(); // 뮤지컬 리스트 불러오기
-            //         setSeatReviewInfo(response.data);
+            const MusicalData = async () => {
+                try {
+                    let response = await MuteApi.seatReviewAvg(); // 뮤지컬 리스트 불러오기
+                    setSeatReviewInfo(response.data);
                     
-            //     } catch (e) {  
-            //         console.log(e + "실패 입니다");
-            //     }
+                } catch (e) {  
+                    console.log(e + "실패 입니다");
+                }
                
-            // };
-            // MusicalData(); // 첫 페이지 로딩시 목록을 다 끌어온다
+            };
+            MusicalData(); // 첫 페이지 로딩시 목록을 다 끌어온다
 
-            // seatReviewInfo.map(e=>{
+            seatReviewInfo && seatReviewInfo.map(e=>{
 
-            // })
+                if(e.avgAllSeat < 2) {
+                    document.getElementById(e.seatId).parentNode.setAttribute('class','real red');
+ 
+                } else if (e.avgAllSeat <3) {
+                    document.getElementById(e.seatId).parentNode.setAttribute('class','real orange');
 
-            
+                } else if (e.avgAllSeat < 4) {
+                    document.getElementById(e.seatId).parentNode.setAttribute('class','real yellow');
 
-            
+                } else if (e.avgAllSeat < 5) {
+                    document.getElementById(e.seatId).parentNode.setAttribute('class','real lightgreen');
 
+                } else {
+                    document.getElementById(e.seatId).parentNode.setAttribute('class','real green');
+                }
 
-        //seatInfoMode === "후기"인 경우
-        // 등록된 후기가 있을 경우
-        // 1-2 : red
-        // 2-3 : yellow
-        // 3-4 : orange
-        // 4-5 : green
-        // 등록된 후기가 없을 경우
-        // grey
-        //document.getElementById('8452').parentNode.setAttribute('class','real red');
-
-
-
+            })
 
         }
+
         // seatInfoMode가 NONE인 경우 => 도연언니
         else {}
 
-    })
+    },[seatReviewInfo])
 
     //let newArr = JSON.parse(window.localStorage.getItem('selectedSeats'));
     //let selectedList = newArr.map((arr)=>(<h1>{arr}</h1>));

@@ -6,13 +6,17 @@ import { BsSearch } from 'react-icons/bs';
 const SeatView = () => {
     useEffect(()=>{
         window.localStorage.setItem("seatInfoMode","후기");
-    })
+    },[])
 
 // 검색창
 const [input, setInput] = useState("");
 const onChangeInput = (e) => {
     setInput(e.target.value)
   };
+
+const highFunction = (e) => {
+    alert("들어온 값 : "+e);
+}
 
 // 검색창 Api
 const onClickInput = async() => {
@@ -23,7 +27,7 @@ const onClickInput = async() => {
         <>
         <input onChange={onChangeInput} placeholder="극장을 검색하세요"/>
         <button type="button" onClick={onClickInput}><BsSearch/></button>
-        <FirstFloorChar />
+        <FirstFloorChar propsFunction={highFunction}/>
         <FirstFloorChung />
         </>
     )

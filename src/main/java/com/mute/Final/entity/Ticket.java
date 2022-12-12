@@ -24,8 +24,8 @@ public class Ticket {
     @JoinColumn(name = "payment_id") // 결제번호(FK)
     private Payment payment;
     private LocalDateTime ticketDate; // 예매 일시
-    private Date seeDate; // 공연 관람일
-    private Date seeTime; // 공연 관람시간
+    private LocalDateTime seeDate; // 공연 관람일
+//    private Date seeTime; // 공연 관람시간
     private int seatNum; // 좌석 번호
     private String seatPosition; // 예매한 좌석 위치
 }
