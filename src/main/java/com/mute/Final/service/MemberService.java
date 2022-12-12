@@ -103,8 +103,8 @@ public class MemberService {
         return memberDTOS;
     }
 
-    // ID, PWD 찾기
-    public MemberDTO findCheck(String uni, String mail, String type) {
+    // ID 찾기
+    public MemberDTO findId(String uni, String name, String type) {
         MemberDTO memberDTO = new MemberDTO();
         try{
             char c = type.charAt(5);
@@ -112,7 +112,7 @@ public class MemberService {
 
             switch (c) {
                 case 'I' :
-                    member = memberRepository.findByNameAndMail(uni, mail);
+                    member = memberRepository.findByNameAndMail(uni, name);
                     if(member != null) {
                         memberDTO.setReg(true);
                         memberDTO.setUserId(member.getUserId());
@@ -121,6 +121,20 @@ public class MemberService {
                     }
                     memberDTO.setOk(true);
                     break;
+            }
+        } catch (Exception e) {
+            memberDTO.setOk(false);
+        }
+        return memberDTO;
+    }
+    // PWD 찾기
+    public MemberDTO findPwd(String uni, String mail, String type) {
+        MemberDTO memberDTO = new MemberDTO();
+        try{
+            char c = type.charAt(5);
+            Member member;
+
+            switch (c) {
                 case 'P' :
                     member = memberRepository.findByUserIdAndMail(uni, mail);
                     if(member != null) {
@@ -136,6 +150,7 @@ public class MemberService {
         }
         return memberDTO;
     }
+
     // 비밀번호 찾기 시 새 비밀번호 설정
     public boolean regNewPwd(String userId, String pwd) {
         try{

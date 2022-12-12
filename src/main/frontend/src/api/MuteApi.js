@@ -99,30 +99,32 @@ const MuteApi =  {
         return await axios.get( "musical/list");
     },
 // Id 찾기
-    researchId: async function (uni, mail, type) {
+    researchId: async function (uni, name, type) {
+        const reg = {
+            uni: uni,
+            name: name,
+            type: type
+        };
+        return await axios.post("member/find_id", reg);
+    },
+// PWD 찾기
+    researchPwd: async function (uni, mail, type) {
         const reg = {
             uni: uni,
             mail: mail,
             type: type
-        };
-        return await axios.post("member/find", reg);
-    },
-// PWD 찾기
-    researchPwd: async function (id, mail) {
-        const reg = {
-            userId: id,
-            mail: mail
         }
-        return await axios.post("", reg);
+        return await axios.post("member/find_pwd", reg);
     },
-    // 새 비밀번호 저장
-    memberNewPwd: async function (userId, pwd) {
-        const reg = {
-            userId: userId,
+    // 비밀번호 재설정
+    rePwd: async function(id, pwd) {
+        const rePwdObj = {
+            userId: id,
             pwd: pwd
-        };
-        return await axios.post("member/new_pwd", reg);
+        }
+        return await axios.post("member/re_pwd", rePwdObj)
     },
+
     // 회원탈퇴
     memberDelete: async function (userId){
         const reg = {
@@ -141,16 +143,6 @@ const MuteApi =  {
             seatId : pkNum
         };
         return await axios.get("reviewSeat/each", seatReviewInfo)
-    },
-
-    // 비밀번호 재설정
-    rePwd: async function(id, pwd, pwdCheck) {
-        const rePwdObj = {
-            userId: id,
-            pwd: pwd,
-            pwdCheck: pwdCheck
-        }
-        return await axios.post("", rePwdObj)
     },
 
     // 공연장 검색

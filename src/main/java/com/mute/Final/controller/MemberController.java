@@ -71,22 +71,35 @@ public class MemberController {
             return new ResponseEntity(false, HttpStatus.OK);
         }
     }
-    // ID, PWD 찾기
-    @PostMapping("/find")
-    public ResponseEntity<List<MemberDTO>> memberFind(@RequestBody Map<String, String> find) {
+    // ID 찾기
+    @PostMapping("/find_id")
+    public ResponseEntity<List<MemberDTO>> findId(@RequestBody Map<String, String> find) {
+        String uni = find.get("uni");
+        String name = find.get("name");
+        String type = find.get("type");
+
+        MemberDTO memberDTO = memberService.findId(uni, name, type);
+        if(memberDTO.isOk()) return  new ResponseEntity(memberDTO, HttpStatus.OK);
+        else return new ResponseEntity(false, HttpStatus.OK);
+    }
+
+    // PWD 찾기
+    @PostMapping("/find_pwd")
+    public ResponseEntity<List<MemberDTO>> findPwd(@RequestBody Map<String, String> find) {
         String uni = find.get("uni");
         String mail = find.get("mail");
         String type = find.get("type");
 
-        MemberDTO memberDTO = memberService.findCheck(uni, mail, type);
+        MemberDTO memberDTO = memberService.findPwd(uni, mail, type);
         if(memberDTO.isOk()) return  new ResponseEntity(memberDTO, HttpStatus.OK);
         else return new ResponseEntity(false, HttpStatus.OK);
     }
-    // 새 비밀번호 설정
-    @PostMapping("/new_pwd")
+    // 비밀번호 재설정
+    @PostMapping("/re_pwd")
     public ResponseEntity<Boolean> memberNewPwd(@RequestBody Map<String, String> newPwd) {
         String id = newPwd.get("id");
         String pwd = newPwd.get("pwd");
+        String mail = newPwd.get("mail");
 
         boolean result = memberService.regNewPwd(id, pwd);
         if(result) {

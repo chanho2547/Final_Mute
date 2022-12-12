@@ -2,6 +2,7 @@ import {Link} from "react-router-dom";
 import {useState} from "react";
 import MuteApi from "../api/MuteApi";
 import Modal from "../util/Modal";
+import findId from "./FindId";
 
 
 const FindPwd = () => {
@@ -11,7 +12,7 @@ const FindPwd = () => {
     // 아이디와 이메일이 맞으면 새로운 비밀번호를 지정할 수 있는 html을 불러옴
     const [isNewPwd, setIsNewPwd] = useState(false);
 
-    //새로 설정한 비밀번호가 정규식이 맞는 지/비밀번호와 비밀번호 확인이 동일한지 검사
+    //새로 설정한 비밀번호가 정규식이 맞는지, 비밀번호 중복 체크
     const [isRePwdCheck, setIsRePwdCheck] = useState(false);
     const [isRePwdConCheck, setIsRePwdConCheck] = useState(false);
 
@@ -63,14 +64,14 @@ const FindPwd = () => {
     const onChangeId = (e) => {
         setInputId(e.target.value);
     }
-    const onChangeEmail = (e) => {
+    const onChangeMail = (e) => {
         setInputMail(e.target.value);
     }
 
     // api 호출
     const onClickFindPwd = async() => {
-        const res = await MuteApi.researchId(inputId, inputMail, "Type_ID");
-        console.log(res.data);
+        const res = await MuteApi.researchPwd(inputId, inputMail, "Type_PWD");
+        //console.log(res.data);
         if(res.data) {
             setModalOpen(true);
             setComment("비밀번호를 재설정합니다.")
@@ -89,13 +90,55 @@ const FindPwd = () => {
     // 비밀번호 재설정 api
     const onClickRePwd = async() => {
         const res = await MuteApi.rePwd(inputId, newPwdChe);
-
+        if(res.data) {
+            setIsNewPwd(false);
+            setModalOpen(true);
+            setComment("비밀번호 재설정이 완료되었습니다. 로그인해주세요")
+        }
     }
-
+    const onKeyDownRePwd = (e) => {
+        if(e.key === 'Enter'){
+            onClickRePwd();
+        }
+    }
 
     return(
         <>
+            {!isNewPwd ?
+                <>
+            <h5>비밀번호 찾기</h5>
+            {/* 아이디 입력창 */}
+                <input className="input" placeholder="아이디" value={inputId} onChange={onChangeId}></input>
+                <br/>
 
+            {/* 이메일 입력창 */}
+                <p> {inputMail.length > 0 && <span></span>}</p>
+                <input className="input" placeholder="이메일" value={inputMail} onChange={onChangeMail} onKeyDown={onKeyDownFindPwd}></input>
+                <br/>
+            {/* 비밀번호 찾기 버튼 활성화 */}
+                <button className="pwdButton" disabled={!inputId && inputMail} onClick={onClickFindPwd}>FIND PASSWORD</button>
+                <br/>
+                </> :
+                <>
+
+            {/* 비밀번호 재설정 */}
+                <p> {newPwd.length > 0 && <span>{pwdMsg}</span>}<br/>
+                <input type="password" placeholder="비밀번호" onChange={onChangePwd} value={newPwd}></input>
+                </p>
+            {/* 재설정한 비밀번호 확인*/}
+                <p> {newPwdChe.length > 0 && <span>{conPwdMsg}</span>}<br/>
+                <input type="password" placeholder="비밀번호 확인" onChange={onChangePwdCheck} value={newPwdChe} onKeyDown={onKeyDownRePwd}></input>
+                </p>
+                <button disabled={!(isRePwdCheck && isRePwdConCheck)} onClick={onClickRePwd}>재설정</button>
+                </>
+            }
+            <div>
+                {/* 다른 페이지 연결 */}
+                <Link to="/SignUp" className="link_item">회원가입</Link>
+                <Link to="/Login" className="link_item">로그인</Link>
+                <Link to="/FindId" className="link_item">아이디 찾기</Link>
+            </div>
+            {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">{comment}</Modal>}
         </>
     )
 }

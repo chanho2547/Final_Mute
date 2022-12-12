@@ -68,7 +68,7 @@ const FindId = () =>{
                 <br/>
 
                 {/* 이메일 입력창 */}
-                <p> {inputMail.length > 0 && <span>{mailMsg}</span>}
+                <p>{inputMail.length > 0 && <span>{mailMsg}</span>}<br/>
                     <input className="input" placeholder="이메일"  value={inputMail} onChange={onChangeMail} onKeyDown={onKeyDownFindId}></input>
                     <br/></p>
 
