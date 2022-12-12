@@ -98,15 +98,22 @@ const MuteApi =  {
     musicalList: async function() {
         return await axios.get( "musical/list");
     },
-
-    // ID, PWD 찾기
-    memberFind: async function (uni, mail, type) {
+// Id 찾기
+    researchId: async function (uni, mail, type) {
         const reg = {
             uni: uni,
             mail: mail,
             type: type
         };
         return await axios.post("member/find", reg);
+    },
+// PWD 찾기
+    researchPwd: async function (id, mail) {
+        const reg = {
+            userId: id,
+            mail: mail
+        }
+        return await axios.post("", reg);
     },
     // 새 비밀번호 저장
     memberNewPwd: async function (userId, pwd) {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import {Link, useNavigate } from "react-router-dom";
 import MuteApi from '../api/MuteApi';
 import Post from './Post';
 import Modal from "../util/Modal";
@@ -50,22 +50,21 @@ const SignUp = () => {
     const IdCheck = async() => {
         // 가입 여부 확인
         try {
-            const memberCheck = await MuteApi.memberJoinCheck(inputId, "TYPE_ID");
+            const memberCheck = awaitMuteApi.memberJoinCheck(inputId, "TYPE_ID");
             if(memberCheck.data && isId) {
-                setIdMsg("사용가능합니다.");
+                //setIdMsg("사용가능합니다.");
                 setModalOpenIdOK(true);
             } else if(memberCheck.data && !isId) {
                 setIdMsg("4자리 이상으로 입력해주세요.");
             }
             else {
-                setIdMsg("이미 사용중인 ID입니다.");
+                // setIdMsg("이미 사용중인 ID입니다.");
                 setIsId(false);
                 setModalOpenIdCheck(true);
             }
         } catch (e) {
         }
     }
-
     // 비밀번호 입력
     const onChangePwd = (e) => {
         const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/
@@ -117,7 +116,7 @@ const SignUp = () => {
 
     const phoneCheck = async() => {
         // 가입 여부 확인
-        const memberCheck = await MuteApi.memberJoinCheck(inputPhone, "TYPE_PHONE");
+        const memberCheck = awaitMuteApi.memberJoinCheck(inputPhone, "TYPE_PHONE");
         if (memberCheck.data) {
             setPhoneMsg("사용가능한 전화번호입니다.");
         } else {
@@ -162,7 +161,7 @@ const SignUp = () => {
     }
     const mailCheck = async() => {
         // 가입 여부 확인
-        const memberCheck = await MuteApi.memberJoinCheck(inputMail, "TYPE_MAIL");
+        const memberCheck = awaitMuteApi.memberJoinCheck(inputMail, "TYPE_MAIL");
         if (memberCheck.data && isMail) {
             setMailMsg("사용가능한 Mail입니다.")
         } else {
@@ -172,7 +171,7 @@ const SignUp = () => {
     }
     // 이메일 인증번호 받기
     const getAuth = async() => {
-        const mailAuth = await MuteApi.mailAuth(inputMail);
+        const mailAuth = awaitMuteApi.mailAuth(inputMail);
         setServerAuth(mailAuth.data);
     }
     // 이메일 인증번호 확인하기
@@ -213,26 +212,21 @@ const SignUp = () => {
     const closeModalSignUp = () => { // 모달 창 닫기
         setModalOpenSignUp(false);
     }
-    const [modalOpenSignUp2, setModalOpenSignUp2] = useState(false); // 회원가입 버튼 눌렀을 때(실패시)
-    const closeModalSignUp2 = () => { // 모달 창 닫기
-        setModalOpenSignUp2(false);
-    }
 
     // 회원가입
     const onClickJoin = async() => {
-        const memberReg = await MuteApi.signUp(inputId, inputPwd, inputName, inputMail, inputPhone, enroll_company.address);
+        const memberReg = awaitMuteApi.signUp(inputId, inputPwd, inputName, inputMail, inputPhone, enroll_company.address);
         if(memberReg.data) {
             console.log("Mute 회원가입이 완료되었습니다.")
-            //setModalOpenSignUp2(true);
             navigate('/Login');
 
             // window.localStorage.setItem("userId",  inputId);
             // window.localStorage.setItem("isLogin", "true");
             // navigate("/SignUp");
 
-        // } else {
-        //     console.log("회원가입에 실패했습니다. 다시 확인해주세요")
-        //     setModalOpenSignUp(true);
+            // } else {
+            //     console.log("회원가입에 실패했습니다. 다시 확인해주세요")
+            //     setModalOpenSignUp(true);
         }
     }
 
@@ -270,7 +264,7 @@ const SignUp = () => {
                 </p>
                 <div>
                     <input type='mail' placeholder='메일' value={inputMail} onChange={onChangeMail} onBlur={mailCheck}/>
-                    <button type='button' onClick={getAuth}>인증번호 받기</button>
+                    <button type='button' onClick={getAuth}>인증하기</button>
                 </div>
                 <div>
                     <input type='text' placeholder='인증번호' value={inputAuth} onChange={onChangeAuth} />
@@ -299,8 +293,7 @@ const SignUp = () => {
                 {/* 모달 */}
                 {modalOpenIdCheck && <Modal open={modalOpenIdCheck} close={closeModalIdCheck} header="확인">이미 가입된 아이디입니다.</Modal>}
                 {modalOpenIdOK && <Modal open={modalOpenIdOK} close={closeModalIdOK} header="확인">사용 가능한 아이디입니다.</Modal>}
-                {modalOpenSignUp2 && <Modal open={modalOpenSignUp2} close={closeModalSignUp2} header="확인">
-                    <Link to="/Login">Mute 회원가입이 완료되었습니다.</Link></Modal>}
+                <Link to="/Login">Mute 회원가입이 완료되었습니다.</Link>
                 {modalOpenSignUp && <Modal open={modalOpenSignUp} close={closeModalSignUp} header="확인">회원가입에 실패했습니다. 다시 확인해주세요.</Modal>}
             </div>
         </>
