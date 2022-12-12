@@ -14,6 +14,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -34,7 +35,7 @@ public class MusicalDetailApiService {
     @Autowired
     MusicalRepository musicalRepository;
 
-    public String MusicalDetailApi() {
+    public String MusicalDetailApi(@PathVariable String mt20id) {
 
         RestTemplate rest = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
@@ -44,7 +45,7 @@ public class MusicalDetailApiService {
         UriComponents uri = UriComponentsBuilder
                 .fromUriString("https://www.kopis.or.kr")
                 .path("/openApi/restful/pblprfr/")
-                .path("PF202217") // 뮤지컬 id (임시 : 베토벤 id)
+                .path(mt20id) // 뮤지컬 id (임시 : 베토벤 id)
                 .queryParam("service", key) // 인증키
                 .encode() // utf-8 로 인코딩
                 .build();
@@ -84,65 +85,3 @@ public class MusicalDetailApiService {
         return list;
     }
 }
-
-
-
-
-
-
-
-
-//        // DTO에 MAP형식으로 저장하기
-//        Map<String, String> map = new HashMap<>();
-//        Map<String, String> map2 = new HashMap<>();
-//
-//        ObjectMapper mapper = new ObjectMapper();
-//        MusicalDetailDTO musicalDetailDTO = mapper.convertValue(jsonObj2.toMap(), MusicalDetailDTO.class);
-//        MusicalDetailDTO musicalDetailDTO2 = mapper.convertValue(jsonParseObj.toMap(), MusicalDetailDTO.class);
-//        for(String key : map.keySet()) {
-//            musicalDetailDTO.setMusicalId(map.get("mt20id"));
-//            musicalDetailDTO.setMusicalName(map.get("prfnm"));
-//            musicalDetailDTO.setTheaterName(map.get("fcltynm"));
-//            musicalDetailDTO.setTheaterId(map.get("mt10id"));
-//            musicalDetailDTO.setMusicalStart(LocalDate.parse(map.get("prfpdfrom")));
-//            musicalDetailDTO.setMusicalEnd(LocalDate.parse(map.get("prfpdto")));
-//            musicalDetailDTO.setMusicalStatus(map.get("prfstate"));
-//            musicalDetailDTO.setMusicalPoster(map.get("poster"));
-//            musicalDetailDTO.setMusicalCast(map.get("prfcast"));
-//            musicalDetailDTO.setMusicalAge(map.get("prfage"));
-//            musicalDetailDTO.setMusicalPrice(map.get("pcseguidance"));
-//            musicalDetailDTO.setMusicalPlan(map.get("dtguidance"));
-//
-//            for(String key2 : map2.keySet()) {
-//                musicalDetailDTO2.setMusicalDescImg(map2.get(key2));
-//            }
-//        } return map ;
-//
-//
-//        try {
-//            map = new ObjectMapper().readValue(jsonObj2.toString(), Map.class);
-//            map2 = new ObjectMapper().readValue(jsonParseObj.toString(), Map.class);
-//
-//            for(String key : map.keySet()) {
-//                musicalDetailDTO.setMusicalId(map.get("mt20id"));
-//                musicalDetailDTO.setMusicalName(map.get("prfnm"));
-//                musicalDetailDTO.setTheaterName(map.get("fcltynm"));
-//                musicalDetailDTO.setTheaterId(map.get("mt10id"));
-//                musicalDetailDTO.setMusicalStart(LocalDate.parse(map.get("prfpdfrom")));
-//                musicalDetailDTO.setMusicalEnd(LocalDate.parse(map.get("prfpdto")));
-//                musicalDetailDTO.setMusicalStatus(map.get("prfstate"));
-//                musicalDetailDTO.setMusicalPoster(map.get("poster"));
-//                musicalDetailDTO.setMusicalCast(map.get("prfcast"));
-//                musicalDetailDTO.setMusicalAge(map.get("prfage"));
-//                musicalDetailDTO.setMusicalPrice(map.get("pcseguidance"));
-//                musicalDetailDTO.setMusicalPlan(map.get("dtguidance"));
-//
-//                for(String key2 : map2.keySet()) {
-//                    musicalDetailDTO.setMusicalDescImg(map2.get(key2));
-//                }
-//            }
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return map;

@@ -39,7 +39,7 @@ public class MusicalDetailDTO {
         this.musicalCast = item.getString("prfcast");
         this.musicalAge = item.getString("prfage");
         this.musicalPrice = item.getString("pcseguidance");
-    //        this.musicalDescImg = item.getString("styurl");
+//        this.musicalDescImg = item.getString("styurls");
         this.musicalPlan = item.getString("dtguidance");
     }
 }

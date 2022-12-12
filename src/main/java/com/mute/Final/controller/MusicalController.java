@@ -66,9 +66,9 @@ public class MusicalController {
     }
 
     // 선택한 뮤지컬 상세정보 불러오기
-    @GetMapping("/musical/result")
-    public List<MusicalDetailDTO> getMusicalDetail() {
-        String result = musicalDetailApiService.MusicalDetailApi();
+    @GetMapping("/musical/{mt20id}")
+    public List<MusicalDetailDTO> getMusicalDetail(@PathVariable String mt20id) {
+        String result = musicalDetailApiService.MusicalDetailApi(mt20id);
         return musicalDetailApiService.getMapFromJsonObj(result);
     }
 
