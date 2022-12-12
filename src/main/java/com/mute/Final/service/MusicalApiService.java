@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.XML;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,9 @@ import java.util.List;
 @Slf4j
 @Component
 public class MusicalApiService {
-    private String key="5a64fe18bbc04f6aaedbedbe0e9dfa13";
+
+    @Value("${api.serviceKey}")
+    private String key;
 
     @Autowired
     MusicalRepository musicalRepository;
@@ -43,7 +46,7 @@ public class MusicalApiService {
                 .queryParam("stdate", 20230101) // 공연시작일 (필수)
                 .queryParam("eddate", 20230401) // 공연종료일 (필수)
                 .queryParam("cpage", 1) // 현재 페이지 (필수)
-                .queryParam("rows", 70) // 페이지 당 목록 수 (필수)
+                .queryParam("rows", 80) // 페이지 당 목록 수 (필수)
                 .queryParam("signgucode", 11) // 지역코드(11 = 서울)
                 .queryParam("shcate", "AAAB") // 장르코드(AAAB = 뮤지컬)
                 .encode() // utf-8 로 인코딩
