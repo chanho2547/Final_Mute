@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.json.XML;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -27,7 +28,8 @@ import java.util.Map;
 @Slf4j
 public class MusicalDetailApiService {
 
-    private String key="5a64fe18bbc04f6aaedbedbe0e9dfa13";
+    @Value("${api.serviceKey}")
+    private String key;
 
     @Autowired
     MusicalRepository musicalRepository;
