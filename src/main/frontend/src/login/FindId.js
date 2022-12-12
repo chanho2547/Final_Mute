@@ -43,9 +43,8 @@ const FindId = () =>{
         const res = await MuteApi.researchId(inputName, inputMail, "Type_ID");
         console.log(res.data);
         if(res.data){
-            setFindId()
             setModalOpen(true);
-            setComment("찾으신 아이디는 [" + res.data.id + "] 입니다.");
+            setComment("찾으신 아이디는 [" + res.data.userId + "] 입니다.");
         } else {
             setModalOpen(true);
             setComment("아이디가 없습니다.")
@@ -79,7 +78,7 @@ const FindId = () =>{
                 <Link to="/Login" className="link_item">로그인</Link>
                 <Link to="/FindPwd" className="link_item">비밀번호 찾기</Link>
             </div>
-            {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">{findId}</Modal>}
+            {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">{comment}</Modal>}
         </>
     );
 }
