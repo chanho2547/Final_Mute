@@ -1,13 +1,11 @@
 package com.mute.Final.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.json.JSONObject;
 
 import javax.persistence.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Getter @Setter @ToString

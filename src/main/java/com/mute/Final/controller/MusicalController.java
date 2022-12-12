@@ -7,6 +7,8 @@ import com.mute.Final.service.MusicalDetailApiService;
 import com.mute.Final.service.MusicalService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONObject;
+import org.json.simple.parser.ParseException;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 @Transactional
@@ -63,10 +66,10 @@ public class MusicalController {
     }
 
     // 선택한 뮤지컬 상세정보 불러오기
-//    @GetMapping("/musical/{musicalID}")
-//    public Map<String, Object> getMusicalDetail(@PathVariable String musicalID) {
-//        String result = musicalDetailApiService.MusicalDetailApi();
-//        return musicalDetailApiService.getMapFromJsonObj(result);
-//    }
+    @GetMapping("/musical/result")
+    public List<MusicalDetailDTO> getMusicalDetail() {
+        String result = musicalDetailApiService.MusicalDetailApi();
+        return musicalDetailApiService.getMapFromJsonObj(result);
+    }
 
 }

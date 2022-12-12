@@ -1,17 +1,11 @@
 package com.mute.Final.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mute.Final.dto.MusicalDTO;
 import com.mute.Final.dto.MusicalDetailDTO;
-import com.mute.Final.entity.Musical;
 import com.mute.Final.repository.MusicalRepository;
-import org.json.JSONArray;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.json.XML;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -19,13 +13,10 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,6 +24,7 @@ import java.util.Map;
 
 @Service
 @Component
+@Slf4j
 public class MusicalDetailApiService {
 
     private String key="5a64fe18bbc04f6aaedbedbe0e9dfa13";
@@ -60,47 +52,95 @@ public class MusicalDetailApiService {
         return response;
     }
 
-    public Map<String, Object> getMapFromJsonObj(JSONObject jsonObject) throws ParseException {
+    public List<MusicalDetailDTO> getMapFromJsonObj(String result) {
 
-        Map<String, Object> map = new HashMap<>();
-        Map<String, Object> map2 = new HashMap<>();
+        List<MusicalDetailDTO> list = new ArrayList<>();
 
-        // xml 데이터를 json 데이터로 변환
-        JSONObject xmlToJson = XML.toJSONObject(String.valueOf(jsonObject));
-
-        // JSONObject로 데이터 가져오기
-        JSONObject jsonObj = xmlToJson.getJSONObject("dbs");
-
-        // JSONObject로 가져오기
-        JSONObject jsonObj2 = jsonObj.getJSONObject("db");
-
-        // 상세이미지 저장하기 위해 파싱
-        JSONParser jsonParser = new JSONParser();
-        JSONObject jsonParseObj = (JSONObject) jsonParser.parse("styurls");
-
-
-        // DTO에 MAP형식으로 저장하기 => 수정필요!
         try {
-            map = new ObjectMapper().readValue(jsonObj2.toString(), Map.class);
-            map2 = new ObjectMapper().readValue(jsonParseObj.toString(), Map.class);
-//            MusicalDetailDTO musicalDetailDTO = new MusicalDetailDTO();
-//            musicalDetailDTO.setMusicalId((String) map.get("mt20id"));
-//            musicalDetailDTO.setMusicalName((String) map.get("prfnm"));
-//            musicalDetailDTO.setMusicalDescImg((String) map2.get("styurl"));
+            // xml 데이터를 json 데이터로 변환
+            JSONObject xmlToJson = XML.toJSONObject(result);
+            // JSONObject로 데이터 가져오기
+            JSONObject jsonObj = xmlToJson.getJSONObject("dbs");
+            // JSONObject로 가져오기
+            JSONObject item = jsonObj.getJSONObject("db");
+            // 상세이미지 가져오기.. 못가져옴
+            JSONObject item2 = item.getJSONObject("styurls");
 
-//            Musical musical = new Musical(item2);
-//            musicalRepository.save(musical);
+            // DTO에 저장하기
+            MusicalDetailDTO musicalDetailDTO = new MusicalDetailDTO(item);
+            list.add(musicalDetailDTO);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            log.warn(musicalDetailDTO.toString());
 
-//        // DB에 저장하기
-//        for (int i = 0; i < jsonArr.length(); i++) {
-//            JSONObject item = (JSONObject) jsonArr.get(i);
+//            // DB에 저장하기
 //            Musical musical = new Musical(item);
 //            musicalRepository.save(musical);
-//        }
-        return map;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 }
+
+
+
+
+
+
+
+
+//        // DTO에 MAP형식으로 저장하기
+//        Map<String, String> map = new HashMap<>();
+//        Map<String, String> map2 = new HashMap<>();
+//
+//        ObjectMapper mapper = new ObjectMapper();
+//        MusicalDetailDTO musicalDetailDTO = mapper.convertValue(jsonObj2.toMap(), MusicalDetailDTO.class);
+//        MusicalDetailDTO musicalDetailDTO2 = mapper.convertValue(jsonParseObj.toMap(), MusicalDetailDTO.class);
+//        for(String key : map.keySet()) {
+//            musicalDetailDTO.setMusicalId(map.get("mt20id"));
+//            musicalDetailDTO.setMusicalName(map.get("prfnm"));
+//            musicalDetailDTO.setTheaterName(map.get("fcltynm"));
+//            musicalDetailDTO.setTheaterId(map.get("mt10id"));
+//            musicalDetailDTO.setMusicalStart(LocalDate.parse(map.get("prfpdfrom")));
+//            musicalDetailDTO.setMusicalEnd(LocalDate.parse(map.get("prfpdto")));
+//            musicalDetailDTO.setMusicalStatus(map.get("prfstate"));
+//            musicalDetailDTO.setMusicalPoster(map.get("poster"));
+//            musicalDetailDTO.setMusicalCast(map.get("prfcast"));
+//            musicalDetailDTO.setMusicalAge(map.get("prfage"));
+//            musicalDetailDTO.setMusicalPrice(map.get("pcseguidance"));
+//            musicalDetailDTO.setMusicalPlan(map.get("dtguidance"));
+//
+//            for(String key2 : map2.keySet()) {
+//                musicalDetailDTO2.setMusicalDescImg(map2.get(key2));
+//            }
+//        } return map ;
+//
+//
+//        try {
+//            map = new ObjectMapper().readValue(jsonObj2.toString(), Map.class);
+//            map2 = new ObjectMapper().readValue(jsonParseObj.toString(), Map.class);
+//
+//            for(String key : map.keySet()) {
+//                musicalDetailDTO.setMusicalId(map.get("mt20id"));
+//                musicalDetailDTO.setMusicalName(map.get("prfnm"));
+//                musicalDetailDTO.setTheaterName(map.get("fcltynm"));
+//                musicalDetailDTO.setTheaterId(map.get("mt10id"));
+//                musicalDetailDTO.setMusicalStart(LocalDate.parse(map.get("prfpdfrom")));
+//                musicalDetailDTO.setMusicalEnd(LocalDate.parse(map.get("prfpdto")));
+//                musicalDetailDTO.setMusicalStatus(map.get("prfstate"));
+//                musicalDetailDTO.setMusicalPoster(map.get("poster"));
+//                musicalDetailDTO.setMusicalCast(map.get("prfcast"));
+//                musicalDetailDTO.setMusicalAge(map.get("prfage"));
+//                musicalDetailDTO.setMusicalPrice(map.get("pcseguidance"));
+//                musicalDetailDTO.setMusicalPlan(map.get("dtguidance"));
+//
+//                for(String key2 : map2.keySet()) {
+//                    musicalDetailDTO.setMusicalDescImg(map2.get(key2));
+//                }
+//            }
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return map;

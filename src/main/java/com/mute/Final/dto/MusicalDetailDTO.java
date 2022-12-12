@@ -2,6 +2,7 @@ package com.mute.Final.dto;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.json.JSONObject;
 
 import java.time.LocalDate;
 
@@ -22,8 +23,25 @@ public class MusicalDetailDTO {
     private String musicalDescImg; // 상세이미지
     private String musicalPlan; // 공연 스케줄(화요일(19:30), 수요일(14:30,19:30), 목요일(19:30), 금요일 ~ 토요일(14:30,19:30), 일요일(15:00))
 
+//     api DTO에 저장
+    public MusicalDetailDTO (JSONObject item) {
+        String tmp1 = item.getString("prfpdfrom");
+        String tmp2 = item.getString("prfpdto");
 
-
+        this.musicalId = item.getString("mt20id");
+        this.musicalName = item.getString("prfnm");
+        this.theaterName = item.getString("fcltynm");
+        this.theaterId = item.getString("mt10id");
+        this.musicalStart = LocalDate.parse(tmp1.replace(".", "-"));
+        this.musicalEnd = LocalDate.parse(tmp2.replace(".", "-"));
+        this.musicalStatus = item.getString("prfstate");
+        this.musicalPoster = item.getString("poster");
+        this.musicalCast = item.getString("prfcast");
+        this.musicalAge = item.getString("prfage");
+        this.musicalPrice = item.getString("pcseguidance");
+    //        this.musicalDescImg = item.getString("styurl");
+        this.musicalPlan = item.getString("dtguidance");
+    }
 }
 
 //<dbs>
