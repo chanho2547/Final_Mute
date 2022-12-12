@@ -21,6 +21,8 @@ import Agree from "./login/Agree";
 import SignCom from "./login/SignCom";
 import FindId from "./login/FindId";
 import MyPage from "./mypage/Mypage";
+import Search from './theaterInfo/Search';
+import FindPwd from './login/FindPwd';
 
 function App() {
   return (
@@ -47,6 +49,8 @@ function App() {
         <Route path='/Agree' element={<Agree/>} />
         <Route path='/SignCom' element={<SignCom />} />
         <Route path='/FindId' element={<FindId />} />
+        <Route path='/Search' element={<Search/>} />
+        <Route path='/FindPwd' element={<FindPwd/>} />
       </Routes>
       <Footer/>
     </Router>

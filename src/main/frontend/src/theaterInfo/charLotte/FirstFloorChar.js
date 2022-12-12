@@ -254,7 +254,7 @@ const onClickSeat = (event) => {
         // seatInfoMode가 NONE인 경우 => 도연언니
         else {}
 
-    },[seatReviewInfo])
+    },[])
 
     //let newArr = JSON.parse(window.localStorage.getItem('selectedSeats'));
     //let selectedList = newArr.map((arr)=>(<h1>{arr}</h1>));

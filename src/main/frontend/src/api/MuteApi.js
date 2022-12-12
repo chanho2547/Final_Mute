@@ -151,7 +151,17 @@ const MuteApi =  {
             pwdCheck: pwdCheck
         }
         return await axios.post("", rePwdObj)
+    },
+
+    // 공연장 검색
+    searchTheater: async function(theaterWord) {
+        const theaterName = {
+            theaterName : theaterWord
+        }
+        return await axios.get("/theater/search", theaterName)
     }
+
+    // 뮤지컬 검색
 
 }
 
