@@ -46,13 +46,17 @@ const ReviewTotal = (props) => {
         console.log("연출 별점" + scoreDirect);
         console.log("캐스팅 별점" + scoreCast);
         console.log("넘버 별점" + scoreNumber);
+        console.log("평균 별점" + scoreAvgTotal);
+  
     
         try {
-            const res = await MuteApi.WriteTotal(scoreStory, scoreDirect, scoreCast, scoreNumber, totalReview);
+            const res = await MuteApi.WriteTotal(scoreStory, scoreDirect, scoreCast, scoreNumber, scoreAvgTotal, totalReview);
 
             if(res.data === true) {
                 console.log("텍스트 입력 성공");
                 setModelText(true);
+                
+  
             } else {
                 console.log("텍스트 입력 실패");
             }
@@ -79,27 +83,15 @@ const ReviewTotal = (props) => {
     const highFunction4 = (text) => {
         console.log("넘버 별점 가져온 값 : " + text);
         setScoreNumber(text);
+
+        // 별점 평균
+    const arr = [scoreStory, scoreDirect, scoreCast, scoreNumber];
+    const avg = arr.reduce((a, c) => a + c) / arr.length
+    console.log("평균 값 : " + avg);
+    setScoreAvgTotal(avg);
     }
-;
-
-    // // 별점 총점 계산
-    // parseInt(setScoreStory);
-    // parseInt(setScoreDirect);
-    // parseInt(setScoreCast);
-    // parseInt(setScoreNumber);
-    
 
     
-
-    const total = setScoreStory + setScoreDirect + setScoreCast + setScoreNumber;
-
-    console.log("total 값 확인 :" + total);
-
-    // // const total = (text) => {
-    // //     setScoreAvgTotal((a + b + c + d) / 4);
-    // //     console.log("토탈:" + setScoreAvgTotal);
-    // // }
-
 
     const onChangeTotalReview = (e) => {
         setTotalReview(e.target.value)

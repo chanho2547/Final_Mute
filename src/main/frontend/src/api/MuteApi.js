@@ -43,7 +43,7 @@ const MuteApi =  {
             scoreAvgTotal : scoreAvgTotal, // 뮤지컬 총평 별점 총점
             reviewMuTxt : totalReview // 뮤지컬 총평 후기 텍스트
         }
-        return await axios.post( "review/writeTotal", reviewObj);
+        return await axios.post("review/writeTotal", reviewObj);
     },
 
      // 좌석 후기 작성 - 도연
