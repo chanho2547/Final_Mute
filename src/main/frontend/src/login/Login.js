@@ -59,7 +59,7 @@ const Login = () => {
     // API호출
     const onClickLogin = async() => {
         try {
-            const res = awaitMuteApi.Login(inputId, inputPwd);
+            const res = await MuteApi.Login(inputId, inputPwd);
             console.log(res.data);
 
             if(res.data === 200) {

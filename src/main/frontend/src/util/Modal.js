@@ -17,7 +17,7 @@ const Modal = (props) => {
 
     // 회원 탈퇴
     const onClickMemDelete = async() => { // 탈퇴한다고 했을때
-        awaitMuteApi.memberDelete(localId);
+        await MuteApi.memberDelete(localId);
         window.localStorage.setItem("userId", "");
         window.localStorage.setItem("userPwd", "");
         window.localStorage.setItem("isLogin", "false")

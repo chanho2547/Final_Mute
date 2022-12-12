@@ -50,7 +50,7 @@ const SignUp = () => {
     const IdCheck = async() => {
         // 가입 여부 확인
         try {
-            const memberCheck = awaitMuteApi.memberJoinCheck(inputId, "TYPE_ID");
+            const memberCheck = await MuteApi.memberJoinCheck(inputId, "TYPE_ID");
             if(memberCheck.data && isId) {
                 //setIdMsg("사용가능합니다.");
                 setModalOpenIdOK(true);
@@ -116,7 +116,7 @@ const SignUp = () => {
 
     const phoneCheck = async() => {
         // 가입 여부 확인
-        const memberCheck = awaitMuteApi.memberJoinCheck(inputPhone, "TYPE_PHONE");
+        const memberCheck = await MuteApi.memberJoinCheck(inputPhone, "TYPE_PHONE");
         if (memberCheck.data) {
             setPhoneMsg("사용가능한 전화번호입니다.");
         } else {
@@ -161,7 +161,7 @@ const SignUp = () => {
     }
     const mailCheck = async() => {
         // 가입 여부 확인
-        const memberCheck = awaitMuteApi.memberJoinCheck(inputMail, "TYPE_MAIL");
+        const memberCheck = await MuteApi.memberJoinCheck(inputMail, "TYPE_MAIL");
         if (memberCheck.data && isMail) {
             setMailMsg("사용가능한 Mail입니다.")
         } else {
@@ -171,7 +171,7 @@ const SignUp = () => {
     }
     // 이메일 인증번호 받기
     const getAuth = async() => {
-        const mailAuth = awaitMuteApi.mailAuth(inputMail);
+        const mailAuth = await MuteApi.mailAuth(inputMail);
         setServerAuth(mailAuth.data);
     }
     // 이메일 인증번호 확인하기
@@ -215,7 +215,7 @@ const SignUp = () => {
 
     // 회원가입
     const onClickJoin = async() => {
-        const memberReg = awaitMuteApi.signUp(inputId, inputPwd, inputName, inputMail, inputPhone, enroll_company.address);
+        const memberReg = await MuteApi.signUp(inputId, inputPwd, inputName, inputMail, inputPhone, enroll_company.address);
         if(memberReg.data) {
             console.log("Mute 회원가입이 완료되었습니다.")
             navigate('/Login');
