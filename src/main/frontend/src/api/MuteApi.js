@@ -9,6 +9,7 @@ const MuteApi =  {
         }
         return await axios.post( "member/login", loginObj);
     },
+    
     // 회원가입
     signUp: async function(userId, pwd, name, mail, phone, addr) {
         console.log("이메일 : " + mail);
@@ -98,7 +99,8 @@ const MuteApi =  {
     musicalList: async function() {
         return await axios.get( "musical/list");
     },
-// Id 찾기
+    
+    // Id 찾기
     researchId: async function (uni, name, type) {
         const reg = {
             uni: uni,
@@ -107,7 +109,8 @@ const MuteApi =  {
         };
         return await axios.post("member/find_id", reg);
     },
-// PWD 찾기
+    
+    // PWD 찾기
     researchPwd: async function (uni, mail, type) {
         const reg = {
             uni: uni,
@@ -116,6 +119,7 @@ const MuteApi =  {
         }
         return await axios.post("member/find_pwd", reg);
     },
+
     // 비밀번호 재설정
     rePwd: async function(id, pwd) {
         const rePwdObj = {
@@ -132,6 +136,7 @@ const MuteApi =  {
         };
         return await axios.post("delete_mem", reg);
     },
+
     // 좌석 후기 평균 별점
     seatReviewAvg: async function() {
         return await axios.get("reviewSeat/avg/test");
@@ -151,9 +156,21 @@ const MuteApi =  {
             theaterName : theaterWord
         }
         return await axios.get("/theater/search", theaterName)
-    }
+    },
 
     // 뮤지컬 검색
+
+
+
+
+
+    // 선택된 뮤지컬 상세정보 불러오기
+    musicalDetail: async function(mt20id) {
+        const musicalId = {
+            musicalId : mt20id
+        }
+        return await axios.get("/musical/detail", musicalId);
+    },
 
 }
 

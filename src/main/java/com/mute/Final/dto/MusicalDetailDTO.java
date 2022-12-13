@@ -45,6 +45,8 @@ public class MusicalDetailDTO {
 //        this.musicalDescImg1 = item.getString("styurl");
 //        this.musicalDescImg2 = item.getString("styurl");
 //        this.musicalDescImg3 = item.getString("styurl");
+//        this.musicalDescImg4 = item.getString("styurl");
+
         this.musicalPlan = item.getString("dtguidance");
     }
 }

@@ -46,7 +46,7 @@ public class MusicalDetailApiService {
         UriComponents uri = UriComponentsBuilder
                 .fromUriString("https://www.kopis.or.kr")
                 .path("/openApi/restful/pblprfr/")
-                .path(mt20id) // 뮤지컬 id (임시 : 베토벤 id)
+                .path(mt20id) // 뮤지컬 id
                 .queryParam("service", key) // 인증키
                 .encode() // utf-8 로 인코딩
                 .build();
@@ -68,9 +68,9 @@ public class MusicalDetailApiService {
             // JSONObject로 가져오기
             JSONObject item = jsonObj.getJSONObject("db");
 
-            // 상세이미지 가져오기.. 못가져옴
-            JSONObject item2 = item.getJSONObject("styurls");
-
+//            // 상세이미지 가져오기.. 못가져옴
+//            JSONObject item2 = item.getJSONObject("styurls");
+//
 //            JSONArray item2 = item.getJSONArray("styurls");
 //            String str = item2.toString();
 //            String[] splitImgUrl = str.split(",");
@@ -82,6 +82,44 @@ public class MusicalDetailApiService {
 //            log.warn(item2.toString());
 //            JSONArray item3 = item2.getJSONArray("styurl");
 //            log.error(item3.toString());
+
+            // 상세이미지 가져오기.. 못가져옴ㅠㅠ
+            JSONObject item2 = item.getJSONObject("styurls");
+            JSONArray jsonArr = item2.getJSONArray("styurl");
+
+            String arrStr = jsonArr.toString();
+
+            log.warn("styurl ToString확인 :: " + arrStr);
+
+            //arrStr = arrStr.split(",");
+
+            //log.error("split확인 :: " + strSplit);
+//            String tmp1 = arrStr.replace("[", "");
+//            String tmp2 = arrStr.replace("]", "");
+//            JSONArray jsonArr = new JSONArray(Arrays.asList(arrStr));
+
+//            for(String s : arrayStr) {
+//                String musicalDescImg1 = arrayStr[0];
+//                String musicalDescImg2 = arrayStr[1];
+////                String musicalDescImg3 = arrayStr[2];
+////                String musicalDescImg4 = arrayStr[3];
+//
+////                musicalDescImg2 = musicalDescImg2.substring(0, musicalDescImg2.length() - 1);
+//
+////                musicalDescImg1 = musicalDescImg1.replace("[", "");
+////                musicalDescImg2 = musicalDescImg2.replace("]", "");
+////                String tmp3 = musicalDescImg3.replace("]", "");
+////                String tmp4 = musicalDescImg4.replace("]", "");
+//
+//                log.warn("이미지주소확인" + s);
+//
+//
+//            }
+
+
+
+
+
 
             // DTO에 저장하기
             MusicalDetailDTO musicalDetailDTO = new MusicalDetailDTO(item);
