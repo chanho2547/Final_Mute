@@ -154,15 +154,19 @@ public class MemberService {
 
     // 비밀번호 찾기 시 새 비밀번호 설정
     public boolean regNewPwd(String userId, String pwd) {
+        log.info("userId : " + userId);
+        log.info("pwd : " + pwd);
         try{
             Member member = memberRepository.findByUserId(userId);
             member.setPwd(pwd);
+            log.warn(member.getUserNum().toString());
             Member rst = memberRepository.save(member);
-            log.warn(rst.toString());
+            if(rst != null) return true;
+            else return false;
+
         } catch(Exception e) {
             return false;
         }
-        return true;
     }
 
     // 회원탈퇴

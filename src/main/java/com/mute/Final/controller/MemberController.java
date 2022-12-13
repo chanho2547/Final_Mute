@@ -100,6 +100,9 @@ public class MemberController {
         String id = newPwd.get("id");
         String pwd = newPwd.get("pwd");
 
+        log.error("userId : " + id);
+        log.error("pwd : " + pwd);
+
         boolean result = memberService.regNewPwd(id, pwd);
         if(result) {
             return new ResponseEntity(true, HttpStatus.OK);
