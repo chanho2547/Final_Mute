@@ -3,26 +3,27 @@ import FirstFloorChung from "../theaterInfo/chungmuArt/FirstFloorChung";
 import { useEffect, useState } from "react";
 import { BsSearch } from 'react-icons/bs';
 import MuteApi from "../api/MuteApi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SeatView = () => {
+const navigate = useNavigate();
+
     // useEffect(()=>{
     //     window.localStorage.setItem("seatInfoMode","후기");
     // },[])
 
 // 공연장 검색창
-const [input, setInput] = useState("");
+const [inputTheater, setInputTheater] = useState("");
 
 // 공연장 검색창 입력
 const onChangeInput = (e) => {
-    setInput(e.target.value)
+    setInputTheater(e.target.value)
 };
 
 // 검색창 Api
 const onClickInput = async() => {
-    window.localStorage.setItem("input", input)
-    // Link to = "/Search"
-    // window.localStorage.replace("/Search");
+    window.localStorage.setItem("inputTheater", inputTheater);
+    navigate("/TheaterSearch")
 }
 
 // const highFunction = (e) => {
@@ -33,7 +34,7 @@ const onClickInput = async() => {
     return(
         <>
         <input onChange={onChangeInput} placeholder="극장을 검색하세요"/>
-        <button type="button" onClick={onClickInput}><Link to = "/Search">웅..</Link><BsSearch/></button>
+        <button type="button" onClick={onClickInput}><BsSearch/></button>
         {/* <FirstFloorChar propsFunction={highFunction}/> */}
         </>
     )

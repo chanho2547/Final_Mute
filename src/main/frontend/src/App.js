@@ -21,7 +21,8 @@ import Agree from "./login/Agree";
 import SignCom from "./login/SignCom";
 import FindId from "./login/FindId";
 import MyPage from "./mypage/Mypage";
-import Search from './theaterInfo/Search';
+import TheaterSearch from './theaterInfo/TheaterSearch';
+import MusicalSearch from './musical/MusicalSearch';
 import FindPwd from './login/FindPwd';
 import TheaterChar from './theaterInfo/TheaterChar';
 import TheaterChung from './theaterInfo/TheaterChung';
@@ -54,7 +55,8 @@ function App() {
         <Route path='/Agree' element={<Agree/>} />
         <Route path='/SignCom' element={<SignCom />} />
         <Route path='/FindId' element={<FindId />} />
-        <Route path='/Search' element={<Search/>} />
+        <Route path='/TheaterSearch' element={<TheaterSearch/>} />
+        <Route path='/MusicalSearch' element={<MusicalSearch/>} />
         <Route path='/FindPwd' element={<FindPwd/>} />
         <Route path='/TheaterChar' element={<TheaterChar/>} />
         <Route path='/TheaterChung' element={<TheaterChung/>} />
