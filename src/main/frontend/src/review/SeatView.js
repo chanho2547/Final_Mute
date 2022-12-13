@@ -2,7 +2,7 @@ import FirstFloorChar from "../theaterInfo/charLotte/FirstFloorChar";
 import FirstFloorChung from "../theaterInfo/chungmuArt/FirstFloorChung";
 import { useEffect, useState } from "react";
 import { BsSearch } from 'react-icons/bs';
-import MuteApi from "../../api/MuteApi";
+import MuteApi from "../api/MuteApi";
 
 const SeatView = () => {
     useEffect(()=>{
