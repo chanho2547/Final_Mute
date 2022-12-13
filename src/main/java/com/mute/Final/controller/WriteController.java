@@ -10,7 +10,7 @@ import java.util.Map;
 
 //@CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping(value="/review", method= {RequestMethod.GET, RequestMethod.POST})
+@RequestMapping(value="/review", method= {RequestMethod.POST})
 public class WriteController {
     // Service 로직 연결
     private WriteService writeService;
@@ -20,7 +20,7 @@ public class WriteController {
     }
 
     // 총평 후기 작성
-    @PostMapping("/writeTotal")
+    @GetMapping("/writeTotal")
     public ResponseEntity<Boolean> writeTotal(@RequestBody Map<String, String> writeTotalData) {
         String userNum = writeTotalData.get("userNum");
         String musicalId = writeTotalData.get("musicalId");
@@ -42,7 +42,7 @@ public class WriteController {
     }
 
     // 좌석 후기 작성
-    @PostMapping("/writeSeat")
+    @GetMapping("/writeSeat")
     public ResponseEntity<Boolean> writeSeat(@RequestBody Map<String, String> writeSeatData) {
         String userNum = writeSeatData.get("userNum");
         String musicalId = writeSeatData.get("musicalId");
