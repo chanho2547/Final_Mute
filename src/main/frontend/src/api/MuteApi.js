@@ -168,6 +168,19 @@ const MuteApi =  {
         return await axios.get(`/musical/${mt20id}`, musicalId);
     },
 
+    insertTicket: async function(seatNum, seatPos, seeDate, ticketDate, userNum, musicalId, paymentId) {
+        const ticketObj = {
+            seatNum: seatNum,
+            seatPos: seatPos,
+            seeDate: seeDate,
+            ticketDate: ticketDate,
+            userNum: userNum,
+            musicalId: musicalId,
+            paymentId : paymentId
+        }
+        return await axios.post("ticket/insert", ticketObj);
+    }
+
 }
 
 export default MuteApi;
