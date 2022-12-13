@@ -1,4 +1,5 @@
 import axios from "axios";
+import { async } from "q";
 
 const MuteApi =  {
 
@@ -179,6 +180,18 @@ const MuteApi =  {
             paymentId : paymentId
         }
         return await axios.post("ticket/insert", ticketObj);
+    },
+    
+    openedMusical: async function() {
+        return await axios.get("/musical/openedMusical");
+    },
+
+    openBeforeMusical: async function() {
+        return await axios.get("/musical/openBeforeMusical");
+    },
+
+    musicalRanking: async function() {
+        return await axios.get("/reviewMusical/starRanking");
     }
 
 }
