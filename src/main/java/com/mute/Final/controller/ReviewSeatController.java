@@ -29,7 +29,7 @@ public class ReviewSeatController {
         return new ResponseEntity(list, HttpStatus.OK);
     }
 
-    @GetMapping("/reviewSeat/avg/test")
+    @GetMapping("/reviewSeat/all")
     public ResponseEntity<List<ReviewSeatAvg>> reviewSeatAvgTest() {
         List<ReviewSeatAvgDTO> list = reviewSeatService.getReviewAvgList();
         return new ResponseEntity(list,HttpStatus.OK);

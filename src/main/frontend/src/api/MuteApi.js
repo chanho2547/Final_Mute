@@ -139,7 +139,7 @@ const MuteApi =  {
 
     // 좌석 후기 평균 별점
     seatReviewAvg: async function() {
-        return await axios.get("reviewSeat/avg/test");
+        return await axios.get("reviewSeat/all");
     },
 
     // 좌석별 후기
@@ -151,18 +151,14 @@ const MuteApi =  {
     },
 
     // 공연장 검색
-    searchTheater: async function(theaterWord) {
-        const theaterName = {
-            theaterName : theaterWord
-        }
-        return await axios.get("/theater/search", theaterName)
+    searchTheater: async function(inputTheater) {
+        return await axios.get(`/theater/search?theaterName=${inputTheater}`);
     },
 
     // 뮤지컬 검색
-
-
-
-
+    searchMusical: async function(inputMusical) {
+        return await axios.get(`/musical/search?musicalName=${inputMusical}`);
+    },
 
     // 선택된 뮤지컬 상세정보 불러오기
     musicalDetail: async function(mt20id) {
