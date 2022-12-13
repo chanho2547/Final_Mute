@@ -26,6 +26,7 @@ import FindPwd from './login/FindPwd';
 import TheaterChar from './theaterInfo/TheaterChar';
 import TheaterChung from './theaterInfo/TheaterChung';
 import RePwd from "./login/RePwd";
+import MusicalListTmp from './musical/MusicalListTmp';
 
 function App() {
   return (
@@ -48,7 +49,8 @@ function App() {
         <Route path='/SeatView' element={<SeatView />} />
         <Route path='/MyPage' element={<MyPage />} />
         <Route path='/Membership' element={<Membership/>} />
-        <Route path='/MusicalDetail' element={<MusicalDetail/>}></Route>
+        <Route path='/MusicalDetail' element={<MusicalDetail/>}/>
+        <Route path='/MusicalListTmp' element={<MusicalListTmp/>}/>
         <Route path='/Agree' element={<Agree/>} />
         <Route path='/SignCom' element={<SignCom />} />
         <Route path='/FindId' element={<FindId />} />
