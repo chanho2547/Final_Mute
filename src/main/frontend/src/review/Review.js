@@ -4,7 +4,8 @@ import styled from "styled-components";
 import ReviewList from "./ReviewList";
 import ReviewTotal from "./ReviewTotal";
 import ReviewSeat from "./ReviewSeat";
-import Theater from "../theaterInfo/Theater";
+import Theater from "../theaterInfo/TheaterChar";
+import TheaterChar from "../theaterInfo/TheaterChar";
 
 // 후기 탭 전체 틀 - 도연 작업 중
 
@@ -61,7 +62,7 @@ const Review = () => {
             {count === -2 ? <Theater /> : null }
             {count === -1 ? <ReviewTotal /> : null } */}
             {count === 0 ? <ReviewList propFunction={highFunction}/> : null} 
-            {count === 1 ? <Theater propFunction={highFunction}/> : null}
+            {count === 1 ? <TheaterChar propFunction={highFunction}/> : null}
             {count === 2 ? <ReviewTotal propFunction={highFunction}/> : null}
             {count === 3 ? <ReviewSeat propFunction={highFunction}/> : null}
             {/* {count === 4 ? setCount(0) : null} */}

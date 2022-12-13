@@ -1,13 +1,8 @@
 
 
-
-
-
-
 const Pay = (props) => {
-    let seatAndGrade = props.seat;
-    let typeofSeat = typeof props.seat;
-
+    // let seatAndGrade = props.seat;
+    // let typeofSeat = typeof props.seat;
 
     return(
         <>
@@ -16,10 +11,6 @@ const Pay = (props) => {
             <p>좌석전체 : {props.seat} </p>
             {props.seat[0]}
             {props.seat[1]}
-            {props.seat.map(e => {
-                <p>좌석 목록 : {e}</p>
-            })}
-          
             <p>날짜 : {props.date}</p>
         </>
     );

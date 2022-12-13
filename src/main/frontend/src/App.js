@@ -23,6 +23,8 @@ import FindId from "./login/FindId";
 import MyPage from "./mypage/Mypage";
 import Search from './theaterInfo/Search';
 import FindPwd from './login/FindPwd';
+import TheaterChar from './theaterInfo/TheaterChar';
+import TheaterChung from './theaterInfo/TheaterChung';
 
 function App() {
   return (
@@ -51,6 +53,8 @@ function App() {
         <Route path='/FindId' element={<FindId />} />
         <Route path='/Search' element={<Search/>} />
         <Route path='/FindPwd' element={<FindPwd/>} />
+        <Route path='/TheaterChar' element={<TheaterChar/>} />
+        <Route path='/TheaterChung' element={<TheaterChung/>} />
       </Routes>
       <Footer/>
     </Router>

@@ -59,10 +59,9 @@ const SelectMusical = (props) => {
         <Container>
        
         {musicalInfo && musicalInfo.map(e => (        
-            <MusicalContainer onClick={() => OnClickPoster(e.prfnm) }>
-            <img alt="poster" src={e.poster}/>
-            
-            <p className="title">{e.prfnm}</p>
+            <MusicalContainer onClick={() => OnClickPoster(e.musicalName) }>
+            <img alt="poster" src={e.musicalPoster}/>
+            <p className="title">{e.musicalName}</p>
           
             </MusicalContainer>
         ))}
