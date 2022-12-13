@@ -6,9 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,10 +15,11 @@ import java.util.List;
 @Slf4j
 public class TheaterController {
     private final TheaterService theaterService;
-
+// (value="theaterName", required=false)
     // 공연장 검색
     @GetMapping("/theater/search")
-    public ResponseEntity<List<TheaterDTO>> theaterSearch(@RequestParam String theaterName) {
+    public ResponseEntity<List<TheaterDTO>> theaterSearch(@RequestParam(value="theaterName") String theaterName) {
+        System.out.println("극장 이름 : " + theaterName);
         List<TheaterDTO> list = theaterService.searchTheaterList(theaterName);
         return new ResponseEntity(list, HttpStatus.OK);
     }
