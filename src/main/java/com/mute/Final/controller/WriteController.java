@@ -10,7 +10,7 @@ import java.util.Map;
 
 //@CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping(value="/review", method= {RequestMethod.POST})
+@RequestMapping(value="/review", method= {RequestMethod.GET})
 public class WriteController {
     // Service 로직 연결
     private WriteService writeService;
