@@ -4,14 +4,14 @@ import { useState, useEffect} from "react";
 import MuteApi from "../api/MuteApi";
 
 const OnClick = (e) => {
-    window.localStorage.setItem("Detail", e);
-    window.location.replace("/ItemDetail");
+    // window.localStorage.setItem("Detail", e);
+    // window.location.replace("/ItemDetail");
 }
 
 
 const Search = () => {
     const [searchInfo, setSearchInfo] = useState("");
-    let inputTheater = window.localStorage.getItem("input");
+    let inputTheater = window.localStorage.getItem("inputTheater");
 
 useEffect(() => {
     const SearchData = async () => {
