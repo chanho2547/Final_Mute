@@ -1,11 +1,16 @@
 package com.mute.Final.service;
 
+import com.mute.Final.dto.MusicalDTO;
 import com.mute.Final.dto.ReviewSeatDTO;
+import com.mute.Final.dto.ReviewTotalAvgDTO;
 import com.mute.Final.dto.ReviewTotalDTO;
+import com.mute.Final.entity.Musical;
 import com.mute.Final.entity.ReviewSeat;
 import com.mute.Final.entity.ReviewTotal;
+import com.mute.Final.entity.ReviewTotalAvg;
 import com.mute.Final.repository.ReviewTotalRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -37,6 +42,28 @@ public class ReviewTotalService {
             reviewTotalDTOS.add(reviewTotalDTO);
         }
         return reviewTotalDTOS;
+    }
+
+
+    // 뮤지컬 총평 후기 view
+
+    public List<ReviewTotalDTO> totalList(int musicalId) {
+        List<ReviewTotalDTO> reviewTotalDTOS = new ArrayList<>();
+        List<ReviewTotal> totalList = reviewTotalRepository.findByMusicalId(musicalId);
+        for(ReviewTotal e : totalList) {
+            ReviewTotalDTO reviewTotalDTO = new ReviewTotalDTO();
+            reviewTotalDTO.setReviewMuId(e.getReviewMuId()); // 총평 후기 글 번호
+            reviewTotalDTO.setMember(e.getMember()); // 회원번호
+            reviewTotalDTO.setScoreAvgTotal(e.getScoreAvgTotal()); // 평균 총평 별점
+            reviewTotalDTO.setScoreStory(e.getScoreStory()); // 스토리 별점
+            reviewTotalDTO.setScoreDirect(e.getScoreDirect()); // 연출 별점
+            reviewTotalDTO.setScoreCast(e.getScoreCast()); // 공연 티켓 예메 시작일
+            reviewTotalDTO.setScoreNumber(e.getScoreNumber()); // 공연장 이름
+            reviewTotalDTO.setReviewMuTxt(e.getReviewMuTxt()); // 공연 포스터
+            reviewTotalDTOS.add(reviewTotalDTO);
+        }
+        return reviewTotalDTOS;
+
     }
 
 //    // 뮤지컬별 개인 후기 전체 조회 및 평균 별점 조회 - 도연

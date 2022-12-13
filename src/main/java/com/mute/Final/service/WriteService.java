@@ -56,7 +56,6 @@ public class WriteService {
         reviewSeat.setMusical(musical);
         log.info(String.valueOf(musical));
 
-
         reviewSeat.setScoreSeat(Integer.parseInt(scoreSeat));
         reviewSeat.setScoreView(Integer.parseInt(scoreView));
         reviewSeat.setScoreSound(Integer.parseInt(scoreSound));

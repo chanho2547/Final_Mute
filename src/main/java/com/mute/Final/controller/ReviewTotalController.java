@@ -1,9 +1,15 @@
 package com.mute.Final.controller;
+import com.mute.Final.dto.ReviewSeatAvgDTO;
+import com.mute.Final.dto.ReviewTotalAvgDTO;
 import com.mute.Final.dto.ReviewTotalDTO;
+import com.mute.Final.entity.ReviewSeatAvg;
+import com.mute.Final.entity.ReviewTotal;
+import com.mute.Final.entity.ReviewTotalAvg;
 import com.mute.Final.service.ReviewTotalService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +27,13 @@ public class ReviewTotalController {
         return new ResponseEntity(list, HttpStatus.OK);
     }
 
-    // 개인 별점 총점 평균
+    // 뮤지컬 총평 후기 view
+    @GetMapping("/totalView")
+    public ResponseEntity<List<ReviewTotalDTO>> totalView(@RequestParam int musicalId) {
+        List<ReviewTotalDTO> list = reviewTotalService.totalList(musicalId);
+        return new ResponseEntity(list, HttpStatus.OK);
+    }
+
 
 //    // 뮤지컬별 평균 별점 조회
 //    @GetMapping("/TotalView")
