@@ -45,17 +45,25 @@ public class WriteService {
     }
 
     // 좌석 후기 작성
-    public boolean writeSeat(String scoreSeat, String scoreView, String scoreSound, String scoreLight, String reviewSeTxt){
+    public boolean writeSeat(String userNum, String musicalId, String scoreSeat, String scoreView, String scoreSound, String scoreLight, String scoreAvgSeat, String reviewSeTxt){
         ReviewSeat reviewSeat  = new ReviewSeat();
-        //System.out.println("테스트 1234 : " + scoreSeat + scoreView + scoreSound + scoreLight + reviewSeTxt);
+
+        Member member = memberRepository.findByUserNum(Long.parseLong(userNum));
+        reviewSeat.setMember(member);
+        log.info(String.valueOf(member));
+
+        Musical musical = musicalRepository.findByMusicalId(musicalId);
+        reviewSeat.setMusical(musical);
+        log.info(String.valueOf(musical));
+
 
         reviewSeat.setScoreSeat(Integer.parseInt(scoreSeat));
         reviewSeat.setScoreView(Integer.parseInt(scoreView));
         reviewSeat.setScoreSound(Integer.parseInt(scoreSound));
         reviewSeat.setScoreLight(Integer.parseInt(scoreLight));
+        reviewSeat.setScoreAvgSeat(Double.parseDouble(scoreAvgSeat));
         reviewSeat.setReviewSeTxt(reviewSeTxt);
-       // System.out.println("테스트 7777 : " + Integer.parseInt(scoreSeat) + Integer.parseInt(scoreView) + Integer.parseInt(scoreSound) + Integer.parseInt(scoreLight) + reviewSeTxt);
-        //reviewSeat.setWriteDate(LocalDateTime.now());
+
         System.out.println("테스트!!!!!!!!!!!!!! : " + reviewSeat);
         reviewSeatRepository.save(reviewSeat);
         return true;
