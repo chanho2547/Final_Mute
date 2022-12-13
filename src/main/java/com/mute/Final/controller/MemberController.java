@@ -90,7 +90,7 @@ public class MemberController {
         String mail = find.get("mail");
         String type = find.get("type");
 
-        MemberDTO memberDTO = memberService.findPwd(uni, mail, type);
+        MemberDTO memberDTO = memberService.findPw(uni, mail, type);
         if(memberDTO.isOk()) return  new ResponseEntity(memberDTO, HttpStatus.OK);
         else return new ResponseEntity(false, HttpStatus.OK);
     }
@@ -99,7 +99,6 @@ public class MemberController {
     public ResponseEntity<Boolean> memberNewPwd(@RequestBody Map<String, String> newPwd) {
         String id = newPwd.get("id");
         String pwd = newPwd.get("pwd");
-        String mail = newPwd.get("mail");
 
         boolean result = memberService.regNewPwd(id, pwd);
         if(result) {

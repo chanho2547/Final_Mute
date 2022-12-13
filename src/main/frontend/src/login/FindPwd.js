@@ -9,6 +9,9 @@ const FindPwd = () => {
     const [inputId, setInputId] = useState("");
     const [inputMail, setInputMail] = useState("");
 
+    const [mailMsg, setMailMsg] = useState("");
+    const [isMail, setIsMail] = useState(false);
+
     // 아이디와 이메일이 맞으면 새로운 비밀번호를 지정할 수 있는 html을 불러옴
     const [isNewPwd, setIsNewPwd] = useState(false);
 
@@ -43,7 +46,7 @@ const FindPwd = () => {
             setIsRePwdCheck(true);
         }
         if(passwordCurrent !== newPwdChe) {
-            setPwdMsg("비밀번호가 일치하지 않습니다.")
+            setConPwdMsg("비밀번호가 일치하지 않습니다.")
             setIsRePwdConCheck(false)
         }
     }
@@ -112,11 +115,11 @@ const FindPwd = () => {
                 <br/>
 
             {/* 이메일 입력창 */}
-                <p> {inputMail.length > 0 && <span></span>}</p>
+                <p> {inputMail.length > 0 && <span>{mailMsg}</span>}</p>
                 <input className="input" placeholder="이메일" value={inputMail} onChange={onChangeMail} onKeyDown={onKeyDownFindPwd}></input>
                 <br/>
             {/* 비밀번호 찾기 버튼 활성화 */}
-                <button className="pwdButton" disabled={!inputId && inputMail} onClick={onClickFindPwd}>FIND PASSWORD</button>
+                <button className="pwdButton" disabled={!inputId && isMail} onClick={onClickFindPwd}>FIND PASSWORD</button>
                 <br/>
                 </> :
                 <>
