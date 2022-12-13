@@ -122,9 +122,9 @@ const MuteApi =  {
     },
 
     // 비밀번호 재설정
-    rePwd: async function(id, pwd) {
+    rePwd: async function(userId, pwd) {
         const rePwdObj = {
-            userId: id,
+            userId: userId,
             pwd: pwd
         }
         return await axios.post("member/re_pwd", rePwdObj)
