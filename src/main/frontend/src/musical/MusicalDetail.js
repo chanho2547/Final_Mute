@@ -8,12 +8,12 @@ import { useNavigate } from "react-router-dom";
 const MusicalDetail = (props) => {
 
   const [musicalDetail,setMusicalDetail] = useState();
-  const musicalId = window.localStorage.getItem("musicalId");
+  const musicalId = window.localStorage.getItem("musicalId"); // 목록에서 가져온 뮤지컬id
 
   useEffect(() => {
       const MusicalData = async () => {
           try {
-              let response = await MuteApi.musicalDetail(musicalId); // 뮤지컬 아이디를 통해 불러오기
+              let response = await MuteApi.musicalDetail(musicalId); // 받은 뮤지컬id 서버로 넘겨주기
               setMusicalDetail(response.data);
               
           } catch (e) {  

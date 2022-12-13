@@ -17,6 +17,8 @@ class PayCancel extends React.Component {
     };
     componentDidMount() {
         const { params } = this.state;
+        // const KAKAO_API_KEY = process.env.REACT_APP_KAKAO_API_KEY;
+
         axios({
           // 요청 url
           url: "/v1/payment/cancel",
@@ -24,7 +26,8 @@ class PayCancel extends React.Component {
           method: "POST",
           // 요청 key
           headers: {
-            Authorization: "KakaoAK d853cf82728147a7a985cfeb193f4b8d",
+            // Authorization: `KakaoAK ${KAKAO_API_KEY}`,
+            Authorization: "KakaoAK ae48346fee13402c7f4406773e04336b",
             "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
           },
           params,
