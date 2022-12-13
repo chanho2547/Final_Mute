@@ -8,9 +8,8 @@ import java.util.Map;
 
 // 좌석 후기 등록 - 도연 작업중..
 
-//@CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping(value="/review", method= {RequestMethod.GET})
+@RequestMapping("/review")
 public class WriteController {
     // Service 로직 연결
     private WriteService writeService;
@@ -20,7 +19,7 @@ public class WriteController {
     }
 
     // 총평 후기 작성
-    @GetMapping("/writeTotal")
+    @PostMapping("/writeTotal")
     public ResponseEntity<Boolean> writeTotal(@RequestBody Map<String, String> writeTotalData) {
         String userNum = writeTotalData.get("userNum");
         String musicalId = writeTotalData.get("musicalId");
@@ -42,7 +41,7 @@ public class WriteController {
     }
 
     // 좌석 후기 작성
-    @GetMapping("/writeSeat")
+    @PostMapping("/writeSeat")
     public ResponseEntity<Boolean> writeSeat(@RequestBody Map<String, String> writeSeatData) {
         String userNum = writeSeatData.get("userNum");
         String musicalId = writeSeatData.get("musicalId");
