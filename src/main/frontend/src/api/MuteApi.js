@@ -1,4 +1,5 @@
 import axios from "axios";
+import { async } from "q";
 
 const MuteApi =  {
 
@@ -121,9 +122,9 @@ const MuteApi =  {
     },
 
     // 비밀번호 재설정
-    rePwd: async function(id, pwd) {
+    rePwd: async function(userId, pwd) {
         const rePwdObj = {
-            id: id,
+            userId: userId,
             pwd: pwd
         }
         return await axios.post("member/re_pwd", rePwdObj)
@@ -179,6 +180,18 @@ const MuteApi =  {
             paymentId : paymentId
         }
         return await axios.post("ticket/insert", ticketObj);
+    },
+    
+    openedMusical: async function() {
+        return await axios.get("/musical/openedMusical");
+    },
+
+    openBeforeMusical: async function() {
+        return await axios.get("/musical/openBeforeMusical");
+    },
+
+    musicalRanking: async function() {
+        return await axios.get("/reviewMusical/starRanking");
     }
 
 }

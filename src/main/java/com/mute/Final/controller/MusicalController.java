@@ -45,14 +45,14 @@ public class MusicalController {
     }
 
     // 뮤지컬 TOP3 티켓 오픈 빠른 순 조회
-    @GetMapping("/musical/ticket/open/before")
+    @GetMapping("/musical/openedMusical")
     public ResponseEntity<List<MusicalDTO>> musicalTicketAlready() {
         List<MusicalDTO> list = musicalService.searchTopTicket();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     // 뮤지컬 TOP3 티켓 오픈 예정 순 조회
-    @GetMapping("/musical/ticket/open/after")
+    @GetMapping("/musical/openBeforeMusical")
     public ResponseEntity<List<MusicalDTO>> musicalTicketOpenStart() {
         List<MusicalDTO> list = musicalService.searchTopTicket2();
         return new ResponseEntity<>(list, HttpStatus.OK);

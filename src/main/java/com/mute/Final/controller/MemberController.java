@@ -97,13 +97,13 @@ public class MemberController {
     // 비밀번호 재설정
     @PostMapping("/re_pwd")
     public ResponseEntity<Boolean> memberNewPwd(@RequestBody Map<String, String> newPwd) {
-        String id = newPwd.get("id");
+        String userId = newPwd.get("userId");
         String pwd = newPwd.get("pwd");
 
-        log.error("userId : " + id);
+        log.error("userId : " + userId);
         log.error("pwd : " + pwd);
 
-        boolean result = memberService.regNewPwd(id, pwd);
+        boolean result = memberService.regNewPwd(userId, pwd);
         if(result) {
             return new ResponseEntity(true, HttpStatus.OK);
         }

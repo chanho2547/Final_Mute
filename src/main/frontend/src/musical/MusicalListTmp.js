@@ -15,11 +15,16 @@ const Container = styled.div`
 
 const ListBlock = styled.div`
 
+  width: 200px;
 
   img {
     width: 100px;
+    cursor: pointer;
   }
 
+  .title {
+    font-weight: 600;
+  }
 
 `;
 
@@ -45,10 +50,10 @@ const MusicalListTmp = (props) => {
 
   }, []);
 
-  // 포스터 클릭 시 해당 뮤지컬 id값 저장해서 
-  const OnClickPoster = (e) => {
-    console.log("클릭한 뮤지컬" + e)
-    window.localStorage.setItem("musicalId", e);
+  // 포스터 클릭 시 해당 뮤지컬 id값으로 상세페이지로 넘겨주기
+  const OnClickPoster = (muId) => {
+    console.log("클릭한 뮤지컬 ID값 : " + muId)
+    window.localStorage.setItem("musicalId", muId);
     navigate('/MusicalDetail');
   }
 

@@ -8,11 +8,12 @@ import { useNavigate } from "react-router-dom";
 const MusicalDetail = (props) => {
 
   const [musicalDetail,setMusicalDetail] = useState();
+  const musicalId = window.localStorage.getItem("musicalId"); // 목록에서 가져온 뮤지컬id
 
   useEffect(() => {
       const MusicalData = async () => {
           try {
-              let response = await MuteApi.musicalDetail(); // 뮤지컬 아이디를 통해 불러오기
+              let response = await MuteApi.musicalDetail(musicalId); // 받은 뮤지컬id 서버로 넘겨주기
               setMusicalDetail(response.data);
               
           } catch (e) {  
@@ -20,9 +21,9 @@ const MusicalDetail = (props) => {
           }
          
       };
-      MusicalData(); // 첫 페이지 로딩시 목록을 다 끌어온다
+      MusicalData();
 
-  });
+  }, []);
 
   const OnClickPoster = (e) => {
 
@@ -34,10 +35,15 @@ const MusicalDetail = (props) => {
       {musicalDetail && musicalDetail.map(e => (        
           <div onClick={() => OnClickPoster(e.musicalId) }>
           <img alt="poster" src={e.musicalPoster}/>
-          
           <p className="title">{e.musicalName}</p>
-          
-        
+          <p className="theaterName">{e.theaterName}</p>
+          <p className="startDate">{e.musicalStart}</p>
+          <p className="endDate">{e.musicalEnd}</p>
+          <p className="status">{e.musicalStatus}</p>
+          <p className="casting">{e.musicalCast}</p>
+          <p className="ageLimit">{e.musicalAge}</p>
+          <p className="price">{e.musicalPrice}</p>
+          <p className="plan">{e.musicalPlan}</p>
           </div>
       ))}
       

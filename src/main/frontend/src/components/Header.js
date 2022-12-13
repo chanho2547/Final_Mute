@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import {Link, useNavigate} from "react-router-dom";
 import { FaBell } from 'react-icons/fa';
+import { BsSearch } from 'react-icons/bs';
 import React from "react";
 
 const Menu = styled.div`
@@ -31,7 +32,10 @@ color: #CF0A0A;
  }
 `;
 
-const Nav = styled.div``;
+const Keyword = styled.div`
+  width: 200px;
+  height: 40px;
+`;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 const Header = () => {
@@ -45,6 +49,18 @@ const Header = () => {
         window.localStorage.removeItem("whoLogin");
         navigate("/");
       }
+
+    // 뮤지컬 검색창
+    const [inputMusical, SetInputMusical] = useState("");
+
+    const onChangeInput = (e) => {
+      SetInputMusical(e.target.value)
+    };
+
+    const onClickInput = async() => {
+      window.localStorage.setItem("inputMusical", inputMusical);
+      navigate("/MusicalSearch")
+    }
 
     return(
         <>
@@ -77,9 +93,10 @@ const Header = () => {
         </Link>
         </Logo>
 
-        <Nav>
-
-        </Nav>
+        <Keyword>
+        <input onChange={onChangeInput} placeholder="뮤지컬을 검색하세요"></input>
+        <button onClick={onClickInput}><BsSearch/></button>
+        </Keyword>
 
 
 

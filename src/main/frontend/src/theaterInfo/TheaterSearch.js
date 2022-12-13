@@ -21,7 +21,7 @@ useEffect(() => {
             setSearchInfo(response.data);
             console.log(response.data);
         } catch (e) {
-            console.log(e + "검색 실패 입니다");
+            console.log(e + "공연장 검색 실패입니다");
         }
     };
     SearchData();

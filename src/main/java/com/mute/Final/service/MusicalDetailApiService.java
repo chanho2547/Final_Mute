@@ -84,12 +84,12 @@ public class MusicalDetailApiService {
 //            log.error(item3.toString());
 
             // 상세이미지 가져오기.. 못가져옴ㅠㅠ
-            JSONObject item2 = item.getJSONObject("styurls");
-            JSONArray jsonArr = item2.getJSONArray("styurl");
-
-            String arrStr = jsonArr.toString();
-
-            log.warn("styurl ToString확인 :: " + arrStr);
+//            JSONObject item2 = item.getJSONObject("styurls");
+//            JSONArray jsonArr = item2.getJSONArray("styurl");
+//
+//            String arrStr = jsonArr.toString();
+//
+//            log.warn("styurl ToString확인 :: " + arrStr);
 
             //arrStr = arrStr.split(",");
 
@@ -115,11 +115,6 @@ public class MusicalDetailApiService {
 //
 //
 //            }
-
-
-
-
-
 
             // DTO에 저장하기
             MusicalDetailDTO musicalDetailDTO = new MusicalDetailDTO(item);

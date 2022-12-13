@@ -6,6 +6,9 @@ build/
 !**/src/test/**/build/
 .DS_Store
 
+# KAKAOPAY API_KEY (FRONTEND)
+.env
+
 ### STS ###
 .apt_generated
 .classpath
