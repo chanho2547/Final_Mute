@@ -1,11 +1,13 @@
 import {useState} from "react";
 import MuteApi from "../api/MuteApi";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Modal from "../util/Modal";
 
 const RePwd = () => {
+    const navigate = useNavigate();
     // 로그인된 아이디 불러오기
-    let localId = window.localStorage.getItem("userId");
+    let localId = window.localStorage.getItem("localId");
+    console.log(localId);
 
     const [inputId, setInputId] = useState("");
 
@@ -25,11 +27,6 @@ const RePwd = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const closeModal = () => {
         setModalOpen(false);
-    };
-
-    // 아이디
-    const onChangeId = (e) => {
-        setInputId(e.target.value)
     };
 
     // 비밀번호 입력
@@ -64,17 +61,23 @@ const RePwd = () => {
     }
 
     // 비밀번호 재설정 api
-    const onClickRePwd = async() => {
-            const res = await MuteApi.rePwd(inputId, newPwdChe);
+    const onClickRePwd = async(localId) => {
+        try {
+            const res = await MuteApi.rePwd(localId, newPwdChe);
             console.log(res.data);
 
-            if(res.data) {
-                //setIsNewPwd(false                                                                                               );
+            if (res.data) {
+                //setIsNewPwd(false)                                                                                               );
                 setModalOpen(true);
                 setComment("비밀번호 재설정이 완료되었습니다. 로그인해주세요")
+                navigate('/Login');
             } else {
                 console.log("오류")
+                setModalOpen(true);
+                setComment("비밀번호 재설정에 실패하였습니다.")
             }
+        } catch (e) {
+        }
     }
 
     const onKeyDownRePwd = (e) => {
@@ -87,17 +90,17 @@ const RePwd = () => {
         <>
             <h5>비밀번호 재설정</h5>
             {/* 아이디 불러오기 */}
-            <div onChange={onChangeId}>님</div>
+            <div>{localId}님</div>
 
             {/* 비밀번호 재설정 */}
-            <p> {newPwd.length > 0 && <span>{pwdMsg}</span>}<br/>
-                <input type="password" placeholder="비밀번호" onChange={onChangePwd} value={newPwd}></input>
-            </p>
+            <p> {newPwd.length > 0 && <span>{pwdMsg}</span>}</p>
+            <input type="password" placeholder="비밀번호" onChange={onChangePwd} value={newPwd}></input>
+            <br/>
             {/* 재설정한 비밀번호 확인*/}
-            <p> {newPwdChe.length > 0 && <span>{conPwdMsg}</span>}<br/>
-                <input type="password" placeholder="비밀번호 확인" onChange={onChangePwdCheck} value={newPwdChe} onKeyDown={onKeyDownRePwd}></input>
-            <br/></p>
-            <button disabled={!(isRePwd && isRePwdCheck)} onClick={onClickRePwd}>재설정</button>
+            <p> {newPwdChe.length > 0 && <span>{conPwdMsg}</span>}</p>
+            <input type="password" placeholder="비밀번호 확인" onChange={onChangePwdCheck} value={newPwdChe} onKeyDown={onKeyDownRePwd}></input>
+            <br/>
+            <button disabled={!(isRePwd && isRePwdCheck)} onClick={()=>onClickRePwd(localId)}>재설정</button>
 
             <div>
                 {/* 다른 페이지 연결 */}
