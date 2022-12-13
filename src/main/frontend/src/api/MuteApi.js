@@ -143,7 +143,7 @@ const MuteApi =  {
         return await axios.get("reviewSeat/all");
     },
 
-    // 좌석별 후기
+    // 선택 좌석별 후기
     seatReview: async function(pkNum) {
         const seatReviewInfo = {
             seatId : pkNum
