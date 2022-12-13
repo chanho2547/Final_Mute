@@ -213,10 +213,16 @@ const SignUp = () => {
         setModalOpenSignUp(false);
     }
 
+    const [modalOpen, setModalOpen] = useState(false);
+    const closeModal = () => {
+        setModalOpen(false);
+    };
+
     // 회원가입
     const onClickJoin = async() => {
         const memberReg = await MuteApi.signUp(inputId, inputPwd, inputName, inputMail, inputPhone, enroll_company.address);
         if(memberReg.data) {
+            setModalOpen(" Mute 회원가입이 완료되었습니다.")
             console.log("Mute 회원가입이 완료되었습니다.")
             navigate('/Login');
 
@@ -293,7 +299,7 @@ const SignUp = () => {
                 {/* 모달 */}
                 {modalOpenIdCheck && <Modal open={modalOpenIdCheck} close={closeModalIdCheck} header="확인">이미 가입된 아이디입니다.</Modal>}
                 {modalOpenIdOK && <Modal open={modalOpenIdOK} close={closeModalIdOK} header="확인">사용 가능한 아이디입니다.</Modal>}
-                <Link to="/Login">Mute 회원가입이 완료되었습니다.</Link>
+                <Link to="/Login">{modalOpen && <Modal open={modalOpen} close={closeModal} header="확인"> Mute 회원가입이 완료되었습니다.</Modal>}</Link>
                 {modalOpenSignUp && <Modal open={modalOpenSignUp} close={closeModalSignUp} header="확인">회원가입에 실패했습니다. 다시 확인해주세요.</Modal>}
             </div>
         </>

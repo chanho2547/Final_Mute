@@ -48,7 +48,7 @@ const FindId = () =>{
             setModalOpen(true);
             setComment("찾으신 아이디는 [" + res.data.userId + "] 입니다.");
         } else {
-            setModalOpen(false);
+            setModalOpen(true);
             setComment("아이디가 없습니다.")
             console.log("아이디 찾기 실패")
         }

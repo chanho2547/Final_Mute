@@ -25,6 +25,7 @@ import Search from './theaterInfo/Search';
 import FindPwd from './login/FindPwd';
 import TheaterChar from './theaterInfo/TheaterChar';
 import TheaterChung from './theaterInfo/TheaterChung';
+import RePwd from "./login/RePwd";
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
         <Route path='/FindPwd' element={<FindPwd/>} />
         <Route path='/TheaterChar' element={<TheaterChar/>} />
         <Route path='/TheaterChung' element={<TheaterChung/>} />
+        <Route path='/RePwd' element={<RePwd/>} />
       </Routes>
       <Footer/>
     </Router>
