@@ -165,7 +165,7 @@ const MuteApi =  {
         const musicalId = {
             musicalId : mt20id
         }
-        return await axios.get("/musical/detail", musicalId);
+        return await axios.get(`/musical/${mt20id}`, musicalId);
     },
 
 }

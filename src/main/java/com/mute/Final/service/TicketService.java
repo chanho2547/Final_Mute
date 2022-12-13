@@ -1,10 +1,7 @@
 package com.mute.Final.service;
 
 import com.mute.Final.constant.AlarmStatus;
-import com.mute.Final.entity.Member;
-import com.mute.Final.entity.Musical;
-import com.mute.Final.entity.Ticket;
-import com.mute.Final.entity.Wish;
+import com.mute.Final.entity.*;
 import com.mute.Final.repository.MemberRepository;
 import com.mute.Final.repository.MusicalRepository;
 import com.mute.Final.repository.TicketRepository;
@@ -17,6 +14,7 @@ import javax.transaction.Transactional;
 import java.rmi.registry.LocateRegistry;
 import java.sql.Date;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -30,27 +28,36 @@ public class TicketService {
 
     private final MusicalRepository musicalRepository;
 
-    public boolean postTicket(Integer seatNum, LocalDateTime seeDate, LocalDateTime ticketDate, Long userNum, String musicalId, Integer paymentID, String seatPos) {
-        Ticket ticket = new Ticket();
-//        System.out.println("userNum: " + userNum);
-//        System.out.println("userNum Type : " + userNum.getClass().getName());
-//        System.out.println("musicalId: " + musicalId);
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-        ticket.setSeatNum(seatNum);
-        ticket.setSeeDate(seeDate);
-        ticket.setTicketDate(ticketDate);
+    public boolean insertTicket(String seatNum, String seatPos, String seeDate, String ticketDate, String userNum, String musicalId, String paymentId) {
+        Ticket ticket = new Ticket();
+        Payment payment = new Payment();
+        //Musical musical = new Musical();
+
+        ticket.setSeatNum(Integer.parseInt(seatNum));
+        ticket.setSeatPosition(seatPos);
+        ticket.setSeeDate(LocalDateTime.parse(seeDate,formatter));
+        ticket.setTicketDate(LocalDateTime.parse(ticketDate,formatter));
 
         // userNum으로 찾기
-        Member member = memberRepository.findByUserNum(userNum);
+        Member member = memberRepository.findByUserNum(Long.parseLong(userNum));
+        // 찾은거 넣어주기
         ticket.setMember(member);
 
         // musical 엔티티 불러와서 넣기
         List<Musical> musical = musicalRepository.findByMusicalNameLike(musicalId);
+
+        System.out.println("musical 테스트 : "+musical.get(0));
         ticket.setMusical(musical.get(0));
 
-        //payment는 임시로 제외함
 
-        ticket.setSeatPosition(seatPos);
+        //payment는 임시로 제외함
+        payment.setPaymentId(Long.parseLong(paymentId));
+        //System.out.println("payment 테스트1 : " + payment);
+        ticket.setPayment(payment);
+        //System.out.println("payment 테스트2 : " + payment);
+
 
         try{
             ticketRepository.save(ticket);

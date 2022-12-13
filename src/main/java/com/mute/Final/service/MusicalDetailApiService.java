@@ -56,7 +56,7 @@ public class MusicalDetailApiService {
         return response;
     }
 
-    public List<MusicalDetailDTO> getMapFromJsonObj(String result) {
+    public List<MusicalDetailDTO> detailFromJsonObj(String result) {
 
         List<MusicalDetailDTO> list = new ArrayList<>();
 

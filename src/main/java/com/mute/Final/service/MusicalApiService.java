@@ -57,7 +57,7 @@ public class MusicalApiService {
         return response;
     }
 
-    public List<MusicalDTO> fromJSONtoItems(String result) {
+    public List<MusicalDTO> listFromJsonObj(String result) {
 
         // xml 데이터를 json 데이터로 변환
         JSONObject xmlToJson = XML.toJSONObject(result);

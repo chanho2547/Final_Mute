@@ -62,14 +62,14 @@ public class MusicalController {
     @GetMapping("/musical/list")
     public List<MusicalDTO> getMusicalList() {
         String resultString = musicalApiService.MusicalListApi();
-        return musicalApiService.fromJSONtoItems(resultString);
+        return musicalApiService.listFromJsonObj(resultString);
     }
 
     // 선택한 뮤지컬 상세정보 불러오기
-    @GetMapping("/musical/detail")
+    @GetMapping("/musical/{mt20id}")
     public List<MusicalDetailDTO> getMusicalDetail(@PathVariable String mt20id) {
         String result = musicalDetailApiService.MusicalDetailApi(mt20id);
-        return musicalDetailApiService.getMapFromJsonObj(result);
+        return musicalDetailApiService.detailFromJsonObj(result);
     }
 
 }
