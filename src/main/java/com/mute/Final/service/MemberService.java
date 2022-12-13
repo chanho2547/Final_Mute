@@ -128,7 +128,7 @@ public class MemberService {
         return memberDTO;
     }
     // PWD 찾기
-    public MemberDTO findPwd(String uni, String mail, String type) {
+    public MemberDTO findPw(String uni, String mail, String type) {
         MemberDTO memberDTO = new MemberDTO();
         try{
             char c = type.charAt(5);
@@ -139,6 +139,7 @@ public class MemberService {
                     member = memberRepository.findByUserIdAndMail(uni, mail);
                     if(member != null) {
                         memberDTO.setReg(true);
+                        memberDTO.setUserId(member.getUserId());
                     } else {
                         memberDTO.setReg(false);
                     }

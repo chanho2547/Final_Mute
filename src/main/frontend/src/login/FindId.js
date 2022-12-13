@@ -6,7 +6,6 @@ import Modal from "../util/Modal";
 const FindId = () =>{
     // 이름, 이메일 입력 => 이메일값으로 ID찾음
     const [inputName, setInputName] = useState("");
-    const [findId, setFindId] = useState("");
     const [inputMail, setInputMail] = useState("");
 
     const [mailMsg, setMailMsg] = useState("");
@@ -45,11 +44,11 @@ const FindId = () =>{
     const onClickFindId = async() => {
         const res = await MuteApi.researchId(inputName, inputMail, "Type_ID");
         console.log(res.data);
-        if(res.data){
+        if(res.data.reg){
             setModalOpen(true);
             setComment("찾으신 아이디는 [" + res.data.userId + "] 입니다.");
         } else {
-            setModalOpen(true);
+            setModalOpen(false);
             setComment("아이디가 없습니다.")
             console.log("아이디 찾기 실패")
         }

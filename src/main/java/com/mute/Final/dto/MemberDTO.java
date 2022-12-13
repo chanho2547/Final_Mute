@@ -23,13 +23,13 @@ public class MemberDTO {
     private boolean isMember;
     private boolean isReg; // 아이디 비밀번호 찾을 때 true/false 응답
 
-    public static MemberDTO toMemberDTO(Member member) {
-        MemberDTO memberDTO = new MemberDTO();
-        memberDTO.setUserId(member.getUserId());
-        memberDTO.setPwd(member.getPwd());
-        memberDTO.setName(member.getName());
-        memberDTO.setPhone(member.getPhone());
-        memberDTO.setMail(member.getMail());
-        return memberDTO;
-    }
+//    public static MemberDTO toMemberDTO(Member member) {
+//        MemberDTO memberDTO = new MemberDTO();
+//        memberDTO.setUserId(member.getUserId());
+//        memberDTO.setPwd(member.getPwd());
+//        memberDTO.setName(member.getName());
+//        memberDTO.setPhone(member.getPhone());
+//        memberDTO.setMail(member.getMail());
+//        return memberDTO;
+//    }
 }

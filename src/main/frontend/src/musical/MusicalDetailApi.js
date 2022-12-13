@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import MuteApi from "../api/MuteApi";
 import styled from "styled-components";
 
-
+// 선택된 뮤지컬 상세페이지
 const MusicalDetailApi = (props) => {
 
     const [musicalDetail,setMusicalDetail] = useState();
@@ -23,8 +23,7 @@ const MusicalDetailApi = (props) => {
     });
 
     const OnClickPoster = (e) => {
-        props.addMusical(e);
-        props.propFunction(); // 상위 컴포넌트의 함수를 불러 count ++
+
     }
 
     return(
