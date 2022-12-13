@@ -15,7 +15,7 @@ public class ReviewTotalController {
         this.reviewTotalService = reviewTotalService;
     }
 
-    @GetMapping("/reviewMusical/avgTop")
+    @GetMapping("/reviewMusical/starRanking")
     public ResponseEntity<List<ReviewTotalDTO>> reviewMusical() {
         List<ReviewTotalDTO> list = reviewTotalService.searchTopStar();
         return new ResponseEntity(list, HttpStatus.OK);
