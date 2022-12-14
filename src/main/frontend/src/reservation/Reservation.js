@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
+import MuteApi from "../api/MuteApi";
 import Login from "../login/Login";
 import Pay from "./Pay";
 import SelectDate from "./SelectDate";
@@ -18,34 +19,85 @@ const TmpBox = styled.div`
 // ---- Reservaion 컴포넌트 시작 ----
 const Reservation = () => {
 
-    const [musical,setMusical] = useState();
-    const [seat,setSeat] = useState();
-    const [date,setDate] = useState();
+    //  아래로는 현재 선택된 정보들 
+
+    // 뮤지컬 선택시
+    const [musicalId,setMusicalId] = useState(); // 뮤지컬 이름
+    
+    // 좌석 선택시
+    const [seatNum,setSeatNum] = useState(); // pk
+    const [seatPos,setSeatPos] = useState(); // 1층 1열 1번
+
+    // 날짜 선택시
+    const [seeDate,setSeeDate] = useState(); // 상영날짜
+
+
+
+    // 현재
+    const [ticketDate,setTicketDate] = useState(); // 구매날짜
+    const [userNum,setUserNum] = useState(); // 산 사람 고유번호
+    const [paymentId,setPaymentId] = useState(); // 결제정보 고유번호
+    
+
+    // const [musical,setMusical] = useState();
+    // const [seat,setSeat] = useState();
+    // const [date,setDate] = useState();
+
+    // 다음 화면 돌리기 위한 count
     const [count, setCount] = useState(0);
 
     useEffect(() => {
         window.localStorage.setItem("seatInfoMode","예매");
         console.log("현재 seatInfoMode : " + window.localStorage.getItem("seatInfoMode"));
-        console.log(`현재 뮤지컬 : ${musical} \n 현재 좌석 : ${seat} \n 현재 선택 날짜 : ${date} \n`);
+        console.log(`현재 뮤지컬 : ${musicalId} \n 현재 좌석 : ${seatPos} \n 현재 선택 날짜 : ${seatNum} \n`);
     })
 
     
-
+    // 하위 컴포넌트에 전달 할 함수들
     const highFunction = () => {
         setCount(count + 1);
     }
 
-    const addMusical = (e) => {
+    // insertTicket - seatNum, seatPos, seeDate, ticketDate, userNum, musicalId, paymentId 순서
+
+    // 최종 결제확인시 실행되는 버튼 (결제 완료)
+    const insertTicketFunction = async() => {
+        const date = new Date();
+        setTicketDate(date.toLocaleString('ko-kr'));// 현재 시점을 티켓 구매날짜,시간으로 설정한다
+
+        // userNum이 들어가야 하는데, userId가 들어간다
+        setUserNum(window.localStorage.getItem('whoLogin'));
+
+        // 일단 결제 정보는 임시로 보류
+        setPaymentId(null); 
+        try {
+            // 아직 userNum, paymentId 설정이 안됌
+            const res = await MuteApi.insertTicket(seatNum,seatPos,seeDate,ticketDate,userNum,musicalId,paymentId);
+            alert("결제가 완료되었습니다");
+            
+
+        }catch(e){
+            console.log("오류 : " + e);
+        }
+    }
+
+    
+    const addMusicalId = (e) => {
         console.log("뮤지컬 입력 완료 : " + e);
-        setMusical(e);
+        setMusicalId(e);
     } 
-    const addSeat = (e) => {
-        console.log("좌석 입력 완료 : " + e);
-        setSeat(e);
+    const addSeatNum = (e) => {
+        console.log("좌석 PK 입력 완료 : " + e);
+        setSeatNum(e);
     } 
-    const addDate = (e) => {
-        console.log("날짜 입력 완료 : " + e);
-        setDate(e);
+    const addSeatPos = (e) => {
+        console.log("좌석 String 입력 완료 : " + e)
+        setSeatPos(e);
+    }
+
+    const addSeeDate = (e) => {
+        console.log("상영날짜 입력 완료 : " + e);
+        setSeeDate(e);
     } 
 
     const onClickNext = () => {
@@ -58,10 +110,12 @@ const Reservation = () => {
         <h1>예매 페이지 입니다</h1>
         <button onClick={onClickNext}>다음으로</button>
         <TmpBox>
-        {count === 0 ? <SelectMusical propFunction={highFunction} addMusical={addMusical}/> : null}
-        {count === 1 ? <SelectDate propFunction={highFunction} addDate={addDate}/> : null }
-        {count === 2 ? <SelectSeat propFunction={highFunction} addSeat={addSeat}/> : null }
-        {count === 3 ? <Pay propFunction={highFunction} musical={musical} seat={seat} date={date}/> : null}
+        {/* 각 컴포넌트에서, 기본적으로 highFunction을 넣어줌 (count++) */}
+        {/* 각 컴포넌트에서, 추가적으로 예매에 필요한 정보들을 가져오기 위한 함수들을 만듦 */}
+        {count === 0 ? <SelectMusical propFunction={highFunction} addMusicalId={addMusicalId}/> : null}
+        {count === 1 ? <SelectDate propFunction={highFunction} addSeeDate={addSeeDate}/> : null }
+        {count === 2 ? <SelectSeat propFunction={highFunction} addSeatNum={addSeatNum} addSeatPos={addSeatPos} /> : null }
+        {count === 3 ? <Pay propFunction={highFunction} insertTicket={insertTicketFunction} /> : null}
         {count === 4 ? <h1>끝</h1> : null}
         {count === 5 ? setCount(0) : null}
         </TmpBox>

@@ -51,7 +51,7 @@ const SelectMusical = (props) => {
     });
 
     const OnClickPoster = (e) => {
-        props.addMusical(e);
+        props.addMusicalId(e);
         props.propFunction(); // 상위 컴포넌트의 함수를 불러 count ++
     }
 
