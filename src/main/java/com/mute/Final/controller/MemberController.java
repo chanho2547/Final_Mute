@@ -85,13 +85,12 @@ public class MemberController {
 
     // PWD 찾기
     @PostMapping("/find_pwd")
-    public ResponseEntity<List<MemberDTO>> findPwd(@RequestBody Map<String, String> find) {
-        String uni = find.get("uni");
+    public ResponseEntity<Boolean> findPwd(@RequestBody Map<String, String> find) {
+        String userId = find.get("userId");
         String mail = find.get("mail");
-        String type = find.get("type");
 
-        MemberDTO memberDTO = memberService.findPw(uni, mail, type);
-        if(memberDTO.isOk()) return  new ResponseEntity(memberDTO, HttpStatus.OK);
+        boolean result = memberService.findPw(userId, mail);
+        if(result == true) return  new ResponseEntity(true, HttpStatus.OK);
         else return new ResponseEntity(false, HttpStatus.OK);
     }
     // 비밀번호 재설정

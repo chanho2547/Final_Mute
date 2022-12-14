@@ -112,11 +112,10 @@ const MuteApi =  {
     },
     
     // PWD 찾기
-    researchPwd: async function (uni, mail, type) {
+    researchPwd: async function (userId, mail) {
         const reg = {
-            uni: uni,
-            mail: mail,
-            type: type
+            userId: userId,
+            mail: mail
         }
         return await axios.post("member/find_pwd", reg);
     },

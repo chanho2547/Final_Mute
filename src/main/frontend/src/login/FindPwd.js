@@ -30,18 +30,17 @@ const FindPwd = () => {
     // api 호출
     const onClickFindPwd = async() => {
         try {
-        const res = await MuteApi.researchPwd(inputId, inputMail, "Type_PWD");
-        console.log(res.data);
-
-        if(res.data) {
-            setModalOpen(true);
-            setComment("비밀번호를 재설정합니다.")
-            window.localStorage.setItem("localId",inputId);
-            navigate('/RePwd');
-        } else {
-            setModalOpen(true);
-            setComment("가입된 정보가 없습니다.")
-        }
+            const res = await MuteApi.researchPwd(inputId, inputMail);
+            console.log(res.data);
+            if(res.data) {
+                setModalOpen(true);
+                setComment("비밀번호를 재설정합니다.")
+                window.localStorage.setItem("localId",inputId);
+                navigate('/RePwd');
+            } else {
+                setModalOpen(true);
+                setComment("가입된 정보가 없습니다.")
+            }
         } catch (e) {
             setModalOpen(true);
             setComment("패스워드 찾기 오류")

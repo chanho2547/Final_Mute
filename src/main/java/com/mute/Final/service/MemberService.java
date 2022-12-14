@@ -128,28 +128,20 @@ public class MemberService {
         return memberDTO;
     }
     // PWD 찾기
-    public MemberDTO findPw(String uni, String mail, String type) {
-        MemberDTO memberDTO = new MemberDTO();
+    public boolean findPw(String userId, String mail) {
         try{
-            char c = type.charAt(5);
             Member member;
-
-            switch (c) {
-                case 'P' :
-                    member = memberRepository.findByUserIdAndMail(uni, mail);
-                    if(member != null) {
-                        memberDTO.setReg(true);
-                        memberDTO.setUserId(member.getUserId());
-                    } else {
-                        memberDTO.setReg(false);
-                    }
-                    memberDTO.setOk(true);
-                    break;
+            member = memberRepository.findByUserId(userId);
+            log.error(mail);
+            log.error(member.getMail().toString());
+            if(mail.equals(member.getMail().toString())){
+                return true;
             }
+            else return false;
+
         } catch (Exception e) {
-            memberDTO.setOk(false);
+            return false;
         }
-        return memberDTO;
     }
 
     // 비밀번호 찾기 시 새 비밀번호 설정

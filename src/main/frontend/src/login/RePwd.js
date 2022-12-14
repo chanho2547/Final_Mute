@@ -82,7 +82,7 @@ const RePwd = () => {
 
     const onKeyDownRePwd = (e) => {
         if(e.key === 'Enter'){
-            onClickRePwd();
+            onClickRePwd(localId);
         }
     }
 
