@@ -83,7 +83,7 @@ const MuteApi =  {
             scoreNumber : scoreNumber, // 넘버 별점
             reviewMuTxt : reviewMuTxt // 뮤지컬 후기 텍스트
         }
-        return await axios.get("review/ReviewInfo", reviewObj);
+        return await axios.get("totalView", reviewObj);
     },
 
 
