@@ -45,7 +45,7 @@ class PayReady extends React.Component {
       //  상품 총액
       total_amount: 125000,
       // 상품 비과세 금액
-      tax_free_amount: 20000,
+      tax_free_amount: 0,
       // router에 지정한 PayResult의 경로로 수정
       // 결제 성공
       approval_url: "http://localhost:8282/payresult",
@@ -58,7 +58,7 @@ class PayReady extends React.Component {
 
   componentDidMount() {
     const { params } = this.state;
-    //const KAKAO_API_KEY = process.env.REACT_APP_KAKAO_API_KEY;
+    const KAKAO_API_KEY = process.env.REACT_APP_KAKAO_API_KEY;
     
     axios({
       // 프록시에 카카오 도메인을 설정했으므로 결제 준비 url만 준다.
@@ -67,7 +67,7 @@ class PayReady extends React.Component {
       method: "POST",
       // 요청 정보 + 카카오 디벨로퍼스에서 나의 Admin Key 헤더에 담아서 요청
       headers: {
-        Authorization: "KakaoAK ae48346fee13402c7f4406773e04336b",
+        Authorization: `KakaoAK ${KAKAO_API_KEY}`,
         "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
       },
       // 설정한 매개변수들
