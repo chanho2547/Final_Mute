@@ -1,15 +1,15 @@
 package com.mute.Final.controller;
+// 좌석 후기 등록 - 도연 작업중..
+
 import com.mute.Final.service.WriteService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.Date;
+
 import java.util.Map;
 
-// 좌석 후기 등록 - 도연 작업중..
-
 @RestController
-@RequestMapping("/review")
+@RequestMapping(value = "/review", method = RequestMethod.POST)
 public class WriteController {
     // Service 로직 연결
     private WriteService writeService;

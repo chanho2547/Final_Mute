@@ -29,6 +29,7 @@ const ReviewTotal = (props) => {
 
     // 모달
     const [modalText, setModelText] = useState(false); // 확인 버튼 눌렀을 때
+
     
     const confirmModal = () => { // 좌석 후기 작성하러 가기
         props.propFunction(); // 상위 컴포넌트의 함수를 불러 count ++
@@ -38,7 +39,8 @@ const ReviewTotal = (props) => {
         // window.location.replace('/Review'); 
     }
 
-    
+
+
     // Api 호출
     // 후기 작성 버튼이 눌려지면 동작하는 함수
     const WriteTotalButton = async() => {
@@ -53,8 +55,7 @@ const ReviewTotal = (props) => {
 
             if(res.data === true) {
                 console.log("텍스트 입력 성공");
-                setModelText(true);
-                
+                setModelText(true);   
   
             } else {
                 console.log("텍스트 입력 실패");
@@ -116,7 +117,7 @@ const ReviewTotal = (props) => {
                 </fieldset>
                 <button onClick={WriteTotalButton}>확인</button>
                 <button onClick={CancelButton}>취소</button>
-                {modalText && <TotalModal open={modalText} confirm={confirmModal} close={closeModal} type={true} header="확인">뮤지컬 후기 작성 완료♥</TotalModal>}
+                {modalText&& <TotalModal open={modalText} onfirm={confirmModal} close={closeModal} type={true} header="확인">뮤지컬 후기 작성 완료♥</TotalModal>}
             </div>
 
         </>
