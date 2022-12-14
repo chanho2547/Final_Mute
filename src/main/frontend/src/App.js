@@ -33,7 +33,7 @@ import PaySelect from './payment/PaySelect';
 import PayCancel from './payment/PayCancel';
 import ResultFalse from './payment/ResultFalse';
 import PayTest from './payment/PayTest';
-import TheaterSearch from './theaterInfo/theaterSearch';
+import TheaterSearch from './theaterInfo/TheaterSearch';
 import TheaterSearchList from './theaterInfo/TheaterSearchList';
 
 function App() {

@@ -7,10 +7,11 @@ import Rating from "../util/Rating";
 import TotalModal from "./TotalModal";
 
 const ReviewTotal = (props) => {
+    const navigate = useNavigate();
 
     // 취소 버튼 누르면 첫 화면으로..
     const CancelButton = () => {   
-        // window.location.replace('/Review');
+        navigate('/Review');
     }
 
     // 입력받는 부분
@@ -36,10 +37,8 @@ const ReviewTotal = (props) => {
     }
     
     const closeModal = () => { // 아니오 눌렀을 때 => 리뷰 리스트로 이동
-        // window.location.replace('/Review'); 
+        navigate("/Review"); 
     }
-
-
 
     // Api 호출
     // 후기 작성 버튼이 눌려지면 동작하는 함수
@@ -89,8 +88,6 @@ const ReviewTotal = (props) => {
         setScoreAvgTotal(avg);
     }
 
-    
-
     const onChangeTotalReview = (e) => {
         setTotalReview(e.target.value)
         if(e.target.value.length > 9 ) {
@@ -99,7 +96,6 @@ const ReviewTotal = (props) => {
             setIsTotalReview(true);
         }
     }
-
     
     return(
         <>
