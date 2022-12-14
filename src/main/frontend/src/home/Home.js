@@ -55,7 +55,7 @@ const Home = () => {
         <p><b>뮤지컬 예매 오픈 예정 최근순3</b></p>
         {openBeforeMusical && openBeforeMusical.map(e => (
             <div  onClick={() => OnClick(e) }>
-              
+            
               <img alt="poster" src={e.musicalPoster}/>
               <p>{e.musicalName}</p>
               <p>{e.theaterName}</p>

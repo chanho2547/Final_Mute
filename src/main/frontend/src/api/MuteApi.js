@@ -192,7 +192,28 @@ const MuteApi =  {
 
     musicalRanking: async function() {
         return await axios.get("/reviewMusical/starRanking");
+    },
+
+    wishReg: async function(userNum, mt20id) {
+        const wishInsert = {
+        userNum : userNum,
+        musicalId : mt20id
+        }
+    return await axios.post("/wish/insert", wishInsert)
+    },
+
+    alarmOn: async function(userNum) {
+        return await axios.get(`/wish/select?userNum=${userNum}`);
+    },
+
+    alarmOff: async function(userNum, mt20id) {
+        const alarmUpdate = {
+            userNum : userNum,
+            musicalId : mt20id
+        }
+        return await axios.post("/wish/update", alarmUpdate)
     }
+
 
 }
 
