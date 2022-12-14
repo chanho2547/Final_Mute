@@ -160,14 +160,6 @@ const MuteApi =  {
         return await axios.get(`/musical/search?musicalName=${inputMusical}`);
     },
 
-    // 뮤지컬 검색2 => ?
-    searchMusicalTest: async function(prfnm) {
-        const musicalName = {
-            musicalName : prfnm
-        }
-        return await axios.get(`/musical/${prfnm}`, musicalName);
-    },
-
     // 선택된 뮤지컬 상세정보 불러오기
     musicalDetail: async function(mt20id) {
         const musicalId = {

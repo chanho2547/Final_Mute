@@ -6,9 +6,10 @@ import { useNavigate } from "react-router-dom";
 
 // 선택된 뮤지컬 상세페이지
 const MusicalDetail = (props) => {
-
+  const [wish, setWish] = useState(false); // 찜하기
   const [musicalDetail,setMusicalDetail] = useState();
   const musicalId = window.localStorage.getItem("musicalId"); // 목록에서 가져온 뮤지컬id
+  console.log(musicalId);
 
   useEffect(() => {
       const MusicalData = async () => {
