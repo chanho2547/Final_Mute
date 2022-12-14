@@ -40,7 +40,6 @@ const Keyword = styled.div`
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 const Header = () => {
     const navigate = useNavigate();
-
     // 로그인했을 경우 현재 ID 표시
     let whoLoginNow = window.localStorage.getItem("whoLogin");
 
@@ -59,7 +58,7 @@ const Header = () => {
 
     const onClickInput = async() => {
       window.localStorage.setItem("inputMusical", inputMusical);
-      navigate("/MusicalSearch")
+      navigate("/MusicalSearchList")
     }
 
     return(

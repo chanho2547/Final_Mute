@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect} from "react";
 import MuteApi from "../api/MuteApi";
 import { useNavigate } from "react-router-dom";
-
+// 페이지 삭제 예정 => MusicalSearchList로 변경
 const MusicalSearch = () => {
     const navigate = useNavigate();
     const [searchInfo, setSearchInfo] = useState("");

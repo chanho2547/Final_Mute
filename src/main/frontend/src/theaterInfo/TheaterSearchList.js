@@ -11,12 +11,12 @@ const TheaterSearchList = () => {
     const navigate = useNavigate();
 
     const [searchInfo, setSearchInfo] = useState("");
-    let inputTheater = window.localStorage.getItem("inputTheater");
+    let inputTheater = window.localStorage.getItem("inputTheater"); // TheaterSearch.js에서 setItem으로 입력한 단어 저장
     console.log("중간테스트" + inputTheater); // 내가 입력한 theater 일부 단어 ex) 샤롯
     
     const OnClick = (e) => {
         window.localStorage.setItem("seatInfoMode","후기");
-        window.localStorage.setItem("theaterName", e);
+        window.localStorage.setItem("theaterName", e); // 공연장 이름
         navigate("/TheaterChar");
     }
 

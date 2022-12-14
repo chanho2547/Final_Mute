@@ -166,6 +166,7 @@ const onClickSeat = (event) => {
         window.localStorage.setItem("floor",1);
         window.localStorage.removeItem("arrString");
         let seatInfoMode = window.localStorage.getItem("seatInfoMode");
+        let theaterName = window.localStorage.getItem("theaterName"); // 공연장 이름 => 찬호 질문
         localStorage.setItem('selectedSeats','[]');
         console.log("seatInfoMode : " + seatInfoMode);
 
