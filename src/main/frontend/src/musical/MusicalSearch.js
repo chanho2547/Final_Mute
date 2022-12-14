@@ -9,8 +9,8 @@ const MusicalSearch = () => {
     let inputMusical = window.localStorage.getItem("inputMusical");
 
     const OnClick = (musicalDetailInfo) => {
-    // window.localStorage.setItem("MusicalDetailInfo", musicalDetailInfo);
-    // navigate("/MusicalDetail");    
+    window.localStorage.setItem("MusicalDetailInfo", musicalDetailInfo);
+    navigate("/MusicalDetail");    
 }
 
 useEffect(() => {

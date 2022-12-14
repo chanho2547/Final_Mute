@@ -13,7 +13,6 @@ import Review from './review/Review';
 import Reservation from './reservation/Reservation';
 import Cs from './cs/Cs';
 import Like from './util/Like';
-import SeatView from './review/SeatView';
 import Membership from './membership/Membership';
 import MusicalDetail from './musical/MusicalDetail';
 import SignUp from "./login/SignUp";
@@ -21,8 +20,8 @@ import Agree from "./login/Agree";
 import SignCom from "./login/SignCom";
 import FindId from "./login/FindId";
 import MyPage from "./mypage/Mypage";
-import TheaterSearch from './theaterInfo/TheaterSearch';
-import MusicalSearch from './musical/MusicalSearch';
+import MusicalSearchList from './musical/MusicalSearchList';
+import MusicalSearch from './musical/MusicalSearch'; // 나중에 삭제 예정
 import FindPwd from './login/FindPwd';
 import TheaterChar from './theaterInfo/TheaterChar';
 import TheaterChung from './theaterInfo/TheaterChung';
@@ -34,6 +33,8 @@ import PaySelect from './payment/PaySelect';
 import PayCancel from './payment/PayCancel';
 import ResultFalse from './payment/ResultFalse';
 import PayTest from './payment/PayTest';
+import TheaterSearch from './theaterInfo/theaterSearch';
+import TheaterSearchList from './theaterInfo/TheaterSearchList';
 
 function App() {
   return (
@@ -53,7 +54,7 @@ function App() {
         <Route path='/Reservation' element={<Reservation />} />
         <Route path='/Like' element={<Like />} />
         <Route path='/Cs' element={<Cs />} />
-        <Route path='/SeatView' element={<SeatView />} />
+        <Route path='/TheaterSearch' element={<TheaterSearch />} />
         <Route path='/MyPage' element={<MyPage />} />
         <Route path='/Membership' element={<Membership/>} />
         <Route path='/MusicalDetail' element={<MusicalDetail/>}/>
@@ -61,13 +62,13 @@ function App() {
         <Route path='/Agree' element={<Agree/>} />
         <Route path='/SignCom' element={<SignCom />} />
         <Route path='/FindId' element={<FindId />} />
-        <Route path='/TheaterSearch' element={<TheaterSearch/>} />
+        <Route path='/TheaterSearchList' element={<TheaterSearchList/>} />
         <Route path='/MusicalSearch' element={<MusicalSearch/>} />
         <Route path='/FindPwd' element={<FindPwd/>} />
         <Route path='/TheaterChar' element={<TheaterChar/>} />
         <Route path='/TheaterChung' element={<TheaterChung/>} />
         <Route path='/RePwd' element={<RePwd/>} />
-
+        <Route path='/MusicalSearchList' element={<MusicalSearchList/>}/>
         <Route path='/payTest' element={<PayTest/>} />
         <Route path="/" exact={true} component={PayReady} />
         <Route path="/payresult" component={PayResult} />
