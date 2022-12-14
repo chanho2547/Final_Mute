@@ -39,7 +39,7 @@ const Home = () => {
         <Link to = "/Review"> ★후기 작성 임시 페이지 </Link> <br></br>
         <Link to = "SeatView">좌석별 후기 페이지</Link> <br></br>
         <Link to = "/MusicalListTmp">뮤지컬 목록 임시 페이지</Link> <br></br>
-        <Link to = "/PayReady">카카오페이 결제 임시 페이지</Link>
+        <Link to = "/PayTest">카카오페이 결제 임시 페이지</Link>
 
         <p><b>뮤지컬 예매 최근 오픈순3</b></p>
         {openedMusical && openedMusical.map(e => (

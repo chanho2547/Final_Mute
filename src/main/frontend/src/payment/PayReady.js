@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import styled from "styled-components";
+import kakaoPay_icon from '../images/payment_icon_yellow_small.png'
 
 const Style = styled.div`
     * {
@@ -96,7 +97,7 @@ class PayReady extends React.Component {
       <Style>
             <div className="container">
                 <h2 className="head-line">카카오페이 결제하기</h2>
-                <a href={next_redirect_pc_url}><img className="kakao" src="image/test.png" alt="카카오페이" /></a>
+                <a href={next_redirect_pc_url}><img src={kakaoPay_icon} className="kakao" alt="카카오페이" /></a>
             </div>
       </Style>
     );

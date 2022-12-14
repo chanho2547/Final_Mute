@@ -33,6 +33,7 @@ import PayResult from './payment/PayResult';
 import PaySelect from './payment/PaySelect';
 import PayCancel from './payment/PayCancel';
 import ResultFalse from './payment/ResultFalse';
+import PayTest from './payment/PayTest';
 
 function App() {
   return (
@@ -67,7 +68,8 @@ function App() {
         <Route path='/TheaterChung' element={<TheaterChung/>} />
         <Route path='/RePwd' element={<RePwd/>} />
 
-        <Route path="/payready" exact={true} component={PayReady} />
+        <Route path='/payTest' element={<PayTest/>} />
+        <Route path="/" exact={true} component={PayReady} />
         <Route path="/payresult" component={PayResult} />
         <Route path="/payselect" component={PaySelect} />
         <Route path="/paycancel" component={PayCancel} />
