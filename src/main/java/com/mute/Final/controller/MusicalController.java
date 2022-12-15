@@ -72,4 +72,11 @@ public class MusicalController {
         return musicalDetailApiService.detailFromJsonObj(result);
     }
 
+    // 전체 뮤지컬 정보 DB에서 불러오기
+    @GetMapping("musical/db/list")
+    public ResponseEntity<List<MusicalDTO>> getMusicalDBList() {
+        List<MusicalDTO> list= musicalService.getMusicalDBList();
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
 }

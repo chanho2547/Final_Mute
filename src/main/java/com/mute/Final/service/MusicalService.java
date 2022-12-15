@@ -18,28 +18,45 @@ public class MusicalService {
     private final MusicalRepository musicalRepository;
 
         // 뮤지컬 검색
-        public List<MusicalDTO> searchMusicalList(String musicalName) {
-            List<MusicalDTO> musicalDTOS = new ArrayList<>();
-            List<Musical> musicalList = musicalRepository.findByMusicalNameLike("%" + musicalName + "%");
-//            List<Musical> musicalList = musicalRepository.findAll();
-            for (Musical e : musicalList) {
-                MusicalDTO musicalDTO = new MusicalDTO();
-                musicalDTO.setMusicalId(e.getMusicalId()); // 공연 고유 번호
-                musicalDTO.setMusicalName(e.getMusicalName()); // 공연 이름
-                musicalDTO.setMusicalStart(e.getMusicalStart()); // 공연 시작일
-                musicalDTO.setMusicalEnd(e.getMusicalEnd()); // 공연 종료일
-                musicalDTO.setTheaterName(e.getTheaterName()); // 공연장 이름
-                musicalDTO.setMusicalPoster(e.getMusicalPoster()); // 공연 포스터
-                musicalDTO.setMusicalStatus("혹시 이것때문에..?에러..?");
-                musicalDTOS.add(musicalDTO);
-            }
-            return musicalDTOS;
-        }
-
-        // 뮤지컬 TOP3 티켓 오픈 빠른 순 조회
-        public List<MusicalDTO> searchTopTicket() {
+    public List<MusicalDTO> searchMusicalList(String musicalName) {
         List<MusicalDTO> musicalDTOS = new ArrayList<>();
-        List<Musical> musicalList = musicalRepository.findAllSysdateBefore();
+        List<Musical> musicalList = musicalRepository.findByMusicalNameLike("%" + musicalName + "%");
+//            List<Musical> musicalList = musicalRepository.findAll();
+        for (Musical e : musicalList) {
+            MusicalDTO musicalDTO = new MusicalDTO();
+            musicalDTO.setMusicalId(e.getMusicalId()); // 공연 고유 번호
+            musicalDTO.setMusicalName(e.getMusicalName()); // 공연 이름
+            musicalDTO.setMusicalStart(e.getMusicalStart()); // 공연 시작일
+            musicalDTO.setMusicalEnd(e.getMusicalEnd()); // 공연 종료일
+            musicalDTO.setTheaterName(e.getTheaterName()); // 공연장 이름
+            musicalDTO.setMusicalPoster(e.getMusicalPoster()); // 공연 포스터
+            musicalDTOS.add(musicalDTO);
+        }
+        return musicalDTOS;
+    }
+
+    // 뮤지컬 TOP3 티켓 오픈 빠른 순 조회
+    public List<MusicalDTO> searchTopTicket() {
+    List<MusicalDTO> musicalDTOS = new ArrayList<>();
+    List<Musical> musicalList = musicalRepository.findAllSysdateBefore();
+    for(Musical e : musicalList) {
+        MusicalDTO musicalDTO = new MusicalDTO();
+        musicalDTO.setMusicalId(e.getMusicalId()); // 공연 고유 번호
+        musicalDTO.setMusicalName(e.getMusicalName()); // 공연 이름
+        musicalDTO.setMusicalStart(e.getMusicalStart()); // 공연 시작일
+        musicalDTO.setMusicalEnd(e.getMusicalEnd()); // 공연 종료일
+        musicalDTO.setMusicalTicketStart(e.getMusicalTicketStart()); // 공연 티켓 예메 시작일
+        musicalDTO.setTheaterName(e.getTheaterName()); // 공연장 이름
+        musicalDTO.setMusicalPoster(e.getMusicalPoster()); // 공연 포스터
+        musicalDTOS.add(musicalDTO);
+    }
+        return musicalDTOS;
+    }
+
+    // 뮤지컬 TOP3 티켓 오픈 예정 순 조회
+    public List<MusicalDTO> searchTopTicket2() {
+        List<MusicalDTO> musicalDTOS = new ArrayList<>();
+        List<Musical> musicalList = musicalRepository.findAllSysdateAfter();
         for(Musical e : musicalList) {
             MusicalDTO musicalDTO = new MusicalDTO();
             musicalDTO.setMusicalId(e.getMusicalId()); // 공연 고유 번호
@@ -51,26 +68,28 @@ public class MusicalService {
             musicalDTO.setMusicalPoster(e.getMusicalPoster()); // 공연 포스터
             musicalDTOS.add(musicalDTO);
         }
-            return musicalDTOS;
-        }
+        return musicalDTOS;
+    }
 
-        // 뮤지컬 TOP3 티켓 오픈 예정 순 조회
-        public List<MusicalDTO> searchTopTicket2() {
-            List<MusicalDTO> musicalDTOS = new ArrayList<>();
-            List<Musical> musicalList = musicalRepository.findAllSysdateAfter();
-            for(Musical e : musicalList) {
-                MusicalDTO musicalDTO = new MusicalDTO();
-                musicalDTO.setMusicalId(e.getMusicalId()); // 공연 고유 번호
-                musicalDTO.setMusicalName(e.getMusicalName()); // 공연 이름
-                musicalDTO.setMusicalStart(e.getMusicalStart()); // 공연 시작일
-                musicalDTO.setMusicalEnd(e.getMusicalEnd()); // 공연 종료일
-                musicalDTO.setMusicalTicketStart(e.getMusicalTicketStart()); // 공연 티켓 예메 시작일
-                musicalDTO.setTheaterName(e.getTheaterName()); // 공연장 이름
-                musicalDTO.setMusicalPoster(e.getMusicalPoster()); // 공연 포스터
-                musicalDTOS.add(musicalDTO);
-            }
-            return musicalDTOS;
+    // 전체 뮤지컬 정보 DB에서 불러오기
+    public List<MusicalDTO> getMusicalDBList() {
+        List<MusicalDTO> musicalDTOS = new ArrayList<>();
+        List<Musical> musicalList = musicalRepository.findAll();
+//            List<Musical> musicalList = musicalRepository.findAll();
+        for (Musical e : musicalList) {
+            MusicalDTO musicalDTO = new MusicalDTO();
+            musicalDTO.setMusicalId(e.getMusicalId()); // 공연 고유 번호
+            musicalDTO.setMusicalName(e.getMusicalName()); // 공연 이름
+            musicalDTO.setMusicalStart(e.getMusicalStart()); // 공연 시작일
+            musicalDTO.setMusicalEnd(e.getMusicalEnd()); // 공연 종료일
+            musicalDTO.setTheaterName(e.getTheaterName()); // 공연장 이름
+            musicalDTO.setMusicalPoster(e.getMusicalPoster()); // 공연 포스터
+            musicalDTO.setMusicalStatus(e.getMusicalStatus()); // 뮤지컬 상태
+            musicalDTO.setMusicalTicketStart(e.getMusicalTicketStart()); // 뮤지컬 시작 날짜
+            musicalDTOS.add(musicalDTO);
         }
+        return musicalDTOS;
+    }
 
 
 
