@@ -44,7 +44,7 @@ const Reservation = () => {
     useEffect(() => {
         window.localStorage.setItem("seatInfoMode","예매");
         console.log("현재 seatInfoMode : " + window.localStorage.getItem("seatInfoMode"));
-        console.log(`현재 뮤지컬 : ${musicalId} \n 현재 좌석 : ${seatPos} \n 현재 선택 날짜 : ${seatNum} \n`);
+        console.log(`현재 뮤지컬 : ${musicalId} \n 현재 좌석 : ${seatPos} \n 현재 선택 날짜 : ${seeDate} \n`);
     })
 
     
@@ -55,6 +55,7 @@ const Reservation = () => {
 
     // 최종 결제확인시 실행되는 버튼 (결제 완료)
     const insertTicketFunction = async() => {
+        console.log("insertTicketFunction 실행");
         const date = new Date();
         setTicketDate(date.toLocaleString('ko-kr'));// 현재 시점을 티켓 구매날짜,시간으로 설정한다
 
@@ -65,6 +66,7 @@ const Reservation = () => {
         setPaymentId(null); 
         try {
             // paymentId 설정이 안됌
+            console.log("insertTicketFunction 실행 - try");
             setUserNum(window.localStorage.getItem("whoLoginUserNum"));
             const res = await MuteApi.insertTicket(seatNum,seatPos,seeDate,ticketDate,userNum,musicalId,paymentId);
             console.log("res.data : " + res.data);

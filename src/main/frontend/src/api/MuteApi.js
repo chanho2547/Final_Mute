@@ -183,7 +183,7 @@ const MuteApi =  {
             musicalId: musicalId,
             paymentId : paymentId
         }
-        return await axios.post("ticket/insert", ticketObj);
+        return await axios.post("/ticket/insert", ticketObj);
     },
     
     openedMusical: async function() {
