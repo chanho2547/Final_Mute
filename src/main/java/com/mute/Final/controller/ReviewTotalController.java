@@ -29,7 +29,7 @@ public class ReviewTotalController {
 
     // 뮤지컬 총평 후기 view
     @GetMapping("/totalView")
-    public ResponseEntity<List<ReviewTotalDTO>> totalView(@RequestParam int musicalId) {
+    public ResponseEntity<List<ReviewTotalDTO>> totalView(int musicalId) {
         List<ReviewTotalDTO> list = reviewTotalService.totalList(musicalId);
         return new ResponseEntity(list, HttpStatus.OK);
     }
