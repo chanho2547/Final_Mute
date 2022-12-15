@@ -35,6 +35,7 @@ public class Musical {
         this.theaterName = item.getString("fcltynm");
         this.musicalStart = LocalDate.parse(tmp1.replace(".", "-"));
         this.musicalEnd = LocalDate.parse(tmp2.replace(".", "-"));
+        this.musicalTicketStart = musicalStart.minusMonths(1);
         this.musicalStatus = item.getString("prfstate");
         this.musicalPoster = item.getString("poster");
     }

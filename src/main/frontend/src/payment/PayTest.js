@@ -19,7 +19,6 @@ const Style = styled.div`
         justify-content: center;
     }
     .head-line {
-        font-size: 3em;
         font-weight: bold;
     }
 `;
