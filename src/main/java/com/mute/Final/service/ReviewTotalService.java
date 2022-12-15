@@ -53,7 +53,7 @@ public class ReviewTotalService {
         for(ReviewTotal e : totalList) {
             ReviewTotalDTO reviewTotalDTO = new ReviewTotalDTO();
             reviewTotalDTO.setReviewMuId(e.getReviewMuId()); // 총평 후기 글 번호
-            reviewTotalDTO.setMember(e.getMember()); // 회원번호
+            reviewTotalDTO.setMember(e.getMember().getUserId()); // 회원번호
             reviewTotalDTO.setScoreAvgTotal(e.getScoreAvgTotal()); // 평균 총평 별점
             reviewTotalDTO.setScoreStory(e.getScoreStory()); // 스토리 별점
             reviewTotalDTO.setScoreDirect(e.getScoreDirect()); // 연출 별점
