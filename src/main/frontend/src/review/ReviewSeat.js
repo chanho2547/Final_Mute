@@ -3,14 +3,17 @@ import { useState } from "react";
 import styled from "styled-components";
 import MuteApi from "../api/MuteApi";
 import Rating from "../util/Rating";
+import TheaterModal from "./TheaterModal";
+import { Link, useNavigate } from "react-router-dom";
 
 // 좌석 후기 등록 - 도연 작업 중 
 
 const ReviewSeat = () => {
+    const navigate = useNavigate();
 
      // 취소 버튼 누르면 첫 화면으로..
     const CancelButton = () => {   
-        window.location.replace('/Review');
+        navigate('/Review');
     }
 
     const [seatRating, setSeatRating] = useState(''); // 좌석 별점
@@ -19,7 +22,22 @@ const ReviewSeat = () => {
     const [lightRating, setLightRating] = useState(''); // 조명 별점
     const [seatReview, setSeatReview] = useState(''); // 뮤지컬 후기 텍스트
 
+    // 모달
+    const [modalTheater, setModelTheater] = useState(false); // 후기 작성 버튼 눌렀을 때
+
+    const charlotte = () => { // 샤롯데 좌석 선택하러 가기
+        navigate("/TheaterChar"); 
+    }
     
+    const chungmu = () => { // 충무 좌석 선택하러 가기
+        navigate("/TheaterChung"); 
+    }
+
+    // 후기 작성 버튼 누르면 극장 선택 모달띄우기
+    const SeatClick = () => {
+        setModelTheater(true);
+    }
+
     // Api 호출
     // 후기 작성 버튼이 눌려지면 동작하는 함수
     const WriteSeatButton = async() => {
@@ -60,12 +78,10 @@ const ReviewSeat = () => {
         setLightRating(text);
     }
 
-
-
-
     return(
         <>
             <div>좌석 후기</div>
+            <button onClick={SeatClick}>좌석 선택</button>
             <div>
                 <fieldset>
                     <div> 좌석 <Rating onClick={setSeatRating} propFunction={highFunction1}/></div>
@@ -80,6 +96,7 @@ const ReviewSeat = () => {
                 <button onClick={WriteSeatButton}>확인</button>
                 <button onClick={CancelButton}>취소</button>
             </div>
+            {modalTheater && <TheaterModal open={modalTheater} confirm={charlotte} close={chungmu} type={true} header="확인">극장을 선택해주세요.</TheaterModal>}
         </>
     );
 }

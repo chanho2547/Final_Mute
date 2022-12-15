@@ -4,8 +4,7 @@ import styled from "styled-components";
 import ReviewList from "./ReviewList";
 import ReviewTotal from "./ReviewTotal";
 import ReviewSeat from "./ReviewSeat";
-import Theater from "../theaterInfo/TheaterChar";
-import TheaterChar from "../theaterInfo/TheaterChar";
+import ReviewTheater from "./TheaterModal";
 
 // 후기 탭 전체 틀 - 도연 작업 중
 
@@ -50,11 +49,13 @@ const Review = () => {
             {count === 1 ? <ReviewList/> : null}
             {count === 0 ? setCountB(0) : null}
             </TmpBox> */}
-            {(count === 0 ? null :  <button onClick={onClickBefore}>이전으로</button>)}
-            {(count === 3 ? null :  <button onClick={onClickNext}>다음으로</button>)}
+
+            {/* 버튼 필요하면 여기 두줄 살리기 */}
+            {/* {(count === 0 ? null :  <button onClick={onClickBefore}>이전으로</button>)}
+            {(count === 3 ? null :  <button onClick={onClickNext}>다음으로</button>)} */}
 
           
-            {/* <button onClick={onClickBefore}>{ <ReviewList /> ? null : "이전으류" }</button> */}
+            {/* <button onClick={onClickBefore}>{ <ReviewList /> ? null : "이전으로" }</button> */}
             {/* <button onClick={onClickNext}>{ <ReviewSeat/> ? null : "다음으로" }</button> */}
             <TmpBox>
             {/* {count === -4 ? setCount(0) : null}
@@ -62,9 +63,9 @@ const Review = () => {
             {count === -2 ? <Theater /> : null }
             {count === -1 ? <ReviewTotal /> : null } */}
             {count === 0 ? <ReviewList propFunction={highFunction}/> : null} 
-            {count === 1 ? <TheaterChar propFunction={highFunction}/> : null}
-            {count === 2 ? <ReviewTotal propFunction={highFunction}/> : null}
-            {count === 3 ? <ReviewSeat propFunction={highFunction}/> : null}
+            {/* {count === 1 ? <ReviewTheater propFunction={highFunction}/> : null} */}
+            {count === 1 ? <ReviewTotal propFunction={highFunction}/> : null}
+            {count === 2 ? <ReviewSeat propFunction={highFunction}/> : null}
             {/* {count === 4 ? setCount(0) : null} */}
             </TmpBox>
  
