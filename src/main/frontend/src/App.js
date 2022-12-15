@@ -36,6 +36,7 @@ import PayTest from './payment/PayTest';
 import TheaterSearch from './theaterInfo/TheaterSearch';
 import TheaterSearchList from './theaterInfo/TheaterSearchList';
 import QnA from "./util/QnA";
+import Alarm from './util/Alarm';
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
         <Route path="/FirstFloorChung" element={<FirstFloorChung />} />
         <Route path="/SecondFloorChung" element={<SecondFloorChung />} />
         <Route path="/ThirdFloorChung" element={<ThirdFloorChung />} />
+        <Route path='/Alarm' element={Alarm}></Route>
         <Route path='/Login' element={<Login />} />
         <Route path='/SignUp' element={<SignUp />} />
         <Route path='/Review' element={<Review />} />

@@ -39,6 +39,7 @@ const Keyword = styled.div`
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 const Header = () => {
+  
     const navigate = useNavigate();
     // 로그인했을 경우 현재 ID 표시
     let whoLoginNow = window.localStorage.getItem("whoLogin");
@@ -61,6 +62,10 @@ const Header = () => {
       navigate("/MusicalSearchList")
     }
 
+    const onClickAlarm = () => {
+      navigate("/Alarm")
+    }
+
     return(
         <>
         <Menu>
@@ -74,7 +79,7 @@ const Header = () => {
             : 
             // 로그인했을 때 => 알림, ~~~님, 로그아웃, 마이페이지, 멤버십
             (<>
-             <FaBell color="white"/>
+             <FaBell color="white" onClick={onClickAlarm}/>
              <div className="menu_item">{whoLoginNow}님</div>
              <button onClick={onClickLogout} className="menu_item">로그아웃</button>
              <Link to={"/MyPage"} className="menu_item">마이페이지</Link>
