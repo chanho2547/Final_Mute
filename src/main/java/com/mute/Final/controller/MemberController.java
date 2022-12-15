@@ -129,5 +129,16 @@ public class MemberController {
             return new ResponseEntity(false, HttpStatus.OK);
         }
     }
+
+    // 아이디 (userId) 입력 -> 회원번호 (userNum) 반환
+    @PostMapping("/id_to_num")
+    public ResponseEntity<Long> memberNumInfo(@RequestBody Map<String, String> userId) {
+        String id = userId.get("userId");
+        Long result = memberService.findByUserId(id);
+        return new ResponseEntity<>(result,HttpStatus.OK);
+//        if(memberDTO.isOk()) return  new ResponseEntity(memberDTO, HttpStatus.OK);
+//        else return new ResponseEntity(false, HttpStatus.OK);
+    }
+
 }
 
