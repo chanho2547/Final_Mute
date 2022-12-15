@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Modal from "../util/Modal";
 import heartIcon from "../images/heart.png";
 import heartIcon2 from "../images/heart2.png";
+import Review from "../review/Review";
 
 // 선택된 뮤지컬 상세페이지
 const MusicalDetail = (props) => {
@@ -93,6 +94,8 @@ const MusicalDetail = (props) => {
             <p className="plan">{e.musicalPlan}</p>
             </div>
         ))}
+
+        <Review/>
 
 
 {/* <IsLikeBtn onClick={() => onClickLike()}>

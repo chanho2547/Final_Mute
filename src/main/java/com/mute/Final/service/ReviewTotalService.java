@@ -47,19 +47,21 @@ public class ReviewTotalService {
 
     // 뮤지컬 총평 후기 view
 
-    public List<ReviewTotalDTO> totalList(int musicalId) {
+    public List<ReviewTotalDTO> totalList(Musical musicalId) {
         List<ReviewTotalDTO> reviewTotalDTOS = new ArrayList<>();
         List<ReviewTotal> totalList = reviewTotalRepository.findByMusicalId(musicalId);
         for(ReviewTotal e : totalList) {
             ReviewTotalDTO reviewTotalDTO = new ReviewTotalDTO();
             reviewTotalDTO.setReviewMuId(e.getReviewMuId()); // 총평 후기 글 번호
-            reviewTotalDTO.setMember(e.getMember().getUserId()); // 회원번호
+            reviewTotalDTO.setMusicalId(e.getMusicalId()); // 뮤지컬 아이디
+            reviewTotalDTO.setMember(e.getMember().getUserId()); // 회원 아이디
             reviewTotalDTO.setScoreAvgTotal(e.getScoreAvgTotal()); // 평균 총평 별점
             reviewTotalDTO.setScoreStory(e.getScoreStory()); // 스토리 별점
             reviewTotalDTO.setScoreDirect(e.getScoreDirect()); // 연출 별점
             reviewTotalDTO.setScoreCast(e.getScoreCast()); // 공연 티켓 예메 시작일
             reviewTotalDTO.setScoreNumber(e.getScoreNumber()); // 공연장 이름
             reviewTotalDTO.setReviewMuTxt(e.getReviewMuTxt()); // 공연 포스터
+            reviewTotalDTO.setWriteDate(e.getWriteDate()); // 작성일
             reviewTotalDTOS.add(reviewTotalDTO);
         }
         return reviewTotalDTOS;
