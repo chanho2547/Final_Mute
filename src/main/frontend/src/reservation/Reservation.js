@@ -73,6 +73,7 @@ const Reservation = () => {
         try {
             // 아직 userNum, paymentId 설정이 안됌
             const res = await MuteApi.insertTicket(seatNum,seatPos,seeDate,ticketDate,userNum,musicalId,paymentId);
+            
             alert("결제가 완료되었습니다");
             
 

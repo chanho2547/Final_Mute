@@ -56,6 +56,7 @@ const Login = () => {
         }
     }
 
+
     // API호출
     const onClickLogin = async() => {
         try {
@@ -65,6 +66,9 @@ const Login = () => {
             if(res.data === 200) {
                 window.localStorage.setItem("whoLogin",inputId);
                 window.localStorage.setItem("whoPwd",inputPwd);
+                const userNum = await MuteApi.userIdToNum(inputId);
+                window.localStorage.setItem("whoLoginUserNum",userNum.data);
+
                 console.log("로그인 성공");
                 navigate('/');
 

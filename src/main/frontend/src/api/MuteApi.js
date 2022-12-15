@@ -217,7 +217,7 @@ const MuteApi =  {
         const userNumInfo = {
             userId : userId
         }
-        return await axios.post("/id_to_num",userNumInfo);
+        return await axios.post("/member/id_to_num",userNumInfo);
     }
 
 }
