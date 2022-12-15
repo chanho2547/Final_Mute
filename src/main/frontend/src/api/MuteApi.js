@@ -70,20 +70,25 @@ const MuteApi =  {
     //     return await axios.post("review/deleteReview", reviewObj);
     // },
 
+    // // 뮤지컬 후기 view - 도연
+    // ReviewInfo : async function(reviewMuId, musical, member, writeDate, scoreStory, scoreDirect, scoreCast, scoreNumber, reviewMuTxt) {
+    //     const reviewObj = {
+    //         reviewMuId : reviewMuId, // 뮤지컬 후기 글 번호
+    //         musical : musical, // 공연 ID
+    //         member: member, // 회원번호
+    //         writeDate : writeDate, // 작성일
+    //         scoreStory: scoreStory,// 스토리 별점
+    //         scoreDirect: scoreDirect, // 연출 별점
+    //         scoreCast : scoreCast, // 캐스팅 별점
+    //         scoreNumber : scoreNumber, // 넘버 별점
+    //         reviewMuTxt : reviewMuTxt // 뮤지컬 후기 텍스트
+    //     }
+    //     return await axios.get("totalView", reviewObj);
+    // },
+
     // 뮤지컬 후기 view - 도연
-    ReviewInfo : async function(reviewMuId, musical, member, writeDate, scoreStory, scoreDirect, scoreCast, scoreNumber, reviewMuTxt) {
-        const reviewObj = {
-            reviewMuId : reviewMuId, // 뮤지컬 후기 글 번호
-            musical : musical, // 공연 ID
-            member: member, // 회원번호
-            writeDate : writeDate, // 작성일
-            scoreStory: scoreStory,// 스토리 별점
-            scoreDirect: scoreDirect, // 연출 별점
-            scoreCast : scoreCast, // 캐스팅 별점
-            scoreNumber : scoreNumber, // 넘버 별점
-            reviewMuTxt : reviewMuTxt // 뮤지컬 후기 텍스트
-        }
-        return await axios.get("totalView", reviewObj);
+    ReviewInfo : async function() {
+        return await axios.get("totalView");
     },
 
 

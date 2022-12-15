@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Modal from "../util/Modal";
 import ReviewTotal from "./ReviewTotal";
 import axios from "axios";
+import MuteApi from "../api/MuteApi";
 
 
 // 뮤지컬 총평 후기 view - 도연 작업중..
@@ -21,7 +22,6 @@ const ReviewList = (props) => {
         setModelLogin(false);
     }
 
-
     // 후기 작성 버튼 눌렀을 때 로그인 이면 OK, 로그인 안했으면 모달 띄우기
     const WriteButton = () => {
         let checkLogin = window.localStorage.getItem("whoLogin");
@@ -35,28 +35,49 @@ const ReviewList = (props) => {
         } 
     };
 
+
+    // Api 호출
+    useEffect(() => {
+        const ReviewData = async () => {
+            try{
+                let response = await MuteApi.ReviewInfo();
+                setReviewInfo(response.data);
+
+            } catch (e) {
+                console.log(e + "후기 불러오기 실패");
+            }
+        };
+        ReviewData();
+    }, []);
+
+    // const OnClick = (musicalId) => {
+    //     window.localStorage.setItem("musicalId", musicalId);
+    //     navigate('/MusicalDetail');
+    // }
+
+
+
     return(
         <>
-            
-        {/* {reviewInfo && reviewInfo.map(Review => ( */}
-        <>
         <h3>뮤지컬 관람 후기</h3>
-        <button onClick={WriteButton}>후기 작성</button>
-        <fieldset>
-            <p>회원 총 평점 [{}]</p>
-        </fieldset>
-        <fieldset>
-            <span>{whoLogin}</span><p>총점{}</p>
-            <span>스토리 {}</span> 
-            <span>연출 {}</span> 
-            <span>캐스팅 {}</span> 
-            <span>넘버 {}</span>
-            <p>텍스트 {}</p>
-        </fieldset>
-
+        {reviewInfo && reviewInfo.map(e => (
+            <div>
+            {/* <div onClick={() => OnClickPoster(e.musicalId) }></div> */}
+            <button onClick={WriteButton}>후기 작성</button>
+            <div>
+                <p>회원 총 평점 {}</p>
+            </div>
+            <div>
+                <span>{whoLogin}</span><p>총점{e.scoreAvgTotal}</p>
+                <span>스토리 {e.scoreStory}</span> 
+                <span>연출 {e.scoreDirect}</span> 
+                <span>캐스팅 {e.scoreCast}</span> 
+                <span>넘버 {e.scoreNumber}</span>
+                <p>텍스트 {e.totalReview}</p>
+            </div>
+            </div>
+        ))} 
         {modalLogin&& <Modal open={modalLogin} close={closeLogin} type={true}>로그인이 필요한 서비스입니다.</Modal>}
-        </>
-        {/* ))} */}
         </>
 
     );
