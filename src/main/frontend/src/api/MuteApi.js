@@ -235,7 +235,7 @@ const MuteApi =  {
         // const payInfo = {
         //     musicalName : musicalName
         // }    
-        return await axios.get("/pay");
+        return await axios.post("/pay");
     },
 
 }
