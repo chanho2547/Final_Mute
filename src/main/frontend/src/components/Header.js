@@ -7,6 +7,8 @@ import React from "react";
 import Modal from "../util/Modal";
 import Alarm from "../util/Alarm";
 
+const HeaderContainer = styled.div``;
+
 const Menu = styled.div`
   background-color: #CF0A0A;
   width: 100%;
@@ -76,6 +78,7 @@ const Header = () => {
 
     return(
         <>
+        <HeaderContainer>
         <Menu>
             {!whoLoginNow ?
             // 로그인하지 않았을 때 => 로그인, 회원가입, 찜하기
@@ -109,10 +112,8 @@ const Header = () => {
         <input onChange={onChangeInput} placeholder="뮤지컬을 검색하세요"></input>
         <button onClick={onClickInput}><BsSearch/></button>
         </Keyword>
+        </HeaderContainer>
         {alarmModal && <Modal open={alarmModal} close={closeModal} header="확인"><Alarm/></Modal>}  
-
-
-
         </>
     )
 

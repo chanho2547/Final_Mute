@@ -34,7 +34,7 @@ const OnClick = (musicalId) => {
             {searchList && searchList.map(e => (
                 // 만약 OnClick(e.musicalName)이라고 적으면 로컬스토리지에 musicalName저장됨
                 <div onClick={() => OnClick(e.musicalId)}>
-                <img src= {e.musicalPoster} />
+                <img src= {e.musicalPoster} size width={180} height={250} />
                 <div>{e.musicalName}</div>
                 <div>{e.musicalStart}</div>
                 <div>{e.musicalEnd}</div>
