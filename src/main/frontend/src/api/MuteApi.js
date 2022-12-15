@@ -211,8 +211,14 @@ const MuteApi =  {
             musicalId : mt20id
         }
         return await axios.post("/wish/update", alarmUpdate)
-    }
+    },
 
+    userIdToNum: async function(userId) {
+        const userNumInfo = {
+            userId : userId
+        }
+        return await axios.post("/id_to_num",userNumInfo);
+    }
 
 }
 

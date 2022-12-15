@@ -24,7 +24,7 @@ useEffect(() => {
 // 뮤지컬 클릭
 const OnClick = (musicalId) => {
     window.localStorage.setItem("musicalId", musicalId)
-    console.log("로컬스토리지 : " + musicalId)
+    // console.log("로컬스토리지 : " + musicalId)
     navigate("/MusicalDetail")
 }
 

@@ -10,6 +10,7 @@ import MuteApi from "../../api/MuteApi";
 let isSeatRender = false; // 무한 루프 Stop
 
 const FirstFloorChar = (props) => {  
+    const [modal, setModal] = useState(false);
 
     let arr = [];
     let arrString;
@@ -121,17 +122,11 @@ const onClickSeat = (event) => {
        
     }
 
-    else if (window.localStorage.getItem("seatInfoMode") === "후기") { // 후기일 때 onClick상황
-        props.propsFunction(pkNum);
-        // const SeatEach = async () => {
-        //     try {
-        //         let response = await MuteApi.seatReview(pkNum); // 좌석별 후기 불러오기
-        //         setSeatReviewInfo(response.data);
-                
-        //     } catch (e) {  
-        //         console.log(e + "실패 입니다");
-        //     }
-        // };
+    else if (window.localStorage.getItem("seatInfoMode") === "후기") {
+        // if(window.localStorage.getItem(pkNum) === null )
+        // 후기일 때 onClick상황
+
+        // props.propsFunction(pkNum);
     } 
     
 

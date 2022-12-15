@@ -41,7 +41,7 @@ const TheaterSearchList = () => {
             <>
                 <div onClick={()=>OnClick(inputTheater.theaterName)}>
                     <div className="theater">
-                    <img className="theaterPoster" src = {inputTheater.theaterPoster} size width={400} height={330}/>
+                    <img className="theaterPoster" src = {inputTheater.theaterPoster} size width={300} height={240}/>
                     <div className="theaterName">공연장 이름 : {inputTheater.theaterName}</div>
                     <div className="theaterAddr">공연장 주소 : {inputTheater.theaterAddr}</div>
                     <div className="theaterSeats">공연장 좌석 개수 : {inputTheater.theaterSeats}석</div>

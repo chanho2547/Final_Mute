@@ -6,9 +6,10 @@ import { useNavigate } from "react-router-dom";
 
 // 선택된 뮤지컬 상세페이지
 const MusicalDetail = (props) => {
-  const [wish, setWish] = useState(false); // 찜하기
+  const [wish, setWish] = useState(false); // 찜하기 등록 취소
   const [musicalDetail,setMusicalDetail] = useState();
-  const musicalId = window.localStorage.getItem("musicalId"); // 목록에서 가져온 뮤지컬id
+  const musicalId = window.localStorage.getItem("musicalId"); // 선택한 뮤지컬id
+  const userNum = window.localStorage.getItem("userNum"); //
   console.log(musicalId);
 
   useEffect(() => {
@@ -23,10 +24,13 @@ const MusicalDetail = (props) => {
          
       };
       MusicalData();
-
   }, []);
 
+  
   const OnClickPoster = (e) => {
+  }
+
+  const OnClickWish = async() => {
 
   }
 
@@ -47,6 +51,7 @@ const MusicalDetail = (props) => {
           <p className="plan">{e.musicalPlan}</p>
           </div>
       ))}
+          <div on></div>
       
       </>
   );
