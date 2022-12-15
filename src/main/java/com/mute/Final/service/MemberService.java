@@ -174,4 +174,10 @@ public class MemberService {
             return false;
         }
     }
+
+    // 아이디 (userId) 입력 -> 회원번호 (userNum) 반환
+    public Long findByUserId(String userId) {
+        Member member = memberRepository.findByUserId(userId);
+        return member.getUserNum();
+    }
 }

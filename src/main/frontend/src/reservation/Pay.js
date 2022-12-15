@@ -16,7 +16,7 @@ const Pay = (props) => {
             {/* {props.seat[0]}
             {props.seat[1]} */}
             <p>날짜 : {props.date}</p>
-            <button onClick={props.insertTicket} > 예매내역 저장 (결제완료)</button>
+            <button onClick={props.insertTicket()} > 예매내역 저장 (결제완료)</button>
     
 
         </>
