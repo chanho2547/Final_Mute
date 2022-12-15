@@ -2,6 +2,7 @@ package com.mute.Final.dto;
 
 import lombok.Data;
 
+// 전체 결제 정보
 @Data
 public class PayAmountDTO {
     private Integer total, tax_free, vat, point, discount;

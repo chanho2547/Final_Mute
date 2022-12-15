@@ -2,6 +2,7 @@ package com.mute.Final.dto;
 
 import lombok.Data;
 
+// 카드 결제 정보
 @Data
 public class PayCardDTO {
     private String purchase_corp, purchase_corp_code; // 매입 카드사 한글명, 매입 카드사 코드

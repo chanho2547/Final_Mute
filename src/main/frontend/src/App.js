@@ -73,11 +73,11 @@ function App() {
         <Route path='/RePwd' element={<RePwd/>} />
         <Route path='/MusicalSearchList' element={<MusicalSearchList/>}/>
         <Route path='/payTest' element={<PayTest/>} />
-        <Route path="/" exact={true} component={PayReady} />
+        {/* <Route path="/" exact={true} component={PayReady} />
         <Route path="/payresult" component={PayResult} />
         <Route path="/payselect" component={PaySelect} />
         <Route path="/paycancel" component={PayCancel} />
-        <Route path="/resultfalse" component={ResultFalse} />
+        <Route path="/resultfalse" component={ResultFalse} /> */}
         <Route path="/QnA" element={<QnA/>} />
       </Routes>
       <Footer/>
