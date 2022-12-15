@@ -33,8 +33,8 @@ public class MusicalDetailApiService {
     @Value("${api.serviceKey}")
     private String key;
 
-    @Autowired
-    MusicalRepository musicalRepository;
+//    @Autowired
+//    MusicalRepository musicalRepository;
 
     public String MusicalDetailApi(@PathVariable String mt20id) {
 
@@ -132,3 +132,16 @@ public class MusicalDetailApiService {
         return list;
     }
 }
+
+
+
+////            // db에 저장 -> 오류나서 막아둠
+////            for(int i = 0; i < jsonArr.size(); i++) {
+////                JSONObject tmp = (JSONObject) jsonArr.get(i);
+////                Musical musical = new Musical(
+////                        (String)tmp.get("mt20id"), (String)tmp.get("prfnm"),
+////                        (String)tmp.get("fcltynm"), (Date)tmp.get("prfpdfrom"),
+////                        (Date)tmp.get("prfpdto"), (String)tmp.get("poster"));
+////
+////                musicalRepository.save(musical);
+////            }
