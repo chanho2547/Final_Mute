@@ -23,6 +23,7 @@ const Reservation = () => {
 
     // 뮤지컬 선택시
     const [musicalId,setMusicalId] = useState(); // 뮤지컬 이름
+    const [musicalName,setMusicalName] = useState(); // 뮤지컬 이름
     
     // 좌석 선택시
     const [seatNum,setSeatNum] = useState(); // pk
@@ -92,10 +93,16 @@ const Reservation = () => {
         setSeeDate(e);
     } 
 
+    const addMusicalName = (e) => {
+        console.log("musicalName 입력 완료 : " + e);
+        setMusicalName(e);
+    } 
+
     const onClickNext = () => {
         console.log("현재 카운트 : "+count);
         setCount(count + 1); 
     }
+    
 
      // insertTicket - seatNum, seatPos, seeDate, ticketDate, userNum, musicalId, paymentId 순서
     let resInfo = {
@@ -116,7 +123,7 @@ const Reservation = () => {
         <TmpBox>
         {/* 각 컴포넌트에서, 기본적으로 highFunction을 넣어줌 (count++) */}
         {/* 각 컴포넌트에서, 추가적으로 예매에 필요한 정보들을 가져오기 위한 함수들을 만듦 */}
-        {count === 0 ? <SelectMusical propFunction={highFunction} addMusicalId={addMusicalId}/> : null}
+        {count === 0 ? <SelectMusical propFunction={highFunction} addMusicalId={addMusicalId} addMusicalName={addMusicalName}/> : null}
         {count === 1 ? <SelectDate propFunction={highFunction} addSeeDate={addSeeDate}/> : null }
         {count === 2 ? <SelectSeat propFunction={highFunction} addSeatNum={addSeatNum} addSeatPos={addSeatPos} /> : null }
         {count === 3 ? <Pay propFunction={highFunction} insertTicket={insertTicketFunction} resInfo={resInfo} /> : null}

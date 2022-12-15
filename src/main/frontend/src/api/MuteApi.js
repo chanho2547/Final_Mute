@@ -223,6 +223,10 @@ const MuteApi =  {
             userId : userId
         }
         return await axios.post("/member/id_to_num",userNumInfo);
+    },
+
+    musicalDBList: async function() {
+        return await axios.get("musical/db/list")
     }
 
 }
