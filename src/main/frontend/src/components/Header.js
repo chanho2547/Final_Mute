@@ -4,6 +4,8 @@ import {Link, useNavigate} from "react-router-dom";
 import { FaBell } from 'react-icons/fa';
 import { BsSearch } from 'react-icons/bs';
 import React from "react";
+import Modal from "../util/Modal";
+import Alarm from "../util/Alarm";
 
 const Menu = styled.div`
   background-color: #CF0A0A;
@@ -39,6 +41,12 @@ const Keyword = styled.div`
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 const Header = () => {
+    const [alarmModal, setAlarmModal] = useState(false); // 알림 모달창
+    
+    const closeModal = () => {
+      setAlarmModal(false);
+  }
+
     const navigate = useNavigate();
     // 로그인했을 경우 현재 ID 표시
     let whoLoginNow = window.localStorage.getItem("whoLogin");
@@ -61,6 +69,11 @@ const Header = () => {
       navigate("/MusicalSearchList")
     }
 
+    const onClickAlarm = () => {
+      setAlarmModal(true);
+    }
+
+
     return(
         <>
         <Menu>
@@ -74,7 +87,7 @@ const Header = () => {
             : 
             // 로그인했을 때 => 알림, ~~~님, 로그아웃, 마이페이지, 멤버십
             (<>
-             <FaBell color="white"/>
+             <FaBell color="white" onClick={onClickAlarm}/>
              <div className="menu_item">{whoLoginNow}님</div>
              <button onClick={onClickLogout} className="menu_item">로그아웃</button>
              <Link to={"/MyPage"} className="menu_item">마이페이지</Link>
@@ -96,6 +109,7 @@ const Header = () => {
         <input onChange={onChangeInput} placeholder="뮤지컬을 검색하세요"></input>
         <button onClick={onClickInput}><BsSearch/></button>
         </Keyword>
+        {alarmModal && <Modal open={alarmModal} close={closeModal} header="확인"><Alarm/></Modal>}  
 
 
 

@@ -35,8 +35,13 @@ import ResultFalse from './payment/ResultFalse';
 import PayTest from './payment/PayTest';
 import TheaterSearch from './theaterInfo/TheaterSearch';
 import TheaterSearchList from './theaterInfo/TheaterSearchList';
+<<<<<<< HEAD
 
 
+=======
+import QnA from "./util/QnA";
+import Alarm from './util/Alarm';
+>>>>>>> cac5426e0a9552d769341d6d3ec07d218db67c46
 
 function App() {
   return (
@@ -50,6 +55,7 @@ function App() {
         <Route path="/FirstFloorChung" element={<FirstFloorChung />} />
         <Route path="/SecondFloorChung" element={<SecondFloorChung />} />
         <Route path="/ThirdFloorChung" element={<ThirdFloorChung />} />
+        <Route path='/Alarm' element={Alarm}></Route>
         <Route path='/Login' element={<Login />} />
         <Route path='/SignUp' element={<SignUp />} />
         <Route path='/Review' element={<Review />} />
@@ -72,11 +78,16 @@ function App() {
         <Route path='/RePwd' element={<RePwd/>} />
         <Route path='/MusicalSearchList' element={<MusicalSearchList/>}/>
         <Route path='/payTest' element={<PayTest/>} />
-        <Route path="/" exact={true} component={PayReady} />
+        {/* <Route path="/" exact={true} component={PayReady} />
         <Route path="/payresult" component={PayResult} />
         <Route path="/payselect" component={PaySelect} />
         <Route path="/paycancel" component={PayCancel} />
+<<<<<<< HEAD
         <Route path="/resultfalse" component={ResultFalse} />
+=======
+        <Route path="/resultfalse" component={ResultFalse} /> */}
+        <Route path="/QnA" element={<QnA/>} />
+>>>>>>> cac5426e0a9552d769341d6d3ec07d218db67c46
       </Routes>
       <Footer/>
     </Router>

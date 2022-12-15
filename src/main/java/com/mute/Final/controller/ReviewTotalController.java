@@ -2,6 +2,7 @@ package com.mute.Final.controller;
 import com.mute.Final.dto.ReviewSeatAvgDTO;
 import com.mute.Final.dto.ReviewTotalAvgDTO;
 import com.mute.Final.dto.ReviewTotalDTO;
+import com.mute.Final.entity.Musical;
 import com.mute.Final.entity.ReviewSeatAvg;
 import com.mute.Final.entity.ReviewTotal;
 import com.mute.Final.entity.ReviewTotalAvg;
@@ -29,7 +30,7 @@ public class ReviewTotalController {
 
     // 뮤지컬 총평 후기 view
     @GetMapping("/totalView")
-    public ResponseEntity<List<ReviewTotalDTO>> totalView(int musicalId) {
+    public ResponseEntity<List<ReviewTotalDTO>> totalView(Musical musicalId) {
         List<ReviewTotalDTO> list = reviewTotalService.totalList(musicalId);
         return new ResponseEntity(list, HttpStatus.OK);
     }

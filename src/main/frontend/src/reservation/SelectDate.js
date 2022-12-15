@@ -15,6 +15,7 @@ const Container = styled.div`
 const SelectDate = (props) => {
     const [value, onChange] = useState(new Date());
     const onClickNext = () => {
+      console.log("SelectDate.js Date : " + moment(value).format("YYYY년 MM월 DD일 19:00"));
       props.addSeeDate(moment(value).format("YYYY년 MM월 DD일 19:00"));
       props.propFunction();
     }

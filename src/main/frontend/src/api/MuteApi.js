@@ -36,8 +36,9 @@ const MuteApi =  {
     },
 
     // 뮤지컬 총평 후기 작성 - 도연
-    WriteTotal: async function(scoreStory, scoreDirect, scoreCast, scoreNumber, scoreAvgTotal, totalReview) {
+    WriteTotal: async function(member, scoreStory, scoreDirect, scoreCast, scoreNumber, scoreAvgTotal, totalReview) {
         const reviewObj = {
+            member: member, // 회원 아이디
             scoreStory: scoreStory,// 스토리 별점
             scoreDirect: scoreDirect, // 연출 별점
             scoreCast : scoreCast, // 캐스팅 별점
@@ -70,26 +71,26 @@ const MuteApi =  {
     //     return await axios.post("review/deleteReview", reviewObj);
     // },
 
-    // // 뮤지컬 후기 view - 도연
-    // ReviewInfo : async function(reviewMuId, musical, member, writeDate, scoreStory, scoreDirect, scoreCast, scoreNumber, reviewMuTxt) {
-    //     const reviewObj = {
-    //         reviewMuId : reviewMuId, // 뮤지컬 후기 글 번호
-    //         musical : musical, // 공연 ID
-    //         member: member, // 회원번호
-    //         writeDate : writeDate, // 작성일
-    //         scoreStory: scoreStory,// 스토리 별점
-    //         scoreDirect: scoreDirect, // 연출 별점
-    //         scoreCast : scoreCast, // 캐스팅 별점
-    //         scoreNumber : scoreNumber, // 넘버 별점
-    //         reviewMuTxt : reviewMuTxt // 뮤지컬 후기 텍스트
-    //     }
-    //     return await axios.get("totalView", reviewObj);
-    // },
-
     // 뮤지컬 후기 view - 도연
-    ReviewInfo : async function() {
-        return await axios.get("totalView");
+    ReviewInfo : async function(reviewMuId, musicalId, member, writeDate, scoreStory, scoreDirect, scoreCast, scoreNumber, reviewMuTxt) {
+        const reviewObj = {
+            reviewMuId : reviewMuId, // 뮤지컬 후기 글 번호
+            musicalId : musicalId, // 공연 ID
+            member: member, // 회원번호
+            writeDate : writeDate, // 작성일
+            scoreStory: scoreStory,// 스토리 별점
+            scoreDirect: scoreDirect, // 연출 별점
+            scoreCast : scoreCast, // 캐스팅 별점
+            scoreNumber : scoreNumber, // 넘버 별점
+            reviewMuTxt : reviewMuTxt // 뮤지컬 후기 텍스트
+        }
+        return await axios.get("totalView", reviewObj);
     },
+
+    // // 뮤지컬 후기 view - 도연
+    // ReviewInfo : async function() {
+    //     return await axios.get("totalView");
+    // },
 
 
     // 가입 중복 확인
@@ -183,7 +184,7 @@ const MuteApi =  {
             musicalId: musicalId,
             paymentId : paymentId
         }
-        return await axios.post("ticket/insert", ticketObj);
+        return await axios.post("/ticket/insert", ticketObj);
     },
     
     openedMusical: async function() {
@@ -223,7 +224,19 @@ const MuteApi =  {
             userId : userId
         }
         return await axios.post("/member/id_to_num",userNumInfo);
-    }
+    },
+
+    musicalDBList: async function() {
+        return await axios.get("musical/db/list")
+    },
+
+    // 카카오페이 결제
+    payment: async function() {
+        // const payInfo = {
+        //     musicalName : musicalName
+        // }    
+        return await axios.get("/pay");
+    },
 
 }
 

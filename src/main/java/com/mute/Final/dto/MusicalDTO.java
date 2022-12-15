@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
 import java.time.LocalDate;
+import java.util.Date;
 
 // 뮤지컬 검색 때문에 임시로 생성
 // 윤정언니 추가하실꺼 있으시면 편하게 추가하세용!!
@@ -26,12 +27,15 @@ public class MusicalDTO {
     public MusicalDTO (JSONObject itemJson) {
         String tmp1 = itemJson.getString("prfpdfrom");
         String tmp2 = itemJson.getString("prfpdto");
+//        LocalDate tmp3 = musicalStart.minusMonths(1);
+
 
         this.musicalId = itemJson.getString("mt20id");
         this.musicalName = itemJson.getString("prfnm");
         this.theaterName = itemJson.getString("fcltynm");
         this.musicalStart = LocalDate.parse(tmp1.replace(".", "-"));
         this.musicalEnd = LocalDate.parse(tmp2.replace(".", "-"));
+        this.musicalTicketStart = musicalStart.minusMonths(1);
         this.musicalStatus = itemJson.getString("prfstate");
         this.musicalPoster = itemJson.getString("poster");
     }

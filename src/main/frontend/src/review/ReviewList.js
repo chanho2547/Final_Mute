@@ -13,8 +13,12 @@ import MuteApi from "../api/MuteApi";
 const ReviewList = (props) => {
     const navigate = useNavigate();
     let whoLogin = window.localStorage.getItem('whoLoginNow');
+    let whatMusical = window.localStorage.getItem('musicalId');
+    
+    console.log("회원 아이디 : " + whoLogin); // 아이디
+    console.log("뮤지컬 아이디 : " + whatMusical); // 뮤지컬
 
-    const [reviewInfo, setReviewInfo] = useState('');
+    const [reviewInfo, setReviewInfo] = useState(''); 
 
     // 모달
     const [modalLogin, setModelLogin] = useState(false); // 로그인 안했을 때
@@ -40,7 +44,7 @@ const ReviewList = (props) => {
     useEffect(() => {
         const ReviewData = async () => {
             try{
-                let response = await MuteApi.ReviewInfo();
+                let response = await MuteApi.ReviewInfo;
                 setReviewInfo(response.data);
 
             } catch (e) {
@@ -50,10 +54,6 @@ const ReviewList = (props) => {
         ReviewData();
     }, []);
 
-    // const OnClick = (musicalId) => {
-    //     window.localStorage.setItem("musicalId", musicalId);
-    //     navigate('/MusicalDetail');
-    // }
 
 
 
@@ -62,12 +62,12 @@ const ReviewList = (props) => {
         <h3>뮤지컬 관람 후기</h3>
         {reviewInfo && reviewInfo.map(e => (
             <div>
-            {/* <div onClick={() => OnClickPoster(e.musicalId) }></div> */}
             <button onClick={WriteButton}>후기 작성</button>
             <div>
                 <p>회원 총 평점 {}</p>
             </div>
             <div>
+                <p>{whatMusical}</p>
                 <span>{whoLogin}</span><p>총점{e.scoreAvgTotal}</p>
                 <span>스토리 {e.scoreStory}</span> 
                 <span>연출 {e.scoreDirect}</span> 

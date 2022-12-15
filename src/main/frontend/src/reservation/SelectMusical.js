@@ -38,7 +38,7 @@ const SelectMusical = (props) => {
     useEffect(() => {
         const MusicalData = async () => {
             try {
-                let response = await MuteApi.musicalList(); // 뮤지컬 리스트 불러오기
+                let response = await MuteApi.musicalDBList(); // 뮤지컬 리스트 불러오기
                 setMusicalInfo(response.data);
                 
             } catch (e) {  
@@ -51,7 +51,8 @@ const SelectMusical = (props) => {
     });
 
     const OnClickPoster = (e) => {
-        props.addMusicalId(e);
+        props.addMusicalName(e.musicalName);
+        props.addMusicalId(e.musicalId);
         props.propFunction(); // 상위 컴포넌트의 함수를 불러 count ++
     }
 
@@ -59,7 +60,7 @@ const SelectMusical = (props) => {
         <Container>
        
         {musicalInfo && musicalInfo.map(e => (        
-            <MusicalContainer onClick={() => OnClickPoster(e.musicalName) }>
+            <MusicalContainer onClick={() => OnClickPoster(e) }>
             <img alt="poster" src={e.musicalPoster}/>
             <p className="title">{e.musicalName}</p>
           

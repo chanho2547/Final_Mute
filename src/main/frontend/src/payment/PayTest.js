@@ -19,7 +19,6 @@ const Style = styled.div`
         justify-content: center;
     }
     .head-line {
-        font-size: 3em;
         font-weight: bold;
     }
 `;
@@ -28,33 +27,28 @@ const Style = styled.div`
 const PayTest = () => {
 
   // const 로그인한 아이디(userNum) 가져와서 넘기기
-  // 선택한 뮤지컬id 가져와서 넘기기
+  // 선택한 뮤지컬id ? 이름??? 가져와서 넘기기
   // 
 
   const [payment, setPayment] = useState();
 
-  useEffect(() => {
-    const PayData = async () => {
-        try {
-            let response = await MuteApi.payment(); // 받은 뮤지컬id 서버로 넘겨주기
-            setPayment(response.data);
-            
-        } catch (e) {  
-            console.log(e + "실패");
-        }
-       
-    };
-    PayData();
-}, []);
 
-
+  const OnClickPay = async() => {
+    try {
+        const response = await MuteApi.payment(); // musicalName으로 넘겨주기????
+        setPayment(response.data);
+    }
+    catch (e) {
+      console.log(e);
+    }
+  }
 
   return(
       <>
       <Style>
         <div className="container">
-            <h2 className="head-line">카카오페이 결제</h2>
-            <img src={kakaoPay_icon} className="kakao" alt="카카오페이" />
+            <h2 className="head-line">카카오페이 결제 TEST</h2>
+            <img src={kakaoPay_icon} onClick={()=>OnClickPay()} className="kakao" alt="카카오페이" />
         </div>
       </Style>
       </>

@@ -9,9 +9,9 @@ import java.time.LocalDateTime;
 @Data
 public class ReviewTotalDTO {
     private Long reviewMuId; // 총평 후기 글 번호
-    private Musical musicalId; // 공연 ID
+    private String musicalId; // 공연 ID
     private String musicalName; // 공연 이름
-    private Member member; // 회원번호
+    private String member; // 회원번호
     private LocalDateTime writeDate; // 작성일
     private int scoreStory; // 스토리 별점
     private int scoreDirect; // 연출 별점
