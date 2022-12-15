@@ -27,8 +27,6 @@ public class MusicalDTO {
     public MusicalDTO (JSONObject itemJson) {
         String tmp1 = itemJson.getString("prfpdfrom");
         String tmp2 = itemJson.getString("prfpdto");
-//        LocalDate tmp3 = musicalStart.minusMonths(1);
-
 
         this.musicalId = itemJson.getString("mt20id");
         this.musicalName = itemJson.getString("prfnm");

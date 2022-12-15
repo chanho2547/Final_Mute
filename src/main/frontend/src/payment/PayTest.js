@@ -30,25 +30,25 @@ const PayTest = () => {
   // 선택한 뮤지컬id ? 이름??? 가져와서 넘기기
   // 
 
-  const [payment, setPayment] = useState();
+  // const [payment, setPayment] = useState();
 
 
-  const OnClickPay = async() => {
-    try {
-        const response = await MuteApi.payment(); // musicalName으로 넘겨주기????
-        setPayment(response.data);
-    }
-    catch (e) {
-      console.log(e);
-    }
-  }
+  // const OnClickPay = async() => {
+  //   try {
+  //       const response = await MuteApi.payment(); // musicalName으로 넘겨주기????
+  //       setPayment(response.data);
+  //   }
+  //   catch (e) {
+  //     console.log(e);
+  //   }
+  // }
 
   return(
       <>
       <Style>
         <div className="container">
             <h2 className="head-line">카카오페이 결제 TEST</h2>
-            <img src={kakaoPay_icon} onClick={()=>OnClickPay()} className="kakao" alt="카카오페이" />
+            <img src={kakaoPay_icon} className="kakao" alt="카카오페이" />
         </div>
       </Style>
       </>

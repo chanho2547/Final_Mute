@@ -14,6 +14,8 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -24,8 +26,7 @@ public class PayService {
 
     @Value("${api.kakaoAdminKey}")
     private String adminKey;
-
-    private static final String HOST = "https://kapi.kakao.com";
+    private String url = "https://kapi.kakao.com/v1/payment";
 
     private PayReadyDTO PayReadyDTO;
     private PayConfirmDTO PayConfirmDTO;
@@ -33,7 +34,7 @@ public class PayService {
 
 
     // 결제 준비 요청 단계
-    public String PayReady() throws URISyntaxException {
+    public String PayReady() {
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -44,7 +45,7 @@ public class PayService {
         headers.add("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
 
         // 카카오가 요구한 결제 요청값을 담아줄 Body
-        MultiValueMap<String, Object> params = new LinkedMultiValueMap<>();
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("cid", "TC0ONETIME"); // 가맹점 코드 (필수), 테스트용 고정값
         params.add("partner_order_id", "mute001"); // 가맹점 주문번호 (필수)
         params.add("partner_user_id", "mute"); // 가맹점 회원id (필수)
@@ -58,15 +59,19 @@ public class PayService {
         params.add("fail_url", "http://localhost:8282/pay/fail"); // 결제 실패시 url
 
         // 하나의 map안에 header와 parameter값을 담아줌.
-        HttpEntity<MultiValueMap<String, Object>> body = new HttpEntity<>(params, headers);
+        HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<>(params, headers);
 
-        PayReadyDTO = restTemplate.postForObject(new URI(HOST + "/v1/payment/ready"), body, PayReadyDTO.class);
-        log.info("" + PayReadyDTO);
-        return PayReadyDTO.getNext_redirect_pc_url();
+        try {
+            PayReadyDTO = restTemplate.postForObject(url + "/ready", body, PayReadyDTO.class);
+            log.info("" + PayReadyDTO);
+            return PayReadyDTO.getNext_redirect_pc_url();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } return "/pay";
     }
 
     // 결제 승인 단계
-    public PayConfirmDTO PayInfo(String pg_token) throws URISyntaxException {
+    public PayConfirmDTO PayInfo(String pg_token) {
 
         log.info("PayConfirmDTO................");
         log.info("-----------------------------");
@@ -76,11 +81,10 @@ public class PayService {
         // 서버로 요청할 Header
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "KakaoAK " + adminKey);
-//        headers.add("Accept", MediaType.APPLICATION_FORM_URLENCODED_VALUE);
         headers.add("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
 
         // 카카오가 요구한 결제 요청값을 담아줄 Body
-        MultiValueMap<String, Object> params = new LinkedMultiValueMap<>();
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("cid", "TC0ONETIME");
         params.add("tid", PayReadyDTO.getTid());
         params.add("partner_order_id", "mute001");
@@ -88,12 +92,18 @@ public class PayService {
         params.add("pg_token", pg_token);
         params.add("total_amount", "59000");
 
-        HttpEntity<MultiValueMap<String, Object>> body = new HttpEntity<>(params, headers);
+        HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<>(params, headers);
 
-        PayConfirmDTO = restTemplate.postForObject(new URI(HOST + "/v1/payment/approve"), body, PayConfirmDTO.class);
-        log.info("" + PayConfirmDTO);
+        try {
+            PayConfirmDTO = restTemplate.postForObject(url + "/approve", body, PayConfirmDTO.class);
+            log.info("" + PayConfirmDTO);
+            return PayConfirmDTO;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } return null;
 
-        return PayConfirmDTO;
+
+
     }
 
 
