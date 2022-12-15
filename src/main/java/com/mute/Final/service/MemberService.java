@@ -2,6 +2,7 @@ package com.mute.Final.service;
 import com.mute.Final.dto.MemberDTO;
 import com.mute.Final.entity.Member;
 import com.mute.Final.repository.MemberRepository;
+import com.mute.Final.repository.WishRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -163,12 +164,20 @@ public class MemberService {
 
     // 회원탈퇴
     public boolean deleteMem(String userId) {
+        log.error("userId : " + userId );
         try {
             Member member = memberRepository.findByUserId(userId);
+            //WishRepository.deleteByUserId(member);
             return true;
         } catch (Exception e) {
             log.warn("실패");
             return false;
         }
+    }
+
+    // 아이디 (userId) 입력 -> 회원번호 (userNum) 반환
+    public Long findByUserId(String userId) {
+        Member member = memberRepository.findByUserId(userId);
+        return member.getUserNum();
     }
 }
