@@ -34,6 +34,7 @@ public class WishService {
         for (Wish e : wishList) {
             WishDTO wishDTO = new WishDTO();
             wishDTO.setUserNum(Math.toIntExact(e.getMember().getUserNum()));
+            wishDTO.setMusicalId(e.getMusical().getMusicalId());
             wishDTO.setMusicalPoster(e.getMusical().getMusicalPoster());
             wishDTO.setUserId(e.getMember().getUserId());
             wishDTO.setMusicalName(e.getMusical().getMusicalName());

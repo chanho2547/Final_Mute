@@ -7,12 +7,13 @@ const Alarm = (props) => {
 
     // 로그인한 userNum을 보내서 데이터 가져오기
     const [alarm, setAlarm] = useState("");
+    const [alarmUpdate, setAlarmUpdate] = useState("");
     let userNum =  window.localStorage.getItem("whoLoginUserNum");
     
     useEffect(() => {
         const AlarmInfo = async () => {
             try {
-                console.log(userNum);
+                console.log("알람페이지 렌더링 userNum: " + userNum);
                 let response = await MuteApi.alarmOn(userNum);
                 setAlarm(response.data);
             } catch (e) {
@@ -20,12 +21,12 @@ const Alarm = (props) => {
             }
         }
         AlarmInfo();
-    }, []);
+    }, [alarmUpdate]);
 
     const OnClickAlarm = (musicalId) => {
         window.localStorage.setItem("musicalId", musicalId)
-        console.log("뮤지컬id : " + musicalId)
-        navigate("/MusicalDetail")
+        console.log("1. 알람페이지 뮤지컬id   : " + musicalId)
+        // navigate("/MusicalDetail")
     }
 
     // const OnClickPoster = (musicalId) => {
@@ -34,29 +35,29 @@ const Alarm = (props) => {
     //     navigate("/MusicalDetail")
     // }
 
-
-    // 아직 수정해야함
-    const OnClickAlarmOff = () => {
+    const OnClickAlarmOff = (userNum, musicalId) => {
         const AlarmUpdate = async () => {
             try{
-                let response = await MuteApi.alarmOff()
+                console.log("2. 알람 수정할 userNum :   " + userNum);
+                console.log("3. 알람 수정할 musicalId :  " + musicalId);
+                let response = await MuteApi.alarmOff(userNum, musicalId);
+                setAlarmUpdate(response.data);
             } catch (e) {
                 console.log(e + "알림off 실패")
             }
         }
+        AlarmUpdate();
     }
 
     return (
         <>
         {alarm && alarm.map(e => (
-        <div onClick={() => OnClickAlarm(e.userNum) }>
-        {/* <div onClick={() => OnClickPoster(e.musicalId)}> */}
+        <div onClick={() => OnClickAlarm(e.musicalId) }>
         {/* <img src= {e.musicalPoster} /> */}
         <p>공연 이름 : {e.musicalName}</p> 
         <p>공연 예매 시작일 : {e.musicalTicketStart}</p> 
         <p>알림 설정 상태 : {e.alarm}</p> 
-        {/* </div> */}
-        <button onClick={OnClickAlarmOff}>OFF</button>
+        <button onClick={() => OnClickAlarmOff(e.userNum, e.musicalId)}>OFF</button>
         </div>
         ))}
         </>

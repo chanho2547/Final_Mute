@@ -1,18 +1,18 @@
-import FirstFloorChar from "./charLotte/FirstFloorChar";
-import FirstFloorChung from "./chungmuArt/FirstFloorChung";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BsSearch } from 'react-icons/bs';
-import MuteApi from "../api/MuteApi";
 import { Link, useNavigate } from "react-router-dom";
-// 이따가 이름 변경하기
-// 공연장 검색창 SeatView.js => TheaterSearch.js
-// 공연장 검색리스트 TheaterSearch.js => TheaterSearchList.js
+import styled from "styled-components";
 
-// 뮤지컬 검색창 Header.js
-// 뮤지컬 검색리스트 MusicalSearchList.js
+const SearchBar = styled.div `
+    width: 200px;
+    height: 30px;
+`;
+
+
+
+
 
 // 공연장 검색바
-
 const TheaterSearch = () => {
 const navigate = useNavigate();
 
@@ -37,9 +37,11 @@ const onClickInput = async() => {
 
     return(
         <>
+        <SearchBar>
         <input onChange={onChangeInput} placeholder="극장을 검색하세요"/>
         <button type="button" onClick={onClickInput}><BsSearch/></button>
         {/* <FirstFloorChar propsFunction={highFunction}/> */}
+        </SearchBar>
         </>
     )
 }

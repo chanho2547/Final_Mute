@@ -11,11 +11,11 @@ const MusicalDetail = (props) => {
     const [musicalDetail,setMusicalDetail] = useState();
     const musicalId = window.localStorage.getItem("musicalId"); // 선택한 musicalId
     const userNum = window.localStorage.getItem("whoLoginUserNum"); // 로그인할 경우 저장한 userNum
-    console.log(musicalId);
-    console.log(userNum);
+    console.log("은종" + musicalId);
+    console.log("은종" + userNum);
 
     // 찜하기 등록
-    const [wish, setWish] = useState(false);
+    const [wish, setWish] = useState();
     const [modalWishOpen, setModalWishOpen] = useState(false);
     const modalWishReg = () => {
         setModalWishOpen(false); 
@@ -62,22 +62,25 @@ const MusicalDetail = (props) => {
 
   const OnClickWish = async() => {
         try {
-            const response = await MuteApi.wishReg(musicalId, userNum); // musicalId와 userNum으로 찜 상품 등록
+            const response = await MuteApi.wishReg(userNum, musicalId); // musicalId와 userNum으로 찜 상품 등록
             setWish(response.data);
+            modalWishOpen(true);
         }
      catch (e) {
         console.log(e);
     }
   }
 
+
   return(
       <>
         {/* wish 등록 */}
         <div onClick={() => OnClickWish()}>
+        {/* <img src={heartIcon2} alt={heartIcon} width="30px"></img> */}
             <div className={(wish ? "likeBtn" : "notLikeBtn")}>
-            <b>wish 찜하기</b>
-            <p className="wish"><img src={wish ? heartIcon2 : heartIcon} alt={heartIcon2} width="15px"></img></p>
+            <p className="wish"><img src={wish ? heartIcon : heartIcon2} alt={heartIcon} width="30px"></img></p>
             </div>
+
         </div>
         
         {musicalDetail && musicalDetail.map(e => (        
@@ -104,8 +107,8 @@ const MusicalDetail = (props) => {
 <p className="like"><img src={likeOk ? whiteLikeIcon : likeIcon} alt={likeIcon} width="15px"></img> x 3,201</p>
 </div>
 </IsLikeBtn> */}
-        {/* {modalOpenLike && <Modal open={modalOpenLike} close={closeModalLikeOK} type={true} header="&nbsp;">뮤지컬 찜 완료</Modal>}
-        {modalOpenLogin && <Modal open={modalOpenLogin} close={closeModalLoginOK} type={true} header="&nbsp;">로그인 후 이용하시기 바랍니다.</Modal>} */}
+         {modalWishOpen && <Modal open={modalWishOpen} close={modalWishReg} type={true} header="&nbsp;">뮤지컬 찜 완료</Modal>}
+        {/* {modalOpenLogin && <Modal open={modalOpenLogin} close={closeModalLoginOK} type={true} header="&nbsp;">로그인 후 이용하시기 바랍니다.</Modal>} */}
       
       </>
   );
