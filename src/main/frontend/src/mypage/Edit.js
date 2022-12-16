@@ -61,7 +61,7 @@ const Edit = () => {
 
     // 설정 저장
     const onClickSave = async() => {
-        await MuteApi.userInfoSave(localId, userName, userPwd, userPhone, userMail, userAddr, userImg);
+        await MuteApi.userInfoSave(localId, userName, userPwd, userPhone, userMail, enroll_company.address, userImg);
         navigate('/Home');
     }
 
@@ -90,7 +90,7 @@ const Edit = () => {
 
     const handleInput = (e) => {
         console.log(e.target.value);
-        setChangeAddr(e.target.value);
+        setUserAddr(e.target.value);
         setEnroll_company({
             ...enroll_company,
             [e.target.name]:e.target.value,
@@ -173,7 +173,7 @@ const Edit = () => {
             </div>
             <div>
                 <p>비밀번호 {changePwd && <span>{pwdMsg}</span>}</p>
-                <input onChange={onChangePwd} value={changePwd} placeholder="비밀번호" />
+                <input type="password" onChange={onChangePwd} value={changePwd} placeholder="비밀번호" />
             </div>
             <div>
                 <p>핸드폰 {changePhone && <span>{phoneMsg}</span>}</p>
@@ -184,7 +184,7 @@ const Edit = () => {
                 <input onChange={onChangeMail} value={changeMail} onBlur={onBlurMailCheck} placeholder="메일" />
             </div>
             <div>
-                <label className="address_search">주소</label>
+                <label className="address_search">주소</label><br/>
                 <input className="addr" type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
                 <button onClick={handleComplete}>주소 검색</button>
                 {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}

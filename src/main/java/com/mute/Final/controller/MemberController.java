@@ -121,8 +121,8 @@ public class MemberController {
     // 회원 탈퇴
     @PostMapping("/delete_mem")
     public ResponseEntity<Boolean> memberDelete(@RequestBody Map<String, String> delete) {
-        String id = delete.get("userId");
-        boolean member = memberService.deleteMem(id);
+        String userId = delete.get("userId");
+        boolean member = memberService.deleteMem(userId);
         if(member) {
             return new ResponseEntity(true,HttpStatus.OK);
         } else {

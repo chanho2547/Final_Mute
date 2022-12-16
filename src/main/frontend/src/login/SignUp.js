@@ -222,7 +222,7 @@ const SignUp = () => {
     const onClickJoin = async() => {
         const memberReg = await MuteApi.signUp(inputId, inputPwd, inputName, inputMail, inputPhone, enroll_company.address);
         if(memberReg.data) {
-            setModalOpen(" Mute 회원가입이 완료되었습니다.")
+            setModalOpenSignUp(true);
             console.log("Mute 회원가입이 완료되었습니다.")
             navigate('/Login');
 

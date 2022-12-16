@@ -163,11 +163,11 @@ public class MemberService {
     }
 
     // 회원탈퇴
-    public boolean deleteMem(String userId) {
-        log.error("userId : " + userId );
+    public boolean deleteMem(Long userNum) {
+        log.error("userNum : " + userNum );
         try {
-            Member member = memberRepository.findByUserId(userId);
-            //WishRepository.deleteByUserId(member);
+            Member member = memberRepository.findByUserNum(userNum);
+
             return true;
         } catch (Exception e) {
             log.warn("실패");
