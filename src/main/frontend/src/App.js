@@ -35,8 +35,8 @@ import ResultFalse from './payment/ResultFalse';
 import PayTest from './payment/PayTest';
 import TheaterSearch from './theaterInfo/TheaterSearch';
 import TheaterSearchList from './theaterInfo/TheaterSearchList';
-import QnA from "./util/QnA";
 import Alarm from './util/Alarm';
+import Edit from "./mypage/Edit";
 
 function App() {
   return (
@@ -78,7 +78,7 @@ function App() {
         <Route path="/payselect" component={PaySelect} />
         <Route path="/paycancel" component={PayCancel} />
         <Route path="/resultfalse" component={ResultFalse} /> */}
-        <Route path="/QnA" element={<QnA/>} />
+        <Route path="/Edit" element={<Edit/>} />
       </Routes>
       <Footer/>
     </Router>
