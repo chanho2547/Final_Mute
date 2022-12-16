@@ -23,11 +23,6 @@ public class DeleteService {
     private final MusicalRepository musicalRepository;
 
     // 총평 후기 삭제
-//    @Transactional
-//    public void deletePost(String userNum) {
-//        reviewTotalRepository.deleteById(userNum);
-//    }
-
     public boolean deleteTotal(String reviewMuId) {
         try {
             Long result = reviewTotalRepository.deleteByReviewMuId(Long.parseLong(reviewMuId));
@@ -42,8 +37,9 @@ public class DeleteService {
     // 좌석 후기 삭제
     public boolean deleteSeat(String reviewSeId) {
         try {
-            ReviewSeat reviewSeat = reviewSeatRepository.findByReviewSeId(Long.parseLong(reviewSeId));
-            return true;
+            Long result = reviewSeatRepository.deleteByReviewSeId(Long.parseLong(reviewSeId));
+            if (result==1) return true;
+            else return false;
         } catch (Exception e) {
             log.warn("실패!!!!!!!!!ㅠㅠㅠㅠㅠㅠㅠ");
             return false;

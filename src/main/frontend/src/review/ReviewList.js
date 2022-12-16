@@ -95,12 +95,12 @@ const ReviewList = (props) => {
             </div>
             <div>
                 <p>{}</p>
-                <span>{e.member}</span><span>총점{e.scoreAvgTotal}</span><span>날짜{e.writeDate}</span><button>수정</button><button onClick={() => OnClickDelete()}>삭제</button>
+                <span>{e.member}</span><span>{}{e.scoreAvgTotal}</span><span>날짜{e.writeDate}</span><button>수정</button><button onClick={() => OnClickDelete()}>삭제</button>
                 <span>스토리 {e.scoreStory}</span> 
                 <span>연출 {e.scoreDirect}</span> 
                 <span>캐스팅 {e.scoreCast}</span> 
                 <span>넘버 {e.scoreNumber}</span>
-                <p>텍스트 {e.totalReview}</p>
+                <p>후기 {e.reviewMuTxt}</p>
             </div>
             </>
          ))}  
