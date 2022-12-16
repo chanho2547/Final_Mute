@@ -7,6 +7,8 @@ import Rating from "../util/Rating";
 import TotalModal from "./TotalModal";
 import Modal from "../util/Modal";
 
+// 뮤지컬 총평 후기 등록 - 도연
+
 const ReviewTotal = (props) => {
     const navigate = useNavigate();
 
@@ -18,7 +20,7 @@ const ReviewTotal = (props) => {
 
     // 취소 버튼 누르면 첫 화면으로..
     const CancelButton = () => {   
-        navigate('/Review');
+        navigate('/ReviewList');
     }
 
     // 입력받는 부분
@@ -44,7 +46,7 @@ const ReviewTotal = (props) => {
     }
     
     const closeModal = () => { // 아니오 눌렀을 때 => 리뷰 리스트로 이동
-        navigate("/Review"); 
+        navigate("/ReviewList"); 
     }
 
     // 후기 작성하기 Api 호출

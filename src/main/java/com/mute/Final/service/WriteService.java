@@ -1,8 +1,5 @@
 package com.mute.Final.service;
-import com.mute.Final.entity.Member;
-import com.mute.Final.entity.Musical;
-import com.mute.Final.entity.ReviewTotal;
-import com.mute.Final.entity.ReviewSeat;
+import com.mute.Final.entity.*;
 import com.mute.Final.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +18,9 @@ public class WriteService {
     private final ReviewSeatRepository reviewSeatRepository; // 좌석 후기
     private final MemberRepository memberRepository;
     private final MusicalRepository musicalRepository;
+
+    private final TheaterRepository theaterRepository;
+
 
 
     // 총평 후기 작성
@@ -41,14 +41,14 @@ public class WriteService {
         reviewTotal.setScoreNumber(Integer.parseInt(scoreNumber));
         reviewTotal.setScoreAvgTotal(Double.parseDouble(scoreAvgTotal));
         reviewTotal.setReviewMuTxt(reviewMuTxt);
-        System.out.println(reviewTotal.getReviewMuTxt());
+//        System.out.println(reviewTotal.getReviewMuTxt());
         reviewTotal.setWriteDate(LocalDateTime.now());
         reviewTotalRepository.save(reviewTotal);
         return true;
     }
 
     // 좌석 후기 작성
-    public boolean writeSeat(String userNum, String musicalId, String scoreSeat, String scoreView, String scoreSound, String scoreLight, String scoreAvgSeat, String reviewSeTxt){
+    public boolean writeSeat(String userNum, String musicalId, String theaterId, String seatNum, String scoreSeat, String scoreView, String scoreSound, String scoreLight, String scoreAvgSeat, String reviewSeTxt){
         ReviewSeat reviewSeat  = new ReviewSeat();
 
         Member member = memberRepository.findByUserNum(Long.parseLong(userNum));
@@ -59,6 +59,11 @@ public class WriteService {
         reviewSeat.setMusical(musical);
         log.info(String.valueOf(musical));
 
+        Theater theater = theaterRepository.findByTheaterId(theaterId);
+        reviewSeat.setTheater(theater);
+        log.info(String.valueOf(theater));
+
+        reviewSeat.setSeatNum(Integer.parseInt(seatNum));
         reviewSeat.setScoreSeat(Integer.parseInt(scoreSeat));
         reviewSeat.setScoreView(Integer.parseInt(scoreView));
         reviewSeat.setScoreSound(Integer.parseInt(scoreSound));

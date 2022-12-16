@@ -19,8 +19,6 @@ import javax.transaction.Transactional;
 public class DeleteService {
     private final ReviewTotalRepository reviewTotalRepository; // 총평 후기
     private final ReviewSeatRepository reviewSeatRepository; // 좌석 후기
-    private final MemberRepository memberRepository;
-    private final MusicalRepository musicalRepository;
 
     // 총평 후기 삭제
     public boolean deleteTotal(String reviewMuId) {

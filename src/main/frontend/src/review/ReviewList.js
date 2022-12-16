@@ -61,12 +61,12 @@ const ReviewList = (props) => {
     }, []);
 
     // 후기 삭제
-    const OnClickDelete = async(reviewMuId, userNum) => {
+    const OnClickDelete = async(reviewMuId) => {
         
         try {
             const stringReviewNum = String(reviewMuId);
             const response = await MuteApi.reviewDelete(stringReviewNum, userNum);
-            // console.log(response.data);
+            console.log(response.data);
 
             if(response.data.includes("NOK")) {
                 setModalText("작성자가 아닙니다. 목록으로 되돌아갑니다.")

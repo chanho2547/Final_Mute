@@ -44,6 +44,8 @@ public class WriteController {
     public ResponseEntity<Boolean> writeSeat(@RequestBody Map<String, String> writeSeatData) {
         String member = writeSeatData.get("member");
         String musicalId = writeSeatData.get("musicalId");
+        String theaterId = writeSeatData.get("theaterId");
+        String seatNum = writeSeatData.get("seatNum");
         String scoreSeat = writeSeatData.get("scoreSeat");
         String scoreView = writeSeatData.get("scoreView");
         String scoreSound = writeSeatData.get("scoreSound");
@@ -51,7 +53,7 @@ public class WriteController {
         String scoreAvgSeat = writeSeatData.get("scoreAvgSeat");
         String reviewSeTxt = writeSeatData.get("reviewSeTxt");
 
-        boolean result = writeService.writeSeat(member, musicalId, scoreSeat, scoreView, scoreSound, scoreLight, scoreAvgSeat, reviewSeTxt);
+        boolean result = writeService.writeSeat(member, musicalId, theaterId, seatNum, scoreSeat, scoreView, scoreSound, scoreLight, scoreAvgSeat, reviewSeTxt);
         if(result) {
             return new ResponseEntity(true, HttpStatus.OK);
         }

@@ -7,7 +7,7 @@ import TheaterModal from "./TheaterModal";
 import { Link, useNavigate } from "react-router-dom";
 import Modal from "../util/Modal";
 
-// 좌석 후기 등록 - 도연 작업 중 
+// 좌석 후기 등록 - 도연
 
 const ReviewSeat = () => {
     const navigate = useNavigate();
@@ -20,16 +20,19 @@ const ReviewSeat = () => {
 
      // 취소 버튼 누르면 첫 화면으로..
     const CancelButton = () => {   
-        navigate('/Review');
+        navigate('/ReviewList');
     }
 
     // 입력받는 부분
+    const [theaterId, setTheaterId] = useState(''); // 공연장
+    const [seatNum, setSeatNum] = useState(''); // 좌석
     const [seatRating, setSeatRating] = useState(''); // 좌석 별점
     const [viewRating, setViewRating] = useState(''); // 시야 별점
     const [soundRating, setSoundRating] = useState(''); // 음향 별점
     const [lightRating, setLightRating] = useState(''); // 조명 별점
     const [scoreAvgSeat, setScoreAvgSeat] = useState(''); // 별점 총점
     const [seatReview, setSeatReview] = useState(''); // 뮤지컬 후기 텍스트
+    
 
      // 오류 메세지
      const [seatReviewMsg, setSeatReviewMsg] = useState('');
@@ -50,7 +53,7 @@ const ReviewSeat = () => {
     }
 
     const closeModal = () => { 
-        navigate("/Review"); 
+        navigate("/ReviewList"); 
     }
 
     // 후기 작성 버튼 누르면 극장 선택 모달띄우기
@@ -62,7 +65,7 @@ const ReviewSeat = () => {
     // 후기 작성 버튼이 눌려지면 동작하는 함수
     const WriteSeatButton = async() => {
         try {
-            const res =  await MuteApi.WriteSeat(userNum, musicalId, seatRating, viewRating, soundRating, lightRating, scoreAvgSeat, seatReview);
+            const res =  await MuteApi.WriteSeat(userNum, musicalId, theaterId, seatNum, seatRating, viewRating, soundRating, lightRating, scoreAvgSeat, seatReview);
             if(res.data === true) {
                 console.log("텍스트 입력 성공");
                 setWriteModal(true);   
@@ -104,6 +107,7 @@ const ReviewSeat = () => {
             setIsSeatReview(false);
         }
     }
+    
 
     return(
         <>
