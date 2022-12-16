@@ -13,11 +13,11 @@ import Rating from "../util/Rating";
 const ReviewList = (props) => {
     const navigate = useNavigate();
 
-    let whoLogin = window.localStorage.getItem('whoLoginNow');
-    let whatMusical = window.localStorage.getItem('musicalId');
+    const userNum = window.localStorage.getItem("whoLoginUserNum");
+    let musicalId = window.localStorage.getItem('musicalId');
     
-    console.log("회원 아이디 : " + whoLogin); // 아이디
-    console.log("뮤지컬 아이디 : " + whatMusical); // 뮤지컬
+    console.log("회원번호 : " + userNum); // 회원번호
+    console.log("뮤지컬 아이디 : " + musicalId); // 뮤지컬번호
 
     // 모달
     const [modalLogin, setModelLogin] = useState(false); // 로그인 안했을 때
@@ -47,7 +47,7 @@ const ReviewList = (props) => {
     useEffect(() => {
         const ReviewData = async () => {
             try{
-                let response = await MuteApi.ReviewInfo(whatMusical);
+                let response = await MuteApi.ReviewInfo(musicalId);
                 // console.log("response.data : " + response.data);
 
                 setReviewInfo(response.data);
@@ -61,11 +61,11 @@ const ReviewList = (props) => {
     }, []);
 
     // 후기 삭제
-    const OnClickDelete = async(reviewMuId, member) => {
+    const OnClickDelete = async(reviewMuId, userNum) => {
         
         try {
             const stringReviewNum = String(reviewMuId);
-            const response = await MuteApi.reviewDelete(stringReviewNum, member);
+            const response = await MuteApi.reviewDelete(stringReviewNum, userNum);
             // console.log(response.data);
 
             if(response.data.includes("NOK")) {
@@ -102,7 +102,7 @@ const ReviewList = (props) => {
                 <span>연출 {e.scoreDirect}</span> 
                 <span>캐스팅 {e.scoreCast}</span> 
                 <span>넘버 {e.scoreNumber}</span>
-                <p>후기 {e.reviewMuTxt}</p>
+                <p>후기 [{e.reviewMuTxt}]</p>
             </div>
             </>
          ))}  

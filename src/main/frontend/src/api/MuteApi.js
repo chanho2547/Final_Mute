@@ -3,6 +3,7 @@ import { async } from "q";
 
 const MuteApi =  {
 
+    // 로그인 - 도연
     Login: async function(id, pwd) {
         const loginObj = {
             userId: id,
@@ -36,9 +37,10 @@ const MuteApi =  {
     },
 
     // 뮤지컬 총평 후기 작성 - 도연
-    WriteTotal: async function(member, scoreStory, scoreDirect, scoreCast, scoreNumber, scoreAvgTotal, totalReview) {
+    WriteTotal: async function(userNum, musicalId, scoreStory, scoreDirect, scoreCast, scoreNumber, scoreAvgTotal, totalReview) {
         const reviewObj = {
-            member: member, // 회원 아이디
+            userNum : userNum,
+            musicalId : musicalId, 
             scoreStory: scoreStory,// 스토리 별점
             scoreDirect: scoreDirect, // 연출 별점
             scoreCast : scoreCast, // 캐스팅 별점
@@ -50,12 +52,15 @@ const MuteApi =  {
     },
 
      // 좌석 후기 작성 - 도연
-     WriteSeat: async function(seatRating, viewRating, soundRating, lightRating, seatReview) {
+     WriteSeat: async function(userNum, musicalId, seatRating, viewRating, soundRating, lightRating, scoreAvgSeat, seatReview) {
         const reviewObj = {
+            userNum : userNum,
+            musicalId : musicalId, 
             scoreSeat: seatRating,// 좌석 별점 
             scoreView: viewRating, // 시야 별점
             scoreSound : soundRating, // 음향 별점
             scoreLight : lightRating, // 조명 별점
+            scoreAvgSeat : scoreAvgSeat, // 좌석 후기 별점 총점
             reviewSeTxt : seatReview // 뮤지컬 후기 텍스트
         }
         return await axios.post("review/writeSeat", reviewObj);

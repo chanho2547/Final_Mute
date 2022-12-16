@@ -10,6 +10,12 @@ import Modal from "../util/Modal";
 const ReviewTotal = (props) => {
     const navigate = useNavigate();
 
+    const userNum = window.localStorage.getItem("whoLoginUserNum");
+    let musicalId = window.localStorage.getItem('musicalId');
+    
+    console.log("회원번호 : " + userNum); // 회원번호
+    console.log("뮤지컬 아이디 : " + musicalId); // 뮤지컬번호
+
     // 취소 버튼 누르면 첫 화면으로..
     const CancelButton = () => {   
         navigate('/Review');
@@ -24,7 +30,7 @@ const ReviewTotal = (props) => {
     const [totalReview, setTotalReview] = useState(''); // 뮤지컬 후기 텍스트
 
     // 오류 메세지
-    const [totalReviewMsg, setotalReviewMsg] = useState('');
+    const [totalReviewMsg, setTotalReviewMsg] = useState('');
     
     // 유효성 검사
     const [isTotalReview, setIsTotalReview] = useState(false);
@@ -33,7 +39,7 @@ const ReviewTotal = (props) => {
     const [writeModal, setWriteModal] = useState(false); // 확인 버튼 눌렀을 때
 
     
-    const confirmModal = () => { // 좌석 후기 작성하러 가기
+    const confirmModal = () => { // 좌석 후기 작성하러 가기 
         props.propFunction(); // 상위 컴포넌트의 함수를 불러 count ++
     }
     
@@ -44,23 +50,18 @@ const ReviewTotal = (props) => {
     // 후기 작성하기 Api 호출
     // 후기 작성 버튼이 눌려지면 동작하는 함수
     const WriteTotalButton = async() => {
-  
         try {
-            const res = await MuteApi.WriteTotal(scoreStory, scoreDirect, scoreCast, scoreNumber, scoreAvgTotal, totalReview);
-
+            const res = await MuteApi.WriteTotal(userNum, musicalId, scoreStory, scoreDirect, scoreCast, scoreNumber, scoreAvgTotal, totalReview);
             if(res.data === true) {
                 console.log("텍스트 입력 성공");
                 setWriteModal(true);   
-  
             } else {
                 console.log("텍스트 입력 실패");
             }
-
         } catch (e) {
             alert("오류 : " + e);
         }
     };
-
 
     const highFunction1 = (text) => {
         console.log("스토리 별점 가져온 값 : " + text);
@@ -87,9 +88,9 @@ const ReviewTotal = (props) => {
     const onChangeTotalReview = (e) => {
         setTotalReview(e.target.value)
         if(e.target.value.length > 9 ) {
-            setIsTotalReview(false);
-        } else {
             setIsTotalReview(true);
+        } else {
+            setIsTotalReview(false);
         }
     }
     
@@ -109,7 +110,7 @@ const ReviewTotal = (props) => {
                 </fieldset>
                 <button onClick={WriteTotalButton}>확인</button>
                 <button onClick={CancelButton}>취소</button>
-                {writeModal&& <TotalModal open={writeModal} onfirm={confirmModal} close={closeModal} type={true} header="확인">뮤지컬 후기 작성 완료♥</TotalModal>}
+                {writeModal&& <TotalModal open={writeModal} confirm={confirmModal} close={closeModal} type={true} header="확인">뮤지컬 후기 작성 완료♥</TotalModal>}
             </div>
 
         </>
