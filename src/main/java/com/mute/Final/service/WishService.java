@@ -73,6 +73,15 @@ public class WishService {
         return true;
     }
 
+    // 찜 데이터 delete
+    // userNum과 musicalId의 데이터 삭제
+    public void deleteAlarm(int userNum, String musicalId) {
+        Wish wish = new Wish();
+        System.out.println("userNum : " + userNum);
+        System.out.println("musicalId : " + musicalId);
+        wishRepository.deleteAlarm(userNum, musicalId);
+    }
+
 
 
 }

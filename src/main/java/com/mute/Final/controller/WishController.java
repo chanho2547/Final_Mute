@@ -1,6 +1,5 @@
 package com.mute.Final.controller;
 
-import com.mute.Final.constant.AlarmStatus;
 import com.mute.Final.dto.WishDTO;
 import com.mute.Final.service.WishService;
 import lombok.extern.slf4j.Slf4j;
@@ -40,7 +39,7 @@ public class WishController {
         }
     }
 
-    // Wish 데이터 Update => 망함
+    // Wish 데이터 Update
     @PostMapping("/wish/update")
     public ResponseEntity<Boolean> wishUpdate(@RequestBody Map<String, String> wishData) {
         String userNum = wishData.get("userNum");
@@ -54,6 +53,14 @@ public class WishController {
         }
     }
 
+    // Wish 데이터 Delete
+    @DeleteMapping("/wish/delete")
+    public boolean wishDelete(@RequestParam Map<String, String> wishData) {
+        String userNum = wishData.get("userNum");
+        String musicalId = wishData.get("musicalId");
+        wishService.deleteAlarm(Integer.parseInt(userNum), musicalId);
+        return true;
 
+    }
 
 }

@@ -254,6 +254,10 @@ const MuteApi =  {
         }
         return await axios.post("saveInfo", ediObj);
     },
+
+    wishCancel: async function(userNum, mt20id) {
+        return await axios.delete(`/wish/delete?userNum=${userNum}&musicalId=${mt20id}`)
+    }
 }
 
 export default MuteApi;
