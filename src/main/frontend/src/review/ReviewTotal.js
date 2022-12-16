@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import MuteApi from "../api/MuteApi";
 import Rating from "../util/Rating";
 import TotalModal from "./TotalModal";
+import Modal from "../util/Modal";
 
 const ReviewTotal = (props) => {
     const navigate = useNavigate();
@@ -29,7 +30,7 @@ const ReviewTotal = (props) => {
     const [isTotalReview, setIsTotalReview] = useState(false);
 
     // 모달
-    const [modalText, setModelText] = useState(false); // 확인 버튼 눌렀을 때
+    const [writeModal, setWriteModal] = useState(false); // 확인 버튼 눌렀을 때
 
     
     const confirmModal = () => { // 좌석 후기 작성하러 가기
@@ -40,21 +41,16 @@ const ReviewTotal = (props) => {
         navigate("/Review"); 
     }
 
-    // Api 호출
+    // 후기 작성하기 Api 호출
     // 후기 작성 버튼이 눌려지면 동작하는 함수
     const WriteTotalButton = async() => {
-        console.log("스토리 별점" + scoreStory);
-        console.log("연출 별점" + scoreDirect);
-        console.log("캐스팅 별점" + scoreCast);
-        console.log("넘버 별점" + scoreNumber);
-        console.log("평균 별점" + scoreAvgTotal);
   
         try {
             const res = await MuteApi.WriteTotal(scoreStory, scoreDirect, scoreCast, scoreNumber, scoreAvgTotal, totalReview);
 
             if(res.data === true) {
                 console.log("텍스트 입력 성공");
-                setModelText(true);   
+                setWriteModal(true);   
   
             } else {
                 console.log("텍스트 입력 실패");
@@ -113,7 +109,7 @@ const ReviewTotal = (props) => {
                 </fieldset>
                 <button onClick={WriteTotalButton}>확인</button>
                 <button onClick={CancelButton}>취소</button>
-                {modalText&& <TotalModal open={modalText} onfirm={confirmModal} close={closeModal} type={true} header="확인">뮤지컬 후기 작성 완료♥</TotalModal>}
+                {writeModal&& <TotalModal open={writeModal} onfirm={confirmModal} close={closeModal} type={true} header="확인">뮤지컬 후기 작성 완료♥</TotalModal>}
             </div>
 
         </>

@@ -61,15 +61,23 @@ const MuteApi =  {
         return await axios.post("review/writeSeat", reviewObj);
     },
 
-    // // 후기 삭제 - 도연
-    // DeleteReview : async function(reviewMuId, musical, member) {
-    //     const reviewObj = {
-    //         reviewMuId : reviewMuId, // 뮤지컬 후기 글 번호
-    //         musical : musical, // 공연 ID
-    //         member : member // 회원번호
-    //     }
-    //     return await axios.post("review/deleteReview", reviewObj);
-    // },
+    // 뮤지컬 총평 후기 삭제 - 도연
+    DeleteTotal : async function(reviewMuId, member) {
+        const reviewObj = {
+            reviewMuId : reviewMuId, // 뮤지컬 후기 글 번호
+            member : member // 회원 아이디
+        }
+        return await axios.post("review/deleteReview", reviewObj);
+    },
+
+    // 좌석 후기 삭제 - 도연
+    DeleteSeat : async function(reviewSeId, musical, member) {
+        const reviewObj = {
+            reviewSeId : reviewSeId, // 좌석 후기 글 번호
+            member : member // 회원 아이디
+        }
+        return await axios.post("review/deleteReview", reviewObj);
+    },
 
     // 뮤지컬 후기 view - 도연
     ReviewInfo : async function(reviewMuId, musicalId, member, writeDate, scoreStory, scoreDirect, scoreCast, scoreNumber, reviewMuTxt) {
