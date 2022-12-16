@@ -29,11 +29,10 @@ public class DeleteService {
 //    }
 
     public boolean deleteTotal(String reviewMuId) {
-//        log.error("reviewMuId 확인 : " + reviewMuId);
-
         try {
-            ReviewTotal reviewTotal = reviewTotalRepository.findByReviewMuId(Long.parseLong(reviewMuId));
-            return true;
+            Long result = reviewTotalRepository.deleteByReviewMuId(Long.parseLong(reviewMuId));
+            if (result==1) return true;
+            else return false;
         } catch (Exception e) {
             log.warn("실패!!!!!!!!!!!!!ㅠㅠㅠㅠㅠㅠ");
             return false;
@@ -42,7 +41,6 @@ public class DeleteService {
 
     // 좌석 후기 삭제
     public boolean deleteSeat(String reviewSeId) {
-        log.error("reviewSeId 확인 : " + reviewSeId);
         try {
             ReviewSeat reviewSeat = reviewSeatRepository.findByReviewSeId(Long.parseLong(reviewSeId));
             return true;
