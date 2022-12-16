@@ -239,12 +239,12 @@ const MuteApi =  {
     },
 
     // 카카오페이 결제
-    payment: async function() {
-        // const payInfo = {
-        //     musicalName : musicalName
-        // }    
-        return await axios.post("/pay");
-    },
+    // payment: async function() {
+    //     // const payInfo = {
+    //     //     musicalName : musicalName
+    //     // }    
+    //     return await axios.get("/pay");
+    // },
 
 }
 

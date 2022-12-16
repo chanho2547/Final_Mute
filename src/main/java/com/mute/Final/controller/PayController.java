@@ -5,13 +5,14 @@ import com.mute.Final.service.PayService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URISyntaxException;
 
 @RequiredArgsConstructor
-@RestController
+@Controller // redirect 동작하려면 이걸로!
 @Slf4j
 public class PayController {
 
@@ -19,12 +20,13 @@ public class PayController {
     @Autowired
     private PayService payService;
 
+//    @GetMapping("/pay")
+//    public void PayReadyGet() {
+//    }
     @GetMapping("/pay")
-    public void PayReadyGet() {
-    }
-    @PostMapping("/pay")
     public String PayReady() {
         log.info("kakaoPay post..........");
+        log.info(payService.PayReady());
 
         return "redirect:" + payService.PayReady(); // 클라이언트에 보냄.(tid,next_redirect_pc_url이 담겨있음.)
     }

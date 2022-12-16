@@ -61,13 +61,16 @@ public class PayService {
         // 하나의 map안에 header와 parameter값을 담아줌.
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<>(params, headers);
 
-        try {
+//        try {
             PayReadyDTO = restTemplate.postForObject(url + "/ready", body, PayReadyDTO.class);
             log.info("" + PayReadyDTO);
+            log.info(PayReadyDTO.getNext_redirect_pc_url());
+
             return PayReadyDTO.getNext_redirect_pc_url();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } return "/pay";
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } return "/pay";
     }
 
     // 결제 승인 단계
