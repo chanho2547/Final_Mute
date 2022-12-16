@@ -1,4 +1,5 @@
 package com.mute.Final.repository;
+import com.mute.Final.entity.Member;
 import com.mute.Final.entity.Musical;
 import com.mute.Final.entity.ReviewSeat;
 import com.mute.Final.entity.ReviewTotal;
@@ -16,7 +17,9 @@ public interface ReviewTotalRepository extends JpaRepository<ReviewTotal, Long> 
     @Query(value = "select * from review_musical limit 3", nativeQuery = true)
     List<ReviewTotal> findTopStar();
     List<ReviewTotal> findByMusicalId(Musical musicalId);
-    
+    ReviewTotal findByReviewMuId(String reviewMuId);
+
+
 
 
 }

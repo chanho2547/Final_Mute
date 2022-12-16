@@ -1,12 +1,11 @@
 package com.mute.Final.controller;
-// 좌석 후기 등록 - 도연 작업중..
-
 import com.mute.Final.service.WriteService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Map;
+
+// 후기 등록 - 도연
 
 @RestController
 @RequestMapping(value = "/review", method = RequestMethod.POST)
@@ -61,7 +60,4 @@ public class WriteController {
         }
 
     }
-    // 좌석 후기 삭제
-//    @PostMapping("/deleteReview")
-
 }
