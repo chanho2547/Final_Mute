@@ -64,8 +64,7 @@ public class WriteService {
         reviewSeat.setScoreLight(Integer.parseInt(scoreLight));
         reviewSeat.setScoreAvgSeat(Double.parseDouble(scoreAvgSeat));
         reviewSeat.setReviewSeTxt(reviewSeTxt);
-
-        System.out.println("테스트!!!!!!!!!!!!!! : " + reviewSeat);
+        reviewSeat.setWriteDate(LocalDateTime.now());
         reviewSeatRepository.save(reviewSeat);
         return true;
     }

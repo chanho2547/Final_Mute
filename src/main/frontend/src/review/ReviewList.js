@@ -6,6 +6,7 @@ import Modal from "../util/Modal";
 import ReviewTotal from "./ReviewTotal";
 import axios from "axios";
 import MuteApi from "../api/MuteApi";
+import Rating from "../util/Rating";
 
 // 뮤지컬 총평 후기 view - 도연 작업중..
 
@@ -46,13 +47,14 @@ const ReviewList = (props) => {
     useEffect(() => {
         const ReviewData = async () => {
             try{
-                let response = await MuteApi.ReviewInfo("PF151901");
-                console.log("response.data : " + response.data);
+                let response = await MuteApi.ReviewInfo(whatMusical);
+                // console.log("response.data : " + response.data);
+
                 setReviewInfo(response.data);
                 console.log("후기 불러오기 성공!!");
 
             } catch (e) {
-                console.log(e + "후기 불러오기 실패777");
+                console.log(e + "후기 불러오기 실패");
             }
         };
         ReviewData();
@@ -94,9 +96,9 @@ const ReviewList = (props) => {
                 <p>회원 총 평점 {}</p>
             </div>
             <div>
-                <p>{}</p>
+                <p>{e.scoreAvgTotal}</p>
                 <span>{e.member}</span><span>{}{e.scoreAvgTotal}</span><span>날짜{e.writeDate}</span><button>수정</button><button onClick={() => OnClickDelete()}>삭제</button>
-                <span>스토리 {e.scoreStory}</span> 
+                <span>스토리 <Rating /> {e.scoreStory}</span> 
                 <span>연출 {e.scoreDirect}</span> 
                 <span>캐스팅 {e.scoreCast}</span> 
                 <span>넘버 {e.scoreNumber}</span>
