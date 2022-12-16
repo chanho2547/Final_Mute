@@ -28,7 +28,9 @@ public class PayController {
         log.info("kakaoPay post..........");
         log.info(payService.PayReady());
 
-        return "redirect:" + payService.PayReady(); // 클라이언트에 보냄.(tid,next_redirect_pc_url이 담겨있음.)
+        return "redirect:" + payService.PayReady();
+        // 클라이언트에 보냄.(tid, next_redirect_pc_url이 담겨있음.)
+        // 결제요청하는 카카오페이 qr코드 url로 리다이렉트됨
     }
 
     // 카카오페이 결제 승인 요청
