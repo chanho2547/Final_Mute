@@ -48,7 +48,7 @@ public class TicketService {
         // musical 엔티티 불러와서 넣기
         List<Musical> musical = musicalRepository.findByMusicalNameLike(musicalId);
 
-        System.out.println("musical 테스트 : "+musical.get(0));
+        //System.out.println("musical 테스트 : "+musical.get(0));
         ticket.setMusical(musical.get(0));
 
 

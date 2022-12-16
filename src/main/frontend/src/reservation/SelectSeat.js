@@ -24,6 +24,12 @@ const SelectSeat = (props) => {
         console.log("넘겨주는 PK값 : "+seatNumRef.current);
         console.log("넘겨주는 String값 : "+seatPosRef.current);
         props.addSeatNum(seatNumRef.current);
+
+        // seatPos 앞에 상영관 붙여주기 
+        for(let i=0 ; i<Object.keys(seatPosRef.current).length ; i++) {
+            seatPosRef.current[i] = window.localStorage.getItem("theaterName") + " " +seatPosRef.current[i]
+        }
+
         props.addSeatPos(seatPosRef.current);
         props.propFunction();
     }

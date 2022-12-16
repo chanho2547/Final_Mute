@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; 
-import moment from 'moment';
+import moment, { now } from 'moment';
 import styled from 'styled-components';
 
 
@@ -17,6 +17,7 @@ const SelectDate = (props) => {
     const onClickNext = () => {
       console.log("SelectDate.js Date : " + moment(value).format("YYYY년 MM월 DD일 19:00"));
       props.addSeeDate(moment(value).format("YYYY-MM-DD 19:00:00"));
+      props.addTicketDate(moment().format("YYYY-MM-DD hh:mm:ss"))
       props.propFunction();
     }
     return(

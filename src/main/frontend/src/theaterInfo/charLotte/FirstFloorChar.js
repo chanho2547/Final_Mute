@@ -131,17 +131,17 @@ const onClickSeat = (event) => {
     
 
 
-    // 현 선택된 좌석 확인 
+    // 현 선택된 좌석 확인 (현재 로컬스토리지에 selected라는 값으로 들어가 있음);
     for(let i = 8193; i<=8954 ; i++) {
         if(window.localStorage.getItem(`${i}`) === "selected") {
             arr.push(i);
             //arrString.push(floor + "층 "+parentNode + "열 " + seatNum + "번");
-
         }
     }
 
     // 상위 컴포넌트로 값 전송
     arrString = JSON.parse(window.localStorage.getItem('selectedSeats'));
+    console.log("FirstFloorChar arrString : " + arrString );
     props.propFunction(arrString);
 
     
@@ -162,7 +162,7 @@ const onClickSeat = (event) => {
         window.localStorage.setItem("floor",1);
         window.localStorage.removeItem("arrString");
         let seatInfoMode = window.localStorage.getItem("seatInfoMode");
-        let theaterName = window.localStorage.getItem("theaterName"); // 공연장 이름 => 찬호 질문
+        window.localStorage.setItem("theaterName","샤롯데"); // 공연장 이름 => 찬호 질문
         localStorage.setItem('selectedSeats','[]');
         console.log("seatInfoMode : " + seatInfoMode);
 
@@ -179,20 +179,26 @@ const onClickSeat = (event) => {
 
                 if((i>=8414 && i<= 8568)){    // VIP좌석
                     try{
-                        document.getElementById(i).parentNode.setAttribute('class','real purple');
-                       
-                        
-                    } catch{
-                        
-                    }
+                        document.getElementById(i).parentNode.setAttribute('class','real purple');  
+                    } catch{}
                 }
-
                 if((i>=8193 && i<=8391) || (i>=8756 && i<= 8954) || (i>=8569 && i<= 8733) ){    //  R 좌석
                     try{
                         document.getElementById(i).parentNode.setAttribute('class','real lightgreen');
-                        
                     } catch{}
                 }
+
+                // 예매 된 좌석은 제외하기
+                
+
+
+
+
+
+
+
+
+
              }
             
         
