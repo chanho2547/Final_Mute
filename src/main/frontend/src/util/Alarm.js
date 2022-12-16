@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import MuteApi from "../api/MuteApi";
 
 const Alarm = (props) => {
-    let navigate = useNavigate();
     const [alarm, setAlarm] = useState("");
     const [alarmUpdate, setAlarmUpdate] = useState(0);
     let userNum =  window.localStorage.getItem("whoLoginUserNum");
