@@ -41,6 +41,7 @@ public class WriteService {
         reviewTotal.setScoreNumber(Integer.parseInt(scoreNumber));
         reviewTotal.setScoreAvgTotal(Double.parseDouble(scoreAvgTotal));
         reviewTotal.setReviewMuTxt(reviewMuTxt);
+        System.out.println(reviewTotal.getReviewMuTxt());
         reviewTotal.setWriteDate(LocalDateTime.now());
         reviewTotalRepository.save(reviewTotal);
         return true;

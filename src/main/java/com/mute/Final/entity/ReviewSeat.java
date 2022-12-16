@@ -31,6 +31,7 @@ public class ReviewSeat {
     private int scoreLight; // 조명 별점
     private double scoreAvgSeat; // 평균 별점
 
-    @Lob
+//    @Lob
+    @Column(nullable = false)
     private String reviewSeTxt; // 좌석 후기 내용
 }

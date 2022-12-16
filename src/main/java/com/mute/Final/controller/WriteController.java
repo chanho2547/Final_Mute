@@ -28,6 +28,7 @@ public class WriteController {
         String scoreNumber = writeTotalData.get("scoreNumber");
         String scoreAvgTotal = writeTotalData.get("scoreAvgTotal");
         String reviewMuTxt = writeTotalData.get("reviewMuTxt");
+        System.out.println(reviewMuTxt);
 
         boolean result = writeService.writeTotal(userNum, musicalId, scoreStory, scoreDirect, scoreCast, scoreNumber, scoreAvgTotal, reviewMuTxt);
         if(result) {

@@ -98,7 +98,7 @@ const ReviewList = (props) => {
             <div>
                 <p>{e.scoreAvgTotal}</p>
                 <span>{e.member}</span><span>{}{e.scoreAvgTotal}</span><span>날짜{e.writeDate}</span><button>수정</button><button onClick={() => OnClickDelete()}>삭제</button>
-                <span>스토리 <Rating /> {e.scoreStory}</span> 
+                <span>스토리 {e.scoreStory}</span> 
                 <span>연출 {e.scoreDirect}</span> 
                 <span>캐스팅 {e.scoreCast}</span> 
                 <span>넘버 {e.scoreNumber}</span>

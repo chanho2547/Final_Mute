@@ -28,7 +28,8 @@ public class ReviewTotal {
     private int scoreNumber; // 넘버 별점
     private double scoreAvgTotal; // 평균 별점
 
-    @Lob
+//    @Lob
+    @Column(nullable = false)
     private String reviewMuTxt; // 총평 후기 텍스트
 
 }

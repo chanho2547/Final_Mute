@@ -17,7 +17,7 @@ public class ReviewTotalDTO {
     private int scoreDirect; // 연출 별점
     private int scoreCast; // 캐스팅 별점
     private int scoreNumber; // 넘버 별점
-    private double scoreAvgTotal; // 평균 총평 별점
+    private double scoreAvgTotal; // 개인 평균 총평 별점
     private String reviewMuTxt; // 총평 후기 텍스트
 
     private long reviewMuCnt; // 평균 리뷰 개수
