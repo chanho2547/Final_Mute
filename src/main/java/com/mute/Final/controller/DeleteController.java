@@ -18,7 +18,15 @@ public class DeleteController {
     }
 
     // 총평 후기 삭제
-    @PostMapping("/deleteTotal")
+//    @DeleteMapping("/deleteTotal/{reviewMuId}")
+//    public String delete(@PathVariable("reviewMuId") String userNum) {
+//        deleteService.deletePost(userNum);
+//
+//        return "redirect:/";
+//    }
+
+
+    @DeleteMapping("/deleteTotal")
 
     public ResponseEntity<Boolean> deleteTotal(@RequestBody Map<String, String> deleteTotalData) {
 //        String userNum = deleteTotalData.get("userNum");
@@ -31,17 +39,17 @@ public class DeleteController {
         }
     }
 
-//    // 좌석 후기 삭제
-//    @PostMapping("/deleteSeat")
-//
-//    public ResponseEntity<Boolean> deleteSeat(@RequestBody Map<String, String> deleteSeatData) {
+    // 좌석 후기 삭제
+    @DeleteMapping("/deleteSeat")
+
+    public ResponseEntity<Boolean> deleteSeat(@RequestBody Map<String, String> deleteSeatData) {
 //        String userNum = deleteSeatData.get("userNum");
-//        String reviewSeId = deleteSeatData.get("reviewSeId");
-//        boolean result = deleteService.deleteSeat(reviewSeId);
-//        if(result) {
-//            return new ResponseEntity(true, HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity(false, HttpStatus.OK);
-//        }
-//    }
+        String reviewSeId = deleteSeatData.get("reviewSeId");
+        boolean result = deleteService.deleteSeat(reviewSeId);
+        if(result) {
+            return new ResponseEntity(true, HttpStatus.OK);
+        } else {
+            return new ResponseEntity(false, HttpStatus.OK);
+        }
+    }
 }

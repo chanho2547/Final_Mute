@@ -23,11 +23,16 @@ public class DeleteService {
     private final MusicalRepository musicalRepository;
 
     // 총평 후기 삭제
+//    @Transactional
+//    public void deletePost(String userNum) {
+//        reviewTotalRepository.deleteById(userNum);
+//    }
+
     public boolean deleteTotal(String reviewMuId) {
 //        log.error("reviewMuId 확인 : " + reviewMuId);
 
         try {
-            ReviewTotal reviewTotal = reviewTotalRepository.findByReviewMuId(String.valueOf(reviewMuId));
+            ReviewTotal reviewTotal = reviewTotalRepository.findByReviewMuId(Long.parseLong(reviewMuId));
             return true;
         } catch (Exception e) {
             log.warn("실패!!!!!!!!!!!!!ㅠㅠㅠㅠㅠㅠ");
@@ -35,15 +40,15 @@ public class DeleteService {
         }
     }
 
-//    // 좌석 후기 삭제
-//    public boolean deleteSeat(String reviewSeId) {
-//        log.error("reviewSeId 확인 : " + reviewSeId);
-//        try {
-//            ReviewSeat reviewSeat = reviewSeatRepository.findByReviewSeId(reviewSeId);
-//            return true;
-//        } catch (Exception e) {
-//            log.warn("실패!!!!!!!!!ㅠㅠㅠㅠㅠㅠㅠ");
-//            return false;
-//        }
-//    }
+    // 좌석 후기 삭제
+    public boolean deleteSeat(String reviewSeId) {
+        log.error("reviewSeId 확인 : " + reviewSeId);
+        try {
+            ReviewSeat reviewSeat = reviewSeatRepository.findByReviewSeId(Long.parseLong(reviewSeId));
+            return true;
+        } catch (Exception e) {
+            log.warn("실패!!!!!!!!!ㅠㅠㅠㅠㅠㅠㅠ");
+            return false;
+        }
+    }
 }

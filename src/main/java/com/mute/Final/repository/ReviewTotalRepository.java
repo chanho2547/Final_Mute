@@ -3,10 +3,8 @@ import com.mute.Final.entity.Musical;
 import com.mute.Final.entity.ReviewTotal;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 
 public interface ReviewTotalRepository extends JpaRepository<ReviewTotal, Long> {
@@ -15,7 +13,7 @@ public interface ReviewTotalRepository extends JpaRepository<ReviewTotal, Long> 
     @Query(value = "select * from review_musical limit 3", nativeQuery = true)
     List<ReviewTotal> findTopStar();
     List<ReviewTotal> findByMusicalId(Musical musicalId); // 뮤지컬 총평 후기 view
-    ReviewTotal findByReviewMuId(String reviewMuId); // 뮤지컬 총평 후기 삭제
+    ReviewTotal findByReviewMuId(long reviewMuId); // 뮤지컬 총평 후기 삭제
 
 
 
