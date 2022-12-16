@@ -7,7 +7,6 @@ const Alarm = (props) => {
     const [alarmUpdate, setAlarmUpdate] = useState(0);
     let userNum =  window.localStorage.getItem("whoLoginUserNum");
 
-    
     useEffect(() => {
         const AlarmInfo = async () => {
             try {
@@ -31,8 +30,8 @@ const Alarm = (props) => {
     // OnClickAlarmOff => 화면에서 사라지지 않음
 
     const OnClickAlarm = (musicalId) => {
-        window.localStorage.setItem("musicalId", musicalId)
-        console.log("1. 알람아이콘 클릭 뮤지컬id   : " + musicalId)
+        window.localStorage.setItem("musicalId", musicalId);
+        console.log("1. 알람아이콘 클릭 뮤지컬id   : " + musicalId);
     }
 
     const OnClickAlarmOff = (userNum, musicalId) => {

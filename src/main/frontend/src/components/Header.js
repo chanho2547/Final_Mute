@@ -56,6 +56,7 @@ const Header = () => {
     // 현재 ID에서 로그아웃하기
     const onClickLogout = () => {
         window.localStorage.removeItem("whoLogin");
+        window.localStorage.removeItem("whoLoginUserNum");
         navigate("/");
       }
 

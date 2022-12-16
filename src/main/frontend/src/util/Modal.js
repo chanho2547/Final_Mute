@@ -37,6 +37,7 @@ const Modal = (props) => {
                     <main>{props.children}</main>
                     <footer>
                         {(header === '탈퇴') ?<button onClick={onClickMemDelete}>네</button>: ''}
+                        {(header === '취소'? <button onClick={confirm}>yes</button>:'')}
                         <button className='close' onClick={close}>close</button>
                     </footer>
                 </section>

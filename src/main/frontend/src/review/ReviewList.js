@@ -6,6 +6,7 @@ import Modal from "../util/Modal";
 import ReviewTotal from "./ReviewTotal";
 import axios from "axios";
 import MuteApi from "../api/MuteApi";
+import Rating from "../util/Rating";
 
 // 뮤지컬 총평 후기 view - 도연 작업중..
 
@@ -40,14 +41,17 @@ const ReviewList = (props) => {
         } 
     };
 
-    const [ReviewInfo, setReviewInfo] = useState(''); 
+    const [ReviewInfo, setReviewInfo] = useState(); 
 
     // Api 호출
     useEffect(() => {
         const ReviewData = async () => {
             try{
-                let response = await MuteApi.ReviewInfo;
+                let response = await MuteApi.ReviewInfo(whatMusical);
+                // console.log("response.data : " + response.data);
+
                 setReviewInfo(response.data);
+                console.log("후기 불러오기 성공!!");
 
             } catch (e) {
                 console.log(e + "후기 불러오기 실패");
@@ -62,7 +66,7 @@ const ReviewList = (props) => {
         try {
             const stringReviewNum = String(reviewMuId);
             const response = await MuteApi.reviewDelete(stringReviewNum, member);
-            console.log(response.data);
+            // console.log(response.data);
 
             if(response.data.includes("NOK")) {
                 setModalText("작성자가 아닙니다. 목록으로 되돌아갑니다.")
@@ -84,22 +88,24 @@ const ReviewList = (props) => {
         <h3>뮤지컬 관람 후기</h3>
         <button onClick={WriteButton}>후기 작성</button>
         
-        {/* {ReviewInfo.map(e => ( */}
+         
+         {ReviewInfo && ReviewInfo.map(e => ( 
+
             <>
             <div>
                 <p>회원 총 평점 {}</p>
             </div>
             <div>
-                <p>{}</p>
-                <span>{}</span><span>총점{}</span><span>날짜{}</span><button onClick={() => OnClickDelete()}>삭제</button>
-                <span>스토리 {}</span> 
-                <span>연출 {}</span> 
-                <span>캐스팅 {}</span> 
-                <span>넘버 {}</span>
-                <p>텍스트 {}</p>
+                <p>{e.scoreAvgTotal}</p>
+                <span>{e.member}</span><span>{}{e.scoreAvgTotal}</span><span>날짜{e.writeDate}</span><button>수정</button><button onClick={() => OnClickDelete()}>삭제</button>
+                <span>스토리 <Rating /> {e.scoreStory}</span> 
+                <span>연출 {e.scoreDirect}</span> 
+                <span>캐스팅 {e.scoreCast}</span> 
+                <span>넘버 {e.scoreNumber}</span>
+                <p>후기 {e.reviewMuTxt}</p>
             </div>
             </>
-        {/* ))}  */}
+         ))}  
         {modalLogin&& <Modal open={modalLogin} close={closeModal} type={true}>로그인이 필요한 서비스입니다.</Modal>}
         {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">{modalText}</Modal>}
         </>

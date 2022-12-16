@@ -67,38 +67,25 @@ const MuteApi =  {
             reviewMuId : reviewMuId, // 뮤지컬 후기 글 번호
             member : member // 회원 아이디
         }
-        return await axios.post("review/deleteReview", reviewObj);
+        return await axios.delete("review/deleteTotal", reviewObj);
     },
 
     // 좌석 후기 삭제 - 도연
-    DeleteSeat : async function(reviewSeId, musical, member) {
+    DeleteSeat : async function(reviewSeId, member) {
         const reviewObj = {
             reviewSeId : reviewSeId, // 좌석 후기 글 번호
             member : member // 회원 아이디
         }
-        return await axios.post("review/deleteReview", reviewObj);
+        return await axios.delete("review/deleteSeat", reviewObj);
     },
 
     // 뮤지컬 후기 view - 도연
-    ReviewInfo : async function(reviewMuId, musicalId, member, writeDate, scoreStory, scoreDirect, scoreCast, scoreNumber, reviewMuTxt) {
+    ReviewInfo : async function(musicalId) {
         const reviewObj = {
-            reviewMuId : reviewMuId, // 뮤지컬 후기 글 번호
-            musicalId : musicalId, // 공연 ID
-            member: member, // 회원번호
-            writeDate : writeDate, // 작성일
-            scoreStory: scoreStory,// 스토리 별점
-            scoreDirect: scoreDirect, // 연출 별점
-            scoreCast : scoreCast, // 캐스팅 별점
-            scoreNumber : scoreNumber, // 넘버 별점
-            reviewMuTxt : reviewMuTxt // 뮤지컬 후기 텍스트
+            musicalId : musicalId
         }
-        return await axios.get("totalView", reviewObj);
+        return await axios.get(`totalView?musicalId=${musicalId}`);
     },
-
-    // // 뮤지컬 후기 view - 도연
-    // ReviewInfo : async function() {
-    //     return await axios.get("totalView");
-    // },
 
 
     // 가입 중복 확인
