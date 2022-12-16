@@ -246,6 +246,27 @@ const MuteApi =  {
     //     return await axios.get("/pay");
     // },
 
+    // // 회원정보 불러오기
+    // userInfo: async function(userId) {
+    //     const ediObj = {
+    //         userId: userId
+    //     }
+    //     return await axios.post("", ediObj);
+    // },
+    //
+    // // 수정한 회원 정보 저장
+    // userInfoSave: async function(userId, name, pwd, phone, mail, addr, img) {
+    //     const ediObj = {
+    //         userId: userId,
+    //         userName: name,
+    //         userPwd: pwd,
+    //         userPhone: phone,
+    //         userMail: mail,
+    //         userAddr: addr,
+    //         userImg: img
+    //     }
+    //     return await axios.post("", ediObj);
+    // },
 }
 
 export default MuteApi;

@@ -34,8 +34,6 @@ yarn add moment
 yarn add react-calendar
 yarn add react-daum-postcode
 yarn add axios
-yarn add install bootstrap
-yarn add install reactstrap
 
 ## 빌드
 ./gradlew build
