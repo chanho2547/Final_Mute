@@ -58,18 +58,24 @@ const Reservation = () => {
         console.log("insertTicketFunction 실행");
         const date = new Date();
         setTicketDate(date.toLocaleString('ko-kr'));// 현재 시점을 티켓 구매날짜,시간으로 설정한다
-
+        console.log("setTicketDate : " + date.toLocaleString('ko-kr'));
         // userNum이 들어가야 하는데, userId가 들어간다
         setUserNum(window.localStorage.getItem('whoLogin'));
+        console.log("setUserNum : "+ window.localStorage.getItem('whoLogin')) ;
 
         // 일단 결제 정보는 임시로 보류
         setPaymentId(null); 
+        console.log("setPaymentId : " + paymentId);
+        // paymentId 설정이 안됌
+        console.log("insertTicketFunction 실행 - try");
+        setUserNum(window.localStorage.getItem("whoLoginUserNum"));
+        
         try {
-            // paymentId 설정이 안됌
-            console.log("insertTicketFunction 실행 - try");
-            setUserNum(window.localStorage.getItem("whoLoginUserNum"));
-            const res = await MuteApi.insertTicket(seatNum,seatPos,seeDate,ticketDate,userNum,musicalId,paymentId);
+
+            console.log("insertTicket 넣기 직전 :  " + seatNum + " " +seatPos + " " +seeDate + " " +ticketDate + " " +userNum + " " +musicalId + " " +paymentId);
+            const res = await MuteApi.insertTicket(seatNum , seatPos , seeDate , ticketDate , userNum , musicalId , paymentId);
             console.log("res.data : " + res.data);
+           
 
         }catch(e){
             console.log("오류 : " + e);
@@ -122,6 +128,8 @@ const Reservation = () => {
         <>
         <h1>예매 페이지 입니다</h1>
         <button onClick={onClickNext}>다음으로</button>
+        {/* <button onClick={insertTicketFunction}>결제 임시 버튼</button> */}
+        
         <TmpBox>
         {/* 각 컴포넌트에서, 기본적으로 highFunction을 넣어줌 (count++) */}
         {/* 각 컴포넌트에서, 추가적으로 예매에 필요한 정보들을 가져오기 위한 함수들을 만듦 */}

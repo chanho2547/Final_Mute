@@ -146,6 +146,7 @@ const onClickSeat = (event) => {
 
     
     console.log("arr 현재 상황 : " + arr);
+    props.addSeatNum(arr);
     //console.log("arrString 현재 상황 : " + arrString);
     console.log("arrString[localStorage] 현재 상황 : " + JSON.parse(window.localStorage.getItem('selectedSeats')));
     // document.getElementById(SelectSeat);
