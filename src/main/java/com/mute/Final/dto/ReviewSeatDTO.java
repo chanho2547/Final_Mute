@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class ReviewSeatDTO {
+    private Long reviewSeId; // 좌석 후기 글 번호
     private int seatId; // 좌석번호
     private String musicalName; // 공연 이름
     private String theaterName; // 공연장 이름

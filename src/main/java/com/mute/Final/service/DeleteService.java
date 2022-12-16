@@ -1,4 +1,5 @@
 package com.mute.Final.service;
+import com.mute.Final.entity.ReviewSeat;
 import com.mute.Final.entity.ReviewTotal;
 import com.mute.Final.repository.MemberRepository;
 import com.mute.Final.repository.MusicalRepository;
@@ -23,13 +24,26 @@ public class DeleteService {
 
     // 총평 후기 삭제
     public boolean deleteTotal(String reviewMuId) {
-        log.error("reviewMuId : " + reviewMuId );
+//        log.error("reviewMuId 확인 : " + reviewMuId);
+
         try {
-            ReviewTotal reviewTotal = reviewTotalRepository.findByReviewMuId(reviewMuId);
+            ReviewTotal reviewTotal = reviewTotalRepository.findByReviewMuId(String.valueOf(reviewMuId));
             return true;
         } catch (Exception e) {
-            log.warn("실패");
+            log.warn("실패!!!!!!!!!!!!!ㅠㅠㅠㅠㅠㅠ");
             return false;
         }
     }
+
+//    // 좌석 후기 삭제
+//    public boolean deleteSeat(String reviewSeId) {
+//        log.error("reviewSeId 확인 : " + reviewSeId);
+//        try {
+//            ReviewSeat reviewSeat = reviewSeatRepository.findByReviewSeId(reviewSeId);
+//            return true;
+//        } catch (Exception e) {
+//            log.warn("실패!!!!!!!!!ㅠㅠㅠㅠㅠㅠㅠ");
+//            return false;
+//        }
+//    }
 }

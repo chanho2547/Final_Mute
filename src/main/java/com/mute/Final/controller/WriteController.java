@@ -29,7 +29,6 @@ public class WriteController {
         String scoreAvgTotal = writeTotalData.get("scoreAvgTotal");
         String reviewMuTxt = writeTotalData.get("reviewMuTxt");
 
-
         boolean result = writeService.writeTotal(userNum, musicalId, scoreStory, scoreDirect, scoreCast, scoreNumber, scoreAvgTotal, reviewMuTxt);
         if(result) {
             return new ResponseEntity(true, HttpStatus.OK);

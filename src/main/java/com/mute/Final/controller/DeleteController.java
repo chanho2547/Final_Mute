@@ -3,7 +3,6 @@ import com.mute.Final.service.DeleteService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Map;
 
 // 후기 삭제  - 도연
@@ -21,8 +20,9 @@ public class DeleteController {
     // 총평 후기 삭제
     @PostMapping("/deleteTotal")
 
-    public ResponseEntity<Boolean> deleteTotal(@RequestBody Map<String, String> delete) {
-        String reviewMuId = delete.get("reviewMuId");
+    public ResponseEntity<Boolean> deleteTotal(@RequestBody Map<String, String> deleteTotalData) {
+//        String userNum = deleteTotalData.get("userNum");
+        String reviewMuId = deleteTotalData.get("reviewMuId");
         boolean result = deleteService.deleteTotal(reviewMuId);
         if(result) {
             return new ResponseEntity(true, HttpStatus.OK);
@@ -30,4 +30,18 @@ public class DeleteController {
             return new ResponseEntity(false, HttpStatus.OK);
         }
     }
+
+//    // 좌석 후기 삭제
+//    @PostMapping("/deleteSeat")
+//
+//    public ResponseEntity<Boolean> deleteSeat(@RequestBody Map<String, String> deleteSeatData) {
+//        String userNum = deleteSeatData.get("userNum");
+//        String reviewSeId = deleteSeatData.get("reviewSeId");
+//        boolean result = deleteService.deleteSeat(reviewSeId);
+//        if(result) {
+//            return new ResponseEntity(true, HttpStatus.OK);
+//        } else {
+//            return new ResponseEntity(false, HttpStatus.OK);
+//        }
+//    }
 }

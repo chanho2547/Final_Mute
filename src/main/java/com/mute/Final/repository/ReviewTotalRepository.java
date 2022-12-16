@@ -1,7 +1,5 @@
 package com.mute.Final.repository;
-import com.mute.Final.entity.Member;
 import com.mute.Final.entity.Musical;
-import com.mute.Final.entity.ReviewSeat;
 import com.mute.Final.entity.ReviewTotal;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,8 +14,9 @@ public interface ReviewTotalRepository extends JpaRepository<ReviewTotal, Long> 
     // 필요한 쿼리 => select musical_id, avg(score_avg_musical) from review_musical group by musical_id order by avg(score_avg_musical) desc limit 3;
     @Query(value = "select * from review_musical limit 3", nativeQuery = true)
     List<ReviewTotal> findTopStar();
-    List<ReviewTotal> findByMusicalId(Musical musicalId);
-    ReviewTotal findByReviewMuId(String reviewMuId);
+    List<ReviewTotal> findByMusicalId(Musical musicalId); // 뮤지컬 총평 후기 view
+    ReviewTotal findByReviewMuId(String reviewMuId); // 뮤지컬 총평 후기 삭제
+
 
 
 
