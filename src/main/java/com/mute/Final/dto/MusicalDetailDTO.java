@@ -2,12 +2,17 @@ package com.mute.Final.dto;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @RequiredArgsConstructor
+@Slf4j
 public class MusicalDetailDTO {
     private String musicalId; // 공연 ID(PK)
     private String musicalName; // 공연 이름
@@ -21,15 +26,50 @@ public class MusicalDetailDTO {
     private String musicalAge; // 공연 관람 연령 (만 0세 이상)
     private String musicalPrice; // 좌석별 가격 (R석 170,000원, S석 140,000원, A석 110,000원, B석 80,000원)
     private String musicalDescImg1; // 상세이미지1
-    private String musicalDescImg2; // 상세이미지2
-    private String musicalDescImg3; // 상세이미지3
-    private String musicalDescImg4; // 상세이미지4
+    private String musicalDescImg2; // 상세이미지
+    private String musicalDescImg3; // 상세이미지
+    private String musicalDescImg4; // 상세이미지
     private String musicalPlan; // 공연 스케줄(화요일(19:30), 수요일(14:30,19:30), 목요일(19:30), 금요일 ~ 토요일(14:30,19:30), 일요일(15:00))
 
 //     api DTO에 저장
     public MusicalDetailDTO (JSONObject item) {
         String tmp1 = item.getString("prfpdfrom");
         String tmp2 = item.getString("prfpdto");
+
+        String descImg1 = null;
+        String descImg2 = null;
+//        String descImg3 = null;
+//        String descImg4 = null;
+
+//        JSONArray jsonArray = new JSONArray();
+//        if (jsonArray == item.getJSONObject("styurls").getJSONArray("styurl")){
+//            descImg1 = (String) jsonArray.get(0);
+//            descImg2 = (String) jsonArray.get(1);
+//            descImg3 = (String) jsonArray.get(2);
+//            descImg4 = (String) jsonArray.get(3);
+//        } else{
+//            descImg1 = item.getJSONObject("styurls").getString("styurl");
+//        }
+
+
+        ;
+
+        if (item.getJSONObject("styurls").getString("styurl") instanceof String) {
+            descImg1 = item.getJSONObject("styurls").getString("styurl");
+            log.warn(descImg1);
+        } else {
+            JSONArray jsonArray = item.getJSONObject("styurls").getJSONArray("styurl");
+//            List<String> imgs = new ArrayList<>();
+
+            // 바꿔야함...
+            for (int i = 0; i < jsonArray.length(); i++) {
+//                String descImg = null;
+                descImg1 = (String) jsonArray.get(0);
+                descImg2 = (String) jsonArray.get(1);
+//                descImg3 = (String) jsonArray.get(2);
+//                descImg4 = (String) jsonArray.get(3);
+            }
+        }
 
         this.musicalId = item.getString("mt20id");
         this.musicalName = item.getString("prfnm");
@@ -42,37 +82,11 @@ public class MusicalDetailDTO {
         this.musicalCast = item.getString("prfcast");
         this.musicalAge = item.getString("prfage");
         this.musicalPrice = item.getString("pcseguidance");
-//        this.musicalDescImg1 = item.getString("styurl");
-//        this.musicalDescImg2 = item.getString("styurl");
-//        this.musicalDescImg3 = item.getString("styurl");
-//        this.musicalDescImg4 = item.getString("styurl");
-
+        this.musicalDescImg1 = descImg1;
+        this.musicalDescImg2 = descImg2;
+//        this.musicalDescImg3 = descImg3;
+//        this.musicalDescImg4 = descImg4;
         this.musicalPlan = item.getString("dtguidance");
     }
 }
 
-//<dbs>
-//<db>
-//<mt20id>PF202217</mt20id>
-//<prfnm>베토벤</prfnm>
-//<prfpdfrom>2023.01.12</prfpdfrom>
-//<prfpdto>2023.03.26</prfpdto>
-//<fcltynm>예술의전당 (오페라극장)</fcltynm>
-//<prfcast>박효신, 박은태, 조정은, 옥주현, 윤공주, 이해준, 윤소호</prfcast>
-//<prfcrew>엄홍현, 왕용범, 이단비 등</prfcrew>
-//<prfruntime> </prfruntime>
-//<prfage>만 7세 이상</prfage>
-//<entrpsnm> </entrpsnm>
-//<pcseguidance>R석 170,000원, S석 140,000원, A석 110,000원, B석 80,000원</pcseguidance>
-//<poster>http://www.kopis.or.kr/upload/pfmPoster/PF_PF202217_221115_164026.gif</poster>
-//<sty> </sty>
-//<genrenm>뮤지컬</genrenm>
-//<prfstate>공연예정</prfstate>
-//<openrun>N</openrun>
-//<styurls>
-//<styurl>http://www.kopis.or.kr/upload/pfmIntroImage/PF_PF202217_221115_0440260.jpg</styurl>
-//</styurls>
-//<mt10id>FC000001</mt10id>
-//<dtguidance>화요일(19:30), 수요일(14:30,19:30), 목요일(19:30), 금요일 ~ 토요일(14:30,19:30), 일요일(15:00)</dtguidance>
-//</db>
-//</dbs>

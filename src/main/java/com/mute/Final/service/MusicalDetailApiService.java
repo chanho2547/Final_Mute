@@ -20,10 +20,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @Component
@@ -32,9 +29,6 @@ public class MusicalDetailApiService {
 
     @Value("${api.serviceKey}")
     private String key;
-
-//    @Autowired
-//    MusicalRepository musicalRepository;
 
     public String MusicalDetailApi(@PathVariable String mt20id) {
 
@@ -68,53 +62,24 @@ public class MusicalDetailApiService {
             // JSONObject로 가져오기
             JSONObject item = jsonObj.getJSONObject("db");
 
-//            // 상세이미지 가져오기.. 못가져옴
+            log.warn(item.toString());
+
+//            JSONArray jsonArray = item.getJSONObject("styurls").getJSONArray("styurl");
+//            jsonArray.get(0);
+//            jsonArray.get(1);
+//
+//            log.warn(jsonArray.get(0).toString());
+
+
+//            JSONArray jsonArr = new JSONArray(Arrays.asList(item.get("styurls")));
+
 //            JSONObject item2 = item.getJSONObject("styurls");
-//
-//            JSONArray item2 = item.getJSONArray("styurls");
-//            String str = item2.toString();
-//            String[] splitImgUrl = str.split(",");
-//
-//            for (int i = 0; i <splitImgUrl.length; i++) {
-//                log.error(splitImgUrl.toString());
-//            }
 
-//            log.warn(item2.toString());
-//            JSONArray item3 = item2.getJSONArray("styurl");
-//            log.error(item3.toString());
-
-            // 상세이미지 가져오기.. 못가져옴ㅠㅠ
-//            JSONObject item2 = item.getJSONObject("styurls");
-//            JSONArray jsonArr = item2.getJSONArray("styurl");
-//
-//            String arrStr = jsonArr.toString();
-//
-//            log.warn("styurl ToString확인 :: " + arrStr);
-
-            //arrStr = arrStr.split(",");
-
-            //log.error("split확인 :: " + strSplit);
-//            String tmp1 = arrStr.replace("[", "");
-//            String tmp2 = arrStr.replace("]", "");
-//            JSONArray jsonArr = new JSONArray(Arrays.asList(arrStr));
-
-//            for(String s : arrayStr) {
-//                String musicalDescImg1 = arrayStr[0];
-//                String musicalDescImg2 = arrayStr[1];
-////                String musicalDescImg3 = arrayStr[2];
-////                String musicalDescImg4 = arrayStr[3];
-//
-////                musicalDescImg2 = musicalDescImg2.substring(0, musicalDescImg2.length() - 1);
-//
-////                musicalDescImg1 = musicalDescImg1.replace("[", "");
-////                musicalDescImg2 = musicalDescImg2.replace("]", "");
-////                String tmp3 = musicalDescImg3.replace("]", "");
-////                String tmp4 = musicalDescImg4.replace("]", "");
-//
-//                log.warn("이미지주소확인" + s);
-//
+//            if (item.get("styurls") == jsonArr) {
 //
 //            }
+//            log.error("item(db)까지::::" + item);
+//            log.warn("styurls 제이슨어레이::::" + jsonArr);
 
             // DTO에 저장하기
             MusicalDetailDTO musicalDetailDTO = new MusicalDetailDTO(item);
@@ -122,26 +87,9 @@ public class MusicalDetailApiService {
 
             log.warn(musicalDetailDTO.toString());
 
-//            // DB에 저장하기
-//            Musical musical = new Musical(item);
-//            musicalRepository.save(musical);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
         return list;
     }
 }
-
-
-
-////            // db에 저장 -> 오류나서 막아둠
-////            for(int i = 0; i < jsonArr.size(); i++) {
-////                JSONObject tmp = (JSONObject) jsonArr.get(i);
-////                Musical musical = new Musical(
-////                        (String)tmp.get("mt20id"), (String)tmp.get("prfnm"),
-////                        (String)tmp.get("fcltynm"), (Date)tmp.get("prfpdfrom"),
-////                        (Date)tmp.get("prfpdto"), (String)tmp.get("poster"));
-////
-////                musicalRepository.save(musical);
-////            }
