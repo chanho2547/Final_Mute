@@ -23,9 +23,6 @@ const FindPwd = () => {
     const onChangeMail = (e) => {
         setInputMail(e.target.value);
     }
-    // 아이디와 이메일이 맞으면 새로운 비밀번호를 지정할 수 있는 html을 불러옴
-    const [isNewPwd, setIsNewPwd] = useState(false);
-
 
     // api 호출
     const onClickFindPwd = async() => {

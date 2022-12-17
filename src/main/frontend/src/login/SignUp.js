@@ -53,14 +53,16 @@ const SignUp = () => {
             const memberCheck = await MuteApi.memberJoinCheck(inputId, "TYPE_ID");
             if(memberCheck.data && isId) {
                 //setIdMsg("사용가능합니다.");
-                setModalOpenIdOK(true);
+                setModalOpen(true);
+                setComment("사용 가능한 아이디입니다.");
             } else if(memberCheck.data && !isId) {
                 setIdMsg("4자리 이상으로 입력해주세요.");
             }
             else {
                 // setIdMsg("이미 사용중인 ID입니다.");
                 setIsId(false);
-                setModalOpenIdCheck(true);
+                setModalOpen(true);
+                setComment("이미 사용중인 아이디입니다.")
             }
         } catch (e) {
         }
@@ -173,6 +175,8 @@ const SignUp = () => {
     const getAuth = async() => {
         const mailAuth = await MuteApi.mailAuth(inputMail);
         setServerAuth(mailAuth.data);
+        setModalOpen(true);
+        setComment("인증번호가 전송되었습니다.");
     }
     // 이메일 인증번호 확인하기
     const authCheck = async() => {
@@ -198,21 +202,7 @@ const SignUp = () => {
     }
 
     // 모달
-    const [modalOpenIdCheck, setModalOpenIdCheck] = useState(false); // 아이디 중복일 때
-    const closeModalIdCheck = () => {
-        setModalOpenIdCheck(false);
-    }
-
-    const [modalOpenIdOK, setModalOpenIdOK] = useState(false); // 아이디 중복 아닐 때
-    const closeModalIdOK = () => {
-        setModalOpenIdOK(false);
-    }
-
-    const [modalOpenSignUp, setModalOpenSignUp] = useState(false); // 회원가입 버튼 눌렀을 때(실패시)
-    const closeModalSignUp = () => { // 모달 창 닫기
-        setModalOpenSignUp(false);
-    }
-
+    const [comment, setComment] = useState("");
     const [modalOpen, setModalOpen] = useState(false);
     const closeModal = () => {
         setModalOpen(false);
@@ -222,17 +212,14 @@ const SignUp = () => {
     const onClickJoin = async() => {
         const memberReg = await MuteApi.signUp(inputId, inputPwd, inputName, inputMail, inputPhone, enroll_company.address);
         if(memberReg.data) {
-            setModalOpenSignUp(true);
+            setModalOpen(true);
+            setComment("Mute 회원가입이 완료되었습니다.");
             console.log("Mute 회원가입이 완료되었습니다.")
             navigate('/Login');
-
-            // window.localStorage.setItem("userId",  inputId);
-            // window.localStorage.setItem("isLogin", "true");
-            // navigate("/SignUp");
-
-            // } else {
-            //     console.log("회원가입에 실패했습니다. 다시 확인해주세요")
-            //     setModalOpenSignUp(true);
+            } else {
+                console.log("회원가입에 실패했습니다. 다시 확인해주세요")
+                setModalOpen(true);
+                setComment("회원가입에 실패했습니다. 다시 확인해주세요.");
         }
     }
 
@@ -270,11 +257,11 @@ const SignUp = () => {
                 </p>
                 <div>
                     <input type='mail' placeholder='메일' value={inputMail} onChange={onChangeMail} onBlur={mailCheck}/>
-                    <button type='button' onClick={getAuth}>인증하기</button>
+                    <button type='button' onClick={getAuth}>인증번호 받기</button>
                 </div>
                 <div>
                     <input type='text' placeholder='인증번호' value={inputAuth} onChange={onChangeAuth} />
-                    <button type='button' onClick={authCheck} >인증번호 확인하기</button>
+                    <button type='button' onClick={authCheck} >인증번호 확인</button>
                     {inputAuth.length > 0 && <span>{authMsg}</span>}
                 </div>
 
@@ -294,13 +281,10 @@ const SignUp = () => {
             </div>
             <div>
                 <button onClick={onClickJoin} disabled={!(isId && isPwd && isPwdCheck && isName && isMail && isPhone && isAuth)}>회원가입</button>
-                <div className='footer'>이미 아이디가 있으신가요? <button><div><Link to="/Login" className="link_item">＞ 로그인</Link></div></button></div>
+                <div className='footer'>이미 아이디가 있으신가요? <button><div><Link to="/Login" className="link_item">> 로그인</Link></div></button></div>
 
                 {/* 모달 */}
-                {modalOpenIdCheck && <Modal open={modalOpenIdCheck} close={closeModalIdCheck} header="확인">이미 가입된 아이디입니다.</Modal>}
-                {modalOpenIdOK && <Modal open={modalOpenIdOK} close={closeModalIdOK} header="확인">사용 가능한 아이디입니다.</Modal>}
-                <Link to="/Login">{modalOpen && <Modal open={modalOpen} close={closeModal} header="확인"> Mute 회원가입이 완료되었습니다.</Modal>}</Link>
-                {modalOpenSignUp && <Modal open={modalOpenSignUp} close={closeModalSignUp} header="확인">회원가입에 실패했습니다. 다시 확인해주세요.</Modal>}
+                {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">{comment}</Modal>}
             </div>
         </>
     )

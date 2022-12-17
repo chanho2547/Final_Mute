@@ -26,12 +26,18 @@ const Container = styled.div`
         text-decoration: none;
     }
     .linkBtn {
-        margin-right: 5px;
+      margin-bottom: 50px;
+      width: 150px;
+      height: 40px;
+      font-size: 18px;
+      margin-right: 30px;
+      
     }
     .lastBtn {
         &:hover {
             color: white;
-            background-color: rgb(0,173,181);
+            background-color: #810000;
+            
         }
     }
 `;
@@ -43,7 +49,7 @@ const Header = styled.div`
         font-weight: bold;
     }
     .comment {
-        color: rgb(0,155,171);
+        color: #810000;
         font-style: italic;
     }
 `;
@@ -72,6 +78,17 @@ const Button = styled.button`
     margin-bottom: 50px;
     width: 150px;
     height: 40px;
+    font-size: 18px;
+    font-weight: 500;
+    color: black;
+    border-radius: 10px;
+    text-align: center;
+`;
+
+const Btn = styled.div`
+  width: 100%;
+  text-align: center;
+  display: inline-block;
 `;
 
 // 이용약관 페이지
@@ -610,8 +627,10 @@ const Agree = () => {
                         <div className='text'><input type="checkbox" checked={ageCheck} onClick={ageBtnEvent}/> 만 14세 이상입니다.<b>(필수)</b></div>
                     </div>
                 </div> </AgreeBox>
-            <Button className='linkBtn'><Link to='/' className='link'>취소하기</Link></Button>
-            <Button onClick={istrue} className='lastBtn'>다음단계</Button>
+            <Btn>
+                <Button className='linkBtn'><Link to='/' className='link'>취소하기</Link></Button>
+                <Button onClick={istrue} className='lastBtn'>다음단계</Button>
+            </Btn>
             {/* 모달 */}
             {modalOpenSignUp && <Modal open={modalOpenSignUp} close={closeModalSignUp} header="확인">필수 항목을 모두 체크해주세요.</Modal>}
         </Container>
