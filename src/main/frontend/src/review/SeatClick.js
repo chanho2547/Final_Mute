@@ -3,13 +3,13 @@ import MuteApi from "../api/MuteApi";
 
 const SeatClick = () => {
     const [selectSeat, setSelectSeat] = useState();
-
+    let pkNum = localStorage.getItem("selected");
 
     useEffect(() => {
         const SeatDetailReview = async () => {
             try {
-                // let response = await MuteApi.seatReview(pkNum);
-                // setSelectSeat(response.data);
+                let response = await MuteApi.seatReview(pkNum);
+                setSelectSeat(response.data);
             } catch(e) {
                 console.log(e + "좌석 상세정보 후기 불러오기 실패");
             }
@@ -45,12 +45,3 @@ const SeatClick = () => {
 }
 
 export default SeatClick;
-
-// const SeatReview = async () => {
-//     try {
-//         let response = await MuteApi.seatReview(pkNum); // 좌석별 후기 불러오기
-//         setSeatReviewInfo(response.data); 
-//     } catch (e) {  
-//         console.log(e + "실패 입니다");
-//     }
-// };

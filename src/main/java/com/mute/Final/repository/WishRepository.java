@@ -30,4 +30,6 @@ public interface WishRepository extends JpaRepository<Wish, Long> {
     @Query(value = "delete from wish where user_num = ?1", nativeQuery = true)
     void deleteByUserNum(Member member); // 회원탈퇴
 
+    List<Wish> findByUserNum(int userNum);
+
 }

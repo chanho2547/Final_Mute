@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import '../seats.css';
 import SelectSeat from "../../reservation/SelectSeat";
 import MuteApi from "../../api/MuteApi";
+import SeatClick from "../../review/SeatClick";
 
 let isSeatRender = false; // 무한 루프 Stop
 
@@ -126,6 +127,7 @@ const onClickSeat = (event) => {
         // if(window.localStorage.getItem(pkNum) === null )
         // 후기일 때 onClick상황
 
+        <SeatClick/>
         // props.propsFunction(pkNum);
     } 
     

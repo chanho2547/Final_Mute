@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { useState, useEffect} from "react";
 import MuteApi from "../api/MuteApi";
@@ -16,8 +15,13 @@ const TheaterSearchList = () => {
     
     const OnClick = (e) => {
         window.localStorage.setItem("seatInfoMode","후기");
-        window.localStorage.setItem("theaterName", e); // 공연장 이름
-        navigate("/TheaterChar");
+        window.localStorage.setItem("theaterFullName", e); // 공연장 풀네임 
+        console.log("입장하는 공연장 이름 : " + e);
+        if(e === "샤롯데시어터"){
+            navigate("/TheaterChar");
+        } else if (e === "충무아트센터"){
+            navigate("/TheaterChung");
+        }
     }
 
     useEffect(() => {
@@ -45,9 +49,7 @@ const TheaterSearchList = () => {
                     <div className="theaterName">공연장 이름 : {inputTheater.theaterName}</div>
                     <div className="theaterAddr">공연장 주소 : {inputTheater.theaterAddr}</div>
                     <div className="theaterSeats">공연장 좌석 개수 : {inputTheater.theaterSeats}석</div>
-                    </div> 
-                    {/* theater 풀네임 저장 */}
-                    {window.localStorage.setItem("inputTheater", inputTheater.theaterName)} 
+                    </div>
                 </div>
             </>
             ))}
