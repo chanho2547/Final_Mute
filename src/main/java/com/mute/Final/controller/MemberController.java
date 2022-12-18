@@ -118,17 +118,19 @@ public class MemberController {
         return new ResponseEntity(list, HttpStatus.OK);
     }
 
-//    // 회원 탈퇴
-//    @PostMapping("/delete_mem")
-//    public ResponseEntity<Boolean> memberDelete(@RequestBody Map<String, String> delete) {
-//        String userId = delete.get("userId");
-//        boolean member = memberService.deleteMem(userNum);
-//        if(member) {
-//            return new ResponseEntity(true,HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity(false, HttpStatus.OK);
-//        }
-//    }
+    // 회원 탈퇴
+    @PostMapping("/delete_mem")
+    public ResponseEntity<Boolean> memberDelete(@RequestBody Map<Member, Long> delete) {
+        Long userNum = delete.get("userNum");
+        log.error(String.valueOf(userNum));
+        boolean member = memberService.deleteMem(userNum);
+        log.error(String.valueOf(member));
+        if(member) {
+            return new ResponseEntity(true,HttpStatus.OK);
+        } else {
+            return new ResponseEntity(false, HttpStatus.OK);
+        }
+    }
 
     // 아이디 (userId) 입력 -> 회원번호 (userNum) 반환
     @PostMapping("/id_to_num")

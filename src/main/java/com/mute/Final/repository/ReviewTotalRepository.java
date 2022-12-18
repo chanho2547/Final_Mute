@@ -1,10 +1,13 @@
 package com.mute.Final.repository;
+import com.mute.Final.entity.Member;
 import com.mute.Final.entity.Musical;
 import com.mute.Final.entity.ReviewTotal;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 public interface ReviewTotalRepository extends JpaRepository<ReviewTotal, Long> {
@@ -14,6 +17,11 @@ public interface ReviewTotalRepository extends JpaRepository<ReviewTotal, Long> 
     List<ReviewTotal> findTopStar();
     List<ReviewTotal> findByMusicalId(Musical musicalId); // 뮤지컬 총평 후기 view
     Long deleteByReviewMuId(long reviewMuId); // 뮤지컬 총평 후기 삭제
+
+    @Modifying //데이터베이스에 변경을 주는 네이티브 쿼리는 이 어노테이션 필요 (INSERT, UPDATE, DELETE)
+    @Transactional
+    @Query(value = "delete from review_musical where user_num = ?", nativeQuery = true)
+    void deleteByUserNum(Member member); // 회원탈퇴
 
 
 

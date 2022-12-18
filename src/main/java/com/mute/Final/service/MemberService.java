@@ -1,8 +1,7 @@
 package com.mute.Final.service;
 import com.mute.Final.dto.MemberDTO;
 import com.mute.Final.entity.Member;
-import com.mute.Final.repository.MemberRepository;
-import com.mute.Final.repository.WishRepository;
+import com.mute.Final.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,6 +17,11 @@ import java.util.List;
 @RequiredArgsConstructor // final 혹은 @NotNull이 붙은 필드의 생성자를 자동으로 생성
 public class MemberService {
     private final MemberRepository memberRepository;
+    private final TicketRepository ticketRepository;
+    private final ReviewTotalRepository reviewTotalRepository;
+    private final ReviewSeatRepository reviewSeatRepository;
+    private final PaymentRepository paymentRepository;
+    private final  WishRepository wishRepository;
     // 로그인 체크
 //    public boolean loginCheck(String userId, String pwd) {
 //        try {
@@ -167,7 +171,13 @@ public class MemberService {
         log.error("userNum : " + userNum );
         try {
             Member member = memberRepository.findByUserNum(userNum);
-
+            log.error(String.valueOf(member));
+            ticketRepository.deleteByUserNum(member);
+            reviewTotalRepository.deleteByUserNum(member);
+            reviewSeatRepository.deleteByUserNum(member);
+            paymentRepository.deleteByUserNum(member);
+            wishRepository.deleteByUserNum(member);
+            memberRepository.deleteByUserNum(member);
             return true;
         } catch (Exception e) {
             log.warn("실패");

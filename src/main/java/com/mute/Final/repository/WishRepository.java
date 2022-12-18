@@ -1,5 +1,6 @@
 package com.mute.Final.repository;
 
+import com.mute.Final.entity.Member;
 import com.mute.Final.entity.Wish;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -23,5 +24,10 @@ public interface WishRepository extends JpaRepository<Wish, Long> {
     @Query(value = "delete from wish where user_num = ?1 and musical_id = ?2", nativeQuery = true)
     void deleteAlarm(int userNum, String musicalId);
 //    void deleteByUserNumAndMusicalId(int userNum, String musicalId);
+
+    @Modifying //데이터베이스에 변경을 주는 네이티브 쿼리는 이 어노테이션 필요 (INSERT, UPDATE, DELETE)
+    @Transactional
+    @Query(value = "delete from wish where user_num = ?", nativeQuery = true)
+    void deleteByUserNum(Member member); // 회원탈퇴
 
 }
