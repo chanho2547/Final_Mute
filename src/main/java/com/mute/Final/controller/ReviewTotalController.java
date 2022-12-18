@@ -35,7 +35,6 @@ public class ReviewTotalController {
         return new ResponseEntity(list, HttpStatus.OK);
     }
 
-
 //    // 뮤지컬별 평균 별점 조회
 //    @GetMapping("/TotalView")
 //    public ResponseEntity<List<ReviewTotalDTO>> reviewTotal() {

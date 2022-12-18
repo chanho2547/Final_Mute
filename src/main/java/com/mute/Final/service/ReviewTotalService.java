@@ -45,7 +45,7 @@ public class ReviewTotalService {
     }
 
 
-    // 뮤지컬 총평 후기 view
+    // 뮤지컬 총평 후기 view - 도연
 
     public List<ReviewTotalDTO> totalList(Musical musicalId) {
         List<ReviewTotalDTO> reviewTotalDTOS = new ArrayList<>();
@@ -68,7 +68,7 @@ public class ReviewTotalService {
 
     }
 
-//    // 뮤지컬별 개인 후기 전체 조회 및 평균 별점 조회 - 도연
+//    // 뮤지컬별 총 평균 별점 - 도연
 //    public List<ReviewTotalDTO> getReviewTotalList(int musicalId) {
 //        List<ReviewTotalDTO> reviewTotalDTOS = new ArrayList<>();
 //        List<ReviewTotal> reviewTotalList = reviewTotalRepository.findByMusicalId(musicalId);

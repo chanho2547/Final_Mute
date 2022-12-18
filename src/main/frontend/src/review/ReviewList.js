@@ -1,14 +1,35 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { BsSearch } from 'react-icons/bs';
+import { FaStar } from 'react-icons/fa';
 import { Link, useNavigate } from "react-router-dom";
 import Modal from "../util/Modal";
 import ReviewTotal from "./ReviewTotal";
 import axios from "axios";
 import MuteApi from "../api/MuteApi";
 import Rating from "../util/Rating";
+import styled from "styled-components";
+import star1 from "../images/star1.png";
+import star2 from "../images/star2.png";
+
 
 // 뮤지컬 총평 후기 view - 도연 작업중..
+
+const StarBox = styled.div`
+    background-color: #EEEBDD;
+
+    .writeBtn {
+        color: white; 
+        background-color: #810000;
+        border-radius: 5px;
+        border: none;
+    }
+    .AvgText {
+        color: #810000;
+        font-size: 20px;
+    }
+    
+    
+`;
 
 const ReviewList = (props) => {
     const navigate = useNavigate();
@@ -83,29 +104,32 @@ const ReviewList = (props) => {
         }
     }
 
-    return(
-        <>
-        <h3>뮤지컬 관람 후기</h3>
-        <button onClick={WriteButton}>후기 작성</button>
-        
-         
-         {ReviewInfo && ReviewInfo.map(e => ( 
+    const Onclick = (e) => {
+        <Rating/>
+    }
 
-            <>
+
+
+    return(
+        <>     
+        <StarBox>
+            <button className="writeBtn" onClick={WriteButton}>후기 작성하기</button>
+            <p><b className="AvgText">평균 별점</b><img src={star1} alt="star" width="20px"/>{}</p>
+            <p><b>스토리</b><img src={star2} alt="star" width="15px"/>{}</p>
+            <p><b>연출</b><img src={star2} alt="star" width="15px"/>{}</p>
+            <p><b>캐스팅</b><img src={star2} alt="star" width="15px"/>{}</p>
+            <p><b>넘버</b><img src={star2} alt="star" width="15px"/>{}</p>
+        </StarBox>
+        {ReviewInfo && ReviewInfo.map(e => ( 
+            <div Onclick={() => Onclick(e)}>
             <div>
-                <p>회원 총 평점 {}</p>
-            </div>
-            <div>
-                <p>{e.scoreAvgTotal}</p>
-                <span>{e.member}</span><span>{}{e.scoreAvgTotal}</span><span>날짜{e.writeDate}</span><button>수정</button><button onClick={() => OnClickDelete()}>삭제</button>
-                <span>스토리 {e.scoreStory}</span> 
-                <span>연출 {e.scoreDirect}</span> 
-                <span>캐스팅 {e.scoreCast}</span> 
-                <span>넘버 {e.scoreNumber}</span>
+                <p autoFocus>{e.member}</p> <p> {e.scoreAvgTotal}</p><p>작성일 {e.writeDate}</p>
+                {/* <button>수정</button><button onClick={() => OnClickDelete()}>삭제</button> */}
+                <p>스토리 {e.scoreStory}연출 {e.scoreDirect} 캐스팅 {e.scoreCast} 넘버 {e.scoreNumber}</p>
                 <p>후기 [{e.reviewMuTxt}]</p>
             </div>
-            </>
-         ))}  
+            </div>
+        ))}  
         {modalLogin&& <Modal open={modalLogin} close={closeModal} type={true}>로그인이 필요한 서비스입니다.</Modal>}
         {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">{modalText}</Modal>}
         </>
