@@ -1,10 +1,15 @@
 package com.mute.Final.entity;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
 // 도연 작업완료
+@Getter @Setter @ToString
 @Data
 @Entity
 @Table(name="member")
