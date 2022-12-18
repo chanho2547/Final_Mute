@@ -47,7 +47,7 @@ public class MusicalApiService {
                 .queryParam("stdate", 20230101) // 공연시작일 (필수)
                 .queryParam("eddate", 20230401) // 공연종료일 (필수)
                 .queryParam("cpage", 1) // 현재 페이지 (필수)
-                .queryParam("rows", 80) // 페이지 당 목록 수 (필수)
+                .queryParam("rows", 100) // 페이지 당 목록 수 (필수)
                 .queryParam("signgucode", 11) // 지역코드(11 = 서울)
                 .queryParam("shcate", "AAAB") // 장르코드(AAAB = 뮤지컬)
                 .encode() // utf-8 로 인코딩
