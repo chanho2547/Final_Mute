@@ -138,11 +138,11 @@ const MuteApi =  {
     },
 
     // 회원탈퇴
-    memberDelete: async function (userId){
+    memberDelete: async function (userNum){
         const reg = {
-            userId: userId
+            userNum: userNum
         };
-        return await axios.post("delete_mem", reg);
+        return await axios.post("delete", reg);
     },
 
     // 좌석 후기 평균 별점
