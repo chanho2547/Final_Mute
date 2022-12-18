@@ -171,7 +171,7 @@ public class MemberService {
     public boolean deleteMem(Long userNum) {
         log.error("userNum : " + userNum );
         try {
-            Member member = memberRepository.findByUserNum(userNum).orElseThrow();
+            Member member = memberRepository.findByUserNum(userNum);
             log.error(String.valueOf(userNum));
             ticketRepository.deleteByUserNum(member);
             reviewTotalRepository.deleteByUserNum(member);
