@@ -28,11 +28,6 @@ import TheaterChar from './theaterInfo/TheaterChar';
 import TheaterChung from './theaterInfo/TheaterChung';
 import RePwd from "./login/RePwd";
 import MusicalListTmp from './musical/MusicalListTmp';
-import PayReady from './payment/PayReady';
-import PayResult from './payment/PayResult';
-import PaySelect from './payment/PaySelect';
-import PayCancel from './payment/PayCancel';
-import ResultFalse from './payment/ResultFalse';
 import PayTest from './payment/PayTest';
 import TheaterSearch from './theaterInfo/TheaterSearch';
 import TheaterSearchList from './theaterInfo/TheaterSearchList';
@@ -76,11 +71,6 @@ function App() {
         <Route path='/RePwd' element={<RePwd/>} />
         <Route path='/MusicalSearchList' element={<MusicalSearchList/>}/>
         <Route path='/payTest' element={<PayTest/>} />
-        {/* <Route path="/" exact={true} component={PayReady} />
-        <Route path="/payresult" component={PayResult} />
-        <Route path="/payselect" component={PaySelect} />
-        <Route path="/paycancel" component={PayCancel} />
-        <Route path="/resultfalse" component={ResultFalse} /> */}
         <Route path="/Edit" element={<Edit/>} />
         <Route path="/MyWish" element={<MyWish/>} />
       </Routes>
