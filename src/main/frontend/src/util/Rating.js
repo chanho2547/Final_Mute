@@ -2,6 +2,36 @@ import React, { useState } from 'react';
 import { FaStar } from 'react-icons/fa';
 import styled from 'styled-components';
 
+const Wrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-top: 15px;
+`;
+
+const RatingText = styled.div`
+  color: #787878;
+  font-size: 12px;
+  font-weight: 400;
+`;
+
+const Stars = styled.div`
+  display: flex;
+  padding-top: 5px;
+  & svg {
+    color: gray;
+    cursor: pointer;
+  }
+  :hover svg {
+    color: #fcc419;
+  }
+  & svg:hover ~ svg {
+    color: gray;
+  }
+  .yellowStar {
+    color: #fcc419;
+  }
+`;
+
 const Rating = ( props ) => {
 
   const ARRAY = [0, 1, 2, 3, 4];
@@ -53,37 +83,3 @@ const Rating = ( props ) => {
 }
 
 export default Rating;
-
-const Wrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding-top: 15px;
-`;
-
-const RatingText = styled.div`
-  color: #787878;
-  font-size: 12px;
-  font-weight: 400;
-`;
-
-const Stars = styled.div`
-  display: flex;
-  padding-top: 5px;
-
-  & svg {
-    color: gray;
-    cursor: pointer;
-  }
-
-  :hover svg {
-    color: #fcc419;
-  }
-
-  & svg:hover ~ svg {
-    color: gray;
-  }
-
-  .yellowStar {
-    color: #fcc419;
-  }
-`;

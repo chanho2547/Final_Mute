@@ -9,6 +9,32 @@ import Modal from "../util/Modal";
 
 // 뮤지컬 총평 후기 등록 - 도연
 
+
+const InfoBox = styled.div`
+    font-size: small;
+    color: lightgray;
+`;
+
+const StarBox = styled.div`
+    display: flex;
+
+    .AvgText {
+        color: #810000;
+        font-size: 20px;
+    }
+    .MyAvg {
+        float: left;
+
+    }
+    .MyStar {
+        float: right;
+
+    }
+    
+    
+`;
+
+
 const ReviewTotal = (props) => {
     const navigate = useNavigate();
 
@@ -98,20 +124,26 @@ const ReviewTotal = (props) => {
     
     return(
         <>
-            <div>총평 후기</div>
             <div>
-                <fieldset>
+                <InfoBox>
+                • 게시판 운영 규칙에 어긋난다고 판단되는 게시글은 사전 통보없이 블라인드 처리될 수 있습니다.<br/>
+                • 특히 티켓 매매 및 양도의 글은 발견 즉시 임의 삭제되며 전화번호, 이메일 등의 개인정보는 악용될 우려가 있습니다.<br/>
+                • 사전 경고에도 불구하고 불량 게시물을 계속적으로 게재한 게시자의 경우 뮤트 후기 게시판 작성 권한이 제한됩니다.
+                </InfoBox>
+                <StarBox>
+                    <div className="MyAvg"><b className="AvgText">나의 총점</b>⭐{scoreAvgTotal}</div>
+                    <div className="MyStar">
                     <div> 스토리 <Rating value={scoreStory} propFunction={highFunction1}/></div>
                     <div> 연출 <Rating value={scoreDirect} propFunction={highFunction2}/></div>
                     <div> 캐스팅 <Rating value={scoreCast} propFunction={highFunction3}/></div>
                     <div> 넘버 <Rating value={scoreNumber}  propFunction={highFunction4}/></div>
-                </fieldset>
-                <fieldset>
-                    <div>후기 작성</div>
-                    <textarea placeholder="관람하신 뮤지컬의 후기를 작성해주세요. (10자 이상)" value={totalReview} onChange={onChangeTotalReview}></textarea>
-                </fieldset>
-                <button onClick={WriteTotalButton}>확인</button>
-                <button onClick={CancelButton}>취소</button>
+                    </div>
+                </StarBox>
+
+                <input placeholder="관람하신 뮤지컬의 후기를 작성해주세요. (10자 이상)" value={totalReview} onChange={onChangeTotalReview}></input>
+
+                <button onClick={WriteTotalButton}>작성하기</button>
+                <button onClick={CancelButton}>취소하기</button>
                 {writeModal&& <TotalModal open={writeModal} confirm={confirmModal} close={closeModal} type={true} header="확인">뮤지컬 후기 작성 완료♥</TotalModal>}
             </div>
 
