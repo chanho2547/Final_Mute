@@ -63,7 +63,7 @@ const Rating = ( props ) => {
 
   return (
     <Wrap>
-      <RatingText>별점</RatingText>
+      <RatingText></RatingText>
       <Stars>
         {ARRAY.map((el, idx) => {
           return (

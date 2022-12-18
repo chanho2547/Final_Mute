@@ -24,14 +24,21 @@ const StarBox = styled.div`
     }
     .MyAvg {
         float: left;
-
+        padding-left: 150px;
+        border-right: 50px;
+        border: solid 0.5px lightgray;
     }
     .MyStar {
         float: right;
-
+        padding-left: 50px;
+        border: solid 0.5px lightgray;
     }
-    
-    
+`;
+
+const TextBox = styled.input`
+    width: 550px;
+    height: 250px;
+    padding-left: 100px;
 `;
 
 
@@ -46,7 +53,7 @@ const ReviewTotal = (props) => {
 
     // 취소 버튼 누르면 첫 화면으로..
     const CancelButton = () => {   
-        navigate('/ReviewList');
+        navigate('/Review');
     }
 
     // 입력받는 부분
@@ -72,7 +79,7 @@ const ReviewTotal = (props) => {
     }
     
     const closeModal = () => { // 아니오 눌렀을 때 => 리뷰 리스트로 이동
-        navigate("/ReviewList"); 
+        navigate("/Review"); 
     }
 
     // 후기 작성하기 Api 호출
@@ -133,14 +140,14 @@ const ReviewTotal = (props) => {
                 <StarBox>
                     <div className="MyAvg"><b className="AvgText">나의 총점</b>⭐{scoreAvgTotal}</div>
                     <div className="MyStar">
-                    <div> 스토리 <Rating value={scoreStory} propFunction={highFunction1}/></div>
-                    <div> 연출 <Rating value={scoreDirect} propFunction={highFunction2}/></div>
-                    <div> 캐스팅 <Rating value={scoreCast} propFunction={highFunction3}/></div>
-                    <div> 넘버 <Rating value={scoreNumber}  propFunction={highFunction4}/></div>
+                    <div> 스토리 <Rating value={scoreStory} propFunction={highFunction1}/>　
+                    연출 <Rating value={scoreDirect} propFunction={highFunction2}/></div>
+                    <div> 캐스팅 <Rating value={scoreCast} propFunction={highFunction3}/>　
+                    넘버 <Rating value={scoreNumber}  propFunction={highFunction4}/></div>
                     </div>
                 </StarBox>
 
-                <input placeholder="관람하신 뮤지컬의 후기를 작성해주세요. (10자 이상)" value={totalReview} onChange={onChangeTotalReview}></input>
+                <TextBox placeholder="관람하신 뮤지컬의 후기를 작성해주세요. (10자 이상)" value={totalReview} onChange={onChangeTotalReview}></TextBox>
 
                 <button onClick={WriteTotalButton}>작성하기</button>
                 <button onClick={CancelButton}>취소하기</button>

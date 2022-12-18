@@ -27,11 +27,23 @@ const StarBox = styled.div`
         border-radius: 5px;
         border: none;
         float: right;
-        width: 80px;
-        height: 50px;
+        width: 100px;
+        height: 30px;
     }
     
     
+`;
+
+const ReviewBox = styled.div`
+    padding: 10px;
+    border: solid 0.5px lightgray;
+
+    .text {
+        padding: 5px;
+    }
+    .date {
+        color: lightgray;
+    }
 `;
 
 const ReviewList = (props) => {
@@ -127,12 +139,12 @@ const ReviewList = (props) => {
         </StarBox>
         {ReviewInfo && ReviewInfo.map(e => ( 
             <div Onclick={() => Onclick(e)}>
-            <div>
-                <p autoFocus>{e.member}</p> <p> {e.scoreAvgTotal}</p><p>작성일 {e.writeDate}</p>
+            <ReviewBox>
+                <p autoFocus>{e.member} ⭐{e.scoreAvgTotal} <span className="date">작성일 {e.writeDate}</span></p>
                 {/* <button>수정</button><button onClick={() => OnClickDelete()}>삭제</button> */}
-                <p>스토리 ★{e.scoreStory} 연출 ★{e.scoreDirect} 캐스팅 ★{e.scoreCast} 넘버 ★{e.scoreNumber}</p>
-                <p>{e.reviewMuTxt}</p>
-            </div>
+                <p>스토리 ★{e.scoreStory} 　연출 ★{e.scoreDirect} 　캐스팅 ★{e.scoreCast} 　넘버 ★{e.scoreNumber}</p>
+                <p className="text">{e.reviewMuTxt}</p>
+            </ReviewBox>
             </div>
         ))}  
         {modalLogin&& <Modal open={modalLogin} close={closeModal} type={true}>로그인이 필요한 서비스입니다.</Modal>}
