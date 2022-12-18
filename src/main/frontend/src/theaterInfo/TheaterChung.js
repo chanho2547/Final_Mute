@@ -25,7 +25,7 @@ const TheaterChung = () => {
         <>
             <button onClick={onClickFirstFloor}>1층</button>
             <button onClick={onClickSecondFloor}>2층</button>
-            <button onClick={onClickThirdFloor}>2층</button>
+            <button onClick={onClickThirdFloor}>3층</button>
 
             {(floor === 1) ? <FirstFloorChung /> : null}
             {(floor === 2) ? <SecondFloorChung /> : null}

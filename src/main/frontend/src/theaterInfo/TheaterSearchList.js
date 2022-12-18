@@ -5,7 +5,7 @@ import MuteApi from "../api/MuteApi";
 import { useNavigate } from "react-router-dom";
 
 // 공연장 검색 목록
-// seatview.js에 검색창있음
+// theaterSearch.js에 검색창있음
 
 const TheaterSearchList = () => {
     const navigate = useNavigate();

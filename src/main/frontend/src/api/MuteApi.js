@@ -264,6 +264,10 @@ const MuteApi =  {
 
     wishCancel: async function(userNum, mt20id) {
         return await axios.delete(`/wish/delete?userNum=${userNum}&musicalId=${mt20id}`)
+    },
+
+    userWish:async function(userNum) {
+        return await axios.get(`/wish/select/all?userum=${userNum}`)
     }
 }
 

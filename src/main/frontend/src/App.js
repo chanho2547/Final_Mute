@@ -13,7 +13,7 @@ import Review from './review/Review';
 import ChoiceSeat from './review/ChoiceSeat';
 import Reservation from './reservation/Reservation';
 import Cs from './cs/Cs';
-import Like from './util/Like';
+import Like from './util/MyWish';
 import Membership from './membership/Membership';
 import MusicalDetail from './musical/MusicalDetail';
 import SignUp from "./login/SignUp";
@@ -38,6 +38,7 @@ import TheaterSearch from './theaterInfo/TheaterSearch';
 import TheaterSearchList from './theaterInfo/TheaterSearchList';
 import Alarm from './util/Alarm';
 import Edit from "./mypage/Edit";
+import MyWish from './util/MyWish';
 
 function App() {
   return (
@@ -81,6 +82,7 @@ function App() {
         <Route path="/paycancel" component={PayCancel} />
         <Route path="/resultfalse" component={ResultFalse} /> */}
         <Route path="/Edit" element={<Edit/>} />
+        <Route path="/MyWish" element={<MyWish/>} />
       </Routes>
       <Footer/>
     </Router>

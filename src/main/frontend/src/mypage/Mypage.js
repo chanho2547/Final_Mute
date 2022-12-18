@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import Modal from "../util/Modal";
 import Edit from "./Edit";
+import MyWish from "../util/MyWish";
 
 
 const MyPage = () => {
@@ -26,6 +27,7 @@ const MyPage = () => {
                 <button onClick={onClickMemDelete}>회원탈퇴</button>
                 <Modal open={modalOpen} close={closeModal} header="탈퇴">{comment}</Modal>
             </div>
+            <MyWish/>
         </>
     )
 }
