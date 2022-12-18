@@ -20,7 +20,7 @@ public interface ReviewTotalRepository extends JpaRepository<ReviewTotal, Long> 
 
     @Modifying //데이터베이스에 변경을 주는 네이티브 쿼리는 이 어노테이션 필요 (INSERT, UPDATE, DELETE)
     @Transactional
-    @Query(value = "delete from review_musical where user_num = ?", nativeQuery = true)
+    @Query(value = "delete from review_musical where user_num = ?1", nativeQuery = true)
     void deleteByUserNum(Member member); // 회원탈퇴
 
 

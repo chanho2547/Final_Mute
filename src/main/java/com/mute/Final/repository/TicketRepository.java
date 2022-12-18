@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
 
-    @Query(value = "delete from ticket where user_num = ?", nativeQuery = true)
+    @Query(value = "delete from ticket where user_num = ?1", nativeQuery = true)
     void deleteByUserNum(Member member); // 회원탈퇴
 }

@@ -167,11 +167,12 @@ public class MemberService {
     }
 
     // 회원탈퇴
+    @Transactional
     public boolean deleteMem(Long userNum) {
         log.error("userNum : " + userNum );
         try {
-            Member member = memberRepository.findByUserNum(userNum);
-            log.error(String.valueOf(member));
+            Member member = memberRepository.findByUserNum(userNum).orElseThrow();
+            log.error(String.valueOf(userNum));
             ticketRepository.deleteByUserNum(member);
             reviewTotalRepository.deleteByUserNum(member);
             reviewSeatRepository.deleteByUserNum(member);

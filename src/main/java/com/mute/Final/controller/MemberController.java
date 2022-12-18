@@ -119,7 +119,7 @@ public class MemberController {
     }
 
     // 회원 탈퇴
-    @PostMapping("/delete_mem")
+    @DeleteMapping("/delete_mem")
     public ResponseEntity<Boolean> memberDelete(@RequestBody Map<Member, Long> delete) {
         Long userNum = delete.get("userNum");
         log.error(String.valueOf(userNum));
