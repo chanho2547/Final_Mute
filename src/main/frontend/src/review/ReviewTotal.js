@@ -13,7 +13,7 @@ import Modal from "../util/Modal";
 const InfoBox = styled.div`
     padding: 15px;
     font-size: small;
-    color: lightgray;
+    color: gray;
 `;
 
 const StarBox = styled.div`
@@ -46,6 +46,7 @@ const OKbtn = styled.button`
     color: white; 
     background-color: #810000;
     border-radius: 5px;
+    border: none;
     width: 70px;
     height: 30px;
 
@@ -54,6 +55,7 @@ const NOKbtn = styled.button`
     color: white; 
     background-color: #909090;
     border-radius: 5px;
+    border: none;
     width: 70px;
     height: 30px;
 `;
@@ -151,7 +153,7 @@ const ReviewTotal = (props) => {
             <div>
                 <InfoBox>
                 • 게시판 운영 규칙에 어긋난다고 판단되는 게시글은 사전 통보없이 블라인드 처리될 수 있습니다.<br/>
-                • 특히 티켓 매매 및 양도의 글은 발견 즉시 임의 삭제되며 전화번호, 이메일 등의 개인정보는 악용될 우려가 있습니다.<br/>
+                • 특히 티켓 매매 및 양도의 글은 발견 즉시 임의 삭제되며 전화번호, 이메일 등의 개인정보는 악용될 우려가 있으므로 게시를 삼가해주시기 바랍니다.<br/>
                 • 사전 경고에도 불구하고 불량 게시물을 계속적으로 게재한 게시자의 경우 뮤트 후기 게시판 작성 권한이 제한됩니다.
                 </InfoBox>
                 <StarBox>
