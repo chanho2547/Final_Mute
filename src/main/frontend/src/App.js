@@ -34,6 +34,7 @@ import TheaterSearchList from './theaterInfo/TheaterSearchList';
 import Alarm from './util/Alarm';
 import Edit from "./mypage/Edit";
 import MyWish from './util/MyWish';
+import PayEnd from './reservation/payment/PayEnd';
 
 function App() {
   return (
@@ -73,6 +74,7 @@ function App() {
         <Route path='/payTest' element={<PayTest/>} />
         <Route path="/Edit" element={<Edit/>} />
         <Route path="/MyWish" element={<MyWish/>} />
+        <Route path="/PayEnd" element={<PayEnd/>} />
       </Routes>
       <Footer/>
     </Router>

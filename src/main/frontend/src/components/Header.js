@@ -43,6 +43,9 @@ const Keyword = styled.div`
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 const Header = () => {
+
+  
+
     const [alarmModal, setAlarmModal] = useState(false); // 알림 모달창
     
     const closeModal = () => {
@@ -75,6 +78,8 @@ const Header = () => {
     const onClickAlarm = () => {
       setAlarmModal(true);
     }
+    
+    if (window.location.pathname === '/PayEnd') return null;
 
 
     return(

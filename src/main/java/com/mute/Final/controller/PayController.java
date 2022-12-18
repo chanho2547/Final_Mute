@@ -35,12 +35,13 @@ public class PayController {
 
     // 카카오페이 결제 승인 요청
     @GetMapping("/pay/success")
-    public void paySuccess(@RequestParam("pg_token") String pg_token, Model model) {
+    public String paySuccess(@RequestParam("pg_token") String pg_token, Model model) {
         log.info("kakaoPaySuccess get..............");
         log.info("kakaoPaySuccess pg_token : " + pg_token);
 
         // 결제 정보를 모델에 저장함
         model.addAttribute("info", payService.PayInfo(pg_token));
+        return "redirect:/PayEnd";
     }
 
     // 카카오페이 결제 취소시 실행 url

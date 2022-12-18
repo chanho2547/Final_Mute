@@ -7,19 +7,37 @@ const Pay = (props) => {
     // let typeofSeat = typeof props.seat;
 
 
-    useEffect(()=>{
-       
-            
-            
-        
-    })
+    const popupCenter = ({url, title, w, h}) => {
+        // Fixes dual-screen position                             Most browsers      Firefox
+        const dualScreenLeft = window.screenLeft !==  undefined ? window.screenLeft : window.screenX;
+        const dualScreenTop = window.screenTop !==  undefined   ? window.screenTop  : window.screenY;
+    
+        const width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : window.screen.width;
+        const height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : window.screen.height;
+    
+        const systemZoom = width / window.screen.availWidth;
+        const left = (width - w) / 2 / systemZoom + dualScreenLeft;
+        const top = (height - h) / 2 / systemZoom + dualScreenTop-100;
+        const newWindow = window.open(url, title, 
+          `
+          scrollbars=yes,
+          width=${w / systemZoom}, 
+          height=${h / systemZoom}, 
+          top=${top}, 
+          left=${left}
+          `
+        )
+    
+        if (window.focus) newWindow.focus();
+    }
 
     
 
     const onClickPay = () => {
         try {
             console.log(onClickPay);
-            window.open('http://localhost:8282/pay/'); // 일단 해결은 되지만 맞는건지...axios호출하면 CORS에러 뜸!!
+            // window.open('http://localhost:8282/pay/', 'pop01', 'top=50%, left=50%, width=500, height=600, status=no, menubar=no, toolbar=no, resizable=no'); // 일단 해결은 되지만 맞는건지...axios호출하면 CORS에러 뜸!!
+            popupCenter({url: 'http://localhost:8282/pay/', title: 'payTest', w: 380, h: 400});  
             // 인가요청(/oauth/authorize)은 XMLHttpRequest를 이용한 비동기 통신 방식으로 호출 하시면 안됩니다. 
             // (REST-API방식이라면 UI에서 href로 페이지 이동 처리 해주세요)
             // 카카오측 로그인 및 동의 이후 html 을 전달하는 것이 아니라 소유하신 사이트로 리다이렉트 하고
