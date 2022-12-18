@@ -11,6 +11,7 @@ import Modal from "../util/Modal";
 
 
 const InfoBox = styled.div`
+    padding: 15px;
     font-size: small;
     color: lightgray;
 `;
@@ -24,21 +25,37 @@ const StarBox = styled.div`
     }
     .MyAvg {
         float: left;
-        padding-left: 150px;
-        border-right: 50px;
-        border: solid 0.5px lightgray;
+        padding-left: 100px;
+        border-right: 60px;
+        /* border: solid 0.5px lightgray; */
     }
     .MyStar {
         float: right;
-        padding-left: 50px;
-        border: solid 0.5px lightgray;
+        padding-left: 60px;
+        /* border: solid 0.5px lightgray; */
     }
 `;
 
-const TextBox = styled.input`
+const Text = styled.input`
     width: 550px;
     height: 250px;
     padding-left: 100px;
+`;
+
+const OKbtn = styled.button`
+    color: white; 
+    background-color: #810000;
+    border-radius: 5px;
+    width: 70px;
+    height: 30px;
+
+`;
+const NOKbtn = styled.button`
+    color: white; 
+    background-color: #909090;
+    border-radius: 5px;
+    width: 70px;
+    height: 30px;
 `;
 
 
@@ -140,17 +157,18 @@ const ReviewTotal = (props) => {
                 <StarBox>
                     <div className="MyAvg"><b className="AvgText">나의 총점</b>⭐{scoreAvgTotal}</div>
                     <div className="MyStar">
-                    <div> 스토리 <Rating value={scoreStory} propFunction={highFunction1}/>　
+                    <div>스토리 <Rating value={scoreStory} propFunction={highFunction1}/>　
                     연출 <Rating value={scoreDirect} propFunction={highFunction2}/></div>
-                    <div> 캐스팅 <Rating value={scoreCast} propFunction={highFunction3}/>　
+                    <div>캐스팅 <Rating value={scoreCast} propFunction={highFunction3}/>　
                     넘버 <Rating value={scoreNumber}  propFunction={highFunction4}/></div>
                     </div>
                 </StarBox>
 
-                <TextBox placeholder="관람하신 뮤지컬의 후기를 작성해주세요. (10자 이상)" value={totalReview} onChange={onChangeTotalReview}></TextBox>
+                <Text placeholder="관람하신 뮤지컬의 후기를 작성해주세요. (10자 이상)" value={totalReview} onChange={onChangeTotalReview}></Text>
 
-                <button onClick={WriteTotalButton}>작성하기</button>
-                <button onClick={CancelButton}>취소하기</button>
+                <OKbtn onClick={WriteTotalButton}>작성하기</OKbtn>
+                <NOKbtn onClick={CancelButton}>취소하기</NOKbtn>
+
                 {writeModal&& <TotalModal open={writeModal} confirm={confirmModal} close={closeModal} type={true} header="확인">뮤지컬 후기 작성 완료♥</TotalModal>}
             </div>
 
