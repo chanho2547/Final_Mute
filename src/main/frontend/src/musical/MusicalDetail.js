@@ -7,6 +7,34 @@ import heartIcon2 from "../images/heart2.png";
 import Review from "../review/Review";
 import { useNavigate } from "react-router-dom";
 
+// 스타일드 컴포넌트
+const DetailInfoContainer = styled.div`
+    .title {
+        font-weight: 700;
+        font-size: 1.5em;
+        display: block;
+        flex-wrap: wrap;
+    }
+`
+
+const DescInfo = styled.div`
+    display: flex;
+    flex-wrap: nowrap;
+`
+
+const Index = styled.div`
+    margin-right: 30px;
+    color: #810000;
+`
+
+const Contents = styled.div`
+    text-align: left;
+`
+
+
+
+
+
 const MusicalDetail = (props) => {
     const navigate = useNavigate();
     const [musicalDetail,setMusicalDetail] = useState();
@@ -56,10 +84,6 @@ const MusicalDetail = (props) => {
       MusicalData();
   }, []);
 
-  
-  const OnClickPoster = (e) => {
-  }
-
   const OnClickWish = async() => {
         try {
             const response = await MuteApi.wishReg(userNum, musicalId); // musicalId와 userNum으로 찜 상품 등록
@@ -90,18 +114,32 @@ const MusicalDetail = (props) => {
         </div>
         
         {musicalDetail && musicalDetail.map(e => (        
-            <div onClick={() => OnClickPoster(e.musicalId) }>
-            <img alt="poster" src={e.musicalPoster}/>
-            <p className="title">{e.musicalName}</p>
-            <p className="theaterName">{e.theaterName}</p>
-            <p className="startDate">{e.musicalStart}</p>
-            <p className="endDate">{e.musicalEnd}</p>
-            <p className="status">{e.musicalStatus}</p>
-            <p className="casting">{e.musicalCast}</p>
-            <p className="ageLimit">{e.musicalAge}</p>
-            <p className="price">{e.musicalPrice}</p>
-            <p className="plan">{e.musicalPlan}</p>
-            </div>
+            <DetailInfoContainer>
+                <p className="title">{e.musicalName}</p>
+                <img alt="poster" src={e.musicalPoster}/>
+                <DescInfo>
+                    <Index>
+                        <p>장소</p>
+                        <p>공연기간</p>
+                        <p>공연시간</p>
+                        <p>공연상태</p>
+                        <p>출연진</p>
+                        <p>관람연령</p>
+                        <p>가격</p>
+                        <p>일정</p>
+                    </Index>
+                    <Contents>
+                        <p className="theaterName">{e.theaterName}</p>
+                        <p className="startDate">{e.musicalStart} ~ {e.musicalEnd}</p>
+                        {/* <p className="status">{e.musicalRuntime} != null ? {e.musicalRuntime} : 정보없음</p> */}
+                        <p className="status">{e.musicalStatus}</p>
+                        <p className="casting">{e.musicalCast}</p>
+                        <p className="ageLimit">{e.musicalAge}</p>
+                        <p className="price">{e.musicalPrice}</p>
+                        <p className="plan">{e.musicalPlan}</p>
+                    </Contents>
+                </DescInfo>
+            </DetailInfoContainer>
         ))}
 
         <Review/>

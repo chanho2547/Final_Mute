@@ -35,9 +35,4 @@ public class TheaterController {
         return theaterDetailApiService.detailFromJsonObj(result);
     }
 
-
-
-
-
-
 }

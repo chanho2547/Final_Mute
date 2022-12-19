@@ -20,6 +20,7 @@ public class MusicalDetailDTO {
     private String theaterId; // 공연장 ID
     private LocalDate musicalStart; // 공연 시작일
     private LocalDate musicalEnd; // 공연 종료일
+    private String musicalRuntime; // 공연 런타임
     private String musicalStatus; // 공연 상태 (공연예정/공연중/공연종료)
     private String musicalPoster; // 공연 포스터
     private String musicalCast; // 공연 출연진 (박효신, 박은태, 조정은, 옥주현)
@@ -27,8 +28,8 @@ public class MusicalDetailDTO {
     private String musicalPrice; // 좌석별 가격 (R석 170,000원, S석 140,000원, A석 110,000원, B석 80,000원)
     private String musicalDescImg1; // 상세이미지1
     private String musicalDescImg2; // 상세이미지
-    private String musicalDescImg3; // 상세이미지
-    private String musicalDescImg4; // 상세이미지
+//    private String musicalDescImg3; // 상세이미지
+//    private String musicalDescImg4; // 상세이미지
     private String musicalPlan; // 공연 스케줄(화요일(19:30), 수요일(14:30,19:30), 목요일(19:30), 금요일 ~ 토요일(14:30,19:30), 일요일(15:00))
 
 //     api DTO에 저장
@@ -38,36 +39,28 @@ public class MusicalDetailDTO {
 
         String descImg1 = null;
         String descImg2 = null;
-//        String descImg3 = null;
-//        String descImg4 = null;
+        String descImg3 = null;
+        String descImg4 = null;
 
-//        JSONArray jsonArray = new JSONArray();
-//        if (jsonArray == item.getJSONObject("styurls").getJSONArray("styurl")){
-//            descImg1 = (String) jsonArray.get(0);
-//            descImg2 = (String) jsonArray.get(1);
-//            descImg3 = (String) jsonArray.get(2);
-//            descImg4 = (String) jsonArray.get(3);
-//        } else{
-//            descImg1 = item.getJSONObject("styurls").getString("styurl");
-//        }
-
-
-        ;
-
-        if (item.getJSONObject("styurls").getString("styurl") instanceof String) {
+        Object obj = item.getJSONObject("styurls").get("styurl");
+        if (obj instanceof String) {
             descImg1 = item.getJSONObject("styurls").getString("styurl");
             log.warn(descImg1);
-        } else {
+        } else if(obj instanceof JSONArray) {
             JSONArray jsonArray = item.getJSONObject("styurls").getJSONArray("styurl");
-//            List<String> imgs = new ArrayList<>();
 
-            // 바꿔야함...
             for (int i = 0; i < jsonArray.length(); i++) {
-//                String descImg = null;
                 descImg1 = (String) jsonArray.get(0);
                 descImg2 = (String) jsonArray.get(1);
-//                descImg3 = (String) jsonArray.get(2);
-//                descImg4 = (String) jsonArray.get(3);
+//                if (jsonArray.get(2) != null) {
+//                    descImg3 = (String) jsonArray.get(2);
+//                } else if (jsonArray.get(2) != obj) {
+//                    descImg3 = null;
+//                } else if (jsonArray.get(3) != null) {
+//                    descImg4 = (String) jsonArray.get(3);
+//                } else {
+//                    descImg4 = null;
+//                }
             }
         }
 
@@ -77,6 +70,7 @@ public class MusicalDetailDTO {
         this.theaterId = item.getString("mt10id");
         this.musicalStart = LocalDate.parse(tmp1.replace(".", "-"));
         this.musicalEnd = LocalDate.parse(tmp2.replace(".", "-"));
+        this.musicalRuntime = item.getString("prfruntime");
         this.musicalStatus = item.getString("prfstate");
         this.musicalPoster = item.getString("poster");
         this.musicalCast = item.getString("prfcast");

@@ -64,23 +64,6 @@ public class MusicalDetailApiService {
 
             log.warn(item.toString());
 
-//            JSONArray jsonArray = item.getJSONObject("styurls").getJSONArray("styurl");
-//            jsonArray.get(0);
-//            jsonArray.get(1);
-//
-//            log.warn(jsonArray.get(0).toString());
-
-
-//            JSONArray jsonArr = new JSONArray(Arrays.asList(item.get("styurls")));
-
-//            JSONObject item2 = item.getJSONObject("styurls");
-
-//            if (item.get("styurls") == jsonArr) {
-//
-//            }
-//            log.error("item(db)까지::::" + item);
-//            log.warn("styurls 제이슨어레이::::" + jsonArr);
-
             // DTO에 저장하기
             MusicalDetailDTO musicalDetailDTO = new MusicalDetailDTO(item);
             list.add(musicalDetailDTO);
