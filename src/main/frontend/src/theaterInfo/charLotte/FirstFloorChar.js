@@ -126,7 +126,8 @@ const onClickSeat = (event) => {
     }
 
     else if (window.localStorage.getItem("seatInfoMode") === "후기") {
-            // window.localStorage.setItem(pkNum,"whatSeatNum");
+            window.localStorage.setItem("whatSeatNum", pkNum);
+            console.log("이게 내가 바로 필요한 것" + pkNum); // => 지금 내가 필요한 것, 잘 들어옴
             // event.currentTarget.setAttribute("class","selected"); // 층
             // window.localStorage.setItem(pkNum,"selected"); // 8450번 좌석
             // window.localStorage.setItem(seatNum,"selectSeat"); // 구역 12번
@@ -143,7 +144,7 @@ const onClickSeat = (event) => {
             arrString.push(floor + "층 "+parentNode + "열 " + seatNum + "번 " + grade);
             console.log("arrString 타입 : "+ typeof(arrString));
             console.log("arrString 출력 : " + arrString);
-            window.localStorage.setItem("selectedSeats", JSON.stringify(arrString));      
+            window.localStorage.setItem("selectedSeats", JSON.stringify(arrString)); // 1층 1열 12번 R
         // props.propsFunction(pkNum);
     } 
     
