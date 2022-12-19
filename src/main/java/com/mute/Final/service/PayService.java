@@ -59,7 +59,7 @@ public class PayService {
         params.add("quantity", "1"); // 상품수량 (필수) -> 변수받아오기
         params.add("total_amount", "59000"); // 상품총액 (필수) -> 변수받아오기
         params.add("tax_free_amount", "0"); // 상품 비과세 금액 (필수)
-        params.add("approval_url", "http://localhost:8282/pay/success"); // 결제 성공시 url -> 결제완료페이지
+        params.add("approval_url", "http://localhost:8282/PayEnd"); // 결제 성공시 url -> 결제완료페이지
         params.add("cancel_url", "http://localhost:8282/pay/cancel"); // 결제 취소시 url
         params.add("fail_url", "http://localhost:8282/pay/fail"); // 결제 실패시 url
 
