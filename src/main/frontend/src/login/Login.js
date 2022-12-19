@@ -4,6 +4,62 @@ import MuteApi from "../api/MuteApi";
 import Modal from "../util/Modal";
 import styled from "styled-components";
 
+const LoginBlock = styled.div`
+    margin-top:50px;
+    .input {
+        width : 270px;
+        height : 35px;
+        background-color : white;
+        border-radius : 5px;
+        border: solid 1.5px #eeeeee;
+        margin : 5px;
+        font-size: 12px;
+        &:hover {
+            border : solid rgb(129,0,0) 1px;
+            font-weight: 600;
+            color: rgb(129,0,0);
+        } 
+        &:focus {
+            outline : solid rgb(129,0,0) 1px;
+            font-weight: 600;
+        }
+    }
+
+    .hint {
+        font-size : 12px;
+        color:green;
+    }
+
+    .loginButton {
+        width: 280px;
+        height: 40px;
+        margin: 10px;
+        color : white;
+        font-weight: 700;
+        opacity: 0.5;
+        background-color: rgb(129,0,0); 
+        border-radius: 5px;
+        border: none;
+        &:hover {
+            border: none;
+            opacity: 1;      
+        }  
+    }
+`;
+
+const PageLink = styled.div`
+    margin-bottom: 40px;
+    .link_item {
+        margin: 10px;
+        color: rgb(57,62,70);
+        font-size : 14px;
+        text-decoration-line: none;
+        &:hover {
+            color: rgb(129,0,0);
+            font-weight: 600;
+        }
+    }
+`;
 const Login = () => {
     const navigate = useNavigate();
     // 아이디, 비밀번호 입력
@@ -94,8 +150,8 @@ const Login = () => {
 
     return(
         <div className="container">
-            <>
-                <h3>현재 로그인 된 계정 [{whoLogin}]</h3>
+            <LoginBlock>
+                <h3>현재 로그인 된 계정 : [{whoLogin}]</h3>
                 <h5>로그인</h5>
                 {/* 아이디 입력창 */}
                 <input className="input" value={inputId} placeholder="아이디" onChange={onChangeId}></input>
@@ -116,12 +172,12 @@ const Login = () => {
                 {/* 로그인 버튼 */}
                 <button className="loginButton" onClick={onClickLogin} >LOGIN</button>
                 <br/>
-            </>
-            <div>
+            </LoginBlock>
+            <PageLink>
                 <Link to="/Agree" className="link_item">회원가입</Link>
                 <Link to="/FindId" className="link_item">아이디 찾기</Link>
                 <Link to="/FindPwd" className="link_item">비밀번호 찾기</Link>
-            </div>
+            </PageLink>
 
             {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">{modalText}</Modal>}
         </div>

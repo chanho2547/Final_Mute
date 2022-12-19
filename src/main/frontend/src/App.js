@@ -42,6 +42,7 @@ function App() {
   return (
     <>
     <Router>
+      <div className='App'>
       <Header/>
       <Routes>
         <Route path="/" element={<Home />} /> 
@@ -80,6 +81,7 @@ function App() {
         <Route path='/SeatClick' element={<SeatClick/>}/>
       </Routes>
       <Footer/>
+      </div>
     </Router>
     </>
   );

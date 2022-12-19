@@ -2,6 +2,58 @@ import {useState} from "react";
 import {Link} from "react-router-dom";
 import MuteApi from "../api/MuteApi";
 import Modal from "../util/Modal";
+import styled from "styled-components";
+
+const FindIdBlock = styled.div`
+  margin-top:50px;
+  .input {
+    width : 270px;
+    height : 35px;
+    background-color : white;
+    border-radius : 5px;
+    border: solid  1.5px #eeeeee;
+    margin : 5px;
+    font-size: 12px;
+    &:hover {
+      border : solid rgb(129,0,0) 1px;
+      color: rgb(129,0,0);
+      font-weight: 600;
+    }
+    &:focus {
+      outline : solid rgb(129,0,0) 1px;
+      font-weight: 600;
+    }
+  }
+
+  .idButton {
+    width: 280px;
+    height: 40px;
+    margin: 10px;
+    color : white;
+    font-weight: 700;
+    opacity: 0.5;
+    background-color: rgb(129,0,0);
+    border-radius: 5px;
+    border: none;
+    &:hover {
+      border: none;
+      opacity: 1;
+    }
+`;
+
+const PageLink = styled.div`
+  margin-bottom: 40px;
+  .link_item {
+    margin: 20px;
+    color: rgb(57,62,70);
+    font-size : 14px;
+    text-decoration-line: none;
+    &:hover {
+      color: rgb(129,0,0);
+      font-weight: 600;
+    }
+  }
+`;
 
 const FindId = () =>{
     // 이름, 이메일 입력 => 이메일값으로 ID찾음
@@ -59,29 +111,30 @@ const FindId = () =>{
         }
     }
     return (
-        <>
-            <div>
+        <div className="container">
+            <FindIdBlock>
                 <h5>아이디 찾기</h5>
                 {/* 이름 입력창 */}
                 <input className="input" placeholder="이름" value={inputName} onChange={onChangeName}></input>
                 <br/>
 
                 {/* 이메일 입력창 */}
-                <p>{inputMail.length > 0 && <span>{mailMsg}</span>}<br/>
+                {inputMail.length > 0 && <span>{mailMsg}</span>}
                     <input className="input" placeholder="이메일"  value={inputMail} onChange={onChangeMail} onKeyDown={onKeyDownFindId}></input>
-                    <br/></p>
+                    <br/>
 
                 {/* 아이디 찾기 버튼 활성화 */}
                 <button className="idButton" disabled={!(inputName && isMail)} onClick={onClickFindId} >FIND ID</button>
-            </div>
-            <div>
+            </FindIdBlock>
+
+            <PageLink>
                 {/* 다른 페이지 연결 */}
                 <Link to="/SignUp" className="link_item">회원가입</Link>
                 <Link to="/Login" className="link_item">로그인</Link>
                 <Link to="/FindPwd" className="link_item">비밀번호 찾기</Link>
-            </div>
+            </PageLink>
             {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">{comment}</Modal>}
-        </>
+        </div>
     );
 }
 

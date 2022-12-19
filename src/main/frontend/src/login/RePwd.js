@@ -2,7 +2,63 @@ import {useState} from "react";
 import MuteApi from "../api/MuteApi";
 import {Link, useNavigate} from "react-router-dom";
 import Modal from "../util/Modal";
+import styled from "styled-components";
 
+const RePwdBlock = styled.div`
+    margin-top:50px;
+    h5 {
+        margin-bottom : 15px;
+    }
+    .input {
+        width : 270px;
+        height : 35px;
+        background-color : white;
+        border-radius : 5px;
+        border: solid 1.5px #eeeeee;
+        margin : 5px;
+        font-size: 12px;
+        &:hover {
+            border : solid rgb(129,0,0) 1px;
+            color: rgb(129,0,0);
+            font-weight: 600;
+        } 
+        &:focus {
+            outline : solid rgb(129,0,0) 1px;
+            font-weight: 600;
+        }
+    }
+
+    .rePwdButton {
+        width : 280px;
+        height : 40px;
+        margin : 10px;
+        opacity: 0.5;
+        color : white;
+        background-color : rgb(129,0,0);
+        border-radius : 5px;
+        font-weight: 700;
+        border: solid 1.5px #eeeeee;
+        
+        margin-bottom: 40px;
+        &:hover {
+            border : none;
+            opacity: 1;    
+        }
+    }
+`;
+const PageLink = styled.div`
+    margin-bottom: 40px;
+    .link_item {
+        margin: 10px;
+        color: rgb(57,62,70);
+        font-size : 14px;
+        text-decoration-line: none;
+        &:hover {
+            color: rgb(129,0,0);
+            font-weight: 600;
+        }
+    }
+`;
 const RePwd = () => {
     const navigate = useNavigate();
     // 로그인된 아이디 불러오기
@@ -87,29 +143,25 @@ const RePwd = () => {
     }
 
     return(
-        <>
+        <div className="container">
+            <RePwdBlock>
             <h5>비밀번호 재설정</h5>
             {/* 아이디 불러오기 */}
             <div>{localId}님</div>
 
             {/* 비밀번호 재설정 */}
-            <p> {newPwd.length > 0 && <span>{pwdMsg}</span>}</p>
-            <input type="password" placeholder="비밀번호" onChange={onChangePwd} value={newPwd}></input>
+            {newPwd.length > 0 && <span>{pwdMsg}</span>}
+            <input className="input" type="password" placeholder="비밀번호" onChange={onChangePwd} value={newPwd}></input>
             <br/>
             {/* 재설정한 비밀번호 확인*/}
-            <p> {newPwdChe.length > 0 && <span>{conPwdMsg}</span>}</p>
-            <input type="password" placeholder="비밀번호 확인" onChange={onChangePwdCheck} value={newPwdChe} onKeyDown={onKeyDownRePwd}></input>
+            <div className="hint">
+            {newPwdChe.length > 0 && <span>{conPwdMsg}</span>}</div>
+            <input className="input" type="password" placeholder="비밀번호 확인" onChange={onChangePwdCheck} value={newPwdChe} onKeyDown={onKeyDownRePwd}></input>
             <br/>
-            <button disabled={!(isRePwd && isRePwdCheck)} onClick={()=>onClickRePwd(localId)}>재설정</button>
-
-            <div>
-                {/* 다른 페이지 연결 */}
-                <Link to="/SignUp" className="link_item">회원가입</Link>
-                <Link to="/Login" className="link_item">로그인</Link>
-                <Link to="/FindId" className="link_item">아이디 찾기</Link>
-            </div>
+            <button className="rePwdButton" disabled={!(isRePwd && isRePwdCheck)} onClick={()=>onClickRePwd(localId)}>재설정</button>
+            </RePwdBlock>
             {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">{comment}</Modal>}
-        </>
+        </div>
     )
 }
 export default RePwd;
