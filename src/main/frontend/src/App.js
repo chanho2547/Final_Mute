@@ -35,6 +35,8 @@ import Alarm from './util/Alarm';
 import Edit from "./mypage/Edit";
 import MyWish from './util/MyWish';
 import PayEnd from './reservation/payment/PayEnd';
+import SeatClick from './review/SeatClick';
+
 
 function App() {
   return (
@@ -75,6 +77,7 @@ function App() {
         <Route path="/Edit" element={<Edit/>} />
         <Route path="/MyWish" element={<MyWish/>} />
         <Route path="/PayEnd" element={<PayEnd/>} />
+        <Route path='/SeatClick' element={<SeatClick/>}/>
       </Routes>
       <Footer/>
     </Router>

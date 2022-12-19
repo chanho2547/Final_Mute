@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
 import { useState } from "react";
 import styled from "styled-components";
 import { ReactDOM, useEffect } from "react";
@@ -7,11 +7,13 @@ import '../seats.css';
 import SelectSeat from "../../reservation/SelectSeat";
 import MuteApi from "../../api/MuteApi";
 import SeatClick from "../../review/SeatClick";
+import { useNavigate } from "react-router-dom";
 
 let isSeatRender = false; // 무한 루프 Stop
 
 const FirstFloorChar = (props) => {  
     const [modal, setModal] = useState(false);
+    let navigate = useNavigate();
 
     let arr = [];
     let arrString;
@@ -124,10 +126,30 @@ const onClickSeat = (event) => {
     }
 
     else if (window.localStorage.getItem("seatInfoMode") === "후기") {
-        // if(window.localStorage.getItem(pkNum) === null )
-        // 후기일 때 onClick상황
+        if(window.localStorage.getItem(pkNum) === null ){
+            event.currentTarget.setAttribute("class","selected");
+            window.localStorage.setItem(pkNum,"selected");
+            <SeatClick/>
+            // navigate('/SeatClick');
+            
+          
+            // 로컬스토리지에 현재상태 배열형식으로 가져오기
+            arrString = JSON.parse(window.localStorage.getItem('selectedSeats'));
 
-        <SeatClick/>
+            //배열에 추가후 다시 로컬스토리지로
+            arrString.push(floor + "층 "+parentNode + "열 " + seatNum + "번 " + grade);
+            console.log("arrString 타입 : "+ typeof(arrString));
+            console.log("arrString 출력 : " + arrString);
+            window.localStorage.setItem("selectedSeats", JSON.stringify(arrString));
+
+        } else {
+            let clickPkNum = localStorage.getItem("selected");
+            console.log("망할 오류")
+            console.log(pkNum); // 여기 pknum들어옴
+            console.log(clickPkNum); // 이거 안들어옴
+        }
+
+        
         // props.propsFunction(pkNum);
     } 
     

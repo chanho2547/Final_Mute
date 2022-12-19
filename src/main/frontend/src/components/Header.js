@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import {Link, useNavigate} from "react-router-dom";
 import { FaBell } from 'react-icons/fa';
-import { BsSearch } from 'react-icons/bs';
+import Logo from '../images/logo.png';
 import React from "react";
 import Modal from "../util/Modal";
 import Alarm from "../util/Alarm";
@@ -10,7 +10,7 @@ import Alarm from "../util/Alarm";
 const HeaderContainer = styled.div``;
 
 const Menu = styled.div`
-  background-color: #CF0A0A;
+  background-color: #810000;
   width: 100%;
   padding: 10px 0px 15px 0px;
   display: flex;
@@ -24,7 +24,7 @@ const Menu = styled.div`
     cursor: pointer;
   }
 `;
-const Logo = styled.div`
+const LogoContainer = styled.div`
 text-decoration: none;
 color: #CF0A0A;
  p {
@@ -36,10 +36,7 @@ color: #CF0A0A;
  }
 `;
 
-const Keyword = styled.div`
-  width: 200px;
-  height: 40px;
-`;
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 const Header = () => {
@@ -63,28 +60,17 @@ const Header = () => {
         navigate("/");
       }
 
-    // 뮤지컬 검색창
-    const [inputMusical, SetInputMusical] = useState("");
-
-    const onChangeInput = (e) => {
-      SetInputMusical(e.target.value)
-    };
-
-    const onClickInput = async() => {
-      window.localStorage.setItem("inputMusical", inputMusical);
-      navigate("/MusicalSearchList")
-    }
-
     const onClickAlarm = () => {
       setAlarmModal(true);
     }
-    
+
     if (window.location.pathname === '/PayEnd') return null;
 
 
     return(
         <>
         <HeaderContainer>
+
         <Menu>
             {!whoLoginNow ?
             // 로그인하지 않았을 때 => 로그인, 회원가입, 찜하기
@@ -106,18 +92,13 @@ const Header = () => {
             <Link to = {"/Cs"} className="menu_item">고객센터</Link>
         </Menu>
         
-        {/* Logo영역은 추후 로고가 만들어지면 변경 예정 */}
-        <Logo>
-        <Link to={"/"} className="logo_link">
-            <p className="logo_item">당신의 <b>뮤지컬 메이트</b></p>
-            <h1 className="logo_item">MUTE</h1>
-        </Link>
-        </Logo>
+        
+        <LogoContainer>
+            <Link to={"/"} className="logo_link">
+            <img src={Logo} width={300} height={160}/>
+            </Link>
+        </LogoContainer>
 
-        <Keyword>
-        <input onChange={onChangeInput} placeholder="뮤지컬을 검색하세요"></input>
-        <button onClick={onClickInput}><BsSearch/></button>
-        </Keyword>
         </HeaderContainer>
         {alarmModal && <Modal open={alarmModal} close={closeModal} header="확인"><Alarm/></Modal>}  
         </>

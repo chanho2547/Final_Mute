@@ -3,12 +3,17 @@ import MuteApi from "../api/MuteApi";
 
 const SeatClick = () => {
     const [selectSeat, setSelectSeat] = useState();
-    let pkNum = localStorage.getItem("selected");
+    let clickPkNum = localStorage.getItem("selected");
+    let ClickSeatInfo = localStorage.getItem("selectedSeats");
+
 
     useEffect(() => {
         const SeatDetailReview = async () => {
             try {
-                let response = await MuteApi.seatReview(pkNum);
+                console.log("야!!!!!!!!!제발 좀 나와!!!!!!!!!!!!!!!!")
+                console.log("클릭한 좌석번호 : " + clickPkNum);
+                console.log("클릭한 좌석위치 : " + ClickSeatInfo);
+                let response = await MuteApi.seatReview(clickPkNum);
                 setSelectSeat(response.data);
             } catch(e) {
                 console.log(e + "좌석 상세정보 후기 불러오기 실패");

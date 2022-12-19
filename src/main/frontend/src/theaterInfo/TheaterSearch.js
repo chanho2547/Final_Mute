@@ -7,7 +7,7 @@ const SearchBar = styled.div `
     .searchBar_input{
         width: 600px;
         height: 40px;
-    },
+    }
     .searchBar_button{
         height: 40px; 
     }
