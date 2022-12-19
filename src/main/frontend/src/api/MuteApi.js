@@ -232,14 +232,6 @@ const MuteApi =  {
         return await axios.get("musical/db/list")
     },
 
-    // 카카오페이 결제
-    // payment: async function() {
-    //     // const payInfo = {
-    //     //     musicalName : musicalName
-    //     // }    
-    //     return await axios.get("/pay");
-    // },
-
     // 회원정보 불러오기
     userInfo: async function(userId) {
         const ediObj = {
@@ -268,7 +260,15 @@ const MuteApi =  {
 
     userWish:async function(userNum) {
         return await axios.get(`/wish/select/all?userum=${userNum}`)
-    }
+    },
+
+    // 선택된 극장 상세정보 불러오기
+    theaterDetail: async function(mt10id) {
+        const theaterId = {
+            theaterId : mt10id
+        }
+        return await axios.get(`/theater/${mt10id}`, theaterId);
+    },
 }
 
 export default MuteApi;
