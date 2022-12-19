@@ -2,7 +2,7 @@
 const MusicalDetailInfo = () => {
     return(
         <>
-        
+        <p>test</p>
         </>
     )
 }

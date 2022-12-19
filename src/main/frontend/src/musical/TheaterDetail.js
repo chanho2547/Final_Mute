@@ -11,7 +11,7 @@ const TheaterDetail = () => {
     useEffect(() => {
         const TheaterData = async () => {
             try {
-                let response = await MuteApi.theaterDetail(theaterId); // 극장 정보 불러오기
+                const response = await MuteApi.theaterDetail(theaterId); // 극장 정보 불러오기
                 setTheaterInfo(response.data);
                 console.log("극장ID값: " + theaterId);
                 
@@ -33,6 +33,14 @@ const TheaterDetail = () => {
     //     }
     //   }
 
+    // // 선택된 뮤지컬 상세정보 불러오기
+    // musicalDetail: async function(mt20id, mt10id) {
+    //     const musicalId = {
+    //         musicalId : mt20id,
+    //         theaterId : mt10id
+    //     }
+    //     return await axios.get(`/musical/${mt20id}`, musicalId);
+    // },
 
     return(
         <>

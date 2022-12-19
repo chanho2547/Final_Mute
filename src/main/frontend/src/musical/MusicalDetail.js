@@ -6,6 +6,8 @@ import heartIcon from "../images/heart.png";
 import heartIcon2 from "../images/heart2.png";
 import Review from "../review/Review";
 import { useNavigate } from "react-router-dom";
+import TheaterDetail from "./TheaterDetail";
+import MusicalTab from "./MusicalTab";
 
 //////////////// 스타일드 컴포넌트 ////////////////
 
@@ -99,7 +101,6 @@ const MusicalDetail = (props) => {
     const [modalWishCancel, setModalWishCancel] = useState(false); // 찜 취소했을 때 
     const [modalNotLogin, setModalNotLogin] = useState(false); // 로그인 안했을 경우
 
-    const [theaterDetail,setTheaterDetail] = useState();
 
     const closeModalWishReg = () => {
         setModalWishReg(false);
@@ -127,13 +128,12 @@ const MusicalDetail = (props) => {
     }
 
   useEffect(() => {
-      const MusicalData = async (theaterId) => {
+      const MusicalData = async () => {
           try {
-              let response = await MuteApi.musicalDetail(musicalId); // 받은 musicalId 서버로 넘겨주기
-              window.localStorage.setItem("theaterId", theaterId); // 불러오면서 극장ID 저장시킴
-              console.log("저장된 극장ID값: " + theaterId);
+              const response = await MuteApi.musicalDetail(musicalId); // 받은 musicalId 서버로 넘겨주기
               setMusicalDetail(response.data);
-              
+            //   window.localStorage.setItem("theaterId",thId); // 불러오면서 극장ID 저장시킴              
+            //   console.log("극장아이디값:" + thId)
           } catch (e) {  
               console.log(e + "실패");
           }     
@@ -212,7 +212,7 @@ const MusicalDetail = (props) => {
                     <WishBtn>찜하기</WishBtn>
                     <ReserveOnbtn>예매하기</ReserveOnbtn>
                 </DescInfo>
-                
+                <MusicalTab/>
 
             </DetailInfoContainer>
         ))}
