@@ -20,9 +20,12 @@ public class DeleteController {
     // 총평 후기 삭제
     @DeleteMapping("/deleteTotal")
     public ResponseEntity<Boolean> deleteTotal(@RequestBody Map<String, String> deleteTotalData) {
-//        String userNum = deleteTotalData.get("userNum");
+        String member = deleteTotalData.get("member");
         String reviewMuId = deleteTotalData.get("reviewMuId");
-        boolean result = deleteService.deleteTotal(reviewMuId);
+
+        //System.out.println("asdf : " + member + " || " + reviewMuId);
+
+        boolean result = deleteService.deleteTotal(member, reviewMuId);
         if(result) {
             return new ResponseEntity(true, HttpStatus.OK);
         } else {
@@ -33,7 +36,7 @@ public class DeleteController {
     // 좌석 후기 삭제
     @DeleteMapping("/deleteSeat")
     public ResponseEntity<Boolean> deleteSeat(@RequestBody Map<String, String> deleteSeatData) {
-//        String userNum = deleteSeatData.get("userNum");
+        String member = deleteSeatData.get("member");
         String reviewSeId = deleteSeatData.get("reviewSeId");
         boolean result = deleteService.deleteSeat(reviewSeId);
         if(result) {

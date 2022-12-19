@@ -69,10 +69,10 @@ const MuteApi =  {
     },
 
     // 뮤지컬 총평 후기 삭제 - 도연
-    DeleteTotal : async function(reviewMuId, member) {
+    DeleteTotal : async function(member, reviewMuId) {
         const reviewObj = {
-            reviewMuId : reviewMuId, // 뮤지컬 후기 글 번호
-            member : member // 회원 아이디
+            member : member, // 회원 아이디 
+            reviewMuId : reviewMuId // 뮤지컬 후기 글 번호
         }
         return await axios.delete("review/deleteTotal", reviewObj);
     },

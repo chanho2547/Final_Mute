@@ -47,6 +47,7 @@ public class WriteService {
         return true;
     }
 
+    //
     // 좌석 후기 작성
     public boolean writeSeat(String userNum, String musicalId, String theaterId, String seatNum, String scoreSeat, String scoreView, String scoreSound, String scoreLight, String scoreAvgSeat, String reviewSeTxt){
         ReviewSeat reviewSeat  = new ReviewSeat();

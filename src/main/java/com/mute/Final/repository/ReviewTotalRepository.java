@@ -17,6 +17,7 @@ public interface ReviewTotalRepository extends JpaRepository<ReviewTotal, Long> 
     List<ReviewTotal> findTopStar();
     List<ReviewTotal> findByMusicalId(Musical musicalId); // 뮤지컬 총평 후기 view
     Long deleteByReviewMuId(long reviewMuId); // 뮤지컬 총평 후기 삭제
+    ReviewTotal findByReviewMuId(long reviewMuId);
 
     @Modifying //데이터베이스에 변경을 주는 네이티브 쿼리는 이 어노테이션 필요 (INSERT, UPDATE, DELETE)
     @Transactional

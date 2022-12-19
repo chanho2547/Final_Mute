@@ -42,7 +42,7 @@ public class WriteController {
     // 좌석 후기 작성
     @PostMapping("/writeSeat")
     public ResponseEntity<Boolean> writeSeat(@RequestBody Map<String, String> writeSeatData) {
-        String member = writeSeatData.get("member");
+        String member = writeSeatData.get("userNum");
         String musicalId = writeSeatData.get("musicalId");
         String theaterId = writeSeatData.get("theaterId");
         String seatNum = writeSeatData.get("seatNum");
@@ -52,8 +52,8 @@ public class WriteController {
         String scoreLight = writeSeatData.get("scoreLight");
         String scoreAvgSeat = writeSeatData.get("scoreAvgSeat");
         String reviewSeTxt = writeSeatData.get("reviewSeTxt");
-
-        boolean result = writeService.writeSeat(member, musicalId, theaterId, seatNum, scoreSeat, scoreView, scoreSound, scoreLight, scoreAvgSeat, reviewSeTxt);
+        //
+        boolean result = writeService.writeSeat(member, musicalId, theaterId, seatNum,scoreSeat, scoreView, scoreSound, scoreLight, scoreAvgSeat, reviewSeTxt);
         if(result) {
             return new ResponseEntity(true, HttpStatus.OK);
         }

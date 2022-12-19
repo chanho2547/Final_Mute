@@ -49,10 +49,11 @@ const ReviewBox = styled.div`
 const ReviewList = (props) => {
     const navigate = useNavigate();
 
-    const userNum = window.localStorage.getItem("whoLoginUserNum");
-    let musicalId = window.localStorage.getItem('musicalId');
+    const member = window.localStorage.getItem("whoLoginUserNum");
+    let musicalId = window.localStorage.getItem("musicalId");
+    const reviewMuId = window.localStorage.getItem("reviewMuId");
     
-    console.log("회원번호 : " + userNum); // 회원번호
+    console.log("회원번호 : " + member); // 회원번호
     console.log("뮤지컬 아이디 : " + musicalId); // 뮤지컬번호
 
     // 모달
@@ -96,15 +97,17 @@ const ReviewList = (props) => {
         ReviewData();
     }, []);
 
-    // 후기 삭제
-    const OnClickDelete = async(reviewMuId) => {
-        
-        try {
-            const stringReviewNum = String(reviewMuId);
-            const response = await MuteApi.reviewDelete(stringReviewNum, userNum);
-            console.log(response.data);
 
-            if(response.data.includes("NOK")) {
+    // 후기 삭제
+    const OnClickDelete = async(member,reviewMuId) => {
+        try {
+            console.log("후기 삭제 userNum : " + member);
+            //console.log("후기 삭제 musicalId : " + musicalId);
+            console.log("후기 삭제 reviewMuId : " + reviewMuId);
+
+            const response = await MuteApi.DeleteTotal(member, reviewMuId);
+
+            if(response.data === false) {
                 setModalText("작성자가 아닙니다. 목록으로 되돌아갑니다.")
                 setModalOpen(true);
             }
@@ -118,6 +121,10 @@ const ReviewList = (props) => {
             alert("오류" + e);
         }
     }
+
+   
+
+
 
     const Onclick = (e) => {
         <Rating/>
@@ -140,8 +147,8 @@ const ReviewList = (props) => {
         {ReviewInfo && ReviewInfo.map(e => ( 
             <div Onclick={() => Onclick(e)}>
             <ReviewBox>
-                <p autoFocus>{e.member} ⭐{e.scoreAvgTotal} <span className="date">작성일 {e.writeDate}</span></p>
-                {/* <button>수정</button><button onClick={() => OnClickDelete()}>삭제</button> */}
+                <p>{e.reviewMuId}　{e.member} ⭐{e.scoreAvgTotal} <span className="date">작성일 {e.writeDate}</span>
+                <button>수정</button><button onClick={()=>OnClickDelete(member,e.reviewMuId)}>삭제</button></p>
                 <p>스토리 ★{e.scoreStory} 　연출 ★{e.scoreDirect} 　캐스팅 ★{e.scoreCast} 　넘버 ★{e.scoreNumber}</p>
                 <p className="text">{e.reviewMuTxt}</p>
             </ReviewBox>
