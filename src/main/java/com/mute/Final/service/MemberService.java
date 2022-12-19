@@ -22,6 +22,7 @@ public class MemberService {
     private final ReviewSeatRepository reviewSeatRepository;
     private final PaymentRepository paymentRepository;
     private final  WishRepository wishRepository;
+    private final DeleteRepository deleteRepository;
     // 로그인 체크
 //    public boolean loginCheck(String userId, String pwd) {
 //        try {
@@ -166,24 +167,35 @@ public class MemberService {
         }
     }
 
+//    // 회원탈퇴
+//    @Transactional
+//    public boolean deleteMem(Long userNum) {
+//        log.error("userNum : " + userNum );
+//        try {
+//            Member member = memberRepository.findByUserNum(userNum);
+//            log.error(String.valueOf(userNum));
+//            ticketRepository.deleteByUserNum(member);
+//            reviewTotalRepository.deleteByUserNum(member);
+//            reviewSeatRepository.deleteByUserNum(member);
+//            paymentRepository.deleteByUserNum(member);
+//            wishRepository.deleteByUserNum(member);
+//            memberRepository.deleteByUserNum(member);
+//            return true;
+//        } catch (Exception e) {
+//            log.warn("실패");
+//            return false;
+//        }
+//    }
     // 회원탈퇴
-    @Transactional
-    public boolean deleteMem(Long userNum) {
-        log.error("userNum : " + userNum );
-        try {
-            Member member = memberRepository.findByUserNum(userNum);
-            log.error(String.valueOf(userNum));
-            ticketRepository.deleteByUserNum(member);
-            reviewTotalRepository.deleteByUserNum(member);
-            reviewSeatRepository.deleteByUserNum(member);
-            paymentRepository.deleteByUserNum(member);
-            wishRepository.deleteByUserNum(member);
-            memberRepository.deleteByUserNum(member);
+    public boolean deleteMem(String userId) {
+        log.error("Id" + userId);
+
+        List<Member> member = deleteRepository.findByUserId(userId);
+
+        if(member.size() == 1) {
+            memberRepository.deleteAll(member);
             return true;
-        } catch (Exception e) {
-            log.warn("실패");
-            return false;
-        }
+        } else return false;
     }
 
     // 아이디 (userId) 입력 -> 회원번호 (userNum) 반환

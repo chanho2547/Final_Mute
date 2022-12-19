@@ -138,9 +138,9 @@ const MuteApi =  {
     },
 
     // 회원탈퇴
-    memberDelete: async function (userNum){
+    memberDelete: async function (userId){
         const reg = {
-            userNum: userNum
+            userId: userId
         };
         return await axios.post("delete", reg);
     },
