@@ -74,7 +74,7 @@ const MuteApi =  {
             member : member, // 회원 아이디 
             reviewMuId : reviewMuId // 뮤지컬 후기 글 번호
         }
-        return await axios.delete("review/deleteTotal", reviewObj);
+        return await axios.post("review/deleteTotal", reviewObj);
     },
 
     // 좌석 후기 삭제 - 도연
@@ -83,7 +83,7 @@ const MuteApi =  {
             reviewSeId : reviewSeId, // 좌석 후기 글 번호
             // member : member // 회원 아이디
         }
-        return await axios.delete("review/deleteSeat", reviewObj);
+        return await axios.post("review/deleteSeat", reviewObj);
     },
 
     // 뮤지컬 후기 view - 도연

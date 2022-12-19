@@ -105,7 +105,9 @@ const ReviewList = (props) => {
             //console.log("후기 삭제 musicalId : " + musicalId);
             console.log("후기 삭제 reviewMuId : " + reviewMuId);
 
-            const response = await MuteApi.DeleteTotal(member, reviewMuId);
+            let response = await MuteApi.DeleteTotal(member, reviewMuId);
+
+            console.log("response : " + response);
 
             if(response.data === false) {
                 setModalText("작성자가 아닙니다. 목록으로 되돌아갑니다.")

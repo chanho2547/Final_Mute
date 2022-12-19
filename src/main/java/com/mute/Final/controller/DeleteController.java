@@ -18,7 +18,7 @@ public class DeleteController {
     }
 
     // 총평 후기 삭제
-    @DeleteMapping("/deleteTotal")
+    @PostMapping("/deleteTotal")
     public ResponseEntity<Boolean> deleteTotal(@RequestBody Map<String, String> deleteTotalData) {
         String member = deleteTotalData.get("member");
         String reviewMuId = deleteTotalData.get("reviewMuId");
@@ -34,7 +34,7 @@ public class DeleteController {
     }
 
     // 좌석 후기 삭제
-    @DeleteMapping("/deleteSeat")
+    @PostMapping("/deleteSeat")
     public ResponseEntity<Boolean> deleteSeat(@RequestBody Map<String, String> deleteSeatData) {
         String member = deleteSeatData.get("member");
         String reviewSeId = deleteSeatData.get("reviewSeId");
