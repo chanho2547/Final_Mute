@@ -103,7 +103,6 @@ const ReviewList = (props) => {
     const OnClickDelete = async(member,reviewMuId) => {
         try {
             console.log("후기 삭제 userNum : " + member);
-            //console.log("후기 삭제 musicalId : " + musicalId);
             console.log("후기 삭제 reviewMuId : " + reviewMuId);
 
             let response = await MuteApi.DeleteTotal(member, reviewMuId);
