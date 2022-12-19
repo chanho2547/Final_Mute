@@ -27,6 +27,7 @@ const SeatClick = () => {
     return(
         <>
         <p>클릭한 좌석 위치 : {clickSeatInfo}</p>
+        <br />
         {selectSeat && selectSeat.map(e => (
             <div Onclick={() => Onclick(e)}>
                 <div>좌석번호 : {e.seatNum}</div>

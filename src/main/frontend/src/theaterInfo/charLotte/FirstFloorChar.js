@@ -127,11 +127,11 @@ const onClickSeat = (event) => {
 
     else if (window.localStorage.getItem("seatInfoMode") === "후기") {
             window.localStorage.setItem("whatSeatNum", pkNum);
-            console.log("이게 내가 바로 필요한 것" + pkNum); // => 지금 내가 필요한 것, 잘 들어옴
+            console.log("이게 내가 바로 필요한 것" + pkNum);
             // event.currentTarget.setAttribute("class","selected"); // 층
             // window.localStorage.setItem(pkNum,"selected"); // 8450번 좌석
             // window.localStorage.setItem(seatNum,"selectSeat"); // 구역 12번
-            // console.log("이게 내가 바로 필요한 것" + pkNum); // => 지금 내가 필요한 것
+           
             // <SeatClick/> // 이 컴포넌트가 어디로 가야할지 모르겠어!
             navigate('/SeatClick'); // 임시로 일단 넘김
             
@@ -212,12 +212,6 @@ const onClickSeat = (event) => {
 
 
 
-
-
-
-
-
-
              }
             
         
@@ -228,6 +222,7 @@ const onClickSeat = (event) => {
                 try {
                     let response = await MuteApi.seatReviewAvg(); // 좌석 총 평균 별점 불러오기
                     setSeatReviewInfo(response.data);
+
                     
                 } catch (e) {  
                     console.log(e + "실패 입니다");
@@ -239,7 +234,7 @@ const onClickSeat = (event) => {
                 isSeatRender = true;
             }
             seatReviewInfo && seatReviewInfo.map(e=>{
-
+                
                 if(e.avgAllSeat < 2) {
                     document.getElementById(e.seatId).parentNode.setAttribute('class','real red');
  
