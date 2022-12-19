@@ -63,7 +63,7 @@ const MuteApi =  {
             scoreSound : soundRating, // 음향 별점
             scoreLight : lightRating, // 조명 별점
             scoreAvgSeat : scoreAvgSeat, // 좌석 후기 별점 총점
-            reviewSeTxt : seatReview // 뮤지컬 후기 텍스트
+            reviewSeTxt : seatReview // 좌석 후기 텍스트
         }
         return await axios.post("review/writeSeat", reviewObj);
     },

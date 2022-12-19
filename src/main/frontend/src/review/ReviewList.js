@@ -60,6 +60,7 @@ const ReviewList = (props) => {
     const [modalLogin, setModelLogin] = useState(false); // 로그인 안했을 때
     const closeModal = () => { 
         setModelLogin(false);
+        setModalOpen(false);
     }
 
     const [modalOpen, setModalOpen] = useState(""); // 삭제 버튼 눌렀을 때
