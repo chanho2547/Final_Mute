@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 let isSeatRender = false; // 무한 루프 Stop
 
 const FirstFloorChar = (props) => {  
-    const [modal, setModal] = useState(false);
+    const [seatView, setSeatView] = useState(false);
     let navigate = useNavigate();
 
     let arr = [];
@@ -126,13 +126,16 @@ const onClickSeat = (event) => {
     }
 
     else if (window.localStorage.getItem("seatInfoMode") === "후기") {
-        if(window.localStorage.getItem(pkNum) === null ){
-            event.currentTarget.setAttribute("class","selected");
-            window.localStorage.setItem(pkNum,"selected");
-            <SeatClick/>
-            // navigate('/SeatClick');
+            // window.localStorage.setItem(pkNum,"whatSeatNum");
+            // event.currentTarget.setAttribute("class","selected"); // 층
+            // window.localStorage.setItem(pkNum,"selected"); // 8450번 좌석
+            // window.localStorage.setItem(seatNum,"selectSeat"); // 구역 12번
+            // console.log("이게 내가 바로 필요한 것" + pkNum); // => 지금 내가 필요한 것
+            // <SeatClick/> // 이 컴포넌트가 어디로 가야할지 모르겠어!
+            navigate('/SeatClick'); // 임시로 일단 넘김
             
           
+
             // 로컬스토리지에 현재상태 배열형식으로 가져오기
             arrString = JSON.parse(window.localStorage.getItem('selectedSeats'));
 
@@ -140,16 +143,7 @@ const onClickSeat = (event) => {
             arrString.push(floor + "층 "+parentNode + "열 " + seatNum + "번 " + grade);
             console.log("arrString 타입 : "+ typeof(arrString));
             console.log("arrString 출력 : " + arrString);
-            window.localStorage.setItem("selectedSeats", JSON.stringify(arrString));
-
-        } else {
-            let clickPkNum = localStorage.getItem("selected");
-            console.log("망할 오류")
-            console.log(pkNum); // 여기 pknum들어옴
-            console.log(clickPkNum); // 이거 안들어옴
-        }
-
-        
+            window.localStorage.setItem("selectedSeats", JSON.stringify(arrString));      
         // props.propsFunction(pkNum);
     } 
     
@@ -15761,7 +15755,7 @@ const onClickSeat = (event) => {
                                     <div id="seat" onClick={onClickSeat}  className="real no_review" pk="8764">
                                         <p id="8764" >39</p>
                                     </div>
-                                    
+                                    <></>
                                 </div>
                                 
                             
@@ -15879,6 +15873,7 @@ const onClickSeat = (event) => {
 
             </div>
         </div>
+        <></>
     
         </>
     );

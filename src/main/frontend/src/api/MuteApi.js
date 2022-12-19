@@ -152,10 +152,7 @@ const MuteApi =  {
 
     // 선택 좌석별 후기
     seatReview: async function(pkNum) {
-        const seatReviewInfo = {
-            seatId : pkNum
-        };
-        return await axios.get("reviewSeat/each", seatReviewInfo)
+        return await axios.get(`reviewSeat/each?seatNum=${pkNum}`);
     },
 
     // 공연장 검색
