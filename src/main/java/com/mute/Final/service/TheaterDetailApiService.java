@@ -62,8 +62,6 @@ public class TheaterDetailApiService {
         try {
             // xml 데이터를 json 데이터로 변환
             JSONObject xmlToJson = XML.toJSONObject(result);
-
-            log.error("처음 변환한 값:" + xmlToJson);
             // JSONObject로 데이터 가져오기
             JSONObject jsonObj = xmlToJson.getJSONObject("dbs");
             // JSONObject로 가져오기

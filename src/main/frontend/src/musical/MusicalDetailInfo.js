@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import MuteApi from "../api/MuteApi";
 import styled from "styled-components";
 
+const Container = styled.div`
+    text-align: center;
+`;
 
 const MusicalDetailInfo = () => {
 
@@ -21,14 +24,14 @@ const MusicalDetailInfo = () => {
     }, []);
 
     return(
-        <>
-        {musicalDetail && musicalDetail.map(e => (
-            <div>
-                <img alt="descImg1" src={e.musicalDescImg1}/>
-                <img alt="" src={e.musicalDescImg2}/>
-            </div>
-        ))}
-        </>
+        <Container>
+            {musicalDetail && musicalDetail.map(e => (
+                <div>
+                    <img alt="descImg1" src={e.musicalDescImg1}/>
+                    <img alt="" src={e.musicalDescImg2}/>
+                </div>
+            ))}
+        </Container>
     )
 }
 

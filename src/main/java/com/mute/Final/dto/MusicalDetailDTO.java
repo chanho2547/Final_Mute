@@ -27,20 +27,16 @@ public class MusicalDetailDTO {
     private String musicalAge; // 공연 관람 연령 (만 0세 이상)
     private String musicalPrice; // 좌석별 가격 (R석 170,000원, S석 140,000원, A석 110,000원, B석 80,000원)
     private String musicalDescImg1; // 상세이미지1
-    private String musicalDescImg2; // 상세이미지
-//    private String musicalDescImg3; // 상세이미지
-//    private String musicalDescImg4; // 상세이미지
+    private String musicalDescImg2; // 상세이미지2
     private String musicalPlan; // 공연 스케줄(화요일(19:30), 수요일(14:30,19:30), 목요일(19:30), 금요일 ~ 토요일(14:30,19:30), 일요일(15:00))
 
-//     api DTO에 저장
+    /// api DTO에 저장
     public MusicalDetailDTO (JSONObject item) {
         String tmp1 = item.getString("prfpdfrom");
         String tmp2 = item.getString("prfpdto");
 
         String descImg1 = null;
         String descImg2 = null;
-        String descImg3 = null;
-        String descImg4 = null;
 
         Object obj = item.getJSONObject("styurls").get("styurl");
         if (obj instanceof String) {
@@ -52,15 +48,6 @@ public class MusicalDetailDTO {
             for (int i = 0; i < jsonArray.length(); i++) {
                 descImg1 = (String) jsonArray.get(0);
                 descImg2 = (String) jsonArray.get(1);
-//                if (jsonArray.get(2) != null) {
-//                    descImg3 = (String) jsonArray.get(2);
-//                } else if (jsonArray.get(2) != obj) {
-//                    descImg3 = null;
-//                } else if (jsonArray.get(3) != null) {
-//                    descImg4 = (String) jsonArray.get(3);
-//                } else {
-//                    descImg4 = null;
-//                }
             }
         }
 
@@ -78,8 +65,6 @@ public class MusicalDetailDTO {
         this.musicalPrice = item.getString("pcseguidance");
         this.musicalDescImg1 = descImg1;
         this.musicalDescImg2 = descImg2;
-//        this.musicalDescImg3 = descImg3;
-//        this.musicalDescImg4 = descImg4;
         this.musicalPlan = item.getString("dtguidance");
     }
 }

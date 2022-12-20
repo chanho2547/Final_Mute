@@ -20,9 +20,6 @@ public class PayController {
     @Autowired
     private PayService payService;
 
-//    @GetMapping("/pay")
-//    public void PayReadyGet() {
-//    }
     @GetMapping("/pay")
     public String PayReady(@RequestParam String price) {
         log.info("kakaoPay post..........");

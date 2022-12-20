@@ -18,7 +18,8 @@ const TabMenu = styled.ul`
 
   .submenu {
   // 기본 Tab CSS
-    display: flex;
+    display: inline-block;
+    cursor: pointer;
     color: #1b1717;
     padding: 10px 30px 10px 30px;
     font-size: 15px;
@@ -37,7 +38,6 @@ const TabMenu = styled.ul`
   }
 
   & div.desc {
-    text-align: center;
     border-top-width: 0px;
   }
 `;
@@ -45,7 +45,6 @@ const TabMenu = styled.ul`
 const Desc = styled.div`
     width: 1024px;
     padding: 50px;
-    text-align: center;
     border-top: 2px solid #810000;
 `;
 

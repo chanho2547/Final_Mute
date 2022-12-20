@@ -85,7 +85,7 @@ const WishBtn = styled.button`
 // 찜하기 취소 버튼 스타일
 const UnWishBtn = styled.button`
     margin: 10px;
-    color: white; 
+    color: #810000; 
     background-color: #EEEBDD;
     border-radius: 5px;
     border: none;
@@ -137,14 +137,13 @@ const MusicalDetail = (props) => {
             try {
                 const response = await MuteApi.musicalDetail(musicalId); // 받은 musicalId 서버로 넘겨주기
                 setMusicalDetail(response.data);
-                
-                console.log(musicalId + "의 극장아이디값:" )
             } catch (e) {  
                 console.log(e + "실패");
             }     
         };
         MusicalData();
     }, []);
+
 
     const OnClickWish = async() => {
             try {
@@ -216,7 +215,7 @@ const MusicalDetail = (props) => {
                         </tr>
                     </table>
                     <div className="button">
-                        <WishBtn>찜하기</WishBtn>
+                        <WishBtn onClick = {() => OnClickWish()} className={(wish ? WishBtn : UnWishBtn)}><img src={wish ? heartIcon : heartIcon2} alt={heartIcon} width="20px"/> 찜하기</WishBtn>
                         <ReserveOnbtn>예매하기</ReserveOnbtn>
                     </div>
                 </DescInfo>
