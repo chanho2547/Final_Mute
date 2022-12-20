@@ -17,7 +17,7 @@ const TabMenu = styled.ul`
   margin-top: 40px;
 
   .submenu {
-  // 기본 Tabmenu 에 대한 CSS를 구현
+  // 기본 Tab CSS
     display: flex;
     color: #1b1717;
     padding: 10px 30px 10px 30px;
@@ -25,7 +25,7 @@ const TabMenu = styled.ul`
   }
 
   .focused {
-   //선택된 Tabmenu 에만 적용되는 CSS를 구현
+   //선택된 Tab에만 적용되는 CSS
     color: #810000;
     border: 2px solid #810000;
     border-bottom-width: 0px;
@@ -50,27 +50,33 @@ const Desc = styled.div`
 `;
 
 
-const MusicalTab = () => {
+const MusicalTab = (props) => {
 
     const [selectTab, setSelectTab] = useState(0);
 
     const tabArr = [
         { 
-            tabTitle: (<li className={selectTab === 0 ? "focused" : "submenu"}onClick={()=>selectTabHandler(0)}> 상세정보 </li>
+            tabTitle: (
+                <li className={selectTab === 0 ? "focused" : "submenu"}
+                onClick={()=>selectTabHandler(0)}> 상세정보 </li>
             ),
             tabCont:(
                 <MusicalDetailInfo/>
             )
         },
         { 
-            tabTitle: (<li className={selectTab === 1 ? "focused" : "submenu"}onClick={()=>selectTabHandler(1)}> 공연장정보 </li>
+            tabTitle: (
+                <li className={selectTab === 1 ? "focused" : "submenu"}
+                onClick={()=>selectTabHandler(1)}> 공연장정보 </li>
             ),
             tabCont:(
-                <TheaterDetail/>
+                <TheaterDetail theaterId={props.theaterId}/>
             )
         },
         { 
-            tabTitle: (<li className={selectTab === 2 ? "focused" : "submenu"}onClick={()=>selectTabHandler(2)}> 후기 </li>
+            tabTitle: (
+                <li className={selectTab === 2 ? "focused" : "submenu"}
+                onClick={()=>selectTabHandler(2)}> 후기 </li>
             ),
             tabCont:(
                 <Review/>
@@ -82,6 +88,7 @@ const MusicalTab = () => {
         setSelectTab(index);
     };
 
+    
     return(
         <>
             <TabMenu>

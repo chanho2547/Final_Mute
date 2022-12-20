@@ -25,7 +25,7 @@ const MusicalDetailInfo = () => {
         {musicalDetail && musicalDetail.map(e => (
             <div>
                 <img alt="descImg1" src={e.musicalDescImg1}/>
-                <img src={e.musicalDescImg2}/>
+                <img alt="" src={e.musicalDescImg2}/>
             </div>
         ))}
         </>

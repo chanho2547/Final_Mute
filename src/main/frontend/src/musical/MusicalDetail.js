@@ -137,8 +137,8 @@ const MusicalDetail = (props) => {
             try {
                 const response = await MuteApi.musicalDetail(musicalId); // 받은 musicalId 서버로 넘겨주기
                 setMusicalDetail(response.data);
-                //   window.localStorage.setItem("theaterId",thId); // 불러오면서 극장ID 저장시킴              
-                //   console.log("극장아이디값:" + thId)
+                
+                console.log(musicalId + "의 극장아이디값:" )
             } catch (e) {  
                 console.log(e + "실패");
             }     
@@ -164,6 +164,8 @@ const MusicalDetail = (props) => {
             setModalNotLogin(true);
         }
     }
+
+    
 
   return(
       <>
@@ -218,11 +220,9 @@ const MusicalDetail = (props) => {
                         <ReserveOnbtn>예매하기</ReserveOnbtn>
                     </div>
                 </DescInfo>
-                <MusicalTab/>
+                <MusicalTab theaterId={e.theaterId} />
             </DetailInfoContainer>
         ))}
-
-        {/* <Review/> */}
 
         {modalWishReg && <Modal open={modalWishReg} close={closeModalWishReg} header="&nbsp;">뮤지컬 찜 완료</Modal>}
         {modalWishCancel && <Modal open={modalWishCancel} confirm = {closeModalWishCancelY} close={closeModalWishCancelN} header='취소'>찜하기를 취소하시겠습니까?</Modal>}
