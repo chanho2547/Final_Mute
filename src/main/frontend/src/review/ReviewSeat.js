@@ -6,6 +6,7 @@ import Rating from "../util/Rating";
 import TheaterModal from "./TheaterModal";
 import { Link, useNavigate } from "react-router-dom";
 import Modal from "../util/Modal";
+import { FaStar } from 'react-icons/fa';
 
 // 좌석 후기 등록 - 도연
 
@@ -168,7 +169,7 @@ const ReviewSeat = () => {
             </InfoBox>
             <p>선택된 좌석 [{}] [{}]</p><button onClick={SeatClick}>좌석 선택</button>
             <StarBox>
-                <div className="MyAvg"><b className="AvgText">나의 총점</b>⭐{scoreAvgSeat}</div>
+                <div className="MyAvg"><b className="AvgText">나의 총점</b><br/><FaStar size="30" color="#FCC419"/>{scoreAvgSeat}</div>
                 <div className="MyStar">
                 <div>좌석 <Rating value={seatRating} propFunction={highFunction1}/>　
                 시야 <Rating value={viewRating} propFunction={highFunction2}/></div>

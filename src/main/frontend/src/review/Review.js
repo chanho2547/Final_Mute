@@ -22,16 +22,16 @@ const Review = () => {
 
     const [count, setCount] = useState(0)
 
-    const onClickBefore = () => {
-        console.log("현재 카운트 : " + count);
-        setCount(count - 1);
+    // const onClickBefore = () => {
+    //     console.log("현재 카운트 : " + count);
+    //     setCount(count - 1);
 
-    }
+    // }
     
-    const onClickNext = () => {
-        console.log("현재 카운트 : " + count);
-        setCount(count + 1);
-    }
+    // const onClickNext = () => {
+    //     console.log("현재 카운트 : " + count);
+    //     setCount(count + 1);
+    // }
 
     const highFunction = () => {
         setCount(count + 1);

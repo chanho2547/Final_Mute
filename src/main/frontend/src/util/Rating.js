@@ -69,7 +69,7 @@ const Rating = ( props ) => {
           return (
             <FaStar
               key={idx}
-              size="30"
+              size="25"
               onClick={() => handleStarClick(el)}
               className={clicked[el] && 'yellowStar'}
             />

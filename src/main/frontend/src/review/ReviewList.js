@@ -7,8 +7,13 @@ import axios from "axios";
 import MuteApi from "../api/MuteApi";
 import Rating from "../util/Rating";
 import styled from "styled-components";
+import { FaStar } from 'react-icons/fa';
 
 // 뮤지컬 총평 후기 view - 도연 작업중..
+
+const Container = styled.div`
+    padding: 10px;
+`;
 
 const StarBox = styled.div`
     background-color: #EEEBDD;
@@ -37,11 +42,19 @@ const ReviewBox = styled.div`
     padding: 10px;
     border: solid 0.5px lightgray;
 
+    .myRaing {
+        padding-left: 25px;
+    }
+
     .text {
         padding: 5px;
     }
     .date {
         color: lightgray;
+    }
+    .deleteBtn {
+        border: none;
+        
     }
 `;
 
@@ -128,31 +141,31 @@ const ReviewList = (props) => {
 
 
     return(
-        <>     
+        <Container>     
         <StarBox>
             <div className="AvgBox">
-            <p><b className="AvgText">평균 별점</b>⭐{}</p>
-            <span><b>스토리</b>★{}</span> 
-            <span><b>연출</b>★{}</span>
-            <span><b>캐스팅</b>★{}</span>
-            <span><b>넘버</b>★{}</span>
+            <p><b className="AvgText">평균 별점 </b><FaStar size="30" color="#FCC419"/>{}</p>
+            <span><b>스토리 </b><FaStar size="25" color="gray"/>{}</span>　
+            <span><b>연출 </b><FaStar size="25" color="gray"/>{}</span>　
+            <span><b>캐스팅 </b><FaStar size="25" color="gray"/>{}</span>　
+            <span><b>넘버 </b><FaStar size="25" color="gray"/>{}</span>
             </div>
             <button className="writeBtn" onClick={WriteButton}>후기 작성하기</button>
         </StarBox>
         {ReviewInfo && ReviewInfo.map(e => ( 
             // <div Onclick={() => Onclick(e)}>
             <ReviewBox>
-                <p>{e.reviewMuId}　{e.member} ⭐{e.scoreAvgTotal} <span className="date">작성일 {e.writeDate}</span>
-                <button onClick={()=>OnClickDelete(member,e.reviewMuId)}>삭제</button></p>
-                <p>스토리 ★{e.scoreStory} 　연출 ★{e.scoreDirect} 　캐스팅 ★{e.scoreCast} 　넘버 ★{e.scoreNumber}</p>
-                <p className="text">{e.reviewMuTxt}</p>
+                <p>{e.reviewMuId}　{e.member}　<FaStar size="20" color="#FCC419"/>{e.scoreAvgTotal} <span className="date">　작성일 {e.writeDate}</span>
+                <button className="deleteBtn" onClick={()=>OnClickDelete(member,e.reviewMuId)}>삭제</button></p>
+                <p className="myRaing">스토리 <FaStar size="15" color="gray"/>{e.scoreStory} 　연출 <FaStar size="15" color="gray"/>{e.scoreDirect} 　캐스팅 <FaStar size="15" color="gray"/>{e.scoreCast} 　넘버 <FaStar size="15" color="gray"/>{e.scoreNumber}<br/>
+                <p className="text">{e.reviewMuTxt}</p></p>
 
             </ReviewBox>
             // </div>
         ))}  
         {modalLogin&& <Modal open={modalLogin} close={closeModal} type={true}>로그인이 필요한 서비스입니다.</Modal>}
         {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">{modalText}</Modal>}
-        </>
+        </Container>
 
     );
 }

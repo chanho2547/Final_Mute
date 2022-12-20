@@ -6,6 +6,8 @@ import MuteApi from "../api/MuteApi";
 import Rating from "../util/Rating";
 import TotalModal from "./TotalModal";
 import Modal from "../util/Modal";
+import { FaStar } from 'react-icons/fa';
+
 
 // 뮤지컬 총평 후기 등록 - 도연
 
@@ -72,7 +74,7 @@ const ReviewTotal = (props) => {
 
     // 취소 버튼 누르면 첫 화면으로..
     const CancelButton = () => {   
-        navigate('/Review');
+        navigate("/Review"); 
     }
 
     // 입력받는 부분
@@ -157,7 +159,7 @@ const ReviewTotal = (props) => {
                 • 사전 경고에도 불구하고 불량 게시물을 계속적으로 게재한 게시자의 경우 뮤트 후기 게시판 작성 권한이 제한됩니다.
                 </InfoBox>
                 <StarBox>
-                    <div className="MyAvg"><b className="AvgText">나의 총점</b>⭐{scoreAvgTotal}</div>
+                    <div className="MyAvg"><b className="AvgText">나의 총점</b><br/><FaStar size="30" color="#FCC419"/>{scoreAvgTotal}</div>
                     <div className="MyStar">
                     <div>스토리 <Rating value={scoreStory} propFunction={highFunction1}/>　
                     연출 <Rating value={scoreDirect} propFunction={highFunction2}/></div>
