@@ -266,6 +266,15 @@ const MuteApi =  {
         }
         return await axios.get(`/theater/${mt10id}`, theaterId);
     },
+    //프로필 이미지 변경
+    changeFace: async function (url, localId) {
+        const faceObj = {
+            url: url,
+            id: localId
+        };
+        return await axios.post("changeFace", faceObj;
+    },
+
 }
 
 export default MuteApi;
