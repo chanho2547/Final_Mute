@@ -176,7 +176,7 @@ const Reservation = () => {
         {/* 좌석은, 이미 선택된 좌석은 비활성화 해야한다 */}
         {count === 2 ? <SelectSeat propFunction={highFunction} addSeatNum={addSeatNum} addSeatPos={addSeatPos} seatNum={seatNum} seatPos={seatPos} /> : null }
         {count === 3 ? <Pay propFunction={highFunction} insertTicket={insertTicketFunction} resInfo={resInfo} count={count} /> : null}
-        {count === 4 ? <ReservaionResult resInfo={resInfo} /> : null}
+        {count === 4 ? <ReservaionResult resInfo={resInfo} insertTicket={insertTicketFunction}/> : null}
         {count === 5 ? setCount(0) : null}
         </TmpBox>
         </>

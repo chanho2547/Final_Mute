@@ -15,6 +15,7 @@ import java.rmi.registry.LocateRegistry;
 import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -66,20 +67,19 @@ public class TicketService {
         }catch (Exception e) {
             return false;
         }
-
-
-
-
-//        Member member = memberRepository.findByUserNum(Long.parseLong(userNum));
-//        wish.setMember(member);
-//        log.info(String.valueOf(member));
-//        Musical musical = musicalRepository.findByMusicalId(musicalId);
-//        wish.setMusical(musical);
-//        log.info(String.valueOf(musical));
-//        wish.setAlarmStatus(AlarmStatus.ON);
-//        Wish test = wishRepository.save(wish);
-//        log.info(String.valueOf(test));
-
-        //return true;
     }
+
+    public List<Integer> getAllSoldSeat() {
+        List<Ticket> ticket = ticketRepository.findAll();
+        ArrayList<Integer> list = new ArrayList();
+        for(Ticket e : ticket) {
+            list.add(e.getSeatNum());
+        }
+
+        return list;
+    }
+
+
+
+
 }

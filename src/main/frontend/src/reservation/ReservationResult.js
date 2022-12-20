@@ -9,8 +9,15 @@
 // paymentId : paymentId ,
 // musicalName : musicalName 
 
+import { useEffect } from "react";
+
 const ReservaionResult = (props) => {
     let whoLogin = window.localStorage.getItem("whoLogin");
+
+    useEffect(()=>{
+        props.insertTicket();
+    })
+
     return(
         <>
         <h1>결제 정보</h1>
