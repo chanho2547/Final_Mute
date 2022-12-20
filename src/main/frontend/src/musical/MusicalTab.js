@@ -4,12 +4,12 @@ import Review from "../review/Review";
 import MusicalDetailInfo from "./MusicalDetailInfo";
 import TheaterDetail from "./TheaterDetail";
 
-//// 임시 스타일드 컴포넌트 ////
+//// 스타일드 컴포넌트 ////
 const TabMenu = styled.ul`
 
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: left;
   list-style: none;
   margin-top: 40px;
 
@@ -37,7 +37,7 @@ const TabMenu = styled.ul`
 `;
 
 const Desc = styled.div`
-    width: 800px;
+    width: 900px;
     padding: 50px;
     text-align: center;
     border-top: 2px solid #810000;

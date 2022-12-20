@@ -12,6 +12,9 @@ import MusicalTab from "./MusicalTab";
 //////////////// 스타일드 컴포넌트 ////////////////
 
 const DetailInfoContainer = styled.div`
+    * {
+        text-align: left;
+    }
     margin: 0 auto;
     width: 1024px;
 
@@ -19,7 +22,6 @@ const DetailInfoContainer = styled.div`
         font-weight: 700;
         font-size: 1.5em;
         display: block;
-        flex-wrap: wrap;
         margin-bottom: 20px;
     }
 `
@@ -33,13 +35,17 @@ const DescInfo = styled.div`
         width: 300px;
     }
     table {
+        vertical-align: top;
         margin-left: 50px;
-        height: 240px;
-        width: 500px;
+        height: 260px;
+        width: 600px;
+        td {
+            padding: 5px;
+        }
     }
     .title {
         width: 100px;
-        padding-right: 30px;
+        padding-right: 40px;
         color: #810000;
         font-weight: 500;
     }
