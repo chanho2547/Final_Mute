@@ -23,7 +23,7 @@ public class EditService {
             memberDTO.setMail(member.getMail());
             memberDTO.setPhone(member.getPhone());
             memberDTO.setAddr(member.getAddress());
-            memberDTO.setProfile(member.getProfile());
+            //memberDTO.setProfile(member.getProfile());
             memberDTO.setImg(member.getImg());
             memberDTO.setOk(true);
         } catch (Exception e) {
@@ -32,14 +32,14 @@ public class EditService {
     }
 
     // 회원 정보 수정
-    public boolean saveUserInfo(String userId, String name, String pwd, String mail, String phone, String profile, String addr) {
+    public boolean saveUserInfo(String userId, String name, String pwd, String mail, String phone, String addr) {
         try {
             Member member = memberRepository.findByUserId(userId);
             member.setName(name);
             member.setPwd(pwd);
             member.setMail(mail);
             member.setPhone(phone);
-            member.setProfile(profile);
+            //member.setProfile(profile);
             member.setAddress(addr);
             Member rst = memberRepository.save(member);
             log.error("저장완료");

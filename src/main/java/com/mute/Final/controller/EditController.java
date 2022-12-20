@@ -34,7 +34,7 @@ public class EditController {
             userInfo.add(memberDTO.getMail());
             userInfo.add(memberDTO.getPhone());
             userInfo.add(memberDTO.getAddr());
-            userInfo.add(memberDTO.getProfile());
+            //userInfo.add(memberDTO.getProfile());
             userInfo.add(memberDTO.getImg());
 
             return new ResponseEntity(userInfo, HttpStatus.OK);
@@ -49,10 +49,10 @@ public class EditController {
         String pwd = userInfo.get("pwd");
         String mail = userInfo.get("mail");
         String phone = userInfo.get("phone");
-        String profile = userInfo.get("profile");
+        //String profile = userInfo.get("profile");
         String addr = userInfo.get("addr");
 
-        boolean result = editService.saveUserInfo(userId, name, pwd, mail, phone, profile, addr);
+        boolean result = editService.saveUserInfo(userId, name, pwd, mail, phone, addr);
         if(result) {
             return new ResponseEntity(true, HttpStatus.OK);
         } else {
