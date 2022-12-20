@@ -29,7 +29,7 @@ const TabMenu = styled.ul`
    //선택된 Tab에만 적용되는 CSS
     color: #810000;
     border: 2px solid #810000;
-    border-bottom: 2px solid white;
+    border-bottom: 4px solid white;
     font-weight: bold;
     position: relative;
     padding: 10px 30px;

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import MuteApi from "../api/MuteApi";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import KakaoMap from "./KakaoMap";
 
 /////////// 스타일드 컴포넌트 ///////////
 const Container = styled.div`
@@ -11,13 +12,14 @@ const Container = styled.div`
         font-size: 1.2em;
         font-weight: bold;
         color: #810000;
+        margin-bottom: 10px;
     }
 `;
 
 
 const TheaterDetail = (props) => {
 
-    const [theateInfo, setTheaterInfo] = useState();
+    const [theaterInfo, setTheaterInfo] = useState();
 
     useEffect(() => {
         const TheaterData = async () => {
@@ -37,16 +39,16 @@ const TheaterDetail = (props) => {
 
     return(
         <>
-        {theateInfo && theateInfo.map (e => (
+        {theaterInfo && theaterInfo.map (e => (
             <Container>
                 <p className="title">{e.theaterName}</p>
                 <p>연락처: {e.theaterCall}</p>
                 <p>홈페이지: {e.theaterWeb}</p>
                 <p>주소: {e.theaterAddr}</p>
-
-                <p>------카카오맵api 추가할 것------</p>
-                <p>위도: {e.theaterLat}</p>
-                <p>경도: {e.theaterLon}</p>
+                <KakaoMap 
+                    theaterLat={e.theaterLat}
+                    theaterLon={e.theaterLon}
+                    theaterName={e.theaterName}/>
             </Container>
 
         ))}
