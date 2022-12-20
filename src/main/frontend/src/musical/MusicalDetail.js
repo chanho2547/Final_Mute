@@ -12,9 +12,7 @@ import MusicalTab from "./MusicalTab";
 //////////////// 스타일드 컴포넌트 ////////////////
 
 const DetailInfoContainer = styled.div`
-    * {
-        text-align: left;
-    }
+   
     margin: 0 auto;
     width: 1024px;
 
@@ -35,17 +33,17 @@ const DescInfo = styled.div`
         width: 300px;
     }
     table {
-        vertical-align: top;
         margin-left: 50px;
         height: 260px;
-        width: 600px;
+        width: 650px;
         td {
+            vertical-align: top;
             padding: 5px;
         }
     }
     .title {
-        width: 100px;
-        padding-right: 40px;
+        width: 150px;
+        padding-right: 25px;
         color: #810000;
         font-weight: 500;
     }
@@ -133,39 +131,39 @@ const MusicalDetail = (props) => {
         navigate('/Login'); // 로그인페이지로 이동 
     }
 
-  useEffect(() => {
-      const MusicalData = async () => {
-          try {
-              const response = await MuteApi.musicalDetail(musicalId); // 받은 musicalId 서버로 넘겨주기
-              setMusicalDetail(response.data);
-            //   window.localStorage.setItem("theaterId",thId); // 불러오면서 극장ID 저장시킴              
-            //   console.log("극장아이디값:" + thId)
-          } catch (e) {  
-              console.log(e + "실패");
-          }     
-      };
-      MusicalData();
-  }, []);
 
-  const OnClickWish = async() => {
-        try {
-            const response = await MuteApi.wishReg(userNum, musicalId); // musicalId와 userNum으로 찜 상품 등록
-            setWish(response.data);
+    useEffect(() => {
+        const MusicalData = async () => {
+            try {
+                const response = await MuteApi.musicalDetail(musicalId); // 받은 musicalId 서버로 넘겨주기
+                setMusicalDetail(response.data);
+                //   window.localStorage.setItem("theaterId",thId); // 불러오면서 극장ID 저장시킴              
+                //   console.log("극장아이디값:" + thId)
+            } catch (e) {  
+                console.log(e + "실패");
+            }     
+        };
+        MusicalData();
+    }, []);
+
+    const OnClickWish = async() => {
+            try {
+                const response = await MuteApi.wishReg(userNum, musicalId); // musicalId와 userNum으로 찜 상품 등록
+                setWish(response.data);
+            }
+        catch (e) {
+            console.log(e);
         }
-     catch (e) {
-        console.log(e);
-    }
-    if(userNum) {
-        if(wish === false) {
-            setModalWishReg(true);
+        if(userNum) {
+            if(wish === false) {
+                setModalWishReg(true);
+            } else {
+                setModalWishCancel(true);
+            }
         } else {
-            setModalWishCancel(true);
+            setModalNotLogin(true);
         }
-    } else {
-        setModalNotLogin(true);
     }
-  }
-
 
   return(
       <>
@@ -215,15 +213,16 @@ const MusicalDetail = (props) => {
                             <td>{e.musicalPlan}</td>
                         </tr>
                     </table>
-                    <WishBtn>찜하기</WishBtn>
-                    <ReserveOnbtn>예매하기</ReserveOnbtn>
+                    <div className="button">
+                        <WishBtn>찜하기</WishBtn>
+                        <ReserveOnbtn>예매하기</ReserveOnbtn>
+                    </div>
                 </DescInfo>
                 <MusicalTab/>
-
             </DetailInfoContainer>
         ))}
 
-        <Review/>
+        {/* <Review/> */}
 
         {modalWishReg && <Modal open={modalWishReg} close={closeModalWishReg} header="&nbsp;">뮤지컬 찜 완료</Modal>}
         {modalWishCancel && <Modal open={modalWishCancel} confirm = {closeModalWishCancelY} close={closeModalWishCancelN} header='취소'>찜하기를 취소하시겠습니까?</Modal>}

@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Review from "../review/Review";
 import MusicalDetailInfo from "./MusicalDetailInfo";
 import TheaterDetail from "./TheaterDetail";
+import MuteApi from "../api/MuteApi";
 
-//// 스타일드 컴포넌트 ////
+
+
+//// 스타일드 컴포넌트 (수정중) ////
 const TabMenu = styled.ul`
 
   display: flex;
@@ -19,7 +22,6 @@ const TabMenu = styled.ul`
     color: #1b1717;
     padding: 10px 30px 10px 30px;
     font-size: 15px;
-    border-radius: 10px 10px 0px 0px;
   }
 
   .focused {
@@ -28,6 +30,10 @@ const TabMenu = styled.ul`
     border: 2px solid #810000;
     border-bottom-width: 0px;
     font-weight: bold;
+    display: flex;
+    padding: 10px 30px 10px 30px;
+    font-size: 15px;
+    border-radius: 10px 10px 0px 0px;
   }
 
   & div.desc {
@@ -37,7 +43,7 @@ const TabMenu = styled.ul`
 `;
 
 const Desc = styled.div`
-    width: 900px;
+    width: 1024px;
     padding: 50px;
     text-align: center;
     border-top: 2px solid #810000;
@@ -46,40 +52,46 @@ const Desc = styled.div`
 
 const MusicalTab = () => {
 
-    // Tab Menu 중 현재 어떤 Tab이 선택되어 있는지 확인하기 위한 nowTab 상태와 
-    // nowTab을 갱신하는 함수가 존재해야 하고, 초기값은 0.
-    const [nowTab, clickTab] = useState(0);
+    const [selectTab, setSelectTab] = useState(0);
 
     const tabArr = [
-        // { name: '상세정보', content: {MusicalDetailInfo}},
-        // { name: '공연장정보', content: {TheaterDetail}},
-        // { name: '후기', content: {Review}}
-        { name: '상세정보', content: 'MusicalDetailInfo'},
-        { name: '공연장정보', content: 'TheaterDetail'},
-        { name: '후기', content: 'Review'}
+        { 
+            tabTitle: (<li className={selectTab === 0 ? "focused" : "submenu"}onClick={()=>selectTabHandler(0)}> 상세정보 </li>
+            ),
+            tabCont:(
+                <MusicalDetailInfo/>
+            )
+        },
+        { 
+            tabTitle: (<li className={selectTab === 1 ? "focused" : "submenu"}onClick={()=>selectTabHandler(1)}> 공연장정보 </li>
+            ),
+            tabCont:(
+                <TheaterDetail/>
+            )
+        },
+        { 
+            tabTitle: (<li className={selectTab === 2 ? "focused" : "submenu"}onClick={()=>selectTabHandler(2)}> 후기 </li>
+            ),
+            tabCont:(
+                <Review/>
+            )
+        }
     ];
 
     const selectTabHandler = (index) => {
-        clickTab(index);
+        setSelectTab(index);
     };
-
 
     return(
         <>
-            <div>
-                <TabMenu>
-                    {tabArr.map((e,index) => (
-                        <li className={index === nowTab ? "submenu focused" : "submenu" }
-                        onClick={() => selectTabHandler(index)}>{e.name}</li>
-                    ))}
-            {/* <MusicalDetailInfo/>
-            <TheaterDetail/>
-            <Review/> */}
-                </TabMenu>
-                <Desc>
-                    {tabArr[nowTab].content}
-                </Desc>
-            </div>
+            <TabMenu>
+                {tabArr.map((section, index) => {
+                    return section.tabTitle
+                })}
+            </TabMenu>
+            <Desc>
+                {tabArr[selectTab].tabCont}
+            </Desc>
         </>
     )
 }
