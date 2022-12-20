@@ -24,9 +24,9 @@ public class EditController {
     }
     // 회원 정보 불러오기
     @PostMapping("/userInfo")
-    public ResponseEntity<List<Object>> userInfo(@RequestBody Map<String, String> userId) {
-        String userId1 = userId.get("userId");
-        MemberDTO memberDTO = editService.userInfo(userId1);
+    public ResponseEntity<List<Object>> userInfo(@RequestBody Map<String, String> info) {
+        String userId = info.get("userId");
+        MemberDTO memberDTO = editService.userInfo(userId);
         if(memberDTO.isOk()) {
             List<Object> userInfo = new ArrayList<>();
             userInfo.add(memberDTO.getName());

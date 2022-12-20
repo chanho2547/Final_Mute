@@ -88,7 +88,7 @@ const FindPwd = () => {
             if(res.data) {
                 setModalOpen(true);
                 setComment("비밀번호를 재설정합니다.")
-                window.localStorage.setItem("localId",inputId);
+                window.localStorage.setItem("whoLogin",inputId);
                 navigate('/RePwd');
             } else {
                 setModalOpen(true);
@@ -115,12 +115,11 @@ const FindPwd = () => {
                 <br/>
 
             {/* 이메일 입력창 */}
-                <p> {inputMail.length > 0 && <span>{mailMsg}</span>}</p>
+                {inputMail.length > 0 && <span>{mailMsg}</span>}
                 <input className="input" placeholder="이메일" value={inputMail} onChange={onChangeMail} onKeyDown={onKeyDownFindPwd}></input>
                 <br/>
             {/* 비밀번호 찾기 버튼 활성화 */}
                 <button className="pwdButton" onClick={onClickFindPwd}>FIND PASSWORD</button>
-                <br/>
             </FindPwdBlock>
             <PageLink>
                 {/* 다른 페이지 연결 */}

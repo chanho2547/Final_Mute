@@ -49,8 +49,11 @@ const Header = () => {
     const onClickLogout = () => {
         window.localStorage.removeItem("whoLogin");
         window.localStorage.removeItem("whoLoginUserNum");
-        navigate("/");
+        window.localStorage.removeItem("whoPwd");
+        window.localStorage.removeItem("isLogin");
+        navigate('/');
       }
+
 
     const onClickAlarm = () => {
       setAlarmModal(true);
@@ -92,7 +95,8 @@ const Header = () => {
         </LogoContainer>
 
         </HeaderContainer>
-        {alarmModal && <Modal open={alarmModal} close={closeModal} header="확인"><Alarm/></Modal>}  
+        {alarmModal && <Modal open={alarmModal} close={closeModal} header="확인"><Alarm/></Modal>}
+
         </>
     )
 

@@ -63,8 +63,8 @@ const PageLink = styled.div`
 const RePwd = () => {
     const navigate = useNavigate();
     // 로그인된 아이디 불러오기
-    let localId = window.localStorage.getItem("localId");
-    console.log(localId);
+    let userId = window.localStorage.getItem("whoLogin");
+    console.log(userId);
 
     const [inputId, setInputId] = useState("");
 
@@ -118,9 +118,9 @@ const RePwd = () => {
     }
 
     // 비밀번호 재설정 api
-    const onClickRePwd = async(localId) => {
+    const onClickRePwd = async(userId) => {
         try {
-            const res = await MuteApi.rePwd(localId, newPwdChe);
+            const res = await MuteApi.rePwd(userId, newPwdChe);
             console.log(res.data);
 
             if (res.data) {
@@ -139,7 +139,7 @@ const RePwd = () => {
 
     const onKeyDownRePwd = (e) => {
         if(e.key === 'Enter'){
-            onClickRePwd(localId);
+            onClickRePwd(userId);
         }
     }
 
@@ -148,18 +148,18 @@ const RePwd = () => {
             <RePwdBlock>
             <h5>비밀번호 재설정</h5>
             {/* 아이디 불러오기 */}
-            <div>{localId}님</div>
+            <div>{userId}님</div>
 
             {/* 비밀번호 재설정 */}
             {newPwd.length > 0 && <span>{pwdMsg}</span>}
             <input className="input" type="password" placeholder="비밀번호" onChange={onChangePwd} value={newPwd}></input>
             <br/>
             {/* 재설정한 비밀번호 확인*/}
-            <div className="hint">
+            //<div className="hint">
             {newPwdChe.length > 0 && <span>{conPwdMsg}</span>}</div>
             <input className="input" type="password" placeholder="비밀번호 확인" onChange={onChangePwdCheck} value={newPwdChe} onKeyDown={onKeyDownRePwd}></input>
             <br/>
-            <button className="rePwdButton" disabled={!(isRePwd && isRePwdCheck)} onClick={()=>onClickRePwd(localId)}>재설정</button>
+            <button className="rePwdButton" disabled={!(isRePwd && isRePwdCheck)} onClick={()=>onClickRePwd(userId)}>재설정</button>
             </RePwdBlock>
             {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">{comment}</Modal>}
         </div>

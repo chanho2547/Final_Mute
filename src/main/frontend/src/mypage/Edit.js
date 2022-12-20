@@ -8,7 +8,7 @@ import Modal from "../util/Modal";
 // 회원정보 수정 페이지
 const Edit = () => {
     const navigate = useNavigate();
-    const userId = window.localStorage.getItem("userId");
+    const userId = window.localStorage.getItem("whoLogin");
     console.log(userId);
 
     const [userImg, setUserImg] = useState(""); // aws나 파이어베이스 이미지 등록한 후 주소 저장 필요함
@@ -47,7 +47,7 @@ const Edit = () => {
     // 회원 탈퇴
     const onClickMemDelete = async() => { // 탈퇴한다고 했을때
         await MuteApi.memberDelete(userId);
-        window.localStorage.setItem("userId", "");
+        window.localStorage.setItem("whoLogin","");
         window.localStorage.setItem("isLogin", "false")
         setModalOpen(true);
         setCommnet("정말 탈퇴 하시겠습니까?😥");

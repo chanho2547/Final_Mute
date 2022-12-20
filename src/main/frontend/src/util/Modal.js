@@ -11,8 +11,8 @@ const Modal = (props) => {
 
     const { open, confirm, close, header } = props;
 
-    const userId =window.localStorage.getItem("userId");
-    const localPw =window.localStorage.getItem("userPw");
+    const userId =window.localStorage.getItem("whoLogin");
+    const userPwd =window.localStorage.getItem("whoPwd");
     const isLogin =window.localStorage.getItem("isLogin");
 
     const [comment, setCommnet] = useState("");
@@ -22,11 +22,9 @@ const Modal = (props) => {
         setModalOpen(false);
     };
 
-    const onClickLogout = () => {
-        window.localStorage.removeItem("userId");
-        window.localStorage.removeItem("isLogin");
-        window.localStorage.removeItem("whoPwd");
-        navigate('/');
+    const onClickLogout = (userId) => {
+        setModalOpen(true);
+        setCommnet("로그아웃되었습니다.");
     }
 
     // 회원 탈퇴
@@ -34,7 +32,6 @@ const Modal = (props) => {
         setModalOpen(true);
         setCommnet("정말 탈퇴 하시겠습니까?😥");
     }
-
 
 
     return (
