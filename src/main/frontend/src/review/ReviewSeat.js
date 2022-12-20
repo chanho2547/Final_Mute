@@ -67,8 +67,6 @@ const ReviewSeat = () => {
     let musicalId = window.localStorage.getItem("musicalId"); // 지금 선택한 뮤지컬
     // let theaterFullName = window.localStorage.getItem("theaterFullName"); // 극장 이름
     let mySeat = window.localStorage.getItem("whatSeatInfo"); // 극장이름 + 좌석번호(층, 열, 번)
-
-
     
     console.log("회원번호 : " + userNum); // 회원번호
     console.log("뮤지컬 아이디 : " + musicalId); // 뮤지컬번호
@@ -79,7 +77,7 @@ const ReviewSeat = () => {
     }
 
     // 입력받는 부분
-    const [theaterId, setTheaterId] = useState(''); // 공연장
+    // const [theaterId, setTheaterId] = useState(''); // 공연장
     const [seatNum, setSeatNum] = useState(''); // 좌석
     const [seatRating, setSeatRating] = useState(''); // 좌석 별점
     const [viewRating, setViewRating] = useState(''); // 시야 별점
@@ -120,7 +118,7 @@ const ReviewSeat = () => {
     // 후기 작성 버튼이 눌려지면 동작하는 함수
     const WriteSeatButton = async() => {
         try {
-            const res =  await MuteApi.WriteSeat(userNum, musicalId, theaterId, seatNum, seatRating, viewRating, soundRating, lightRating, scoreAvgSeat, seatReview);
+            const res =  await MuteApi.WriteSeat(userNum, musicalId, seatNum, seatRating, viewRating, soundRating, lightRating, scoreAvgSeat, seatReview);
             if(res.data === true) {
                 console.log("텍스트 입력 성공");
                 setWriteModal(true);   
@@ -162,6 +160,11 @@ const ReviewSeat = () => {
             setIsSeatReview(false);
         }
     }
+
+    const selectSeat = (e) => {
+        setSeatNum(e);
+        console.log("선택된 좌석!?!?!? : " + e)
+    }
     
 
     return(
@@ -171,7 +174,7 @@ const ReviewSeat = () => {
             • 특히 티켓 매매 및 양도의 글은 발견 즉시 임의 삭제되며 전화번호, 이메일 등의 개인정보는 악용될 우려가 있으므로 게시를 삼가해주시기 바랍니다.<br/>
             • 사전 경고에도 불구하고 불량 게시물을 계속적으로 게재한 게시자의 경우 뮤트 후기 게시판 작성 권한이 제한됩니다.
             </InfoBox>
-            <p>선택된 좌석 [{mySeat}]</p><button onClick={SeatClick}>좌석 선택</button>
+            <p onChange={selectSeat}>선택된 좌석 [{mySeat}]</p><button onClick={SeatClick}>좌석 선택</button>
             <StarBox>
                 <div className="MyAvg"><b className="AvgText">나의 총점</b><br/><FaStar size="30" color="#FCC419"/>{scoreAvgSeat}</div>
                 <div className="MyStar">
