@@ -168,7 +168,7 @@ const ReviewSeat = () => {
 
     const onChangeSeatReview = (e) => {
         setSeatReview(e.target.value)
-        if(e.target.value.length > 9 ) {
+        if(e.target.value.length > 4 ) {
             setIsSeatReview(true);
         } else {
             setIsSeatReview(false);
@@ -199,8 +199,8 @@ const ReviewSeat = () => {
                 </div>
             </StarBox>
             <TextBox>
-            <input className="text" placeholder="관람하신 좌석의 후기를 작성해주세요. (10자 이상)" value={seatReview} onChange={onChangeSeatReview}></input>     
-            <button className="OKbtn" onClick={WriteSeatButton}>작성하기</button>
+            <input className="text" placeholder="관람하신 좌석의 후기를 작성해주세요. (5자 이상)" value={seatReview} onChange={onChangeSeatReview}></input>     
+            <button className="OKbtn" onClick={WriteSeatButton}>작성하기</button>　
             <button className="NOKbtn" onClick={CancelButton}>취소하기</button>  
             </TextBox>  
              

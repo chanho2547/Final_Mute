@@ -32,15 +32,27 @@ const StarBox = styled.div`
     }
     .MyAvg {
         float: left;
-        /* padding-left: 100px; */
-        border-right: 60px;
-        /* border: solid 0.5px lightgray; */
     }
     .MyStar {
         float: right;
-        padding-left: 60px;
-        /* border: solid 0.5px lightgray; */
     }
+   
+`;
+
+const MyStar = styled.div`
+    display: flex;
+
+    .MyStar1 {
+        float: left;
+        padding-left: 60px;
+
+    }
+    .MyStar2 {
+        float: right;
+        padding-left: 30px;
+     
+    }
+   
 `;
 
 const TextBox = styled.div`
@@ -60,6 +72,7 @@ const TextBox = styled.div`
     border: none;
     width: 150px;
     height: 30px;
+    margin: 10px;
     }
     .NOKbtn {
     color: white; 
@@ -68,7 +81,7 @@ const TextBox = styled.div`
     border: none;
     width: 150px;
     height: 30px;
-
+    margin: 10px;
     }
 
 
@@ -155,7 +168,7 @@ const ReviewTotal = (props) => {
 
     const onChangeTotalReview = (e) => {
         setTotalReview(e.target.value)
-        if(e.target.value.length > 9 ) {
+        if(e.target.value.length > 4 ) {
             setIsTotalReview(true);
         } else {
             setIsTotalReview(false);
@@ -172,16 +185,20 @@ const ReviewTotal = (props) => {
                 </InfoBox>
                 <StarBox>
                     <div className="MyAvg"><b className="AvgText">나의 총점</b><br/><FaStar size="30" color="#FCC419"/>{scoreAvgTotal}</div>
-                    <div className="MyStar">
-                    <span>스토리 <Rating value={scoreStory} propFunction={highFunction1}/></span>　
-                    <span>연출 <Rating value={scoreDirect} propFunction={highFunction2}/></span>
-                    <span>캐스팅 <Rating value={scoreCast} propFunction={highFunction3}/></span>　
-                    <span>넘버 <Rating value={scoreNumber}  propFunction={highFunction4}/></span>
+                    <MyStar>
+                    <div className="MyStar1">
+                    <p>스토리 <Rating value={scoreStory} propFunction={highFunction1}/></p>
+                    <p>캐스팅 <Rating value={scoreCast} propFunction={highFunction3}/></p>
                     </div>
+                    <div className="MyStar2">
+                    <p>연출 <Rating value={scoreDirect} propFunction={highFunction2}/></p>
+                    <p>넘버 <Rating value={scoreNumber}  propFunction={highFunction4}/></p>
+                    </div>
+                    </MyStar>
                 </StarBox>
                 <TextBox>
-                <input className="text" placeholder="관람하신 뮤지컬의 후기를 작성해주세요. (10자 이상)" value={totalReview} onChange={onChangeTotalReview}></input><br/>
-                <button className="OKbtn" onClick={WriteTotalButton}>작성하기</button>
+                <input className="text" placeholder="관람하신 뮤지컬의 후기를 작성해주세요. (5자 이상)" value={totalReview} onChange={onChangeTotalReview}></input><br/>
+                <button className="OKbtn" onClick={WriteTotalButton}>작성하기</button>　
                 <button className="NOKbtn" onClick={CancelButton}>취소하기</button>
                 </TextBox>
 
