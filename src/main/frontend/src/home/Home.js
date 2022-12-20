@@ -143,7 +143,6 @@ const Home = () => {
         <Link to = "/TheaterChar">샤롯데 좌석 정보</Link> <br></br>
         <Link to = "/TheaterChung">충무 좌석 정보</Link> <br></br>
         <Link to = "/Reservation"> 예매 임시 페이지 </Link> <br></br>
-        <Link to = "/Review"> ★후기 작성 임시 페이지 </Link> <br></br>
         <Link to = "/TheaterSearch">좌석별 후기 페이지</Link> <br></br>
         <Link to = "/MusicalListTmp">뮤지컬 목록 임시 페이지</Link> <br></br>
         <Link to = "/PayTest">카카오페이 결제 임시 페이지</Link>

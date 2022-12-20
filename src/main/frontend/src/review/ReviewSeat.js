@@ -10,6 +10,10 @@ import { FaStar } from 'react-icons/fa';
 
 // 좌석 후기 등록 - 도연
 
+const Container = styled.div`
+    padding: 10px;
+`;
+
 const InfoBox = styled.div`
     padding: 15px;
     font-size: small;
@@ -18,6 +22,7 @@ const InfoBox = styled.div`
 
 const StarBox = styled.div`
     display: flex;
+    padding-left: 250px;
 
     .AvgText {
         color: #810000;
@@ -25,7 +30,7 @@ const StarBox = styled.div`
     }
     .MyAvg {
         float: left;
-        padding-left: 100px;
+        /* padding-left: 100px; */
         border-right: 60px;
         /* border: solid 0.5px lightgray; */
     }
@@ -36,28 +41,35 @@ const StarBox = styled.div`
     }
 `;
 
-const Text = styled.input`
+const TextBox = styled.div`
+    text-align: center;
+
+    .text {
     width: 550px;
     height: 250px;
     padding-left: 100px;
-`;
+    margin: 10px;
 
-const OKbtn = styled.button`
+    }
+    .OKbtn {
     color: white; 
     background-color: #810000;
     border-radius: 5px;
     border: none;
-    width: 70px;
+    width: 150px;
     height: 30px;
-
-`;
-const NOKbtn = styled.button`
+    }
+    .NOKbtn {
     color: white; 
     background-color: #909090;
     border-radius: 5px;
     border: none;
-    width: 70px;
+    width: 150px;
     height: 30px;
+
+    }
+
+
 `;
 
 const ReviewSeat = () => {
@@ -67,9 +79,11 @@ const ReviewSeat = () => {
     let musicalId = window.localStorage.getItem("musicalId"); // 지금 선택한 뮤지컬
     // let theaterFullName = window.localStorage.getItem("theaterFullName"); // 극장 이름
     let mySeat = window.localStorage.getItem("whatSeatInfo"); // 극장이름 + 좌석번호(층, 열, 번)
-    
-    console.log("회원번호 : " + userNum); // 회원번호
-    console.log("뮤지컬 아이디 : " + musicalId); // 뮤지컬번호
+    const pkNum = window.localStorage.setItem("whatSeatNum"); // 좌석번호
+
+    console.log("회원번호 : " + userNum); 
+    console.log("뮤지컬 아이디 : " + musicalId); 
+    console.log("좌석번호 : "  + pkNum);
 
      // 취소 버튼 누르면 첫 화면으로..
     const CancelButton = () => {   
@@ -168,7 +182,7 @@ const ReviewSeat = () => {
     
 
     return(
-        <div>
+        <Container>
             <InfoBox>
             • 게시판 운영 규칙에 어긋난다고 판단되는 게시글은 사전 통보없이 블라인드 처리될 수 있습니다.<br/>
             • 특히 티켓 매매 및 양도의 글은 발견 즉시 임의 삭제되며 전화번호, 이메일 등의 개인정보는 악용될 우려가 있으므로 게시를 삼가해주시기 바랍니다.<br/>
@@ -178,22 +192,22 @@ const ReviewSeat = () => {
             <StarBox>
                 <div className="MyAvg"><b className="AvgText">나의 총점</b><br/><FaStar size="30" color="#FCC419"/>{scoreAvgSeat}</div>
                 <div className="MyStar">
-                <div>좌석 <Rating value={seatRating} propFunction={highFunction1}/>　
-                시야 <Rating value={viewRating} propFunction={highFunction2}/></div>
-                <div>음향 <Rating value={soundRating} propFunction={highFunction3}/>　
-                조명 <Rating value={lightRating}  propFunction={highFunction4}/></div>
+                <span>좌석 <Rating value={seatRating} propFunction={highFunction1}/></span>　
+                <span>시야 <Rating value={viewRating} propFunction={highFunction2}/></span>
+                <span>음향 <Rating value={soundRating} propFunction={highFunction3}/></span>　
+                <span>조명 <Rating value={lightRating}  propFunction={highFunction4}/></span>
                 </div>
             </StarBox>
-
-            <Text placeholder="관람하신 좌석의 후기를 작성해주세요. (10자 이상)" value={seatReview} onChange={onChangeSeatReview}></Text>     
-           
-            <OKbtn onClick={WriteSeatButton}>작성하기</OKbtn>
-            <NOKbtn onClick={CancelButton}>취소하기</NOKbtn>    
+            <TextBox>
+            <input className="text" placeholder="관람하신 좌석의 후기를 작성해주세요. (10자 이상)" value={seatReview} onChange={onChangeSeatReview}></input>     
+            <button className="OKbtn" onClick={WriteSeatButton}>작성하기</button>
+            <button className="NOKbtn" onClick={CancelButton}>취소하기</button>  
+            </TextBox>  
              
             
             {modalTheater && <TheaterModal open={modalTheater} confirm={charlotte} close={chungmu} type={true} header="확인">극장을 선택해주세요.</TheaterModal>}
             {writeModal&& <Modal open={writeModal} close={closeModal} type={true}>좌석 후기 작성 완료♥</Modal>}
-        </div>
+        </Container>
     );
 }
 

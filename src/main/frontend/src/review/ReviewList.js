@@ -20,7 +20,7 @@ const Container = styled.div`
 const StarBox = styled.div`
     background-color: #EEEBDD;
     display: flex;
-    padding: 15px;
+    padding: 20px;
     padding-left: 50px;
 
     .AvgText {
@@ -40,7 +40,7 @@ const StarBox = styled.div`
         width: 200px;
         height: 50px;
         margin-left: 200px;
-        margin-top: 30px;
+        margin-top: 12px;
         
     }
 `;
@@ -50,7 +50,7 @@ const ReviewBox = styled.div`
     border: solid 0.5px lightgray;
 
     .myRaing {
-        padding-left: 30px;
+        padding-left: 33px;
     }
 
     .text {
