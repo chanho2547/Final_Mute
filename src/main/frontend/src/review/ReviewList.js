@@ -26,7 +26,7 @@ const StarBox = styled.div`
     .AvgText {
         text-align: left;
         color: #810000;
-        font-size: 25px;
+        font-size: 30px;
     }
     .AvgBox {
         float: left;
@@ -37,8 +37,8 @@ const StarBox = styled.div`
         border-radius: 5px;
         border: none;
         float: right;
-        width: 300px;
-        height: 100px;
+        width: 200px;
+        height: 50px;
         margin-left: 200px;
         
     }

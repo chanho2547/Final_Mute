@@ -63,8 +63,12 @@ const NOKbtn = styled.button`
 const ReviewSeat = () => {
     const navigate = useNavigate();
 
-    const userNum = window.localStorage.getItem("whoLoginUserNum");
-    let musicalId = window.localStorage.getItem("musicalId");
+    const userNum = window.localStorage.getItem("whoLoginUserNum"); // 지금 로그인한 회원번호
+    let musicalId = window.localStorage.getItem("musicalId"); // 지금 선택한 뮤지컬
+    // let theaterFullName = window.localStorage.getItem("theaterFullName"); // 극장 이름
+    let mySeat = window.localStorage.getItem("whatSeatInfo"); // 극장이름 + 좌석번호(층, 열, 번)
+
+
     
     console.log("회원번호 : " + userNum); // 회원번호
     console.log("뮤지컬 아이디 : " + musicalId); // 뮤지컬번호
@@ -96,11 +100,11 @@ const ReviewSeat = () => {
     const [writeModal, setWriteModal] = useState(false); // 확인 버튼 눌렀을 때
 
     const charlotte = () => { // 샤롯데 좌석 선택하러 가기
-        navigate("/SelectChar"); 
+        navigate("/TheaterChar"); 
     }
     
     const chungmu = () => { // 충무 좌석 선택하러 가기
-        navigate("/SelectChung"); 
+        navigate("/TheaterChung"); 
     }
 
     const closeModal = () => { 
@@ -167,7 +171,7 @@ const ReviewSeat = () => {
             • 특히 티켓 매매 및 양도의 글은 발견 즉시 임의 삭제되며 전화번호, 이메일 등의 개인정보는 악용될 우려가 있으므로 게시를 삼가해주시기 바랍니다.<br/>
             • 사전 경고에도 불구하고 불량 게시물을 계속적으로 게재한 게시자의 경우 뮤트 후기 게시판 작성 권한이 제한됩니다.
             </InfoBox>
-            <p>선택된 좌석 [{}] [{}]</p><button onClick={SeatClick}>좌석 선택</button>
+            <p>선택된 좌석 [{mySeat}]</p><button onClick={SeatClick}>좌석 선택</button>
             <StarBox>
                 <div className="MyAvg"><b className="AvgText">나의 총점</b><br/><FaStar size="30" color="#FCC419"/>{scoreAvgSeat}</div>
                 <div className="MyStar">
