@@ -51,6 +51,12 @@ public class EditController {
         String phone = userInfo.get("phone");
         //String profile = userInfo.get("profile");
         String addr = userInfo.get("addr");
+        log.error("아이디 : " + userId);
+        log.error("변경 name : " + name);
+        log.error("변경 pwd : " + pwd);
+        log.error("변경 mail : " + mail);
+        log.error("변경 phone : " + phone);
+        log.error("변경 addr : " + addr);
 
         boolean result = editService.saveUserInfo(userId, name, pwd, mail, phone, addr);
         if(result) {

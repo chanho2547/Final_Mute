@@ -35,13 +35,19 @@ public class EditService {
     public boolean saveUserInfo(String userId, String name, String pwd, String mail, String phone, String addr) {
         try {
             Member member = memberRepository.findByUserId(userId);
+            log.error("아이디 : " + userId);
+            log.error("변경 name : " + name);
+            log.error("변경 pwd : " + pwd);
+            log.error("변경 mail : " + mail);
+            log.error("변경 phone : " + phone);
+            log.error("변경 addr : " + addr);
             member.setName(name);
             member.setPwd(pwd);
             member.setMail(mail);
             member.setPhone(phone);
             //member.setProfile(profile);
             member.setAddress(addr);
-            Member rst = memberRepository.save(member);
+            memberRepository.save(member);
             log.error("저장완료");
         } catch (Exception e) {
             return false;

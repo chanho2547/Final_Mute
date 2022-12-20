@@ -8,9 +8,8 @@ import Modal from "../util/Modal";
 // 회원정보 수정 페이지
 const Edit = () => {
     const navigate = useNavigate();
-    // 로그인한 사람 아이디 가져오기
-    let localId = window.localStorage.getItem("localId");
-    console.log(localId);
+    const userId = window.localStorage.getItem("userId");
+    console.log(userId);
 
     const [userImg, setUserImg] = useState(""); // aws나 파이어베이스 이미지 등록한 후 주소 저장 필요함
     // const [url, setUrl] = userState("");
@@ -46,41 +45,48 @@ const Edit = () => {
     };
 
     // 회원 탈퇴
-    const onClickMemDelete = () => { // 탈퇴한다고 했을때
+    const onClickMemDelete = async() => { // 탈퇴한다고 했을때
+        await MuteApi.memberDelete(userId);
+        window.localStorage.setItem("userId", "");
+        window.localStorage.setItem("isLogin", "false")
         setModalOpen(true);
         setCommnet("정말 탈퇴 하시겠습니까?😥");
+        console.log({userId});
+        console.log("탈퇴된겨?" + userId);
+        navigate('/');
     }
 
 
-
     useEffect(() => {
-        const userInfo = async() => {
+        const userInfo = async(userId) => {
             try {
-                const response = await MuteApi.userInfo(localId);
+                const response = await MuteApi.userInfo(userId);
                 console.log(response.data);
-                setChangeName(response.data[2]);
+                setChangeName(response.data[0]);
                 setChangePwd(response.data[1]);
                 setChangePhone(response.data[3]);
-                setChangeMail(response.data[4]);
-                setChangeAddr(response.data[5]);
+                setChangeMail(response.data[2]);
+                setChangeAddr(response.data[4]);
 
-                setUserName(response.data[2])
+                setUserName(response.data[0])
                 setUserPwd(response.data[1]);
                 setUserPhone(response.data[3]);
-                setUserMail(response.data[4]);
-                setUserAddr(response.data[5]);
+                setUserMail(response.data[2]);
+                setUserAddr(response.data[4]);
                 setUserImg(response.data[0]);
             } catch (e) {
                 console.log(e);
             }
         }
         userInfo();
-    }, [localId]);
+    }, [userId]);
 
     // 설정 저장
-    const onClickSave = async() => {
-        await MuteApi.userInfoSave(localId, userName, userPwd, userPhone, userMail, enroll_company.address, userImg);
-        navigate('/Home');
+    const onClickSave = async(userId) => {
+        await MuteApi.userInfoSave(userId, userName, userPwd, userPhone, userMail, enroll_company.address, userImg);
+        setModalOpen(true);
+        setCommnet("회원정보 수정이 완료되었습니다.");
+        navigate('/');
     }
 
     // 이름 변경
@@ -95,8 +101,9 @@ const Edit = () => {
     }
     // phone 변경
     const onChangePhone = (e) => {
-        setChangePhone(e.target.value);
-        setIsPhone(false);
+        setChangePhone(e.target.value.replace(/[^0-9]/g, '').replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`));
+        if(e.target.value.length === 0) setIsPhone(true);
+        else setIsPhone(false);
     }
 
     // 주소
@@ -207,7 +214,7 @@ const Edit = () => {
                 {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}
             </div>
             <div>
-                <button onClick={onClickSave} disabled={!(isMail && isPhone && isName && isPwd)}>회원정보수정</button>
+                <button onClick={onClickSave} disabled={!(isMail && isPhone && isName)}>회원정보수정</button>
             </div>
             <div>
                 <button onClick={onClickMemDelete}>회원탈퇴</button>

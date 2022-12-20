@@ -5,7 +5,8 @@ import MyWish from "../util/MyWish";
 
 
 const MyPage = () => {
-
+    const userId = window.localStorage.getItem("userId");
+    console.log(userId);
 
     return(
 
