@@ -22,25 +22,24 @@ public class ReviewTotalService {
     private final ReviewTotalRepository reviewTotalRepository;
     private final ReviewTotalAvgRepository reviewTotalAvgRepository;
 
-    // 뮤지컬 TOP3 별점 순 조회
-
-    public List<ReviewTotalDTO> searchTopStar() {
-        List<ReviewTotalDTO> reviewTotalDTOS = new ArrayList<>();
-        List<ReviewTotal> reviewTotalList = reviewTotalRepository.findTopStar();
-        for(ReviewTotal e : reviewTotalList) {
-            ReviewTotalDTO reviewTotalDTO = new ReviewTotalDTO();
-
-            reviewTotalDTO.setReviewMuId(reviewTotalDTO.getReviewMuId());
-            reviewTotalDTO.setReviewMuTxt(reviewTotalDTO.getReviewMuTxt());
-            reviewTotalDTO.setReviewMuId(e.getReviewMuId());
-            reviewTotalDTO.setReviewMuTxt(e.getReviewMuTxt());
-//            reviewTotalDTO.setReviewMuId(e.getReviewMuId());
-//            reviewTotalDTO.setMusicalName(e.getMusical().getMusicalName());
-//            reviewTotalDTO.setReviewMuCnt(reviewTotalRepository.count());
-            reviewTotalDTOS.add(reviewTotalDTO);
-        }
-        return reviewTotalDTOS;
-    }
+    // 뮤지컬 TOP3 별점 순 조회 // 뮤지컬아이디, 뮤지컬이름, 전체 평균 별점, 총평 후기 개수, 공연 기간, 공연장소
+//    public List<ReviewTotalAvgDTO> searchTopStar() {
+//        List<ReviewTotalAvgDTO> reviewTotalAvgDTOS = new ArrayList<>();
+//        List<ReviewTotalAvg> reviewTotalAvgList = reviewTotalAvgRepository.findTop3();
+//        //
+//        for(ReviewTotalAvg e : reviewTotalAvgList) {
+//            ReviewTotalAvgDTO reviewTotalAvgDTO = new ReviewTotalAvgDTO();
+//            reviewTotalAvgDTO.setMusicalId(e.getMusicalId()); // 뮤지컬 아이디
+//            reviewTotalAvgDTO.setAvgAllTotal(e.getAvgAllTotal()); // 뮤지컬 평점
+//            reviewTotalAvgDTO.setReviewCnt(e.getReviewCnt()); // 뮤지컬 총평 후기 개수
+//            // 지금 추가로 뮤지컬 테이블에서 뮤지컬 이름, 공연 기간, 공연 장소 필요
+//            // 현재 문제점 reviewTotalAvgRepository 엔티티 수정못함,, 다시 쿼리 날리기
+////            reviewTotalAvgDTO.setTheaterName();
+////            reviewTotalAvgDTO.setMusicalStart();
+////            reviewTotalAvgDTO.setMusicalEnd();
+//        }
+//        return reviewTotalAvgDTOS;
+//    }
 
 
     // 뮤지컬 총평 후기 view - 도연

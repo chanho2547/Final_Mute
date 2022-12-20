@@ -22,11 +22,11 @@ public class ReviewTotalController {
         this.reviewTotalService = reviewTotalService;
     }
 
-    @GetMapping("/reviewMusical/starRanking")
-    public ResponseEntity<List<ReviewTotalDTO>> reviewMusical() {
-        List<ReviewTotalDTO> list = reviewTotalService.searchTopStar();
-        return new ResponseEntity(list, HttpStatus.OK);
-    }
+//    @GetMapping("/reviewMusical/starRanking")
+//    public ResponseEntity<List<ReviewTotalAvgDTO>> reviewMusical() {
+//        List<ReviewTotalAvgDTO> list = reviewTotalService.searchTopStar();
+//        return new ResponseEntity(list, HttpStatus.OK);
+//    }
 
     // 뮤지컬 총평 후기 view - 도연
     @GetMapping("/totalView")
