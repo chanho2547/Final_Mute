@@ -9,9 +9,8 @@ import TheaterChar from "../theaterInfo/TheaterChar";
 const SelectChar = () => {
     const navigate = useNavigate();
 
-    let musicalId = window.localStorage.getItem('musicalId');
-    let theaterName = window.localStorage.getItem('theaterFullName');
-
+    let musicalId = window.localStorage.getItem("musicalId");
+    let theaterName =  window.localStorage.getItem("theaterName")
    
 
     return (

@@ -92,7 +92,7 @@ const ReviewTotal = (props) => {
     // 모달
     const [writeModal, setWriteModal] = useState(false); // 확인 버튼 눌렀을 때
 
-    
+
     const confirmModal = () => { // 좌석 후기 작성하러 가기 
         props.propFunction(); // 상위 컴포넌트의 함수를 불러 count ++
     }

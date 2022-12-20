@@ -76,7 +76,7 @@ public class ReviewTotalService {
             reviewTotalAvgDTO.setAvgDirect(e.getAvgDirect()); // 연출 별점
             reviewTotalAvgDTO.setAvgCast(e.getAvgCast()); // 캐스팅 별점
             reviewTotalAvgDTO.setAvgNumber(e.getAvgNumber()); // 넘버 별점
-            reviewTotalAvgDTO.setAvgAllTotal(e.getAvgAllTotal()); // 평균 좌석 별점
+            reviewTotalAvgDTO.setAvgAllTotal(e.getAvgAllTotal()); // 총 평균 별점
             reviewTotalAvgDTOS.add(reviewTotalAvgDTO);
         }
         return reviewTotalAvgDTOS;

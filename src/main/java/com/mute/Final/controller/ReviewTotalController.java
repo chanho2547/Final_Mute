@@ -40,7 +40,7 @@ public class ReviewTotalController {
     public ResponseEntity<List<ReviewTotalAvgDTO>> totalAvgList() {
         int count = 1;
         List<ReviewTotalAvgDTO> reviewTotalAvgDTOS = new ArrayList<>();
-        for(int i = 1 ; i < 1000 ; i++) {
+        for(int i = 1 ; i < 100 ; i++) {
             double totalScore = 0;
             double totalStory = 0;
             double totalDirect = 0;
@@ -52,7 +52,7 @@ public class ReviewTotalController {
                 count = 0;
                 for(ReviewTotalAvgDTO e : list) {
                     reviewTotalAvgDTO.setMusicalId(e.getMusicalId()); // 뮤지컬 번호
-                    totalScore += e.getAvgAllTotal(); // 뮤지컬별 평균 별점 누적
+                    totalScore += e.getAvgAllTotal(); // 뮤지컬별 총 평균 별점 누적
                     totalStory += e.getAvgStory(); // 뮤지컬별 스토리 별점 누적
                     totalDirect += e.getAvgDirect(); // 뮤지컬별 연출 별점 누적
                     totalCast += e.getAvgCast(); // 뮤지컬별 캐스팅 별점 누적

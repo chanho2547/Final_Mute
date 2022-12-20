@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Modal from "../util/Modal";
 import ReviewTotal from "./ReviewTotal";
@@ -31,8 +31,6 @@ const StarBox = styled.div`
         width: 100px;
         height: 30px;
     }
-    
-    
 `;
 
 const ReviewBox = styled.div`
@@ -66,6 +64,7 @@ const ReviewList = (props) => {
 
     const [modalOpen, setModalOpen] = useState(""); // 삭제 버튼 눌렀을 때
     const [modalText, setModalText] = useState(""); // 삭제 모달 텍스트
+
 
     // 후기 작성 버튼 눌렀을 때 로그인 이면 OK, 로그인 안했으면 모달 띄우기
     const WriteButton = () => {
@@ -101,7 +100,7 @@ const ReviewList = (props) => {
 
 
     // 후기 삭제
-    const OnClickDelete = async(member,reviewMuId) => {
+    const OnClickDelete = async(member, reviewMuId) => {
         try {
             console.log("후기 삭제 userNum : " + member);
             console.log("후기 삭제 reviewMuId : " + reviewMuId);
@@ -110,28 +109,21 @@ const ReviewList = (props) => {
 
             console.log("response : " + response);
 
-            if(response.data === false) {
-                setModalText("작성자가 아닙니다. 목록으로 되돌아갑니다.")
+            if(response.data === true) {
                 setModalOpen(true);
-            }
-            else {
                 setModalText("삭제가 완료되었습니다.");
-                setModalOpen(true);
+                navigate('/Review');
             }
             
         } catch (e) {
-            console.log("오류" + e);
-            alert("오류" + e);
+            setModalOpen(true);
+            setModalText("작성자가 아닙니다. 삭제할 수 없습니다.");            
         }
     }
 
-   
-
-
-
-    const Onclick = (e) => {
-        <Rating/>
-    }
+    // const Onclick = (e) => {
+    //     <Rating/>
+    // }
 
 
 
@@ -148,14 +140,15 @@ const ReviewList = (props) => {
             <button className="writeBtn" onClick={WriteButton}>후기 작성하기</button>
         </StarBox>
         {ReviewInfo && ReviewInfo.map(e => ( 
-            <div Onclick={() => Onclick(e)}>
+            // <div Onclick={() => Onclick(e)}>
             <ReviewBox>
                 <p>{e.reviewMuId}　{e.member} ⭐{e.scoreAvgTotal} <span className="date">작성일 {e.writeDate}</span>
                 <button onClick={()=>OnClickDelete(member,e.reviewMuId)}>삭제</button></p>
                 <p>스토리 ★{e.scoreStory} 　연출 ★{e.scoreDirect} 　캐스팅 ★{e.scoreCast} 　넘버 ★{e.scoreNumber}</p>
                 <p className="text">{e.reviewMuTxt}</p>
+
             </ReviewBox>
-            </div>
+            // </div>
         ))}  
         {modalLogin&& <Modal open={modalLogin} close={closeModal} type={true}>로그인이 필요한 서비스입니다.</Modal>}
         {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">{modalText}</Modal>}
