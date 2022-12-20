@@ -15,19 +15,20 @@ const Menu = styled.div`
   padding: 10px 0px 15px 0px;
   display: flex;
   justify-content: right;
-  .menu_item {
-    margin-left: 20px;
-    margin-right: 10px;
-    text-decoration: none;
-    font-size: 11px;  
-    color: #ffffff;
-    cursor: pointer;
-  }
+    .menu_item {
+        margin-left: 20px;
+        margin-right: 10px;
+        text-decoration: none;
+        font-size: 11px;  
+        color: #ffffff;
+      cursor: pointer;
+    }
 `;
+
 const LogoContainer = styled.div`
-text-decoration: none;
-text-align: center;
-color: #CF0A0A;
+  text-decoration: none;
+  text-align: center;
+  color: #CF0A0A;
 `;
 
 

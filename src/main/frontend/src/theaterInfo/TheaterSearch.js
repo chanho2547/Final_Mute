@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { BsSearch } from 'react-icons/bs';
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Search from '../images/search.png';
@@ -44,9 +43,9 @@ const onClickInput = async() => {
     navigate("/TheaterSearchList")
 }
 
-const onClickPress = (e) => {
+const onKeyPress = (e) => {
     if(e.key === 'Enter'){
-    onChangeInput();
+        onClickInput();
     }
 }
 
@@ -58,9 +57,8 @@ const onClickPress = (e) => {
     return(
         <>
         <SearchContainer>
-        <input className="search_input" onChange={onChangeInput} onKeyDown={onClickPress} placeholder="극장을 검색하세요"/>
+        <input className="search_input" onChange={onChangeInput} onKeyDown={onKeyPress} placeholder="극장을 검색하세요"/>
         <button className="search_button" type="button" onClick={onClickInput}><img src={Search}/></button>
-        
         </SearchContainer>
         </>
     )

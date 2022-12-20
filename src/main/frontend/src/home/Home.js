@@ -5,6 +5,29 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Search from '../images/search.png';
 
+const SearchContainer = styled.div`
+  margin: auto;
+  border: 4px solid #810000;
+  display: flex;
+  width: 580px;
+  height: 60px;
+    .search_input{
+        width: 550px;
+        border: none;
+        font-size: 18px;
+        margin-left: 15px;
+    }
+    .search_button{
+        border: none;
+        background-color: rgba(0,0,0,0);
+    }
+    img{
+        width: 25px;
+        height: 25px;
+        margin-right: 15px;
+        }
+`;
+
 const MusicalContainer =styled.div`
 margin: auto;
 .musical_title{
@@ -26,7 +49,6 @@ margin: auto;
     font-size: 20px;
     margin: 0 50px 0 50px;
 }
-
 .musical_img{
     width: 300px;
     height: 400px;
@@ -52,35 +74,22 @@ margin: auto;
     display: flex;
     justify-content: center;
     margin: auto;
+    padding-bottom: 35px;
 }
 .starRanking{
     display: flex;
     justify-content: center;
     margin: auto;
 }
-`;
-
-const SearchContainer = styled.div`
-  margin: auto;
-  border: 4px solid #810000;
-  display: flex;
-  width: 580px;
-  height: 60px;
-    .search_input{
-        width: 550px;
-        border: none;
-        font-size: 18px;
-        margin-left: 15px;
+.centerBlock{
+    background-color: #F4F4F4;
+    .musical_title{
+        padding-top:30px;
     }
-    .search_button{
-        border: none;
-        background-color: rgba(0,0,0,0);
+    .musicalDate{
+        padding-bottom:30px;
     }
-    img{
-            width: 25px;
-            height: 25px;
-            margin-right: 15px;
-        }
+}
 `;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -159,6 +168,7 @@ const Home = () => {
             </div>
 
             <br/><br/> 
+            <div className="centerBlock">
             <div className="musical_title"><p className="musical_title_front">예매 예정&nbsp;</p><p className="musical_title_back">뮤지컬 TOP3</p></div>
             <div className="openBeforeMusical"> 
             {openBeforeMusical && openBeforeMusical.map(e => (
@@ -169,6 +179,7 @@ const Home = () => {
                 <p className="musical_date">{e.musicalStart} ~ {e.musicalEnd}</p>
                 </div>
             ))}
+            </div>
             </div>
 
             <br/><br/>

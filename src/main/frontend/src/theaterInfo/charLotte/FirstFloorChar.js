@@ -130,32 +130,11 @@ const onClickSeat = (event) => {
             console.log("선택한 좌석 pkNum : "  + pkNum);
             let theaterFullName = window.localStorage.getItem("theaterFullName"); // 극장 이름
             window.localStorage.setItem("whatSeatInfo", theaterFullName+" "+floor+"층 "+parentNode+"열 "+seatNum+"번");
-            // 지금 나는 극장이름, 층, 열, 번이 필요해
-
-
-
-
-
-            // event.currentTarget.setAttribute("class","selected"); // 층
-            // window.localStorage.setItem(pkNum,"selected"); // 8450번 좌석
-            // window.localStorage.setItem(seatNum,"selectSeat"); // 구역 12번
-           
             if(seatView === true) {
                 setSeatView(false);
-                //window.localStorage.removeItem("selectedSeats");
             }
             else {setSeatView(true)}
-            
-            // 로컬스토리지에 현재상태 배열형식으로 가져오기
-            // arrString = JSON.parse(window.localStorage.getItem('selectedSeats'));
-
-            // 나는 층, 열, 번이 필요해
-
-            // //배열에 추가후 다시 로컬스토리지로
-            // arrString.push(floor + "층 "+parentNode + "열 " + seatNum + "번 " + grade);
-            // console.log("arrString 타입 : "+ typeof(arrString));
-            // console.log("arrString 출력 : " + arrString);
-            // window.localStorage.setItem("selectedSeats", JSON.stringify(arrString)); // 1층 1열 12번 R
+       
         // props.propsFunction(pkNum);
     } 
 
@@ -240,7 +219,7 @@ const onClickSeat = (event) => {
                 try {
                     let response = await MuteApi.seatReviewAvg(); // 좌석 총 평균 별점 불러오기
                     setSeatReviewInfo(response.data);
-
+                    console.log(setSeatReviewInfo);
                     
                 } catch (e) {  
                     console.log(e + "실패 입니다");
