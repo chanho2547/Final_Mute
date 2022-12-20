@@ -6,6 +6,7 @@ import styled from "styled-components";
 
 const RePwdBlock = styled.div`
     margin-top:50px;
+    text-align: center;
     h5 {
         margin-bottom : 15px;
     }

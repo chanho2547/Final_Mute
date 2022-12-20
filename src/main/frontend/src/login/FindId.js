@@ -5,6 +5,7 @@ import Modal from "../util/Modal";
 import styled from "styled-components";
 
 const FindIdBlock = styled.div`
+  text-align: center;
   margin-top:50px;
   .input {
     width : 270px;
@@ -12,6 +13,7 @@ const FindIdBlock = styled.div`
     background-color : white;
     border-radius : 5px;
     border: solid  1.5px #eeeeee;
+    text-align: center;
     margin : 5px;
     font-size: 12px;
     &:hover {
@@ -42,6 +44,7 @@ const FindIdBlock = styled.div`
 `;
 
 const PageLink = styled.div`
+  text-align: center;
   margin-bottom: 40px;
   .link_item {
     margin: 20px;

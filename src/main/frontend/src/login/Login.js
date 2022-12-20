@@ -6,12 +6,14 @@ import styled from "styled-components";
 
 const LoginBlock = styled.div`
     margin-top:50px;
+    text-align: center;
     .input {
         width : 270px;
         height : 35px;
         background-color : white;
         border-radius : 5px;
         border: solid 1.5px #eeeeee;
+        text-align: center;
         margin : 5px;
         font-size: 12px;
         &:hover {
@@ -28,6 +30,7 @@ const LoginBlock = styled.div`
     .hint {
         font-size : 12px;
         color:green;
+        text-align: center;
     }
 
     .loginButton {
@@ -48,6 +51,7 @@ const LoginBlock = styled.div`
 `;
 
 const PageLink = styled.div`
+    text-align: center;
     margin-bottom: 40px;
     .link_item {
         margin: 10px;
@@ -151,11 +155,12 @@ const Login = () => {
     return(
         <div className="container">
             <LoginBlock>
-                <h3>현재 로그인 된 계정 : [{whoLogin}]</h3>
+                {/*<h3>현재 로그인 된 계정 : [{whoLogin}]</h3>*/}
                 <h5>로그인</h5>
                 {/* 아이디 입력창 */}
-                <input className="input" value={inputId} placeholder="아이디" onChange={onChangeId}></input>
-
+                <div calassName="input">
+                    <input className="input" value={inputId} placeholder="아이디" onChange={onChangeId}></input>
+                </div>
                 {/* 아이디 제한 메시지 */}
                 <div className="hint">
                     {inputId.length > 0 && <span className={`message ${isId ? 'success' : 'error'}`}>{idMessage}</span>}
