@@ -2,7 +2,9 @@ package com.mute.Final.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mute.Final.dto.MusicalDetailDTO;
+import com.mute.Final.entity.Musical;
 import com.mute.Final.repository.MusicalRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -15,6 +17,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
@@ -29,6 +32,9 @@ public class MusicalDetailApiService {
 
     @Value("${api.serviceKey}")
     private String key;
+
+    @Autowired
+    MusicalRepository musicalRepository;
 
     public String MusicalDetailApi(@PathVariable String mt20id) {
 
@@ -69,6 +75,14 @@ public class MusicalDetailApiService {
             list.add(musicalDetailDTO);
 
             log.warn(musicalDetailDTO.toString());
+
+//             DB에 저장하기..관람연령만 되려나? 안돼안돼안돼!!!!!!!!!!!!!!
+//            String ageStr = item.getString("prfage");
+//            Musical musical = new Musical(ageStr);
+//            musical.setMusicalAge(ageStr);
+//            log.warn("가져온 연령값???????????" + ageStr);
+//            Musical savedAge = musicalRepository.save(musical);
+//            log.warn("저장되는 값???????????" + savedAge);
 
         } catch (Exception e) {
             e.printStackTrace();

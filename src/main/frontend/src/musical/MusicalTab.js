@@ -29,22 +29,22 @@ const TabMenu = styled.ul`
    //선택된 Tab에만 적용되는 CSS
     color: #810000;
     border: 2px solid #810000;
-    border-bottom-width: 0px;
+    border-bottom: 2px solid white;
     font-weight: bold;
-    display: flex;
-    padding: 10px 30px 10px 30px;
+    position: relative;
+    padding: 10px 30px;
     font-size: 15px;
     border-radius: 10px 10px 0px 0px;
   }
 
   & div.desc {
-    border-top-width: 0px;
+    border-top: 2px solid white;
   }
 `;
 
 const Desc = styled.div`
     width: 1024px;
-    padding: 50px;
+    padding: 50px 10px;
     border-top: 2px solid #810000;
 `;
 

@@ -2,10 +2,12 @@ package com.mute.Final.entity;
 
 import lombok.*;
 import org.json.JSONObject;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.persistence.*;
 
 import java.time.LocalDate;
+
 
 @Entity
 @Getter @Setter @ToString
@@ -24,6 +26,7 @@ public class Musical {
     private LocalDate musicalTicketStart; // 공연 예매 시작일
     private String musicalStatus; // 공연 상태 (공연예정, 공연중, 공연종료)
     private String musicalPoster; // 공연 포스터
+    private String musicalAge; // 공연 관람 연령
 
     // api 호출 후 DB에 저장
     public Musical (JSONObject item) {
@@ -39,5 +42,12 @@ public class Musical {
         this.musicalStatus = item.getString("prfstate");
         this.musicalPoster = item.getString("poster");
     }
+
+    public Musical(String ageStr) {
+    }
+
+//    public void Musical1 (JSONObject item) {
+//        this.musicalAge = item.getString("prfage");
+//    }
 }
 

@@ -22,6 +22,11 @@ const DetailInfoContainer = styled.div`
         display: block;
         margin-bottom: 20px;
     }
+    .button {
+        font-size: 1em;
+        justify-content: center;
+        align-items: center;
+    }
 `
 
 const DescInfo = styled.div`
@@ -35,7 +40,7 @@ const DescInfo = styled.div`
     table {
         margin-left: 50px;
         height: 260px;
-        width: 650px;
+        width: 600px;
         td {
             vertical-align: top;
             padding: 5px;
@@ -168,52 +173,56 @@ const MusicalDetail = (props) => {
 
   return(
       <>
-        {/* wish 등록 */}
+        {/* wish 등록
         <div onClick={() => OnClickWish()}>
             <div className={(wish ? "likeBtn" : "notLikeBtn")}>
             <p className="wish"><img src={wish ? heartIcon : heartIcon2} alt={heartIcon} width="30px"></img></p>
             </div>
-        </div>
+        </div> */}
         
         {musicalDetail && musicalDetail.map(e => (        
             <DetailInfoContainer>
                 <p className="musicalTitle">{e.musicalName}</p>
                 <DescInfo>
-                    <img alt="poster" className="poster" src={e.musicalPoster}/>
-                    <table>
-                        <tr>
-                            <td className="title">장소</td>
-                            <td>{e.theaterName}</td>
-                        </tr>
-                        <tr>
-                            <td className="title">공연기간</td>
-                            <td>{e.musicalStart} ~ {e.musicalEnd}</td>
-                        </tr>
-                        <tr>
-                            <td className="title">공연시간</td>
-                            <td>{e.musicalRuntime}</td>
-                        </tr>
-                        <tr>
-                            <td className="title">공연상태</td>
-                            <td>{e.musicalStatus}</td>
-                        </tr>
-                        <tr>
-                            <td className="title">출연진</td>
-                            <td>{e.musicalCast}</td>
-                        </tr>
-                        <tr>
-                            <td className="title">관람연령</td>
-                            <td>{e.musicalAge}</td>
-                        </tr>
-                        <tr>
-                            <td className="title">가격</td>
-                            <td>{e.musicalPrice}</td>
-                        </tr>
-                        <tr>
-                            <td className="title">공연일정</td>
-                            <td>{e.musicalPlan}</td>
-                        </tr>
-                    </table>
+                    <div>
+                        <img alt="poster" className="poster" src={e.musicalPoster}/>
+                    </div>
+                    <div>
+                        <table>
+                            <tr>
+                                <td className="title">장소</td>
+                                <td>{e.theaterName}</td>
+                            </tr>
+                            <tr>
+                                <td className="title">공연기간</td>
+                                <td>{e.musicalStart} ~ {e.musicalEnd}</td>
+                            </tr>
+                            <tr>
+                                <td className="title">공연시간</td>
+                                <td>{e.musicalRuntime}</td>
+                            </tr>
+                            <tr>
+                                <td className="title">공연상태</td>
+                                <td>{e.musicalStatus}</td>
+                            </tr>
+                            <tr>
+                                <td className="title">출연진</td>
+                                <td>{e.musicalCast}</td>
+                            </tr>
+                            <tr>
+                                <td className="title">관람연령</td>
+                                <td>{e.musicalAge}</td>
+                            </tr>
+                            <tr>
+                                <td className="title">가격</td>
+                                <td>{e.musicalPrice}</td>
+                            </tr>
+                            <tr>
+                                <td className="title">공연일정</td>
+                                <td>{e.musicalPlan}</td>
+                            </tr>
+                        </table>
+                    </div>
                     <div className="button">
                         <WishBtn onClick = {() => OnClickWish()} className={(wish ? WishBtn : UnWishBtn)}><img src={wish ? heartIcon : heartIcon2} alt={heartIcon} width="20px"/> 찜하기</WishBtn>
                         <ReserveOnbtn>예매하기</ReserveOnbtn>
