@@ -40,7 +40,7 @@ public class PayService {
 
 
     // 결제 준비 요청 단계
-    public String PayReady() {
+    public String PayReady(String price) {
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -54,10 +54,10 @@ public class PayService {
         params.add("cid", "TC0ONETIME"); // 가맹점 코드 (필수), 테스트용 고정값
         params.add("partner_order_id", "mute001"); // 가맹점 주문번호 (필수)
         params.add("partner_user_id", "mute"); // 가맹점 회원id (필수)
-        params.add("item_name", "뮤지컬이름"); // 상품명 (필수) -> 변수받아오기
+        params.add("item_name", "MUTE"); // 상품명 (필수) -> 변수받아오기
         params.add("item_code", "뮤지컬id"); // 상품코드 -> 변수받아오기
         params.add("quantity", "1"); // 상품수량 (필수) -> 변수받아오기
-        params.add("total_amount", "59000"); // 상품총액 (필수) -> 변수받아오기
+        params.add("total_amount", price); // 상품총액 (필수) -> 변수받아오기
         params.add("tax_free_amount", "0"); // 상품 비과세 금액 (필수)
         params.add("approval_url", "http://localhost:8282/PayEnd"); // 결제 성공시 url -> 결제완료페이지
         params.add("cancel_url", "http://localhost:8282/pay/cancel"); // 결제 취소시 url

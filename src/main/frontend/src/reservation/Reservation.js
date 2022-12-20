@@ -5,6 +5,7 @@ import styled from "styled-components";
 import MuteApi from "../api/MuteApi";
 import Login from "../login/Login";
 import Pay from "./Pay";
+import ReservaionResult from "./ReservationResult";
 import SelectDate from "./SelectDate";
 import SelectMusical from "./SelectMusical";
 import SelectSeat from "./SelectSeat";
@@ -12,7 +13,6 @@ import SelectSeat from "./SelectSeat";
 
 // ---- 스타일드 컴포넌트 ----
 const TmpBox = styled.div`
-   
     width: 90%;
     height: fit-content;
     border: 2px solid black;
@@ -175,8 +175,8 @@ const Reservation = () => {
         
         {/* 좌석은, 이미 선택된 좌석은 비활성화 해야한다 */}
         {count === 2 ? <SelectSeat propFunction={highFunction} addSeatNum={addSeatNum} addSeatPos={addSeatPos} seatNum={seatNum} seatPos={seatPos} /> : null }
-        {count === 3 ? <Pay propFunction={highFunction} insertTicket={insertTicketFunction} resInfo={resInfo}  /> : null}
-        {count === 4 ? <h1>끝</h1> : null}
+        {count === 3 ? <Pay propFunction={highFunction} insertTicket={insertTicketFunction} resInfo={resInfo} count={count} /> : null}
+        {count === 4 ? <ReservaionResult resInfo={resInfo} /> : null}
         {count === 5 ? setCount(0) : null}
         </TmpBox>
         </>

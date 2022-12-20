@@ -17,7 +17,7 @@ const PayEnd = (props) => {
         window.localStorage.setItem("payStatus","yes");
         //Reservation.propFunction();
        
-        alert("결제가 완료 되었습니다, pg_tokeen : " + props.pg_token);
+        alert("결제가 완료 되었습니다");
     })
     
     return (

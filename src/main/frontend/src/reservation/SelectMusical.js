@@ -37,6 +37,7 @@ const SelectMusical = (props) => {
 
     useEffect(() => {
         const MusicalData = async () => {
+            window.localStorage.setItem("payStatus","no");
             try {
                 let response = await MuteApi.musicalDBList(); // 뮤지컬 리스트 불러오기
                 setMusicalInfo(response.data);

@@ -26,7 +26,10 @@ const StyledFooter = styled.footer`
 }
 `;
 
+
+
 const Footer = () => {
+    if (window.location.pathname === '/PayEnd') return null;
     return (
         <>
             <StyledFooter>

@@ -24,11 +24,11 @@ public class PayController {
 //    public void PayReadyGet() {
 //    }
     @GetMapping("/pay")
-    public String PayReady() {
+    public String PayReady(@RequestParam String price) {
         log.info("kakaoPay post..........");
-        log.info(payService.PayReady());
+        log.info(payService.PayReady(price));
 
-        return "redirect:" + payService.PayReady();
+        return "redirect:" + payService.PayReady(price);
         // 클라이언트에 보냄.(tid, next_redirect_pc_url이 담겨있음.)
         // 결제요청하는 카카오페이 qr코드 url로 리다이렉트됨
     }
