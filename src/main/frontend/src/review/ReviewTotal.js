@@ -65,7 +65,7 @@ const ReviewTotal = (props) => {
     const navigate = useNavigate();
 
     const userNum = window.localStorage.getItem("whoLoginUserNum");
-    let musicalId = window.localStorage.getItem('musicalId');
+    let musicalId = window.localStorage.getItem("musicalId");
     
     console.log("회원번호 : " + userNum); // 회원번호
     console.log("뮤지컬 아이디 : " + musicalId); // 뮤지컬번호

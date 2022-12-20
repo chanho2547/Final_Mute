@@ -13,6 +13,7 @@ import styled from "styled-components";
 const StarBox = styled.div`
     background-color: #EEEBDD;
     display: flex;
+    padding: 10px;
 
     .AvgText {
         color: #810000;
@@ -150,7 +151,7 @@ const ReviewList = (props) => {
             <div Onclick={() => Onclick(e)}>
             <ReviewBox>
                 <p>{e.reviewMuId}　{e.member} ⭐{e.scoreAvgTotal} <span className="date">작성일 {e.writeDate}</span>
-                <button>수정</button><button onClick={()=>OnClickDelete(member,e.reviewMuId)}>삭제</button></p>
+                <button onClick={()=>OnClickDelete(member,e.reviewMuId)}>삭제</button></p>
                 <p>스토리 ★{e.scoreStory} 　연출 ★{e.scoreDirect} 　캐스팅 ★{e.scoreCast} 　넘버 ★{e.scoreNumber}</p>
                 <p className="text">{e.reviewMuTxt}</p>
             </ReviewBox>

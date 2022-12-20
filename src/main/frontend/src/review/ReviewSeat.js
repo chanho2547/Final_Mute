@@ -63,7 +63,7 @@ const ReviewSeat = () => {
     const navigate = useNavigate();
 
     const userNum = window.localStorage.getItem("whoLoginUserNum");
-    let musicalId = window.localStorage.getItem('musicalId');
+    let musicalId = window.localStorage.getItem("musicalId");
     
     console.log("회원번호 : " + userNum); // 회원번호
     console.log("뮤지컬 아이디 : " + musicalId); // 뮤지컬번호
@@ -95,11 +95,11 @@ const ReviewSeat = () => {
     const [writeModal, setWriteModal] = useState(false); // 확인 버튼 눌렀을 때
 
     const charlotte = () => { // 샤롯데 좌석 선택하러 가기
-        navigate("/TheaterChar"); 
+        navigate("/SelectChar"); 
     }
     
     const chungmu = () => { // 충무 좌석 선택하러 가기
-        navigate("/TheaterChung"); 
+        navigate("/SelectChung"); 
     }
 
     const closeModal = () => { 
@@ -166,6 +166,7 @@ const ReviewSeat = () => {
             • 특히 티켓 매매 및 양도의 글은 발견 즉시 임의 삭제되며 전화번호, 이메일 등의 개인정보는 악용될 우려가 있으므로 게시를 삼가해주시기 바랍니다.<br/>
             • 사전 경고에도 불구하고 불량 게시물을 계속적으로 게재한 게시자의 경우 뮤트 후기 게시판 작성 권한이 제한됩니다.
             </InfoBox>
+            <p>선택된 좌석 [{}] [{}]</p><button onClick={SeatClick}>좌석 선택</button>
             <StarBox>
                 <div className="MyAvg"><b className="AvgText">나의 총점</b>⭐{scoreAvgSeat}</div>
                 <div className="MyStar">
@@ -175,7 +176,6 @@ const ReviewSeat = () => {
                 조명 <Rating value={lightRating}  propFunction={highFunction4}/></div>
                 </div>
             </StarBox>
-            <p>선택된 좌석 [{}] [{}]</p><button onClick={SeatClick}>좌석 선택</button>
 
             <Text placeholder="관람하신 좌석의 후기를 작성해주세요. (10자 이상)" value={seatReview} onChange={onChangeSeatReview}></Text>     
            
