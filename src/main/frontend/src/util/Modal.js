@@ -30,7 +30,7 @@ const Modal = (props) => {
                 <section>
                     <header>
                         &nbsp;
-                        <button className='close' onClick={close}>
+                        <button onClick={close}>
                             &times;
                         </button>
                     </header>
@@ -38,7 +38,7 @@ const Modal = (props) => {
                     <footer>
                         {(header === '탈퇴') ?<button onClick={onClickMemDelete}>네</button>: ''}
                         {(header === '취소'? <button onClick={confirm}>yes</button>:'')}
-                        <button className='close' onClick={close}>close</button>
+                        <button onClick={()=>props.close()}>close</button>
                     </footer>
                 </section>
             }

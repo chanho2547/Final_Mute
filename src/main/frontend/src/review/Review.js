@@ -36,14 +36,17 @@ const Review = () => {
     const highFunction = () => {
         setCount(count + 1);
     }
+    const homeFunction = () => {
+        setCount(0);
+    }
 
 
     return (
         <div className="container">
             <TmpBox>
             {count === 0 ? <ReviewList propFunction={highFunction}/> : null} 
-            {count === 1 ? <ReviewTotal propFunction={highFunction}/> : null}
-            {count === 2 ? <ReviewSeat propFunction={highFunction}/> : null}
+            {count === 1 ? <ReviewTotal homeFunction={homeFunction} propFunction={highFunction}/> : null}
+            {count === 2 ? <ReviewSeat homeFunction={homeFunction} propFunction={highFunction}/> : null}
             </TmpBox>
         </div>
     );
