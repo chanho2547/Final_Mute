@@ -7,7 +7,30 @@ import { BsSearch } from 'react-icons/bs';
 import Search from '../images/search.png';
 
 const MusicalContainer =styled.div`
-margin: 0;
+margin: 30px;
+.musical_title_front{
+    color: #810000;
+    font-weight: 700;
+    font-size: 25px;
+}
+.musical_title_back{
+    color: #1b1717;
+    font-weight: 700;
+    font-size: 25px;
+}
+.musical_name{
+    color: #810000;
+    font-weight: 700;
+    font-size: 23px;
+}
+.theater_name{
+    color: #1b1717;
+
+}
+.musical_date{
+    color: #909090;
+    font-size: 13px;
+}
 `;
 
 const OpenedMusical = styled.div`
@@ -93,7 +116,7 @@ const Home = () => {
 
         <MusicalContainer>
             <OpenedMusical>
-            <p className="musical_title">예매 시작 뮤지컬 TOP3</p>
+            <p className="musical_title_front">예매 시작</p><p className="musical_title_back">뮤지컬 TOP3</p>
             {openedMusical && openedMusical.map(e => (
                 <div onClick={() => OnClick(e.musicalId) }>
                 <img alt="poster" src={e.musicalPoster} size width={160} height={230}/>
@@ -107,7 +130,7 @@ const Home = () => {
             <br/><br/> 
            
             <OpenBeforeMusical> 
-            <p className="musical_title">예매 예정 뮤지컬 TOP3</p>
+            <p className="musical_title_front">예매 예정</p><p className="musical_title_back">뮤지컬 TOP3</p>
             {openBeforeMusical && openBeforeMusical.map(e => (
                 <div onClick={() => OnClick(e.musicalId) }>           
                 <img alt="poster" src={e.musicalPoster} size width={160} height={230}/>
@@ -121,7 +144,7 @@ const Home = () => {
             <br/><br/>
            
             <StarRanking>
-            <p className="musical_title">별점이 가장 높은 뮤지컬 TOP3(쿼리수정예정)</p>
+            <p className="musical_title_front">별점이 가장 높은</p><p className="musical_title_back">뮤지컬 TOP3</p>
             {starRanking && starRanking.map(e => (
                 <div  onClick={() => OnClick(e.musicalId) }>
                 <img alt="poster" src={e.musicalPoster} size width={160} height={230}/>

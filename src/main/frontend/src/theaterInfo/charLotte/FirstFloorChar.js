@@ -127,7 +127,7 @@ const onClickSeat = (event) => {
 
     else if (window.localStorage.getItem("seatInfoMode") === "후기") {
             window.localStorage.setItem("whatSeatNum", pkNum);
-            console.log("이게 내가 바로 필요한 것" + pkNum);
+            console.log("이게 내가 바로 필요한 것 : " + pkNum);
             // event.currentTarget.setAttribute("class","selected"); // 층
             // window.localStorage.setItem(pkNum,"selected"); // 8450번 좌석
             // window.localStorage.setItem(seatNum,"selectSeat"); // 구역 12번
