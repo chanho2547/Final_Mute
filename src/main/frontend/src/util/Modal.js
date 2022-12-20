@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import '../App';
 import './Modal.css';
 import {useNavigate} from "react-router-dom";
@@ -11,18 +11,36 @@ const Modal = (props) => {
 
     const { open, confirm, close, header } = props;
 
-    const localId =window.localStorage.getItem("userId");
+    const userId =window.localStorage.getItem("userId");
     const localPw =window.localStorage.getItem("userPw");
     const isLogin =window.localStorage.getItem("isLogin");
 
+    const [comment, setCommnet] = useState("");
+    const [modalOpen, setModalOpen] = useState(false);
+
+    const closeModal = () => {
+        setModalOpen(false);
+    };
+
+    const onClickLogout = () => {
+        window.localStorage.setItem("userId", "");
+        window.localStorage.setItem("isLogin", "false");
+        navigate('/');
+    }
+
     // 회원 탈퇴
     const onClickMemDelete = async() => { // 탈퇴한다고 했을때
-        await MuteApi.memberDelete(localId);
+        await MuteApi.memberDelete(userId);
         window.localStorage.setItem("userId", "");
         window.localStorage.setItem("userPwd", "");
         window.localStorage.setItem("isLogin", "false")
+        setModalOpen(true);
+        setCommnet("정말 탈퇴 하시겠습니까?😥");
         navigate('/');
     }
+
+
+
 
     return (
         <div className={open ? 'openModal modal' : 'modal'}>
@@ -36,6 +54,7 @@ const Modal = (props) => {
                     </header>
                     <main>{props.children}</main>
                     <footer>
+                        {(header === '로그아웃') ?<button onClick={onClickLogout}>네</button>: ''}
                         {(header === '탈퇴') ?<button onClick={onClickMemDelete}>네</button>: ''}
                         {(header === '취소'? <button onClick={confirm}>yes</button>:'')}
                         <button onClick={()=>props.close()}>close</button>

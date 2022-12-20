@@ -142,7 +142,7 @@ const MuteApi =  {
         const reg = {
             userId: userId
         };
-        return await axios.post("delete", reg);
+        return await axios.post("member/delete", reg);
     },
 
     // 좌석 후기 평균 별점
@@ -234,7 +234,7 @@ const MuteApi =  {
         const ediObj = {
             userId: userId
         }
-        return await axios.post("userInfo", ediObj);
+        return await axios.post("user/userInfo", ediObj);
     },
 
     // 수정한 회원 정보 저장
@@ -248,7 +248,7 @@ const MuteApi =  {
             userAddr: addr,
             userImg: img
         }
-        return await axios.post("saveInfo", ediObj);
+        return await axios.post("user/saveInfo", ediObj);
     },
 
     wishCancel: async function(userNum, mt20id) {
@@ -272,7 +272,7 @@ const MuteApi =  {
             url: url,
             id: localId
         };
-        return await axios.post("changeFace", faceObj);
+        return await axios.post("user/editImg", faceObj);
     }
 
 }
