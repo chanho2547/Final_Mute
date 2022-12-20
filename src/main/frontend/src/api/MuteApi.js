@@ -272,8 +272,8 @@ const MuteApi =  {
             url: url,
             id: localId
         };
-        return await axios.post("changeFace", faceObj;
-    },
+        return await axios.post("changeFace", faceObj);
+    }
 
 }
 
