@@ -4,7 +4,7 @@ import MuteApi from "../api/MuteApi";
 const SeatClick = () => {
     const [selectSeat, setSelectSeat] = useState();
     let clickSeatNum = window.localStorage.getItem("whatSeatNum");
-    let clickSeatInfo = window.localStorage.getItem("selectedSeats");
+    let clickSeatInfo = window.localStorage.getItem("whatSeatInfo");
 
 
     useEffect(() => {

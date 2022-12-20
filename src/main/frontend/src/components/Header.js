@@ -26,23 +26,14 @@ const Menu = styled.div`
 `;
 const LogoContainer = styled.div`
 text-decoration: none;
+text-align: center;
 color: #CF0A0A;
- p {
-    font-size : 18px;
- }
-
- h1 { 
-    font-size : 50px;
- }
 `;
 
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 const Header = () => {
-
-  
-
     const [alarmModal, setAlarmModal] = useState(false); // 알림 모달창
     
     const closeModal = () => {
@@ -95,7 +86,7 @@ const Header = () => {
         
         <LogoContainer>
             <Link to={"/"} className="logo_link">
-            <img src={Logo} width={300} height={160}/>
+            <img className="logo_img" src={Logo} width={400} height={210}/>
             </Link>
         </LogoContainer>
 

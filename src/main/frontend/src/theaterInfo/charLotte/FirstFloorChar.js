@@ -127,24 +127,35 @@ const onClickSeat = (event) => {
 
     else if (window.localStorage.getItem("seatInfoMode") === "후기") {
             window.localStorage.setItem("whatSeatNum", pkNum);
-            console.log("이게 내가 바로 필요한 것 : " + pkNum);
+            console.log("선택한 좌석 pkNum : "  + pkNum);
+            let theaterFullName = window.localStorage.getItem("theaterFullName"); // 극장 이름
+            window.localStorage.setItem("whatSeatInfo", theaterFullName+" "+floor+"층 "+parentNode+"열 "+seatNum+"번");
+            // 지금 나는 극장이름, 층, 열, 번이 필요해
+
+
+
+
+
             // event.currentTarget.setAttribute("class","selected"); // 층
             // window.localStorage.setItem(pkNum,"selected"); // 8450번 좌석
             // window.localStorage.setItem(seatNum,"selectSeat"); // 구역 12번
            
-            // <SeatClick/> // 이 컴포넌트가 어디로 가야할지 모르겠어!
-            navigate('/SeatClick'); // 임시로 일단 넘김
+            if(seatView === true) {
+                setSeatView(false);
+                //window.localStorage.removeItem("selectedSeats");
+            }
+            else {setSeatView(true)}
             
-          
-
             // 로컬스토리지에 현재상태 배열형식으로 가져오기
-            arrString = JSON.parse(window.localStorage.getItem('selectedSeats'));
+            // arrString = JSON.parse(window.localStorage.getItem('selectedSeats'));
 
-            //배열에 추가후 다시 로컬스토리지로
-            arrString.push(floor + "층 "+parentNode + "열 " + seatNum + "번 " + grade);
-            console.log("arrString 타입 : "+ typeof(arrString));
-            console.log("arrString 출력 : " + arrString);
-            window.localStorage.setItem("selectedSeats", JSON.stringify(arrString)); // 1층 1열 12번 R
+            // 나는 층, 열, 번이 필요해
+
+            // //배열에 추가후 다시 로컬스토리지로
+            // arrString.push(floor + "층 "+parentNode + "열 " + seatNum + "번 " + grade);
+            // console.log("arrString 타입 : "+ typeof(arrString));
+            // console.log("arrString 출력 : " + arrString);
+            // window.localStorage.setItem("selectedSeats", JSON.stringify(arrString)); // 1층 1열 12번 R
         // props.propsFunction(pkNum);
     } 
     
@@ -15870,7 +15881,7 @@ const onClickSeat = (event) => {
             </div>
         </div>
         <></>
-    
+        {seatView && <SeatClick />}
         </>
     );
 }

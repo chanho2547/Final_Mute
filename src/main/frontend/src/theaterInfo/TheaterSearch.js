@@ -2,15 +2,29 @@ import { useState } from "react";
 import { BsSearch } from 'react-icons/bs';
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import Search from '../images/search.png';
 
-const SearchBar = styled.div `
-    .searchBar_input{
-        width: 600px;
-        height: 40px;
+const SearchContainer = styled.div`
+  margin: auto;
+  border: 4px solid #810000;
+  display: flex;
+  width: 580px;
+  height: 60px;
+    .search_input{
+        width: 550px;
+        border: none;
+        font-size: 18px;
+        margin-left: 15px;
     }
-    .searchBar_button{
-        height: 40px; 
+    .search_button{
+        border: none;
+        background-color: rgba(0,0,0,0);
     }
+    img{
+        width: 25px;
+        height: 25px;
+        margin-right: 15px;
+        }
 `;
 
 // 공연장 검색바
@@ -30,20 +44,24 @@ const onClickInput = async() => {
     navigate("/TheaterSearchList")
 }
 
+const onClickPress = (e) => {
+    if(e.key === 'Enter'){
+    onChangeInput();
+    }
+}
+
 // const highFunction = (e) => {
 //     alert("들어온 값 : "+e);
-
 // }
-
 // return문에 들어갈 내용 => <FirstFloorChar propsFunction={highFunction}/> 
 
     return(
         <>
-        <SearchBar>
-        <input className="searchBar_input" onChange={onChangeInput} placeholder="극장을 검색하세요"/>
-        <button className="searchBar_button" type="button" onClick={onClickInput}><BsSearch/></button>
+        <SearchContainer>
+        <input className="search_input" onChange={onChangeInput} onKeyDown={onClickPress} placeholder="극장을 검색하세요"/>
+        <button className="search_button" type="button" onClick={onClickInput}><img src={Search}/></button>
         
-        </SearchBar>
+        </SearchContainer>
         </>
     )
 }

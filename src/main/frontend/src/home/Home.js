@@ -3,59 +3,84 @@ import { useEffect, useState } from "react";
 import MuteApi from "../api/MuteApi";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { BsSearch } from 'react-icons/bs';
 import Search from '../images/search.png';
 
 const MusicalContainer =styled.div`
-margin: 30px;
-.musical_title_front{
-    color: #810000;
-    font-weight: 700;
-    font-size: 25px;
-}
-.musical_title_back{
-    color: #1b1717;
-    font-weight: 700;
-    font-size: 25px;
+margin: auto;
+.musical_title{
+    display: flex;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 35px;
+    margin: 50px 0 10px 0;
+    .musical_title_front{
+        color: #810000;
+    }
+    .musical_title_back{
+        color: #1b1717;
+    }
 }
 .musical_name{
     color: #810000;
     font-weight: 700;
-    font-size: 23px;
+    font-size: 20px;
+    margin: 0 50px 0 50px;
 }
+
+.musical_img{
+    width: 300px;
+    height: 400px;
+    margin: 25px 50px 0 50px;
+}
+
 .theater_name{
     color: #1b1717;
-
+    margin: 0 50px 0 50px;
 }
 .musical_date{
     color: #909090;
     font-size: 13px;
+    margin: 0 50px 0 50px;
+}
+.openedMusical{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+.openBeforeMusical{
+    background-color: #F4F4F4;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+.starRanking{
+    display: flex;
+    justify-content: center;
+    margin: auto;
 }
 `;
 
-const OpenedMusical = styled.div`
-margin: 20px;
-display: flex;
-/* justify-content: right */
-`;
-const OpenBeforeMusical = styled.div`
-background-color: #F4F4F4;
-margin: 20px;
-display: flex;
-/* justify-content: right */
-`;
-const StarRanking = styled.div`
-margin: 20px;
-display: flex;
-/* justify-content: right */
-`;
-
 const SearchContainer = styled.div`
-  border-radius: 2px solid black;
+  margin: auto;
+  border: 4px solid #810000;
   display: flex;
-  .search_button{
-    background-color: none;
-  }
+  width: 580px;
+  height: 60px;
+    .search_input{
+        width: 550px;
+        border: none;
+        font-size: 18px;
+        margin-left: 15px;
+    }
+    .search_button{
+        border: none;
+        background-color: rgba(0,0,0,0);
+    }
+    img{
+            width: 25px;
+            height: 25px;
+            margin-right: 15px;
+        }
 `;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -93,9 +118,15 @@ const Home = () => {
         RankData();
     }, []);
 
-    const OnClick = (musicalId) => {
+    const onClick = (musicalId) => {
         window.localStorage.setItem("musicalId", musicalId);
         navigate('/MusicalDetail');
+    }
+
+    const onKeyPress = (e) => {
+        if(e.key === 'Enter'){
+            onClickInput();
+        }
     }
 
     return(
@@ -110,50 +141,49 @@ const Home = () => {
         <br/><br/>
         
         <SearchContainer>
-        <input className="search_input" onChange={onChangeInput} placeholder="찾고싶은 뮤지컬을 검색하세요!" width={500}></input>
-        <button className="search_button" onClick={onClickInput}><img src={Search} width={20} height={20}/></button>
+        <input className="search_input" onChange={onChangeInput} onKeyDown={onKeyPress} placeholder="찾고 싶은 뮤지컬을 검색하세요!"></input>
+        <button className="search_button" onClick={onClickInput} ><img src={Search}/></button>
         </SearchContainer>
 
         <MusicalContainer>
-            <OpenedMusical>
-            <p className="musical_title_front">예매 시작</p><p className="musical_title_back">뮤지컬 TOP3</p>
+            <p className="musical_title"><p className="musical_title_front">예매 시작&nbsp;</p><p className="musical_title_back">뮤지컬 TOP3</p></p>
+            <div className="openedMusical">
             {openedMusical && openedMusical.map(e => (
-                <div onClick={() => OnClick(e.musicalId) }>
-                <img alt="poster" src={e.musicalPoster} size width={160} height={230}/>
+                <div onClick={() => onClick(e.musicalId) }>
+                <img className="musical_img" alt="poster" src={e.musicalPoster}/>
                 <p className="musical_name">{e.musicalName}</p>
                 <p className="theater_name">{e.theaterName}</p>
                 <p className="musical_date">{e.musicalStart} ~ {e.musicalEnd}</p>
                 </div>
             ))}
-            </OpenedMusical>
+            </div>
 
             <br/><br/> 
-           
-            <OpenBeforeMusical> 
-            <p className="musical_title_front">예매 예정</p><p className="musical_title_back">뮤지컬 TOP3</p>
+            <div className="musical_title"><p className="musical_title_front">예매 예정&nbsp;</p><p className="musical_title_back">뮤지컬 TOP3</p></div>
+            <div className="openBeforeMusical"> 
             {openBeforeMusical && openBeforeMusical.map(e => (
-                <div onClick={() => OnClick(e.musicalId) }>           
-                <img alt="poster" src={e.musicalPoster} size width={160} height={230}/>
+                <div onClick={() => onClick(e.musicalId) }>           
+                <img className="musical_img" alt="poster" src={e.musicalPoster} />
                 <p className="musical_name">{e.musicalName}</p>
                 <p className="theater_name">{e.theaterName}</p>
                 <p className="musical_date">{e.musicalStart} ~ {e.musicalEnd}</p>
                 </div>
             ))}
-            </OpenBeforeMusical>
+            </div>
 
             <br/><br/>
            
-            <StarRanking>
-            <p className="musical_title_front">별점이 가장 높은</p><p className="musical_title_back">뮤지컬 TOP3</p>
+            <div className="musical_title"><p className="musical_title_front">별점이 가장 높은&nbsp;</p><p className="musical_title_back">뮤지컬 TOP3</p></div>
+            <div className="starRanking">
             {starRanking && starRanking.map(e => (
-                <div  onClick={() => OnClick(e.musicalId) }>
-                <img alt="poster" src={e.musicalPoster} size width={160} height={230}/>
+                <div  onClick={() => onClick(e.musicalId) }>
+                <img alt="poster" src={e.musicalPoster}/>
                 <p>{e.musicalName}</p>
                 <p>{e.theaterName}</p>
                 <p>{e.musicalStart} ~ {e.musicalEnd}</p>
                 </div>
             ))}
-            </StarRanking>
+            </div>
         </MusicalContainer>
 
 

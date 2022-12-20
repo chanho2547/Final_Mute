@@ -23,7 +23,6 @@ import SignCom from "./login/SignCom";
 import FindId from "./login/FindId";
 import MyPage from "./mypage/Mypage";
 import MusicalSearchList from './musical/MusicalSearchList';
-import MusicalSearch from './musical/MusicalSearch'; // 나중에 삭제 예정
 import FindPwd from './login/FindPwd';
 import TheaterChar from './theaterInfo/TheaterChar';
 import TheaterChung from './theaterInfo/TheaterChung';
@@ -72,7 +71,6 @@ function App() {
         <Route path='/SignCom' element={<SignCom />} />
         <Route path='/FindId' element={<FindId />} />
         <Route path='/TheaterSearchList' element={<TheaterSearchList/>} />
-        <Route path='/MusicalSearch' element={<MusicalSearch/>} />
         <Route path='/FindPwd' element={<FindPwd/>} />
         <Route path='/TheaterChar' element={<TheaterChar/>} />
         <Route path='/TheaterChung' element={<TheaterChung/>} />
