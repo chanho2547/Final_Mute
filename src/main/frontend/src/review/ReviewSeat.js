@@ -11,8 +11,9 @@ import { FaStar } from 'react-icons/fa';
 // 좌석 후기 등록 - 도연
 
 const Container = styled.div`
-    padding: 10px;
+    padding: 20px;
 `;
+
 
 const InfoBox = styled.div`
     padding: 15px;
@@ -20,9 +21,26 @@ const InfoBox = styled.div`
     color: gray;
 `;
 
+const SelectSeat = styled.div`
+    text-align: center;
+    margin-bottom: 20px;
+    border: solid 0.5px gray;
+    padding: 10px;
+    width: 550px;
+    padding-left: 100px;
+
+    .SeatBtn {
+        border-radius: 5px;
+        border: solid 0.5px lightgray;
+        background-color: #EEEBDD;
+        width: 100px;
+        height: 30px;
+    }
+`;
+
 const StarBox = styled.div`
     display: flex;
-    padding-left: 250px;
+    padding-left: 240px;
 
     .AvgText {
         color: #810000;
@@ -30,15 +48,27 @@ const StarBox = styled.div`
     }
     .MyAvg {
         float: left;
-        /* padding-left: 100px; */
-        border-right: 60px;
-        /* border: solid 0.5px lightgray; */
     }
     .MyStar {
         float: right;
-        padding-left: 60px;
-        /* border: solid 0.5px lightgray; */
     }
+   
+`;
+
+const MyStar = styled.div`
+    display: flex;
+
+    .MyStar1 {
+        float: left;
+        padding-left: 70px;
+
+    }
+    .MyStar2 {
+        float: right;
+        padding-left: 30px;
+     
+    }
+   
 `;
 
 const TextBox = styled.div`
@@ -49,7 +79,11 @@ const TextBox = styled.div`
     height: 250px;
     padding-left: 100px;
     margin: 10px;
-
+    }
+    .hint {
+        color: royalblue;
+        font-style: italic;
+        font-size: small;
     }
     .OKbtn {
     color: white; 
@@ -58,6 +92,7 @@ const TextBox = styled.div`
     border: none;
     width: 150px;
     height: 30px;
+    margin: 10px;
     }
     .NOKbtn {
     color: white; 
@@ -66,7 +101,7 @@ const TextBox = styled.div`
     border: none;
     width: 150px;
     height: 30px;
-
+    margin: 10px;
     }
 
 
@@ -79,11 +114,11 @@ const ReviewSeat = () => {
     let musicalId = window.localStorage.getItem("musicalId"); // 지금 선택한 뮤지컬
     // let theaterFullName = window.localStorage.getItem("theaterFullName"); // 극장 이름
     let mySeat = window.localStorage.getItem("whatSeatInfo"); // 극장이름 + 좌석번호(층, 열, 번)
-    const pkNum = window.localStorage.setItem("whatSeatNum"); // 좌석번호
+    // let pkNum = window.localStorage.setItem("whatSeatNum"); // 좌석번호
 
     console.log("회원번호 : " + userNum); 
     console.log("뮤지컬 아이디 : " + musicalId); 
-    console.log("좌석번호 : "  + pkNum);
+    // console.log("좌석번호 : "  + pkNum);
 
      // 취소 버튼 누르면 첫 화면으로..
     const CancelButton = () => {   
@@ -172,14 +207,11 @@ const ReviewSeat = () => {
             setIsSeatReview(true);
         } else {
             setIsSeatReview(false);
+            setSeatReviewMsg("후기는 5자 이상 작성해주세요.")
         }
     }
 
-    const selectSeat = (e) => {
-        setSeatNum(e);
-        console.log("선택된 좌석!?!?!? : " + e)
-    }
-    
+   
 
     return(
         <Container>
@@ -188,24 +220,30 @@ const ReviewSeat = () => {
             • 특히 티켓 매매 및 양도의 글은 발견 즉시 임의 삭제되며 전화번호, 이메일 등의 개인정보는 악용될 우려가 있으므로 게시를 삼가해주시기 바랍니다.<br/>
             • 사전 경고에도 불구하고 불량 게시물을 계속적으로 게재한 게시자의 경우 뮤트 후기 게시판 작성 권한이 제한됩니다.
             </InfoBox>
-            <p onChange={selectSeat}>선택된 좌석 [{mySeat}]</p><button onClick={SeatClick}>좌석 선택</button>
+            <SelectSeat>
+            <button className="SeatBtn" onClick={SeatClick}>좌석 선택하기</button>　<span>선택된 좌석 [{mySeat}]</span>
+            </SelectSeat>
             <StarBox>
-                <div className="MyAvg"><b className="AvgText">나의 총점</b><br/><FaStar size="30" color="#FCC419"/>{scoreAvgSeat}</div>
-                <div className="MyStar">
-                <span>좌석 <Rating value={seatRating} propFunction={highFunction1}/></span>　
-                <span>시야 <Rating value={viewRating} propFunction={highFunction2}/></span>
-                <span>음향 <Rating value={soundRating} propFunction={highFunction3}/></span>　
-                <span>조명 <Rating value={lightRating}  propFunction={highFunction4}/></span>
+                <div className="MyAvg"><b className="AvgText">나의 총점</b><br/>　<FaStar size="30" color="#FCC419"/>{scoreAvgSeat}</div>
+                <MyStar>
+                <div className="MyStar1">
+                <p>좌석 <Rating value={seatRating} propFunction={highFunction1}/></p>
+                <p>음향 <Rating value={soundRating} propFunction={highFunction3}/></p>
                 </div>
+                <div className="MyStar2">
+                <p>시야 <Rating value={viewRating} propFunction={highFunction2}/></p>
+                <p>조명 <Rating value={lightRating}  propFunction={highFunction4}/></p>
+                </div>
+                </MyStar>
             </StarBox>
-            <TextBox>
-            <input className="text" placeholder="관람하신 좌석의 후기를 작성해주세요. (5자 이상)" value={seatReview} onChange={onChangeSeatReview}></input>     
+            <TextBox> 
+            <input className="text" placeholder="관람하신 좌석의 후기를 작성해주세요. (5자 이상)" value={seatReview} onChange={onChangeSeatReview}></input><br/> 
+            <div className="hint">{seatReview.length < 5 && <span className={`message ${isSeatReview ? 'success' : 'error'}`}>{seatReviewMsg}</span>}</div>
             <button className="OKbtn" onClick={WriteSeatButton}>작성하기</button>　
             <button className="NOKbtn" onClick={CancelButton}>취소하기</button>  
             </TextBox>  
-             
             
-            {modalTheater && <TheaterModal open={modalTheater} confirm={charlotte} close={chungmu} type={true} header="확인">극장을 선택해주세요.</TheaterModal>}
+            {modalTheater && <TheaterModal open={modalTheater} confirm={charlotte} close={chungmu} type={true} header="확인">관람하신 극장을 선택해주세요.</TheaterModal>}
             {writeModal&& <Modal open={writeModal} close={closeModal} type={true}>좌석 후기 작성 완료♥</Modal>}
         </Container>
     );

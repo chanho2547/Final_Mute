@@ -140,7 +140,7 @@ const onClickSeat = (event) => {
 
     else  { // 도연(좌석후기 -> 좌석선택할때 사용)
         window.localStorage.setItem("whatSeatNum", pkNum);
-        console.log("선택한 좌석 pkNum : "  + pkNum);
+        console.log("선택한 좌석번호 : "  + pkNum);
         let theaterFullName = window.localStorage.getItem("theaterFullName"); // 극장 이름
         window.localStorage.setItem("whatSeatInfo", theaterFullName+" "+floor+"층 "+parentNode+"열 "+seatNum+"번");
     }

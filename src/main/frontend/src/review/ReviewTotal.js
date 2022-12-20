@@ -24,7 +24,7 @@ const InfoBox = styled.div`
 
 const StarBox = styled.div`
     display: flex;
-    padding-left: 250px;
+    padding-left: 240px;
 
     .AvgText {
         color: #810000;
@@ -44,7 +44,7 @@ const MyStar = styled.div`
 
     .MyStar1 {
         float: left;
-        padding-left: 60px;
+        padding-left: 70px;
 
     }
     .MyStar2 {
@@ -63,7 +63,11 @@ const TextBox = styled.div`
     height: 250px;
     padding-left: 100px;
     margin: 10px;
-
+    }
+    .hint {
+        color: red;
+        font-style: italic;
+        font-size: small;
     }
     .OKbtn {
     color: white; 
@@ -172,6 +176,7 @@ const ReviewTotal = (props) => {
             setIsTotalReview(true);
         } else {
             setIsTotalReview(false);
+            setTotalReviewMsg("후기는 5자 이상 작성해주세요.")
         }
     }
     
@@ -184,7 +189,7 @@ const ReviewTotal = (props) => {
                 • 사전 경고에도 불구하고 불량 게시물을 계속적으로 게재한 게시자의 경우 뮤트 후기 게시판 작성 권한이 제한됩니다.
                 </InfoBox>
                 <StarBox>
-                    <div className="MyAvg"><b className="AvgText">나의 총점</b><br/><FaStar size="30" color="#FCC419"/>{scoreAvgTotal}</div>
+                    <div className="MyAvg"><b className="AvgText">나의 총점</b><br/>　<FaStar size="30" color="#FCC419"/>{scoreAvgTotal}</div>
                     <MyStar>
                     <div className="MyStar1">
                     <p>스토리 <Rating value={scoreStory} propFunction={highFunction1}/></p>
@@ -198,6 +203,7 @@ const ReviewTotal = (props) => {
                 </StarBox>
                 <TextBox>
                 <input className="text" placeholder="관람하신 뮤지컬의 후기를 작성해주세요. (5자 이상)" value={totalReview} onChange={onChangeTotalReview}></input><br/>
+                <div className="hint">{totalReview.length < 5 && <span className={`message ${isTotalReview ? 'success' : 'error'}`}>{totalReviewMsg}</span>}</div> 
                 <button className="OKbtn" onClick={WriteTotalButton}>작성하기</button>　
                 <button className="NOKbtn" onClick={CancelButton}>취소하기</button>
                 </TextBox>
