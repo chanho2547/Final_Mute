@@ -5,6 +5,7 @@ import React from "react";
 import Post from '../login/Post';
 import Modal from "../util/Modal";
 
+
 // 회원정보 수정 페이지
 const Edit = () => {
     const navigate = useNavigate();
@@ -56,45 +57,30 @@ const Edit = () => {
         navigate('/');
     }
 
+    // useEffect(() => {
+    //     const userInfo = async() => {
+    //         try {
+    //             const response = await MuteApi.userInfo(userId);
+    //             console.log(response.data);
+    //             setChangeName(response.data[0]);
+    //             setChangePwd(response.data[1]);
+    //             setChangePhone(response.data[3]);
+    //             setChangeMail(response.data[2]);
+    //             setChangeAddr(response.data[4]);
+    //
+    //             setUserName(response.data[0])
+    //             setUserPwd(response.data[1]);
+    //             setUserPhone(response.data[3]);
+    //             setUserMail(response.data[2]);
+    //             setUserAddr(response.data[4]);
+    //             setUserImg(response.data[0]);
+    //         } catch (e) {
+    //             console.log(e);
+    //         }
+    //     }
+    //     userInfo();
+    // }, [userId]);
 
-    useEffect(() => {
-        const userInfo = async() => {
-            try {
-                const response = await MuteApi.userInfo(userId);
-                console.log(response.data);
-                setChangeName(response.data[0]);
-                setChangePwd(response.data[1]);
-                setChangePhone(response.data[3]);
-                setChangeMail(response.data[2]);
-                setChangeAddr(response.data[4]);
-
-                setUserName(response.data[0])
-                setUserPwd(response.data[1]);
-                setUserPhone(response.data[3]);
-                setUserMail(response.data[2]);
-                setUserAddr(response.data[4]);
-                setUserImg(response.data[0]);
-            } catch (e) {
-                console.log(e);
-            }
-        }
-        userInfo();
-    }, [userId]);
-
-
-    // 설정 저장
-    const onClickSave = async(userId) => {
-        const saveInfo = await MuteApi.userInfoSave(userId, userName, userPwd, userPhone, userMail, enroll_company.address, userImg);
-        if(saveInfo.data) {
-        setModalOpen(true);
-        setCommnet("회원정보 수정이 완료되었습니다.");
-        console.log(saveInfo)
-        navigate('/');
-        } else {
-            setModalOpen(true);
-            setCommnet("회원정보 수정에 실패하였습니다.")
-        }
-    }
 
     // 이름 변경
     const onChangeName = (e) => {
@@ -195,39 +181,77 @@ const Edit = () => {
         }
     }
 
+    const [userInfo, setUserInfo] = useState();
 
+    // 회원정보 불러오기
+    useEffect(() => {
+        const userData = async() => {
+            try {
+                const response = await MuteApi.userInfo(userId);
+                setUserInfo(response.data);
+            } catch (e) {
+                console.log(e + " 예외발생")
+            }
+        };
+        userData();
+    }, [])
+
+
+    // 설정 저장
+    const onClickSave = async(userId) => {
+        const saveInfo = await MuteApi.userInfoSave(userId, userName, userPwd, userPhone, userMail, enroll_company.address, userImg);
+        if(saveInfo.data) {
+            setModalOpen(true);
+            setCommnet("회원정보 수정이 완료되었습니다.");
+            console.log(saveInfo)
+            navigate('/');
+        } else {
+            setModalOpen(true);
+            setCommnet("회원정보 수정에 실패하였습니다.")
+        }
+    }
     return(
         <>
             <div>{userId}님</div>
-            <div>
-                <p>이름 {changeName && <span>{nameMsg}</span>}</p>
-                <input onChange={onChangeName} value={changeName} onBlur={onBlurNameCheck} placeholder="이름" />
-            </div>
-            <div>
-                <p>비밀번호 {changePwd && <span>{pwdMsg}</span>}</p>
-                <input type="password" onChange={onChangePwd} value={changePwd} placeholder="비밀번호" />
-            </div>
-            <div>
-                <p>핸드폰 {changePhone && <span>{phoneMsg}</span>}</p>
-                <input onChange={onChangePhone} value={changePhone} onBlur={onBlurPhoneCheck} placeholder="핸드폰" />
-            </div>
-            <div>
-                <p>Mail {changeMail && <span>{mailMsg}</span>}</p>
-                <input onChange={onChangeMail} value={changeMail} onBlur={onBlurMailCheck} placeholder="메일" />
-            </div>
-            <div>
-                <label className="address_search">주소</label><br/>
-                <input className="addr" type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
-                <button onClick={handleComplete}>주소 검색</button>
-                {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}
-            </div>
-            <div>
-                <button onClick={onClickSave} disabled={!(isMail && isPhone && isName)}>회원정보수정</button>
-            </div>
-            <div>
-                <button onClick={onClickMemDelete}>회원탈퇴</button>
-            </div>
-            {modalOpen && <Modal open={modalOpen} close={closeModal} header="탈퇴">{comment}</Modal>}
+            {userInfo && userInfo.map (e => (
+                <container>
+                    <p className="info">이름: {e.name} && <span>{nameMsg}</span>} </p>
+                    <input onChange={onChangeName} value={changeName} onBlur={onBlurNameCheck} placeholder="이름" />
+                    <p>비밀번호: {e.pwd}</p>
+                    <p>전화번호: {e.phone}</p>
+                    <p>메일: {e.mail}</p>
+                    <p>주소: {e.addr}</p>
+                </container>
+            ))}
+            {/*<div>*/}
+            {/*    <p>이름{e.name} {changeName && <span>{nameMsg}</span>}</p>*/}
+            {/*    <input onChange={onChangeName} value={changeName} onBlur={onBlurNameCheck} placeholder="닉네임" />*/}
+            {/*</div>*/}
+            {/*<div>*/}
+            {/*    <p>비밀번호 {changePwd && <span>{pwdMsg}</span>}</p>*/}
+            {/*    <input type="password" onChange={onChangePwd} value={changePwd} placeholder="비밀번호" />*/}
+            {/*</div>*/}
+            {/*<div>*/}
+            {/*    <p>핸드폰 {changePhone && <span>{phoneMsg}</span>}</p>*/}
+            {/*    <input onChange={onChangePhone} value={changePhone} onBlur={onBlurPhoneCheck} placeholder="핸드폰" />*/}
+            {/*</div>*/}
+            {/*<div>*/}
+            {/*    <p>Mail {changeMail && <span>{mailMsg}</span>}</p>*/}
+            {/*    <input onChange={onChangeMail} value={changeMail} onBlur={onBlurMailCheck} placeholder="메일" />*/}
+            {/*</div>*/}
+            {/*<div>*/}
+            {/*    <label className="address_search">주소</label><br/>*/}
+            {/*    <input className="addr" type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>*/}
+            {/*    <button onClick={handleComplete}>주소 검색</button>*/}
+            {/*    {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}*/}
+            {/*</div>*/}
+            {/*<div>*/}
+            {/*    <button onClick={onClickSave} disabled={!(isMail && isPhone && isName)}>회원정보수정</button>*/}
+            {/*</div>*/}
+            {/*<div>*/}
+            {/*    <button onClick={onClickMemDelete}>회원탈퇴</button>*/}
+            {/*</div>*/}
+            {/*{modalOpen && <Modal open={modalOpen} close={closeModal} header="탈퇴">{comment}</Modal>}*/}
 
         </>
     )
