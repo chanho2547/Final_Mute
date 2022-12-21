@@ -148,7 +148,7 @@ const MusicalDetail = (props) => {
             setWish(!wish);
         } catch (e) {
             console.log(e + "찜 취소 통신 실패")
-        }    
+        }
     }
 
     const closeModalNotLogin= () => {
