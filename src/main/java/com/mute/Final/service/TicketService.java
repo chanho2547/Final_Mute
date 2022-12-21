@@ -1,6 +1,7 @@
 package com.mute.Final.service;
 
 import com.mute.Final.constant.AlarmStatus;
+import com.mute.Final.dto.TicketDTO;
 import com.mute.Final.entity.*;
 import com.mute.Final.repository.MemberRepository;
 import com.mute.Final.repository.MusicalRepository;
@@ -69,16 +70,44 @@ public class TicketService {
         }
     }
 
-    public List<Integer> getAllSoldSeat() {
-        List<Ticket> ticket = ticketRepository.findAll();
-        ArrayList<Integer> list = new ArrayList();
-        for(Ticket e : ticket) {
-            list.add(e.getSeatNum());
+    public List<TicketDTO> getAllSoldSeat() {
+        List<Ticket> ticketList = ticketRepository.findAll();
+        List<TicketDTO> ticketDTOS = new ArrayList<>();
+        for(Ticket e : ticketList) {
+            TicketDTO ticketDTO = new TicketDTO();
+            ticketDTO.setTicketId(e.getTicketId());
+            ticketDTO.setSeatNum(e.getSeatNum());
+            ticketDTO.setSeatPosition(e.getSeatPosition());
+            ticketDTO.setSeeDate(e.getSeeDate());
+            ticketDTO.setTicketDate(e.getTicketDate());
+            ticketDTO.setUserNum(e.getMember().getUserNum());
+            ticketDTO.setMusicalId(e.getMusical().getMusicalId());
+            ticketDTO.setPaymentId(e.getPayment().getPaymentId());
+            ticketDTOS.add(ticketDTO);
         }
 
-        return list;
+        return ticketDTOS;
     }
 
+
+    public List<TicketDTO> getSoldSeatByDate(LocalDateTime seeDate) {
+        List<Ticket> ticketList = ticketRepository.findBySeeDate(seeDate);
+        List<TicketDTO> ticketDTOS = new ArrayList<>();
+        for(Ticket e : ticketList) {
+            TicketDTO ticketDTO = new TicketDTO();
+            ticketDTO.setTicketId(e.getTicketId());
+            ticketDTO.setSeatNum(e.getSeatNum());
+            ticketDTO.setSeatPosition(e.getSeatPosition());
+            ticketDTO.setSeeDate(e.getSeeDate());
+            ticketDTO.setTicketDate(e.getTicketDate());
+            ticketDTO.setUserNum(e.getMember().getUserNum());
+            ticketDTO.setMusicalId(e.getMusical().getMusicalId());
+            ticketDTO.setPaymentId(e.getPayment().getPaymentId());
+            ticketDTOS.add(ticketDTO);
+        }
+
+        return ticketDTOS;
+    }
 
 
 

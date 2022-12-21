@@ -273,6 +273,13 @@ const MuteApi =  {
             id: localId
         };
         return await axios.post("user/editImg", faceObj);
+    },
+    // 예약된 좌석 확인
+    isReservation : async function (seeDate) {
+        const seeDateInfo = {
+            seeDate : seeDate
+        }
+        return await axios.post("/ticket/get_sold_seat_by_date",seeDateInfo);
     }
 
 }
