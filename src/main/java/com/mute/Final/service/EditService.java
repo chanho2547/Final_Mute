@@ -14,23 +14,23 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class EditService {
     private final MemberRepository memberRepository;
+
+    // 회원정보 불러오기
     public MemberDTO userInfo (String userId) {
         MemberDTO memberDTO = new MemberDTO();
         try {
             Member member = memberRepository.findByUserId(userId);
-
-            // 회원정보 불러오기
             memberDTO.setName(member.getName());
             memberDTO.setPwd(member.getPwd());
             memberDTO.setMail(member.getMail());
             memberDTO.setPhone(member.getPhone());
             memberDTO.setAddr(member.getAddress());
-            //memberDTO.setProfile(member.getProfile());
             memberDTO.setImg(member.getImg());
             memberDTO.setOk(true);
         } catch (Exception e) {
             memberDTO.setOk(false);
-        } return memberDTO;
+        }
+        return memberDTO;
     }
 
     // 회원 정보 수정
@@ -47,13 +47,13 @@ public class EditService {
             member.setPwd(pwd);
             member.setMail(mail);
             member.setPhone(phone);
-            //member.setProfile(profile);
             member.setAddress(addr);
             memberRepository.save(member);
             log.error("저장완료");
         } catch (Exception e) {
             return false;
-        } return true;
+        }
+        return true;
     }
     // 프로필 이미지 수정
     public boolean imgEdit(String userId, String img) {
@@ -64,6 +64,7 @@ public class EditService {
             log.error(rst.toString());
         } catch (Exception e) {
             return false;
-        } return true;
+        }
+        return true;
     }
 }

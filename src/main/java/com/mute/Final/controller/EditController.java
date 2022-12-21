@@ -34,12 +34,11 @@ public class EditController {
             userInfo.add(memberDTO.getMail());
             userInfo.add(memberDTO.getPhone());
             userInfo.add(memberDTO.getAddr());
-            //userInfo.add(memberDTO.getProfile());
             userInfo.add(memberDTO.getImg());
             System.out.println(userInfo);
             return new ResponseEntity(userInfo, HttpStatus.OK);
         } else {
-            log.warn("null 값");
+            log.error("null 값");
             return new ResponseEntity(null, HttpStatus.OK);}
     }
 
@@ -51,7 +50,6 @@ public class EditController {
         String pwd = userInfo.get("pwd");
         String mail = userInfo.get("mail");
         String phone = userInfo.get("phone");
-        //String profile = userInfo.get("profile");
         String addr = userInfo.get("addr");
         log.error("아이디 : " + userId);
         log.error("변경 name : " + name);

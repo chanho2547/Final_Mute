@@ -60,8 +60,8 @@ const Edit = () => {
     const userId = window.localStorage.getItem("whoLogin");
     console.log(userId);
 
-    const [userImg, setUserImg] = useState(""); // aws나 파이어베이스 이미지 등록한 후 주소 저장 필요함
-    //const [url, setUrl] = userState("");
+    const [userImg, setUserImg] = useState(""); 
+    const [url, setUrl] = useState({ background: "url(https://mutemute.s3.ap-northeast-2.amazonaws.com/profileimg.png" + userImg + ")" });
     const [userName, setUserName] = useState("");
     const [userPwd, setUserPwd] = useState("");
     const [userPhone, setUserPhone] = useState("");
@@ -78,13 +78,11 @@ const Edit = () => {
     const [pwdMsg, setPwdMsg] = useState("");
     const [phoneMsg, setPhoneMsg] = useState("");
     const [mailMsg, setMailMsg] = useState("");
-    const [addrMsg, setAddrMsg] = useState("");
 
     const [isName, setIsName] = useState(true);
     const [isPwd, setIsPwd] = useState(true);
     const [isPhone, setIsPhone] = useState(true);
     const [isMail, setIsMail] = useState(true);
-    const [isAddr, setIsAddr] = useState(true);
 
     const [comment, setCommnet] = useState("");
     const [modalOpen, setModalOpen] = useState(false);
@@ -104,6 +102,20 @@ const Edit = () => {
         console.log("탈퇴된겨?" + userId);
         navigate('/');
     }
+    // const [userInfo, setUserInfo] = useState();
+
+    // // 회원정보 불러오기
+    // useEffect(() => {
+    //     const userData = async() => {
+    //         try {
+    //             const response = await MuteApi.userInfo(userId);
+    //             setUserInfo(response.data);
+    //         } catch (e) {
+    //             console.log(e + " 예외발생")
+    //         }
+    //     };
+    //     userData();
+    // }, [])
 
     useEffect(() => {
         const userInfo = async() => {
@@ -121,7 +133,8 @@ const Edit = () => {
                 setUserPhone(response.data[3]);
                 setUserMail(response.data[2]);
                 setUserAddr(response.data[4]);
-                setUserImg(response.data[0]);
+                setUserImg(response.data[5]);
+                setUrl({ background: "url(https://mutemute.s3.ap-northeast-2.amazonaws.com/profileimg.png" + userImg + ")"});
             } catch (e) {
                 console.log(e);
             }
@@ -229,25 +242,9 @@ const Edit = () => {
         }
     }
 
-    // const [userInfo, setUserInfo] = useState();
-
-    // // 회원정보 불러오기
-    // useEffect(() => {
-    //     const userData = async() => {
-    //         try {
-    //             const response = await MuteApi.userInfo(userId);
-    //             setUserInfo(response.data);
-    //         } catch (e) {
-    //             console.log(e + " 예외발생")
-    //         }
-    //     };
-    //     userData();
-    // }, [])
-
-
     // 설정 저장
     const onClickSave = async(userId) => {
-        const saveInfo = await MuteApi.userInfoSave(userId, userName, userPwd, userPhone, userMail, userImg);
+        const saveInfo = await MuteApi.userInfoSave(userId, userName, userPwd, userPhone, userMail);
         if(saveInfo.data) {
             setModalOpen(true);
             setCommnet("회원정보 수정이 완료되었습니다.");
@@ -260,6 +257,9 @@ const Edit = () => {
     }
 
     // 이미지 저장 aws s3
+
+    const bucket = "mutemute";
+
     AWS.config.update({
         region: "ap-northeast-2",
         credentials: new AWS.CognitoIdentityCredentials({
@@ -268,14 +268,15 @@ const Edit = () => {
     })
 
     const handleFileInput = async(e) => {
-        const file = e.target.files[0]
+        const file = e.target.files[0];
+        const fileName = userId + e.target.files[0].name;
 
         // s3 sdk에 내장된 업로드 함수
         const upload = new AWS.S3.ManagedUpload({
             params: {
-                Bucket: "mutemute",
-                Key: "profileimg.png",
-                Body: file,
+                Bucket: bucket, // 업로드할 aws 버킷명
+                Key: fileName, // 업로드할  파일 이름
+                Body: file, // 업로드할 파일
             },
         })
 
@@ -289,14 +290,20 @@ const Edit = () => {
                 return alert("업로드 오류 발생:" + err.message)
             }
         )
+        setUserImg(fileName);
+
+        // 서버에 이미지 저장
+        await MuteApi.userImgSave(userId, fileName);
+
+        // 이미지 미리보기
+        const fileUrl = URL.createObjectURL(file);
+        setUrl({backgroundImage: "url(" + fileUrl + ")"});
     }
     return(
         <>
-            <Img>
+            <Img style={url}>
                 <input type="file" id="upload" className="image-upload" onChange={handleFileInput} />
                 <label htmlFor="upload" className="image-upload-wrapper"></label>
-                <img className="profile-img"
-                     src={`https://mutemute.s3.ap-northeast-2.amazonaws.com/profileimg.png`} />
             </Img>
             <div>{userId}님</div>
             <div>
