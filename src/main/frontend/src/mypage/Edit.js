@@ -4,7 +4,55 @@ import MuteApi from "../api/MuteApi";
 import React from "react";
 import Post from '../login/Post';
 import Modal from "../util/Modal";
+import AWS from "aws-sdk";
+import styled from "styled-components";
 
+const Img = styled.div `
+    .image-upload {
+  width: 120px !important;
+  height: 120px !important;
+  font-size: 100px;
+  text-align: right;
+  min-width: 0 !important;
+  outline: none;
+  background: rgb(0, 0, 0);
+  cursor: inherit;
+  display: block !important;
+  border-radius: 50% !important;
+  cursor: pointer;
+  position: absolute;
+  margin: 0 !important;
+  z-index: -1;
+}
+
+.image-upload-wrapper {
+  position: inherit;
+  width: 120px !important;
+  height: 120px !important;
+  font-size: 100px;
+  text-align: right;
+  min-width: 0 !important;
+  outline: none;
+  background: rgb(255, 255, 255);
+  cursor: inherit;
+  display: block !important;
+  border-radius: 50% !important;
+  cursor: pointer;
+}
+
+.profile-img {
+  position: inherit;
+  width: 120px !important;
+  height: 120px !important;
+  font-size: 100px;
+  min-width: 0 !important;
+  outline: none;
+  cursor: inherit;
+  display: block !important;
+  border-radius: 50% !important;
+  cursor: pointer;
+}
+`;
 
 // 회원정보 수정 페이지
 const Edit = () => {
@@ -13,7 +61,7 @@ const Edit = () => {
     console.log(userId);
 
     const [userImg, setUserImg] = useState(""); // aws나 파이어베이스 이미지 등록한 후 주소 저장 필요함
-    // const [url, setUrl] = userState("");
+    //const [url, setUrl] = userState("");
     const [userName, setUserName] = useState("");
     const [userPwd, setUserPwd] = useState("");
     const [userPhone, setUserPhone] = useState("");
@@ -57,29 +105,29 @@ const Edit = () => {
         navigate('/');
     }
 
-    // useEffect(() => {
-    //     const userInfo = async() => {
-    //         try {
-    //             const response = await MuteApi.userInfo(userId);
-    //             console.log(response.data);
-    //             setChangeName(response.data[0]);
-    //             setChangePwd(response.data[1]);
-    //             setChangePhone(response.data[3]);
-    //             setChangeMail(response.data[2]);
-    //             setChangeAddr(response.data[4]);
-    //
-    //             setUserName(response.data[0])
-    //             setUserPwd(response.data[1]);
-    //             setUserPhone(response.data[3]);
-    //             setUserMail(response.data[2]);
-    //             setUserAddr(response.data[4]);
-    //             setUserImg(response.data[0]);
-    //         } catch (e) {
-    //             console.log(e);
-    //         }
-    //     }
-    //     userInfo();
-    // }, [userId]);
+    useEffect(() => {
+        const userInfo = async() => {
+            try {
+                const response = await MuteApi.userInfo(userId);
+                console.log(response.data);
+                setChangeName(response.data[0]);
+                setChangePwd(response.data[1]);
+                setChangePhone(response.data[3]);
+                setChangeMail(response.data[2]);
+                setChangeAddr(response.data[4]);
+
+                setUserName(response.data[0])
+                setUserPwd(response.data[1]);
+                setUserPhone(response.data[3]);
+                setUserMail(response.data[2]);
+                setUserAddr(response.data[4]);
+                setUserImg(response.data[0]);
+            } catch (e) {
+                console.log(e);
+            }
+        }
+        userInfo();
+    }, [userId]);
 
 
     // 이름 변경
@@ -181,25 +229,25 @@ const Edit = () => {
         }
     }
 
-    const [userInfo, setUserInfo] = useState();
+    // const [userInfo, setUserInfo] = useState();
 
-    // 회원정보 불러오기
-    useEffect(() => {
-        const userData = async() => {
-            try {
-                const response = await MuteApi.userInfo(userId);
-                setUserInfo(response.data);
-            } catch (e) {
-                console.log(e + " 예외발생")
-            }
-        };
-        userData();
-    }, [])
+    // // 회원정보 불러오기
+    // useEffect(() => {
+    //     const userData = async() => {
+    //         try {
+    //             const response = await MuteApi.userInfo(userId);
+    //             setUserInfo(response.data);
+    //         } catch (e) {
+    //             console.log(e + " 예외발생")
+    //         }
+    //     };
+    //     userData();
+    // }, [])
 
 
     // 설정 저장
     const onClickSave = async(userId) => {
-        const saveInfo = await MuteApi.userInfoSave(userId, userName, userPwd, userPhone, userMail, enroll_company.address, userImg);
+        const saveInfo = await MuteApi.userInfoSave(userId, userName, userPwd, userPhone, userMail, userImg);
         if(saveInfo.data) {
             setModalOpen(true);
             setCommnet("회원정보 수정이 완료되었습니다.");
@@ -210,48 +258,76 @@ const Edit = () => {
             setCommnet("회원정보 수정에 실패하였습니다.")
         }
     }
+
+    // 이미지 저장 aws s3
+    AWS.config.update({
+        region: "ap-northeast-2",
+        credentials: new AWS.CognitoIdentityCredentials({
+            IdentityPoolId: 'ap-northeast-2:b8bdbff5-c873-43a0-b07d-eb28bb5be5e0'
+        }),
+    })
+
+    const handleFileInput = async(e) => {
+        const file = e.target.files[0]
+
+        // s3 sdk에 내장된 업로드 함수
+        const upload = new AWS.S3.ManagedUpload({
+            params: {
+                Bucket: "mutemute",
+                Key: "profileimg.png",
+                Body: file,
+            },
+        })
+
+        const promise = upload.promise()
+
+        promise.then(
+            function (data) {
+                alert("이미지 업로드 성공")
+            },
+            function (err) {
+                return alert("업로드 오류 발생:" + err.message)
+            }
+        )
+    }
     return(
         <>
+            <Img>
+                <input type="file" id="upload" className="image-upload" onChange={handleFileInput} />
+                <label htmlFor="upload" className="image-upload-wrapper"></label>
+                <img className="profile-img"
+                     src={`https://mutemute.s3.ap-northeast-2.amazonaws.com/profileimg.png`} />
+            </Img>
             <div>{userId}님</div>
-            {userInfo && userInfo.map (e => (
-                <container>
-                    <p className="info">이름: {e.name} && <span>{nameMsg}</span>} </p>
-                    <input onChange={onChangeName} value={changeName} onBlur={onBlurNameCheck} placeholder="이름" />
-                    <p>비밀번호: {e.pwd}</p>
-                    <p>전화번호: {e.phone}</p>
-                    <p>메일: {e.mail}</p>
-                    <p>주소: {e.addr}</p>
-                </container>
-            ))}
-            {/*<div>*/}
-            {/*    <p>이름{e.name} {changeName && <span>{nameMsg}</span>}</p>*/}
-            {/*    <input onChange={onChangeName} value={changeName} onBlur={onBlurNameCheck} placeholder="닉네임" />*/}
-            {/*</div>*/}
-            {/*<div>*/}
-            {/*    <p>비밀번호 {changePwd && <span>{pwdMsg}</span>}</p>*/}
-            {/*    <input type="password" onChange={onChangePwd} value={changePwd} placeholder="비밀번호" />*/}
-            {/*</div>*/}
-            {/*<div>*/}
-            {/*    <p>핸드폰 {changePhone && <span>{phoneMsg}</span>}</p>*/}
-            {/*    <input onChange={onChangePhone} value={changePhone} onBlur={onBlurPhoneCheck} placeholder="핸드폰" />*/}
-            {/*</div>*/}
-            {/*<div>*/}
-            {/*    <p>Mail {changeMail && <span>{mailMsg}</span>}</p>*/}
-            {/*    <input onChange={onChangeMail} value={changeMail} onBlur={onBlurMailCheck} placeholder="메일" />*/}
-            {/*</div>*/}
-            {/*<div>*/}
-            {/*    <label className="address_search">주소</label><br/>*/}
-            {/*    <input className="addr" type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>*/}
-            {/*    <button onClick={handleComplete}>주소 검색</button>*/}
-            {/*    {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}*/}
-            {/*</div>*/}
-            {/*<div>*/}
-            {/*    <button onClick={onClickSave} disabled={!(isMail && isPhone && isName)}>회원정보수정</button>*/}
-            {/*</div>*/}
-            {/*<div>*/}
-            {/*    <button onClick={onClickMemDelete}>회원탈퇴</button>*/}
-            {/*</div>*/}
-            {/*{modalOpen && <Modal open={modalOpen} close={closeModal} header="탈퇴">{comment}</Modal>}*/}
+            <div>
+                <p>이름 {changeName && <span>{nameMsg}</span>}</p>
+                <input onChange={onChangeName} value={changeName} onBlur={onBlurNameCheck} placeholder="닉네임" />
+            </div>
+            <div>
+                <p>비밀번호 {changePwd && <span>{pwdMsg}</span>}</p>
+                <input type="password" onChange={onChangePwd} value={changePwd} placeholder="비밀번호" />
+            </div>
+            <div>
+                <p>핸드폰 {changePhone && <span>{phoneMsg}</span>}</p>
+                <input onChange={onChangePhone} value={changePhone} onBlur={onBlurPhoneCheck} placeholder="핸드폰" />
+            </div>
+            <div>
+                <p>Mail {changeMail && <span>{mailMsg}</span>}</p>
+                <input onChange={onChangeMail} value={changeMail} onBlur={onBlurMailCheck} placeholder="메일" />
+            </div>
+            <div>
+                <label className="address_search">주소</label><br/>
+                <input className="addr" type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
+                <button onClick={handleComplete}>주소 검색</button>
+                {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}
+            </div>
+            <div>
+                <button onClick={onClickSave} disabled={!(isMail && isPhone && isName)}>회원정보수정</button>
+            </div>
+            <div>
+                <button onClick={onClickMemDelete}>회원탈퇴</button>
+            </div>
+            {modalOpen && <Modal open={modalOpen} close={closeModal} header="탈퇴">{comment}</Modal>}
 
         </>
     )

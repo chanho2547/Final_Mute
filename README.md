@@ -34,6 +34,7 @@ yarn add moment
 yarn add react-calendar
 yarn add react-daum-postcode
 yarn add axios
+yarn add aws-sdk
 
 ## 빌드
 ./gradlew build
