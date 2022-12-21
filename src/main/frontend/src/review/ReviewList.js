@@ -154,6 +154,7 @@ const ReviewList = (props) => {
     //     <Rating/>
     // }
 
+    
 
 
     return(
@@ -172,7 +173,7 @@ const ReviewList = (props) => {
             // <div Onclick={() => Onclick(e)}>
             <ReviewBox>
                 <p>{e.reviewMuId}　{e.member}　<FaStar size="20" color="#FCC419"/>{e.scoreAvgTotal} <span className="date">　작성일 {e.writeDate}</span>　
-                <button className="deleteBtn" onClick={()=>OnClickDelete(member,e.reviewMuId)}>삭제</button></p>
+                <button className="deleteBtn" onClick={()=>OnClickDelete(member, e.reviewMuId)}>삭제</button></p>
                 <p className="myRaing">스토리 <FaStar size="15" color="gray"/>{e.scoreStory} 　연출 <FaStar size="15" color="gray"/>{e.scoreDirect} 　캐스팅 <FaStar size="15" color="gray"/>{e.scoreCast} 　넘버 <FaStar size="15" color="gray"/>{e.scoreNumber}<br/>
                 <p className="text">{e.reviewMuTxt}</p></p>
 
