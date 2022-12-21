@@ -14,7 +14,6 @@ const Container = styled.div`
     padding: 20px;
 `;
 
-
 const InfoBox = styled.div`
     padding: 15px;
     font-size: small;
@@ -52,7 +51,6 @@ const StarBox = styled.div`
     .MyStar {
         float: right;
     }
-   
 `;
 
 const MyStar = styled.div`
@@ -61,14 +59,11 @@ const MyStar = styled.div`
     .MyStar1 {
         float: left;
         padding-left: 70px;
-
     }
     .MyStar2 {
         float: right;
         padding-left: 30px;
-     
-    }
-   
+    } 
 `;
 
 const TextBox = styled.div`
@@ -103,8 +98,6 @@ const TextBox = styled.div`
     height: 30px;
     margin: 10px;
     }
-
-
 `;
 
 const ReviewSeat = () => {
@@ -134,13 +127,12 @@ const ReviewSeat = () => {
     const [lightRating, setLightRating] = useState(''); // 조명 별점
     const [scoreAvgSeat, setScoreAvgSeat] = useState(''); // 별점 총점
     const [seatReview, setSeatReview] = useState(''); // 뮤지컬 후기 텍스트
-    
 
-     // 오류 메세지
-     const [seatReviewMsg, setSeatReviewMsg] = useState('');
-    
-     // 유효성 검사
-     const [isSeatReview, setIsSeatReview] = useState(false);
+    // 오류 메세지
+    const [seatReviewMsg, setSeatReviewMsg] = useState('');
+
+    // 유효성 검사
+    const [isSeatReview, setIsSeatReview] = useState('');
 
     // 모달
     const [modalTheater, setModelTheater] = useState(false); // 좌석 선택 버튼 눌렀을 때
@@ -201,16 +193,16 @@ const ReviewSeat = () => {
         setScoreAvgSeat(avg);
     }
 
+    // 후기 작성 힌트
     const onChangeSeatReview = (e) => {
         setSeatReview(e.target.value)
-        if(e.target.value.length > 4 ) {
-            setIsSeatReview(true);
-        } else {
+        if(e.target.value.length < 10) {
             setIsSeatReview(false);
-            setSeatReviewMsg("후기는 5자 이상 작성해주세요.")
+            setSeatReviewMsg("후기는 10자 이상 작성해주세요.")
+        } else {
+            setIsSeatReview(true);
         }
     }
-
    
 
     return(
@@ -237,8 +229,8 @@ const ReviewSeat = () => {
                 </MyStar>
             </StarBox>
             <TextBox> 
-            <input className="text" placeholder="관람하신 좌석의 후기를 작성해주세요. (5자 이상)" value={seatReview} onChange={onChangeSeatReview}></input><br/> 
-            <div className="hint">{seatReview.length < 5 && <span className={`message ${isSeatReview ? 'success' : 'error'}`}>{seatReviewMsg}</span>}</div>
+            <input className="text" placeholder="관람하신 좌석의 후기를 작성해주세요. (10자 이상)" value={seatReview} onChange={onChangeSeatReview}></input><br/> 
+            <div className="hint">{10 > seatReview.length && <span className={`message ${isSeatReview ? 'success' : 'error'}`}>{seatReviewMsg}</span>}</div>
             <button className="OKbtn" onClick={WriteSeatButton}>작성하기</button>　
             <button className="NOKbtn" onClick={CancelButton}>취소하기</button>  
             </TextBox>  

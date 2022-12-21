@@ -36,7 +36,6 @@ const StarBox = styled.div`
     .MyStar {
         float: right;
     }
-   
 `;
 
 const MyStar = styled.div`
@@ -45,12 +44,10 @@ const MyStar = styled.div`
     .MyStar1 {
         float: left;
         padding-left: 70px;
-
     }
     .MyStar2 {
         float: right;
         padding-left: 30px;
-     
     }
    
 `;
@@ -65,7 +62,7 @@ const TextBox = styled.div`
     margin: 10px;
     }
     .hint {
-        color: red;
+        color: royalblue;
         font-style: italic;
         font-size: small;
     }
@@ -87,8 +84,6 @@ const TextBox = styled.div`
     height: 30px;
     margin: 10px;
     }
-
-
 `;
 
 
@@ -118,7 +113,7 @@ const ReviewTotal = (props) => {
     const [totalReviewMsg, setTotalReviewMsg] = useState('');
     
     // 유효성 검사
-    const [isTotalReview, setIsTotalReview] = useState(false);
+    const [isTotalReview, setIsTotalReview] = useState('');
 
     // 모달
     const [writeModal, setWriteModal] = useState(false); // 확인 버튼 눌렀을 때
@@ -170,15 +165,17 @@ const ReviewTotal = (props) => {
         setScoreAvgTotal(avg);
     }
 
+    // 후기 작성 힌트
     const onChangeTotalReview = (e) => {
         setTotalReview(e.target.value)
-        if(e.target.value.length > 4 ) {
-            setIsTotalReview(true);
-        } else {
+        if(e.target.value.length < 10) {
             setIsTotalReview(false);
-            setTotalReviewMsg("후기는 5자 이상 작성해주세요.")
+            setTotalReviewMsg("후기는 10자 이상 작성해주세요.")
+        } else {
+            setIsTotalReview(true);
         }
     }
+
     
     return(
         <>
@@ -202,8 +199,8 @@ const ReviewTotal = (props) => {
                     </MyStar>
                 </StarBox>
                 <TextBox>
-                <input className="text" placeholder="관람하신 뮤지컬의 후기를 작성해주세요. (5자 이상)" value={totalReview} onChange={onChangeTotalReview}></input><br/>
-                <div className="hint">{totalReview.length < 5 && <span className={`message ${isTotalReview ? 'success' : 'error'}`}>{totalReviewMsg}</span>}</div> 
+                <input className="text" placeholder="관람하신 뮤지컬의 후기를 작성해주세요. (10자 이상)" value={totalReview} onChange={onChangeTotalReview} patten=".{10,}"></input><br/>
+                <div className="hint">{10 > totalReview.length && <span className={`message ${isTotalReview ? 'success' : 'error'}`}>{totalReviewMsg}</span>}</div> 
                 <button className="OKbtn" onClick={WriteTotalButton}>작성하기</button>　
                 <button className="NOKbtn" onClick={CancelButton}>취소하기</button>
                 </TextBox>
