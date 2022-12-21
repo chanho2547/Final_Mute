@@ -155,8 +155,8 @@ const RePwd = () => {
             <input className="input" type="password" placeholder="비밀번호" onChange={onChangePwd} value={newPwd}></input>
             <br/>
             {/* 재설정한 비밀번호 확인*/}
-            //<div className="hint">
-            {newPwdChe.length > 0 && <span>{conPwdMsg}</span>}</div>
+            {/*<div className="hint">*/}
+            {newPwdChe.length > 0 && <span>{conPwdMsg}</span>}
             <input className="input" type="password" placeholder="비밀번호 확인" onChange={onChangePwdCheck} value={newPwdChe} onKeyDown={onKeyDownRePwd}></input>
             <br/>
             <button className="rePwdButton" disabled={!(isRePwd && isRePwdCheck)} onClick={()=>onClickRePwd(userId)}>재설정</button>

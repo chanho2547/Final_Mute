@@ -36,6 +36,7 @@ const Edit = () => {
     const [isPhone, setIsPhone] = useState(true);
     const [isMail, setIsMail] = useState(true);
     const [isAddr, setIsAddr] = useState(true);
+    const [save, setSave] = useState(true);
 
     const [comment, setCommnet] = useState("");
     const [modalOpen, setModalOpen] = useState(false);
@@ -81,9 +82,11 @@ const Edit = () => {
         userInfo();
     }, [userId]);
 
+
     // 설정 저장
     const onClickSave = async(userId) => {
-        await MuteApi.userInfoSave(userId, userName, userPwd, userPhone, userMail, enroll_company.address, userImg);
+        const saveInfo = await MuteApi.userInfoSave(userId, userName, userPwd, userPhone, userMail, enroll_company.address, userImg);
+        setSave(saveInfo.data)
         setModalOpen(true);
         setCommnet("회원정보 수정이 완료되었습니다.");
         navigate('/');
@@ -191,6 +194,7 @@ const Edit = () => {
 
     return(
         <>
+            <div>{userId}님</div>
             <div>
                 <p>닉네임 {changeName && <span>{nameMsg}</span>}</p>
                 <input onChange={onChangeName} value={changeName} onBlur={onBlurNameCheck} placeholder="닉네임" />

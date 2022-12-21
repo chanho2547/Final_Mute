@@ -17,11 +17,6 @@ import java.util.List;
 @RequiredArgsConstructor // final 혹은 @NotNull이 붙은 필드의 생성자를 자동으로 생성
 public class MemberService {
     private final MemberRepository memberRepository;
-    private final TicketRepository ticketRepository;
-    private final ReviewTotalRepository reviewTotalRepository;
-    private final ReviewSeatRepository reviewSeatRepository;
-    private final PaymentRepository paymentRepository;
-    private final  WishRepository wishRepository;
     private final DeleteRepository deleteRepository;
     // 로그인 체크
 //    public boolean loginCheck(String userId, String pwd) {
@@ -48,7 +43,7 @@ public class MemberService {
         else {return 400;}
     }
     // 회원가입
-    public boolean memberJoin(String userId, String pwd, String name, String phone, String mail, String addr) {
+    public boolean memberJoin(String userId, String pwd, String name, String phone, String mail, String addr, String img) {
         try {
             Member member = new Member();
             member.setUserId(userId);
@@ -57,6 +52,7 @@ public class MemberService {
             member.setPhone(phone);
             member.setMail(mail);
             member.setAddress(addr);
+            member.setImg(img);
             member.setRegData(LocalDateTime.now());
             log.warn("회원정보 입력완료");
             memberRepository.save(member);

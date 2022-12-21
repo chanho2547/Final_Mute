@@ -123,8 +123,8 @@ const FindId = () =>{
 
                 {/* 이메일 입력창 */}
                 {inputMail.length > 0 && <span>{mailMsg}</span>}
-                    <input className="input" placeholder="이메일"  value={inputMail} onChange={onChangeMail} onKeyDown={onKeyDownFindId}></input>
-                    <br/>
+                <input className="input" placeholder="이메일"  value={inputMail} onChange={onChangeMail} onKeyDown={onKeyDownFindId}></input>
+                <br/>
 
                 {/* 아이디 찾기 버튼 활성화 */}
                 <button className="idButton" disabled={!(inputName && isMail)} onClick={onClickFindId} >FIND ID</button>

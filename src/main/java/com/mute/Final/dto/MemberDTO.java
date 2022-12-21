@@ -18,7 +18,7 @@ public class MemberDTO {
     private String mail; // 메일
     private String addr; // 주소
     private Date regDate; // 가입일
-    private String profile;
+    //private String profile;
     private String img; // 프로필 사진
     //private Date unRegDate; // 탈퇴일
     private boolean isOk;

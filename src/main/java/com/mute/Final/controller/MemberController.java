@@ -33,12 +33,13 @@ public class MemberController {
     public ResponseEntity<Map<String, String>> signup(@RequestBody Map<String, String> signupData) {
         try {
             String userId = signupData.get("userId");
-            String pwd = signupData.get("pwd");
             String name = signupData.get("name");
+            String pwd = signupData.get("pwd");
             String phone = signupData.get("phone");
             String mail = signupData.get("mail");
             String addr = signupData.get("addr");
-            boolean result = memberService.memberJoin(userId, pwd, name, phone, mail,addr);
+            String img = signupData.get("img");
+            boolean result = memberService.memberJoin(userId, pwd, name, phone, mail,addr,img);
             log.warn(String.valueOf(result));
             if(result) {
                 return new ResponseEntity(true, HttpStatus.OK);
