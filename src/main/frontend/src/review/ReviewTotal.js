@@ -108,7 +108,6 @@ const ReviewTotal = (props) => {
     const [scoreCast, setScoreCast] = useState(''); // 캐스팅 별점
     const [scoreNumber, setScoreNumber] = useState(''); // 넘버 별점
     const [scoreAvgTotal, setScoreAvgTotal] = useState(''); // 별점 총점
-    const [totalAvg, setTotalAvg] = useState(''); // 총 별점 평균
     const [totalReview, setTotalReview] = useState(''); // 뮤지컬 후기 텍스트
 
     // 오류 메세지
@@ -126,8 +125,8 @@ const ReviewTotal = (props) => {
     }
     
     const closeModal = () => { // 아니오 눌렀을 때 => 리뷰 리스트로 이동
-        navigate("/Review"); 
         setCount(count + 1);
+        navigate("/Review"); 
     }
 
     const [count, setCount] = useState(0);
@@ -139,10 +138,10 @@ const ReviewTotal = (props) => {
         try {
             const res = await MuteApi.WriteTotal(userNum, musicalId, scoreStory, scoreDirect, scoreCast, scoreNumber, scoreAvgTotal, totalReview);
             if(res.data === true) {
-                console.log("텍스트 입력 성공");
+                // console.log("텍스트 입력 성공");
                 setWriteModal(true);   
             } else {
-                console.log("텍스트 입력 실패");
+                // console.log("텍스트 입력 실패");
             }
         } catch (e) {
             alert("오류 : " + e);
@@ -150,24 +149,24 @@ const ReviewTotal = (props) => {
     };
 
     const highFunction1 = (text) => {
-        console.log("스토리 별점 가져온 값 : " + text);
+        // console.log("스토리 별점 가져온 값 : " + text);
         setScoreStory(text);
     }
     const highFunction2 = (text) => {
-        console.log("연출 별점 가져온 값 : " + text);
+        // console.log("연출 별점 가져온 값 : " + text);
         setScoreDirect(text);
     }
     const highFunction3 = (text) => {
-        console.log("캐스팅 별점 가져온 값 : " + text);
+        // console.log("캐스팅 별점 가져온 값 : " + text);
         setScoreCast(text);
     }
     const highFunction4 = (text) => {
-        console.log("넘버 별점 가져온 값 : " + text);
+        // console.log("넘버 별점 가져온 값 : " + text);
         setScoreNumber(text);
 
         const arr = [scoreStory, scoreDirect, scoreCast, scoreNumber];
         const avg = arr.reduce((a, c) => a + c) / arr.length
-        console.log("평균 값 : " + avg);
+        // console.log("평균 값 : " + avg);
         setScoreAvgTotal(avg);
     }
 

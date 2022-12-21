@@ -15,7 +15,6 @@ import { FaStar } from 'react-icons/fa';
 const Container = styled.div`
     text-align: left;
     padding: 10px;
-    
 `;
 
 const StarBox = styled.div`
@@ -83,7 +82,7 @@ const ReviewList = (props) => {
 
     const member = window.localStorage.getItem("whoLoginUserNum");
     let musicalId = window.localStorage.getItem("musicalId");
-    const reviewMuId = window.localStorage.getItem("reviewMuId");
+    // const reviewMuId = window.localStorage.getItem("reviewMuId");
     
     console.log("회원번호 : " + member); // 회원번호
     console.log("뮤지컬 아이디 : " + musicalId); // 뮤지컬번호
@@ -124,7 +123,7 @@ const ReviewList = (props) => {
             try{
                 let response = await MuteApi.ReviewInfo(musicalId);
                 setReviewInfo(response.data);
-                console.log("후기 불러오기 성공!!");
+                // console.log("후기 불러오기 성공!!");
 
             } catch (e) {
                 console.log(e + "후기 불러오기 실패");
