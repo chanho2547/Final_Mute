@@ -1,5 +1,5 @@
 import {BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import styled from "styled-components";
 import { ReactDOM, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -173,6 +173,7 @@ const onClickSeat = (event) => {
 // ------- 여기까지 onClickSeat ---------------------
 
     const [seatReviewInfo,setSeatReviewInfo] = useState();
+    const [soldOutSeat,setSoldOutSeat] = useState([]);
 
     useEffect(() => {
         window.localStorage.setItem("floor",1);
@@ -187,10 +188,12 @@ const onClickSeat = (event) => {
             window.localStorage.removeItem(`${i}`);
         }
 
-        if(seatInfoMode === "예매") {    
+        if(seatInfoMode === "예매") {   
+            
+            
             
             // 예매 상황에 맞게 색깔 뿌려주기
-             for(let i = 8193 ; i <= 8954 ; i++) {
+            for(let i = 8193 ; i <= 8954 ; i++) {
 
 
                 if((i>=8414 && i<= 8568)){    // VIP좌석
@@ -204,15 +207,54 @@ const onClickSeat = (event) => {
                     } catch{}
                 }
 
-                // 예매 된 좌석은 제외하기
-                
-
-
 
              }
-            
-        
 
+            // 예매 된 좌석은 제외하기
+            // for문 돌리기 전에 제외해야 할 좌석 불러오기 
+            const getSoldOutSeat = async () => {
+                try{
+                    // console.log("솔드아웃 부르기 위한 props.seeDate : " + props.seeDate);
+                    // console.log("솔드아웃 부르기 위한 props.seeDate [type] : " + typeof props.seeDate);
+                    let newSeeDate = "2022-12-25T19:00:00";
+                    let response = await MuteApi.isReservation(newSeeDate);
+                    // console.log("response.data : " + response.data);
+                    // console.log("response.data[0] : " + response.data[0]);
+                    // console.log("response.data.get(0) : " + response.data.get(0));
+                    setSoldOutSeat(response.data); // 현재 예약된 좌석 정보 (특정 날짜, 지금은 뮤지컬이 다양한 상황임)
+                    // console.log("솔드아웃 좌석 불러오기 : "+ soldOutSeat.map(e=>e.musicalId));
+
+                    response.data.map((e) => {
+                        console.log(e.musicalId);
+                        console.log(e.seatNum);
+                    })
+
+
+
+
+                } catch(e) {
+                    console.log("오류 : " + e);
+                }
+            };
+            getSoldOutSeat(); // 일단 useEffect니까 호출함
+
+            console.log("[배열 길이]Object.keys(soldOutSeat.current).length : " + Object.keys(soldOutSeat).length);
+            console.log("soldOutSeat.current : " + soldOutSeat );
+            // console.log("soldOutSeat[0].musicalId : " + soldOutSeat[0].musicalId);
+            // console.log("soldOutSeat[0].seatNum" + soldOutSeat[0].seatNum);
+
+
+             for (let i=0 ; i<Object.keys(soldOutSeat).length ; i++) {
+                if(props.musicalId === soldOutSeat[i].musicalId) { // 만약 예매된 좌석중 뮤지컬id가 일치하여 비활성화를 해야할때 
+                    document.getElementById(soldOutSeat[i].seatNum).parentNode.setAttribute('class','real disabled');
+                    console.log("비활성화 PK : " + soldOutSeat[i].seatNum);
+                }
+             }
+
+            
+
+
+            
         } else if(seatInfoMode === "후기"){
 
             const SeatData = async () => {

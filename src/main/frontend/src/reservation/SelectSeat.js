@@ -42,7 +42,7 @@ const SelectSeat = (props) => {
             <button onClick={()=>onClickNext()}>선택완료</button>
             
             {/* 모든 층수, 극장 다 만들어놓아야함 */}
-            <FirstFloorChar propFunction={seatPosInfoFunc} addSeatNum={seatNumInfoFunc} />
+            <FirstFloorChar propFunction={seatPosInfoFunc} addSeatNum={seatNumInfoFunc} musicalId={props.musicalId} seeDate={props.seeDate} />
 
         </>
     );
