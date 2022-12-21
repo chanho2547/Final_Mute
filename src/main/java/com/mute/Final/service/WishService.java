@@ -14,9 +14,7 @@ import org.springframework.data.convert.EntityWriter;
 import org.springframework.stereotype.Service;
 import javax.persistence.*;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -26,6 +24,19 @@ public class WishService {
     private final WishRepository wishRepository;
     private final MemberRepository memberRepository;
     private final MusicalRepository musicalRepository;
+
+//    public List<?> getWishOnList(int userNum) {
+//        List<Map<?,?>> result = new ArrayList<>();
+//        Map<String, List<Map<?,?>>> map = new HashMap<>();
+//        map.put("rankingListContent", WishRepository.wishON(userNum));
+//        System.out.println(map);
+//        for(int i = 0; i < map.size(); i++){
+//            result.add(map);
+//        }
+//        return result;
+//    }
+
+
 
     // ID별 알림 상태 ON인 경우 조회
     public List<WishDTO> getWishList(int userNum) {

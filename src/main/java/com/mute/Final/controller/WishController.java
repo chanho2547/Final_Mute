@@ -18,6 +18,18 @@ public class WishController {
         this.wishService = wishService;
     }
 
+//   @GetMapping("/wish/join")
+//    public ResponseEntity<List<?>> wishJoin() {
+//            list = (List<Object>) WishService.getWishOnList();
+//            list.add();
+//    }
+//        return new ResponseEntity<>(list, HttpStatus.OK);
+
+
+
+
+
+
     // ID별 alarm = "on" Select
     @GetMapping("/wish/select")
     public ResponseEntity<List<WishDTO>> wishSelect(@RequestParam int userNum) {
