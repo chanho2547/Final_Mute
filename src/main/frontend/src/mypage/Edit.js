@@ -58,7 +58,7 @@ const Edit = () => {
 
 
     useEffect(() => {
-        const userInfo = async(userId) => {
+        const userInfo = async() => {
             try {
                 const response = await MuteApi.userInfo(userId);
                 console.log(response.data);
@@ -77,7 +77,7 @@ const Edit = () => {
             } catch (e) {
                 console.log(e);
             }
-        }
+        };
         userInfo();
     }, [userId]);
 

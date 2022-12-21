@@ -36,9 +36,11 @@ public class EditController {
             userInfo.add(memberDTO.getAddr());
             //userInfo.add(memberDTO.getProfile());
             userInfo.add(memberDTO.getImg());
-
+            System.out.println(userInfo);
             return new ResponseEntity(userInfo, HttpStatus.OK);
-        } else return new ResponseEntity(null, HttpStatus.OK);
+        } else {
+            log.warn("null 값");
+            return new ResponseEntity(null, HttpStatus.OK);}
     }
 
     // 회원 정보 수정
