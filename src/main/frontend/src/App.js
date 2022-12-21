@@ -36,8 +36,6 @@ import Edit from "./mypage/Edit";
 import MyWish from './util/MyWish';
 import PayEnd from './reservation/payment/PayEnd';
 import SeatClick from './review/SeatClick';
-import TheaterDetail from './musical/TheaterDetail';
-import MusicalDetailInfo from './musical/MusicalDetailInfo';
 
 
 function App() {
@@ -81,8 +79,6 @@ function App() {
         <Route path="/MyWish" element={<MyWish/>} />
         <Route path="/PayEnd" element={<PayEnd/>} />
         <Route path='/SeatClick' element={<SeatClick/>}/>
-        <Route path='/TheaterDetail' element={<TheaterDetail/>}/>
-        <Route path='/MusialDetailInfo' element={<MusicalDetailInfo/>}/>
       </Routes>
       <Footer/>
       </div>

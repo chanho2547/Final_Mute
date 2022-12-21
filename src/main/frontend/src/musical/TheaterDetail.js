@@ -43,7 +43,7 @@ const TheaterDetail = (props) => {
             <Container>
                 <p className="title">{e.theaterName}</p>
                 <p>연락처: {e.theaterCall}</p>
-                <p>홈페이지: {e.theaterWeb}</p>
+                <p>홈페이지: <a href={e.theaterWeb}>{e.theaterWeb}</a></p>
                 <p>주소: {e.theaterAddr}</p>
                 <KakaoMap 
                     theaterLat={e.theaterLat}

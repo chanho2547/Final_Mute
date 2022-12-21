@@ -41,7 +41,7 @@ const KakaoMap = (e) => {
         marker.setMap(map);
 
         var iwPosition = new kakao.maps.LatLng(lat, lon), //인포윈도우 표시 위치
-        iwContent = `<div style="padding:15px; width:auto; height:auto;">${e.theaterName}</div>`; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+        iwContent = `<div style="padding:15px; width:auto; height:auto; font-size:11px">${e.theaterName}</div>`; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 
         // 인포윈도우를 생성합니다
         var infowindow = new kakao.maps.InfoWindow({

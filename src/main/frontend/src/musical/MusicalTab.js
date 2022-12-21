@@ -8,44 +8,44 @@ import MuteApi from "../api/MuteApi";
 
 
 //// 스타일드 컴포넌트 (수정중) ////
+
+const Desc = styled.div`
+    padding: 50px 10px;
+    border-top: 2px solid #810000;
+`;
+
 const TabMenu = styled.ul`
 
-  display: flex;
-  flex-direction: row;
-  align-items: left;
-  list-style: none;
-  margin-top: 40px;
+    width: 1024px;
+    display: flex;
+    flex-direction: row;
+    align-items: left;
+    list-style: none;
+    margin-top: 40px;
 
   .submenu {
   // 기본 Tab CSS
     display: inline-block;
     cursor: pointer;
     color: #1b1717;
-    padding: 10px 30px 10px 30px;
-    font-size: 15px;
+    padding: 10px 30px;
   }
 
   .focused {
    //선택된 Tab에만 적용되는 CSS
     color: #810000;
     border: 2px solid #810000;
-    border-bottom: 4px solid white;
+    border-bottom: 2px solid white;
+    margin-bottom: -2px;
     font-weight: bold;
     position: relative;
     padding: 10px 30px;
-    font-size: 15px;
     border-radius: 10px 10px 0px 0px;
   }
-
+/* 
   & div.desc {
     border-top: 2px solid white;
-  }
-`;
-
-const Desc = styled.div`
-    width: 1024px;
-    padding: 50px 10px;
-    border-top: 2px solid #810000;
+  } */
 `;
 
 

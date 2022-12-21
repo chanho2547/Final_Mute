@@ -13,7 +13,7 @@ import MusicalTab from "./MusicalTab";
 
 const DetailInfoContainer = styled.div`
    
-    margin: 0 auto;
+    margin: 40px auto;
     width: 1024px;
 
     .musicalTitle {
@@ -23,9 +23,11 @@ const DetailInfoContainer = styled.div`
         margin-bottom: 20px;
     }
     .button {
-        font-size: 1em;
-        justify-content: center;
-        align-items: center;
+        cursor: pointer;
+        display: flex;
+        float: left;
+        margin-left: 50px;
+
     }
 `
 
@@ -39,7 +41,7 @@ const DescInfo = styled.div`
     }
     table {
         margin-left: 50px;
-        height: 260px;
+        height: 340px;
         width: 600px;
         td {
             vertical-align: top;
@@ -54,48 +56,66 @@ const DescInfo = styled.div`
     }
 `
 
-// 예매하기 버튼 스타일
-const ReserveOnbtn = styled.button`
-    margin: 10px;
-    color: white; 
-    background-color: #810000;
-    border-radius: 5px;
-    border: none;
-    width: 180px;
-    height: 50px;
-`;
-
-// 예매예정 버튼 스타일
-const ReserveOffbtn = styled.button`
-    margin: 10px;
-    color: white; 
-    background-color: #909090;
-    border-radius: 5px;
-    border: none;
-    width: 180px;
-    height: 50px;
-`;
-
 // 찜하기 버튼 스타일
 const WishBtn = styled.button`
+    font-size: 1.1em;
+    width: 280px;
+    height: 50px;
+    border-radius: 5px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 10px;
     color: #810000; 
     background-color: #EEEBDD;
-    border-radius: 5px;
-    border: none;
-    width: 180px;
-    height: 50px;
+    img {
+        margin-right: 5px;
+        margin-top: 1px;
+    }
+    
 `;
 
 // 찜하기 취소 버튼 스타일
 const UnWishBtn = styled.button`
+    width: 280px;
+    height: 50px;
+    border-radius: 5px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 10px;
     color: #810000; 
     background-color: #EEEBDD;
+    img {
+        margin-right: 5px;
+        margin-top: 1px;
+    }
+`;
+
+// 예매하기 버튼 스타일
+const ReserveOnbtn = styled.button`
+    font-size: 1.1em;
+    width: 280px;
+    height: 50px;
     border-radius: 5px;
     border: none;
-    width: 180px;
+    margin: 10px;
+    color: white; 
+    background-color: #810000;
+`;
+
+// 예매예정 버튼 스타일 - 티켓스타트 날짜 이전일 경우
+const ReserveOffbtn = styled.button`
+    font-size: 1.1em;
+    width: 280px;
     height: 50px;
+    border-radius: 5px;
+    border: none;
+    margin: 10px;
+    color: white; 
+    background-color: #909090;
 `;
 
 
@@ -136,15 +156,20 @@ const MusicalDetail = (props) => {
         navigate('/Login'); // 로그인페이지로 이동 
     }
 
-
+    // 뮤지컬 api 호출
     useEffect(() => {
         const MusicalData = async () => {
             try {
                 const response = await MuteApi.musicalDetail(musicalId); // 받은 musicalId 서버로 넘겨주기
-                setMusicalDetail(response.data);
+                setMusicalDetail(response.data);                
             } catch (e) {  
                 console.log(e + "실패");
-            }     
+            }
+            if(setMusicalDetail === null) return '정보없음';
+            console.log("!setMusicalDetail" + !setMusicalDetail === null);
+            // console.log("data없는값:? " + !setMusicalDetail);
+
+            // if ()
         };
         MusicalData();
     }, []);
@@ -169,10 +194,17 @@ const MusicalDetail = (props) => {
         }
     }
 
+    const OnClickReserve = (e) => {
+        console.log("클릭한 뮤지컬 ID값 : " + e);
+        window.localStorage.setItem("seatInfoMode", e); // 흠..?
+        navigate('/Reservation');
+    }
     
 
-  return(
-      <>
+
+
+    return(
+        <>
         {/* wish 등록
         <div onClick={() => OnClickWish()}>
             <div className={(wish ? "likeBtn" : "notLikeBtn")}>
@@ -222,11 +254,12 @@ const MusicalDetail = (props) => {
                                 <td>{e.musicalPlan}</td>
                             </tr>
                         </table>
+                        <div className="button">
+                            <WishBtn onClick = {() => OnClickWish()} className={(wish ? WishBtn : UnWishBtn)}><img src={wish ? heartIcon : heartIcon2} alt={heartIcon} width="17px"/> 찜하기</WishBtn>
+                            <ReserveOnbtn onClick={() => OnClickReserve(e.musicalId)}>예매하기</ReserveOnbtn>
+                        </div>
                     </div>
-                    <div className="button">
-                        <WishBtn onClick = {() => OnClickWish()} className={(wish ? WishBtn : UnWishBtn)}><img src={wish ? heartIcon : heartIcon2} alt={heartIcon} width="20px"/> 찜하기</WishBtn>
-                        <ReserveOnbtn>예매하기</ReserveOnbtn>
-                    </div>
+                    
                 </DescInfo>
                 <MusicalTab theaterId={e.theaterId} />
             </DetailInfoContainer>

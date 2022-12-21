@@ -12,14 +12,14 @@ const HeaderContainer = styled.div``;
 const Menu = styled.div`
   background-color: #810000;
   width: 100%;
-  padding: 10px 0px 15px 0px;
+  padding: 10px 30px 15px 0px;
   display: flex;
   justify-content: right;
     .menu_item {
         margin-left: 20px;
         margin-right: 10px;
         text-decoration: none;
-        font-size: 11px;  
+        font-size: 0.8em;  
         color: #ffffff;
       cursor: pointer;
     }
@@ -29,8 +29,27 @@ const LogoContainer = styled.div`
   text-decoration: none;
   text-align: center;
   color: #CF0A0A;
+  margin-top: 20px;
 `;
 
+const Category = styled.div`
+  
+  font-size: 1.3em;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 30px;
+  border-bottom: 1px solid #eee;
+  .category_item {
+    cursor: pointer;
+    text-decoration: none;
+    color: #1b1717;
+  }
+  .category_item:hover {
+    color: #810000;
+    font-weight: 500;
+  }
+`;
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -93,6 +112,12 @@ const Header = () => {
             <img className="logo_img" src={Logo} width={400} height={210}/>
             </Link>
         </LogoContainer>
+
+        <Category>
+          <Link to={"/"} className="category_item">뮤지컬</Link>
+          <Link to={"/TheaterSearch"} className="category_item">좌석별 후기</Link>
+          <Link to={"/Reservation"} className="category_item">예매하기</Link>
+        </Category>
 
         </HeaderContainer>
         {alarmModal && <Modal open={alarmModal} close={closeModal} header="확인"><Alarm/></Modal>}
