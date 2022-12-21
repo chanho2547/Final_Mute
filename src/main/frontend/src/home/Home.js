@@ -115,10 +115,10 @@ const Home = () => {
             try{
                 let response1 = await MuteApi.openedMusical();
                 let response2 = await MuteApi.openBeforeMusical();
-                let response3 = await MuteApi.musicalRanking();
+                // let response3 = await MuteApi.musicalRanking();
                 setOpenedMusical(response1.data);
                 setBeforeMusical(response2.data);
-                setStarRanking(response3.data);
+                // setStarRanking(response3.data);
 
             } catch (e) {
                 console.log(e + "뮤지컬 데이터 불러오기 실패");
@@ -184,7 +184,7 @@ const Home = () => {
             <br/><br/>
            
             <div className="musical_title"><p className="musical_title_front">별점이 가장 높은&nbsp;</p><p className="musical_title_back">뮤지컬 TOP3</p></div>
-            <div className="starRanking">
+            {/* <div className="starRanking">
             {starRanking && starRanking.map(e => (
                 <div  onClick={() => onClick(e.musicalId) }>
                 <img alt="poster" src={e.musicalPoster}/>
@@ -193,7 +193,7 @@ const Home = () => {
                 <p>{e.musicalStart} ~ {e.musicalEnd}</p>
                 </div>
             ))}
-            </div>
+            </div> */}
         </MusicalContainer>
 
 

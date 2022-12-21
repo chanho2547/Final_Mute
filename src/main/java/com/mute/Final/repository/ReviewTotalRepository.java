@@ -11,12 +11,16 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 public interface ReviewTotalRepository extends JpaRepository<ReviewTotal, Long> {
-    // 뮤지컬 별점 높은순 top3 => 수정예정
-    // 필요한 쿼리 => select musical_id, avg(score_avg_musical) from review_musical group by musical_id order by avg(score_avg_musical) desc limit 3;
-    @Query(value = "select * from review_musical limit 3", nativeQuery = true)
-    List<ReviewTotal> findTopStar();
+//    @Query(value = "select rm.musical_id as musicalId, m.musical_name as musical_name, m.musical_start as musical_start, " +
+//            "m.musical_end as musical_end, m.theater_name as theater_name, avg(rm.score_avg_total) as avg_musical " +
+//            "from review_musical as rm " +
+//            "join musical as m " +
+//            "on rm.musical_id = m.musical_id " +
+//            "group by m.musical_id " +
+//            "order by avg(rm.score_avg_total) desc limit 3", nativeQuery = true)
+//    List<ReviewTotalProjection> findTop3();
+
     List<ReviewTotal> findByMusicalId(Musical musicalId); // 뮤지컬 총평 후기 view
     Long deleteByReviewMuId(long reviewMuId); // 뮤지컬 총평 후기 삭제
     ReviewTotal findByReviewMuId(long reviewMuId);
-
 }
