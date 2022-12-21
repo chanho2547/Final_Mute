@@ -6,6 +6,7 @@ import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 // 후기 작성 - 도연
@@ -43,7 +44,7 @@ public class WriteService {
         reviewTotal.setScoreAvgTotal(Double.parseDouble(scoreAvgTotal));
         reviewTotal.setReviewMuTxt(reviewMuTxt);
 //        System.out.println(reviewTotal.getReviewMuTxt());
-        reviewTotal.setWriteDate(LocalDateTime.now());
+        reviewTotal.setWriteDate(LocalDate.now());
         reviewTotalRepository.save(reviewTotal);
         return true;
     }

@@ -99,6 +99,7 @@ const ReviewTotal = (props) => {
     // 취소 버튼 누르면 첫 화면으로..
     const CancelButton = () => {   
         navigate("/Review"); 
+        setCount(count + 1);
     }
 
     // 입력받는 부분
@@ -125,8 +126,12 @@ const ReviewTotal = (props) => {
     
     const closeModal = () => { // 아니오 눌렀을 때 => 리뷰 리스트로 이동
         navigate("/Review"); 
+        setCount(count + 1);
     }
 
+    const [count, setCount] = useState(0);
+
+    
     // 후기 작성하기 Api 호출
     // 후기 작성 버튼이 눌려지면 동작하는 함수
     const WriteTotalButton = async() => {

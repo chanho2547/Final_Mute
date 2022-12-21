@@ -49,7 +49,8 @@ const Modal = (props) => {
                         {(header === '로그아웃') ?<button onClick={onClickLogout}>로그아웃</button>: ''}
                         {(header === '탈퇴') ?<button onClick={onClickMemDelete}>네</button>: ''}
                         {(header === '취소'? <button onClick={confirm}>yes</button>:'')}
-                        <button onClick={()=>props.close()}>close</button>
+                        {/* <button onClick={()=>props.close()}>close</button> */}
+                        <button className='close' onClick={close}>확인</button>
                     </footer>
                 </section>
             }

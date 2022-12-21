@@ -26,7 +26,7 @@ const SelectSeat = styled.div`
     border: solid 0.5px gray;
     padding: 10px;
     width: 550px;
-    padding-left: 100px;
+    margin-left: 250px;
 
     .SeatBtn {
         border-radius: 5px;
@@ -116,6 +116,7 @@ const ReviewSeat = () => {
      // 취소 버튼 누르면 첫 화면으로..
     const CancelButton = () => {   
         navigate('/Review');
+        setCount(count + 1);
     }
 
     // 입력받는 부분
@@ -137,6 +138,8 @@ const ReviewSeat = () => {
     // 모달
     const [modalTheater, setModelTheater] = useState(false); // 좌석 선택 버튼 눌렀을 때
     const [writeModal, setWriteModal] = useState(false); // 확인 버튼 눌렀을 때
+
+    const [count, setCount] = useState(0);
 
     const charlotte = () => { // 샤롯데 좌석 선택하러 가기
         navigate("/TheaterChar"); 

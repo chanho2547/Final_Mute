@@ -3,6 +3,7 @@ package com.mute.Final.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -21,7 +22,7 @@ public class ReviewTotal {
     @JoinColumn(name = "user_num")
     private Member member; // 회원번호
 
-    private LocalDateTime writeDate; // 작성일
+    private LocalDate writeDate; // 작성일
     private int scoreStory; // 스토리 별점
     private int scoreDirect; // 연출 별점
     private int scoreCast; // 캐스팅 별점

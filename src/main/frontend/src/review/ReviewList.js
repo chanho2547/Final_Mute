@@ -9,6 +9,7 @@ import Rating from "../util/Rating";
 import styled from "styled-components";
 import { FaStar } from 'react-icons/fa';
 
+
 // 뮤지컬 총평 후기 view - 도연 작업중..
 
 const Container = styled.div`
@@ -41,7 +42,6 @@ const StarBox = styled.div`
         height: 50px;
         margin-left: 200px;
         margin-top: 12px;
-        
     }
 `;
 
@@ -63,8 +63,6 @@ const ReviewBox = styled.div`
         border-radius: 5px;
         border: solid 0.5px lightgray;
         background-color: white;
-        
-
     }
 `;
 
@@ -85,13 +83,13 @@ const ReviewList = (props) => {
         setModelLogin(false);
         setModalOpen(false);
         setCount(count + 1);
-        console.log("테스트 - count : " + count);
+
     }
 
     const [modalOpen, setModalOpen] = useState(""); // 삭제 버튼 눌렀을 때
     const [modalText, setModalText] = useState(""); // 삭제 모달 텍스트
 
-    const [count,setCount] = useState();
+    const [count, setCount] = useState(0);
 
 
     // 후기 작성 버튼 눌렀을 때 로그인 이면 OK, 로그인 안했으면 모달 띄우기
@@ -135,8 +133,6 @@ const ReviewList = (props) => {
 
             let response = await MuteApi.DeleteTotal(member, reviewMuId);
 
-            console.log("response : " + response);
-
             if(response.data === true) {
                 setModalOpen(true);
                 setModalText("삭제가 완료되었습니다.");
@@ -153,8 +149,6 @@ const ReviewList = (props) => {
     // const Onclick = (e) => {
     //     <Rating/>
     // }
-
-    
 
 
     return(
@@ -176,12 +170,11 @@ const ReviewList = (props) => {
                 <button className="deleteBtn" onClick={()=>OnClickDelete(member, e.reviewMuId)}>삭제</button></p>
                 <p className="myRaing">스토리 <FaStar size="15" color="gray"/>{e.scoreStory} 　연출 <FaStar size="15" color="gray"/>{e.scoreDirect} 　캐스팅 <FaStar size="15" color="gray"/>{e.scoreCast} 　넘버 <FaStar size="15" color="gray"/>{e.scoreNumber}<br/>
                 <p className="text">{e.reviewMuTxt}</p></p>
-
             </ReviewBox>
             // </div>
         ))}  
         {modalLogin&& <Modal open={modalLogin} close={closeModal} type={true}>로그인이 필요한 서비스입니다.</Modal>}
-        {modalOpen && <Modal open={modalOpen} close={()=>closeModal()} header="확인">{modalText}</Modal>}
+        {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">{modalText}</Modal>}
         </Container>
 
     );

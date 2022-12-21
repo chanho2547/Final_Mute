@@ -2,6 +2,8 @@ package com.mute.Final.dto;
 import com.mute.Final.entity.Member;
 import com.mute.Final.entity.Musical;
 import lombok.Data;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 // 총평 후기 - 도연
@@ -12,7 +14,7 @@ public class ReviewTotalDTO {
     private String musicalId; // 공연 ID
     private String musicalName; // 공연 이름
     private String member; // 회원번호
-    private LocalDateTime writeDate; // 작성일
+    private LocalDate writeDate; // 작성일
     private int scoreStory; // 스토리 별점
     private int scoreDirect; // 연출 별점
     private int scoreCast; // 캐스팅 별점
