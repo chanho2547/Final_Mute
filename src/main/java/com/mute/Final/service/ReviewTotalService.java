@@ -62,39 +62,4 @@ public class ReviewTotalService {
         }
         return reviewTotalDTOS;
     }
-
-//    // 뮤지컬별 총 평균 별점 - 도연
-//    public List<ReviewTotalAvgDTO> totalAvgList(int musicalId) {
-//        List<ReviewTotalAvgDTO> reviewTotalAvgDTOS = new ArrayList<>();
-//        List<ReviewTotalAvg> reviewTotalAvgList = reviewTotalAvgRepository.findAvg();
-//        for (ReviewTotalAvg e : reviewTotalAvgList) {
-//            ReviewTotalAvgDTO reviewTotalAvgDTO = new ReviewTotalAvgDTO();
-//            reviewTotalAvgDTO.setMusicalId(e.getMusicalId()); // 뮤지컬 아이디
-//            reviewTotalAvgDTO.setAvgStory(e.getAvgStory()); // 스토리 별점
-//            reviewTotalAvgDTO.setAvgDirect(e.getAvgDirect()); // 연출 별점
-//            reviewTotalAvgDTO.setAvgCast(e.getAvgCast()); // 캐스팅 별점
-//            reviewTotalAvgDTO.setAvgNumber(e.getAvgNumber()); // 넘버 별점
-//            reviewTotalAvgDTO.setAvgAllTotal(e.getAvgAllTotal()); // 총 평균 별점
-//            reviewTotalAvgDTOS.add(reviewTotalAvgDTO);
-//        }
-//        return reviewTotalAvgDTOS;
-//    }
-//}
-
-    // 뮤지컬별 총 평균 별점 - 도연
-    public List<ReviewTotalAvgDTO> totalAvgList(int musicalId) {
-        List<ReviewTotalAvgDTO> reviewTotalAvgDTOS = new ArrayList<>();
-        List<ReviewTotalAvg> reviewTotalAvgList = reviewTotalAvgRepository.findAvg();
-        for (ReviewTotalAvg e : reviewTotalAvgList) {
-            ReviewTotalAvgDTO reviewTotalAvgDTO = new ReviewTotalAvgDTO();
-            reviewTotalAvgDTO.setMusicalId(e.getMusicalId()); // 뮤지컬 아이디
-            reviewTotalAvgDTO.setAvgStory(e.getAvgStory()); // 스토리 별점
-            reviewTotalAvgDTO.setAvgDirect(e.getAvgDirect()); // 연출 별점
-            reviewTotalAvgDTO.setAvgCast(e.getAvgCast()); // 캐스팅 별점
-            reviewTotalAvgDTO.setAvgNumber(e.getAvgNumber()); // 넘버 별점
-            reviewTotalAvgDTO.setAvgAllTotal(e.getAvgAllTotal()); // 총 평균 별점
-            reviewTotalAvgDTOS.add(reviewTotalAvgDTO);
-        }
-        return reviewTotalAvgDTOS;
-    }
 }

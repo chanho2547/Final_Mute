@@ -108,6 +108,7 @@ const ReviewTotal = (props) => {
     const [scoreCast, setScoreCast] = useState(''); // 캐스팅 별점
     const [scoreNumber, setScoreNumber] = useState(''); // 넘버 별점
     const [scoreAvgTotal, setScoreAvgTotal] = useState(''); // 별점 총점
+    const [totalAvg, setTotalAvg] = useState(''); // 총 별점 평균
     const [totalReview, setTotalReview] = useState(''); // 뮤지컬 후기 텍스트
 
     // 오류 메세지

@@ -69,6 +69,18 @@ const ReviewBox = styled.div`
 const ReviewList = (props) => {
     const navigate = useNavigate();
 
+    // let totalScore = 0.0;
+    // let totalStory = 0.0;
+    // let totalDirect = 0.0;
+    // let totalCast = 0.0;
+    // let totalNumber = 0.0;
+
+    let totalResult = 0.0;
+    let storyResult = 0.0;
+    let directResult = 0.0;
+    let castResult = 0.0;
+    let numberResult = 0.0;
+
     const member = window.localStorage.getItem("whoLoginUserNum");
     let musicalId = window.localStorage.getItem("musicalId");
     const reviewMuId = window.localStorage.getItem("reviewMuId");
@@ -83,7 +95,6 @@ const ReviewList = (props) => {
         setModelLogin(false);
         setModalOpen(false);
         setCount(count + 1);
-
     }
 
     const [modalOpen, setModalOpen] = useState(""); // 삭제 버튼 눌렀을 때
@@ -106,14 +117,13 @@ const ReviewList = (props) => {
     };
 
     const [ReviewInfo, setReviewInfo] = useState(); 
-      
+    const [totalAvg, setTotalAvg] = useState(); 
 
     // Api 호출
     useEffect(() => {
         const ReviewData = async () => {
             try{
                 let response = await MuteApi.ReviewInfo(musicalId);
-            
                 setReviewInfo(response.data);
                 console.log("후기 불러오기 성공!!");
 
@@ -124,6 +134,16 @@ const ReviewList = (props) => {
         ReviewData();
     }, [count]);
 
+
+    if(ReviewInfo) {
+        totalResult = ReviewInfo.map(e => parseFloat(e.scoreAvgTotal));
+        console.log("result : " + totalResult) // 배열
+
+        const totalAvg = totalResult.reduce((a, c) => a + c) / totalResult.length;
+        console.log("총 별점 평균 : " + totalAvg);
+        setTotalAvg(totalAvg);
+        
+    }
 
     // 후기 삭제
     const OnClickDelete = async(member, reviewMuId) => {
@@ -151,11 +171,13 @@ const ReviewList = (props) => {
     // }
 
 
+
+
     return(
         <Container>     
         <StarBox>
             <div className="AvgBox">
-            <p><b className="AvgText">평균 별점 </b><FaStar size="30" color="#FCC419"/>{}</p>
+            <p><b className="AvgText">평균 별점 </b><FaStar size="30" color="#FCC419"/>{setTotalAvg}</p>
             <span><b>스토리 </b><FaStar size="25" color="gray"/>{}</span>　
             <span><b>연출 </b><FaStar size="25" color="gray"/>{}</span>　
             <span><b>캐스팅 </b><FaStar size="25" color="gray"/>{}</span>　
