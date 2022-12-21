@@ -69,11 +69,11 @@ const ReviewBox = styled.div`
 const ReviewList = (props) => {
     const navigate = useNavigate();
 
-    // let totalScore = 0.0;
-    // let totalStory = 0.0;
-    // let totalDirect = 0.0;
-    // let totalCast = 0.0;
-    // let totalNumber = 0.0;
+    let totalScore = 0.0;
+    let totalStory = 0.0;
+    let totalDirect = 0.0;
+    let totalCast = 0.0;
+    let totalNumber = 0.0;
 
     let totalResult = 0.0;
     let storyResult = 0.0;
@@ -117,7 +117,6 @@ const ReviewList = (props) => {
     };
 
     const [ReviewInfo, setReviewInfo] = useState(); 
-    const [totalAvg, setTotalAvg] = useState(); 
 
     // Api 호출
     useEffect(() => {
@@ -137,13 +136,18 @@ const ReviewList = (props) => {
 
     if(ReviewInfo) {
         totalResult = ReviewInfo.map(e => parseFloat(e.scoreAvgTotal));
-        console.log("result : " + totalResult) // 배열
+        storyResult = ReviewInfo.map(e => parseFloat(e.scoreStory));
+        directResult = ReviewInfo.map(e => parseFloat(e.scoreDirect));
+        castResult = ReviewInfo.map(e => parseFloat(e.scoreCast));
+        numberResult = ReviewInfo.map(e => parseFloat(e.scoreNumber));
 
-        const totalAvg = totalResult.reduce((a, c) => a + c) / totalResult.length;
-        console.log("총 별점 평균 : " + totalAvg);
-        setTotalAvg(totalAvg);
-        
+        totalScore = totalResult.reduce((a, c) => a + c) / totalResult.length;
+        totalStory = storyResult.reduce((a, c) => a + c) / storyResult.length;
+        totalDirect = directResult.reduce((a, c) => a + c) / directResult.length;
+        totalCast = castResult.reduce((a, c) => a + c) / castResult.length;
+        totalNumber = numberResult.reduce((a, c) => a + c) / numberResult.length;
     }
+
 
     // 후기 삭제
     const OnClickDelete = async(member, reviewMuId) => {
@@ -166,39 +170,29 @@ const ReviewList = (props) => {
         }
     }
 
-    // const Onclick = (e) => {
-    //     <Rating/>
-    // }
-
-
-
-
     return(
         <Container>     
         <StarBox>
             <div className="AvgBox">
-            <p><b className="AvgText">평균 별점 </b><FaStar size="30" color="#FCC419"/>{setTotalAvg}</p>
-            <span><b>스토리 </b><FaStar size="25" color="gray"/>{}</span>　
-            <span><b>연출 </b><FaStar size="25" color="gray"/>{}</span>　
-            <span><b>캐스팅 </b><FaStar size="25" color="gray"/>{}</span>　
-            <span><b>넘버 </b><FaStar size="25" color="gray"/>{}</span>
+            <p><b className="AvgText">평균 별점 </b><FaStar size="30" color="#FCC419"/>{totalScore}</p>
+            <span><b>스토리 </b><FaStar size="25" color="gray"/>{totalStory}</span>　
+            <span><b>연출 </b><FaStar size="25" color="gray"/>{totalDirect}</span>　
+            <span><b>캐스팅 </b><FaStar size="25" color="gray"/>{totalCast}</span>　
+            <span><b>넘버 </b><FaStar size="25" color="gray"/>{totalNumber}</span>
             </div>
             <button className="writeBtn" onClick={WriteButton}>후기 작성하기</button>
         </StarBox>
         {ReviewInfo && ReviewInfo.map(e => ( 
-            // <div Onclick={() => Onclick(e)}>
             <ReviewBox>
                 <p>{e.reviewMuId}　{e.member}　<FaStar size="20" color="#FCC419"/>{e.scoreAvgTotal} <span className="date">　작성일 {e.writeDate}</span>　
                 <button className="deleteBtn" onClick={()=>OnClickDelete(member, e.reviewMuId)}>삭제</button></p>
                 <p className="myRaing">스토리 <FaStar size="15" color="gray"/>{e.scoreStory} 　연출 <FaStar size="15" color="gray"/>{e.scoreDirect} 　캐스팅 <FaStar size="15" color="gray"/>{e.scoreCast} 　넘버 <FaStar size="15" color="gray"/>{e.scoreNumber}<br/>
                 <p className="text">{e.reviewMuTxt}</p></p>
             </ReviewBox>
-            // </div>
         ))}  
         {modalLogin&& <Modal open={modalLogin} close={closeModal} type={true}>로그인이 필요한 서비스입니다.</Modal>}
         {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">{modalText}</Modal>}
         </Container>
-
     );
 }
 export default ReviewList;
