@@ -78,11 +78,12 @@ public class MusicalDetailApiService {
 
 //             DB에 저장하기..관람연령만 되려나? 안돼안돼안돼!!!!!!!!!!!!!!
 //            String ageStr = item.getString("prfage");
-//            Musical musical = new Musical(ageStr);
-//            musical.setMusicalAge(ageStr);
+//
+//            Musical musicalAge = new Musical();
+//            musicalAge.setMusicalAge(musicalDetailDTO.getMusicalAge());
+
+//            musicalRepository.save(ageStr);
 //            log.warn("가져온 연령값???????????" + ageStr);
-//            Musical savedAge = musicalRepository.save(musical);
-//            log.warn("저장되는 값???????????" + savedAge);
 
         } catch (Exception e) {
             e.printStackTrace();

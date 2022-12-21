@@ -1,5 +1,7 @@
 package com.mute.Final.dto;
 
+import com.mute.Final.entity.Musical;
+import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -67,5 +69,6 @@ public class MusicalDetailDTO {
         this.musicalDescImg2 = descImg2;
         this.musicalPlan = item.getString("dtguidance");
     }
+
 }
 

@@ -1,19 +1,24 @@
 package com.mute.Final.entity;
 
+import com.mute.Final.dto.MusicalDetailDTO;
+import com.mute.Final.repository.MusicalRepository;
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.persistence.*;
 
 import java.time.LocalDate;
 
-
+@Slf4j
 @Entity
 @Getter @Setter @ToString
 @Table(name = "musical")
 @RequiredArgsConstructor
 public class Musical {
+
     @Id
     private String musicalId; // 공연 ID(PK)
     private String musicalName; // 공연 이름
@@ -43,7 +48,11 @@ public class Musical {
         this.musicalPoster = item.getString("poster");
     }
 
-    public Musical(String ageStr) {
+    public Musical (MusicalDetailDTO musicalDetailDTO) {
+//        MusicalDetailDTO musicalDetailDTO = new MusicalDetailDTO();
+        this.setMusicalAge(musicalDetailDTO.getMusicalAge());
+
+        log.warn("세이브됐나? : " + musicalAge); // 안됨
     }
 
 //    public void Musical1 (JSONObject item) {
