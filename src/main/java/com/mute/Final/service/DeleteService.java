@@ -1,10 +1,6 @@
 package com.mute.Final.service;
-import com.mute.Final.entity.ReviewSeat;
 import com.mute.Final.entity.ReviewTotal;
-import com.mute.Final.repository.MemberRepository;
-import com.mute.Final.repository.MusicalRepository;
 import com.mute.Final.repository.ReviewSeatRepository;
-import com.mute.Final.repository.ReviewTotalRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
