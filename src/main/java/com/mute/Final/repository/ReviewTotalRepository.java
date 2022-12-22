@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface ReviewTotalRepository extends JpaRepository<ReviewTotal, Long> {
-    @Query(value = "select rm.musical_id, m.musical_poster, m.musical_name, m.musical_start, " +
+    @Query(value = "select rm.musical_id as musicalId, m.musical_poster, m.musical_name, m.musical_start, " +
             "m.musical_end, m.theater_name, avg(rm.score_avg_total) as avg_musical " +
             "from review_musical as rm " +
             "join musical as m " +

@@ -51,15 +51,15 @@ const Alarm = (props) => {
 
     return (
         <div className="alarm_container">
-            {alarm && alarm.map(e => (
-            <div className="alarm">
-                <div onClick={() => OnClickAlarm(e.musicalId) }>
-                <p>공연 이름 : {e.musicalName}</p> 
-                <p>공연 예매 시작일 : {e.musicalTicketStart}</p> 
-                <p>알림 설정 상태 : {e.alarm}</p> 
+            {alarm && alarm.map(e =>e.wishListContent.map(el=>
+                <>
+                <div onClick={() => OnClickAlarm(el.musicalId) }>
+                <p>공연 이름 : {el.musicalName}</p> 
+                <p>공연 예매 시작일 : {el.musicalTicketStart}</p> 
+                <p>알림 설정 상태 : {el.alarm}</p> 
                 </div>
-                <button onClick={() => OnClickAlarmOff(e.userNum, e.musicalId)}>OFF</button>
-            </div>
+                <button onClick={() => OnClickAlarmOff(el.userNum, el.musicalId)}>OFF</button>
+                </>
             ))}
 
         </div>

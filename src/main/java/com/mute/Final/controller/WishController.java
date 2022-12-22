@@ -18,6 +18,7 @@ public class WishController {
     public WishController(WishService wishService){
         this.wishService = wishService;
     }
+
     // mypage 찜 목록 Select
     @GetMapping("/wish/select/all")
     public ResponseEntity<List<WishDTO>> wishSelectAll(Member member) {
@@ -25,15 +26,8 @@ public class WishController {
         return new ResponseEntity(list, HttpStatus.OK);
     }
 
-    // ID별 alarm = "on" Select
+    // ID별 alarm = "on", date 비교 Select
     @GetMapping("/wish/select")
-    public ResponseEntity<List<WishDTO>> wishSelect(@RequestParam int userNum) {
-        List<WishDTO> list = wishService.getWishList(userNum);
-        return new ResponseEntity(list, HttpStatus.OK);
-    }
-
-    // ID별 alarm = "on" Select 2 + date 비교
-    @GetMapping("/wish/join")
     public ResponseEntity<List<?>> getWishOnList(@RequestParam int userNum) {
         List<?> list = wishService.getWishOnList(userNum);
         return new ResponseEntity<>(list, HttpStatus.OK);

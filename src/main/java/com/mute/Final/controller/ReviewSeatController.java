@@ -35,6 +35,12 @@ public class ReviewSeatController {
         return new ResponseEntity(list,HttpStatus.OK);
     }
 
+    @GetMapping("/reviewSeat/avg")
+    public ResponseEntity<List<?>> getReviewSeatAvg(@RequestParam int seatNum) {
+        List<?> list = reviewSeatService.getReviewSeatAvg(seatNum);
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
     // 좌석번호별 총 평균 별점, 평균 좌석 별점, 평균 시야 별점, 평균 음향 별점, 평균 조명 별점 조회
 //    @GetMapping("/reviewSeat/avg")
 //    public ResponseEntity<List<ReviewSeatDTO>> reviewSeat() {

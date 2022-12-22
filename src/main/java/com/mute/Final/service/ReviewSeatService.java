@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Slf4j
@@ -45,8 +47,6 @@ public class ReviewSeatService {
         return reviewSeatAvgDTOS;
     }
 
-
-
     // 좌석번호별 개인 후기 전체 조회
     public List<ReviewSeatDTO> getReviewSeatList(int seatNum) {
         List<ReviewSeatDTO> reviewSeatDTOS = new ArrayList<>();
@@ -71,6 +71,17 @@ public class ReviewSeatService {
             reviewSeatDTOS.add(reviewSeatDTO);
         }
         return reviewSeatDTOS;
+    }
+
+    public List<?> getReviewSeatAvg(int seatNum) {
+        List<Map<?,?>> result = new ArrayList<>();
+        Map<String, List<Map<?,?>>> map = new HashMap<>();
+        map.put("seatAvgContent", reviewSeatRepository.reviewSeatScore(seatNum));
+        System.out.println(map);
+        for(int i = 0; i < map.size(); i++){
+            result.add(map);
+        }
+        return result;
     }
 
 

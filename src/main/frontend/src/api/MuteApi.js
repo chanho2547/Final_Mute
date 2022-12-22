@@ -152,9 +152,14 @@ const MuteApi =  {
         return await axios.post("member/delete", reg);
     },
 
-    // 좌석 후기 평균 별점
+    // 좌석 전체 후기 평균 별점
     seatReviewAvg: async function() {
         return await axios.get("reviewSeat/all");
+    },
+
+    // 좌석별 평균 별점 // 내일 이름 바꾸기
+    seatReviewStar: async function(pkNum) {
+        return await axios.get(`reviewSeat/avg?seatNum=${pkNum}`);
     },
 
     // 선택 좌석별 후기

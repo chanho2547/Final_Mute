@@ -15,6 +15,7 @@ const SeatReviewContainer = styled.div`
 `;
 
 const SeatClick = () => {
+    const [seatAvg, setseatAvg] = useState();
     const [selectSeat, setSelectSeat] = useState();
     let clickSeatNum = window.localStorage.getItem("whatSeatNum");
     let clickSeatInfo = window.localStorage.getItem("whatSeatInfo");
@@ -25,8 +26,10 @@ const SeatClick = () => {
             try {
                 console.log("클릭한 좌석번호 : " + clickSeatNum);
                 console.log("클릭한 좌석위치 : " + clickSeatInfo);
-                let response = await MuteApi.seatReview(clickSeatNum);
-                setSelectSeat(response.data);
+                let response1 = await MuteApi.seatReviewStar(clickSeatNum);
+                let response2 = await MuteApi.seatReview(clickSeatNum);
+                setseatAvg(response1.data);
+                setSelectSeat(response2.data);
             } catch(e) {
                 console.log(e + "좌석 상세정보 후기 불러오기 실패");
             }
@@ -37,12 +40,30 @@ const SeatClick = () => {
     const Onclick = (e) => {
     }
 
+    const OnclickSeat = (e) => {
+
+    } 
+
 
     return(
         <>
         <SeatReviewAvgContainer>
         <p className="seat_position">{clickSeatInfo}</p>
+        {seatAvg && seatAvg.map(e=>e.seatAvgContent.map(el =>
+            <>
+            <div onClick={()=>OnclickSeat()}>
+            <p>평균 별점{el.avgSeat}</p>
+            <p>후기 수{el.cnt}</p>
+            <p>좌석{el.seat}</p>
+            <p>시야{el.view}</p>
+            <p>음향{el.sound}</p>
+            <p>조명{el.light}</p>
+            </div>
+            </>
+            ))}
         </SeatReviewAvgContainer>
+
+
 
 
 

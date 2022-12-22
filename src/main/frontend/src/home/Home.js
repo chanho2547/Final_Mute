@@ -92,6 +92,7 @@ margin: auto;
     display: flex;
     justify-content: center;
     margin: auto;
+    margin-bottom: 35px
 }
 .centerBlock{
     background-color: #F4F4F4;
@@ -123,7 +124,6 @@ const Home = () => {
     const [openedMusical, setOpenedMusical] = useState();
     const [openBeforeMusical, setBeforeMusical] = useState();
     const [starRanking, setStarRanking] = useState();
-    const [mywish, setMish] = useState();
 
     useEffect(() => {
         const RankData = async () => {
@@ -136,13 +136,7 @@ const Home = () => {
                 setOpenedMusical(response1.data);
                 setBeforeMusical(response2.data);
                 setStarRanking(response3.data);
-                // console.log("꺼내야하는 데이터1" + response3.data.get(0).get("rankingListContent"));
-                // console.log("꺼내야하는 데이터2" + response3.data.list.get(0)); // [Object object]
-                // console.log("꺼내야하는 데이터3" + response3.data.get[0].get("rankingListContent")[0].get("musical_id")); // [Object object]
-                // console.log("꺼내야하는 데이터3" + response3.data.map(e=>e.rankingListContent.map(el=>el.musical_id))); // [Object object]
-                console.log("꺼내야하는 데이터3" + response3.data.map(e=>e.rankingListContent.map(el=>el.map(ele=>ele.musical_id)))); // [Object object]
-                // console.log("꺼내야하는 데이터" + response3.data.list.get(0)); // [Object object]
-                // console.log("꺼내야하는 데이터" + response3.data.list.get(0)); // [Object object]
+                console.log("꺼내야하는 데이터" + response3.data.map(e=>e.rankingListContent.map(el=>el.musical_id))); // 요게 맞음 PF195257,PF194963,PF195242
 
             } catch (e) {
                 console.log(e + "뮤지컬 데이터 불러오기 실패");
@@ -165,7 +159,6 @@ const Home = () => {
     return(
         <>
         <TopButton/>
-        {/* {mywish && <MyWish/>} */}
         {/* <Link to = "/TheaterChar">샤롯데 좌석 정보</Link> <br></br>
         <Link to = "/TheaterChung">충무 좌석 정보</Link> <br></br>
         <Link to = "/Reservation"> 예매 임시 페이지 </Link> <br></br>
@@ -208,28 +201,19 @@ const Home = () => {
             </div>
 
             <br/><br/>
-           
             <div className="musical_title"><p className="musical_title_front">별점이 가장 높은&nbsp;</p><p className="musical_title_back">뮤지컬 TOP3</p></div>
-
-              {/* rankingListContent */}
-             {/* <div className="starRanking">
-            {starRanking && starRanking.list.rankingListContent.map(rankingListContent => (
-                <div  onClick={() => onClick(rankingListContent.musicalId) }>
-                <img alt="poster" src={rankingListContent.musicalPoster}/>
-                <p>{rankingListContent.musicalName}</p>
-                <p>{rankingListContent.theaterName}</p>
-                <p>{rankingListContent.musicalStart} ~ {rankingListContent.musicalEnd}</p>
-                </div>
-                
+            <div className="starRanking">
+            {starRanking && starRanking.map(e=>e.rankingListContent.map(el=>
+            <>
+            <div onClick={()=>onClick(el.musicalId)}>
+            <img className="musical_img" alt="poster" src={el.musical_poster} />
+            <p className="musical_name">{el.musical_name}</p>
+            <p className="theater_name">{el.theater_name}</p>
+            <p className="musical_date">{el.musical_start} ~ {el.musical_end}</p>
+            </div>
+            </>
             ))}
-            </div>  */}
-
-                {/* {starRanking && starRanking.map(e=>e.rankingListContent.map(el=>el.map(ele=>
-                    <>
-                    <div onClick={()=>onClick(ele.musical_id)}>{ele.musical_id}</div>
-                    <div>{ele.musical_start}</div>
-                    </>
-                    )))} */}
+            </div>
              
         </MusicalContainer>
         
