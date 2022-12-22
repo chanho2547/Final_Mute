@@ -34,7 +34,7 @@ public class EditService {
     }
 
     // 회원 정보 수정
-    public boolean saveUserInfo(String userId, String name, String pwd, String mail, String phone, String addr) {
+    public boolean saveUserInfo(String userId, String name, String pwd, String mail, String phone) {
         try {
             Member member = memberRepository.findByUserId(userId);
             log.error("아이디 : " + userId);
@@ -42,12 +42,12 @@ public class EditService {
             log.error("변경 pwd : " + pwd);
             log.error("변경 mail : " + mail);
             log.error("변경 phone : " + phone);
-            log.error("변경 addr : " + addr);
+            //log.error("변경 addr : " + addr);
             member.setName(name);
             member.setPwd(pwd);
             member.setMail(mail);
             member.setPhone(phone);
-            member.setAddress(addr);
+            //member.setAddress(addr);
             memberRepository.save(member);
             log.error("저장완료");
         } catch (Exception e) {

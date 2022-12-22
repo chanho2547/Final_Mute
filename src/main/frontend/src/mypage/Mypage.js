@@ -1,6 +1,6 @@
-import React, {useState} from "react";
-import Modal from "../util/Modal";
+import React from "react";
 import Edit from "./Edit";
+
 import MyWish from "../util/MyWish";
 
 
@@ -11,6 +11,7 @@ const MyPage = () => {
     return(
 
         <>
+
             <Edit/>
             <div>
 
