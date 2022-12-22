@@ -238,11 +238,15 @@ const onClickSeat = (event) => {
                 try{
                     // console.log("솔드아웃 부르기 위한 props.seeDate : " + props.seeDate);
                     // console.log("솔드아웃 부르기 위한 props.seeDate [type] : " + typeof props.seeDate);
-                    let newSeeDate = "2022-12-25T19:00:00";
+                    // let newSeeDate = "2022-12-25T19:00:00";
+                    let seeDate = props.seeDate;
+                    let newSeeDate = seeDate.replace(' ','T');
+                    console.log("newSeeDate : " + newSeeDate);
+
                     let response = await MuteApi.isReservation(newSeeDate);
                     // console.log("response.data : " + response.data);
                     // console.log("response.data[0] : " + response.data[0]);
-                    // console.log("response.data.get(0) : " + response.data.get(0));
+                    // console.log("response.data.get(musicalId) : " + response.data.get("musicalId"));
                     setSoldOutSeat(response.data); // 현재 예약된 좌석 정보 (특정 날짜, 지금은 뮤지컬이 다양한 상황임)
                     // console.log("솔드아웃 좌석 불러오기 : "+ soldOutSeat.map(e=>e.musicalId));
 
@@ -253,7 +257,7 @@ const onClickSeat = (event) => {
                         if(props.musicalId === e.musicalId) {
                             document.getElementById(e.seatNum).parentNode.setAttribute('class','disabled');
                             // document.getElementById(e.seatNum).parentNode.setAttribute('onClick',);
-                            document.getElementById(e.seatNum).parentNode.onclick=onClickSoldOut();
+                            //document.getElementById(e.seatNum).parentNode.onclick=onClickSoldOut();
 
                             console.log("비활성화 PK test : " + e.seatNum);
                         }
