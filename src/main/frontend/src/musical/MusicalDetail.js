@@ -162,12 +162,21 @@ const MusicalDetail = (props) => {
 		const MusicalData = async () => {
 			try {
 				const response = await MuteApi.musicalDetail(musicalId); // 받은 musicalId 서버로 넘겨주기
-				setMusicalDetail(response.data);                
-			} catch (e) {  
+				setMusicalDetail(response.data);
+
+				// if(response.data.value === null) {
+				// 	return '정보없음';
+				// }
+				// console.log("response.data.musicalCast ::: " + response.data.musicalCast);
+				// // if(!setMusicalDetail(undefined)) return '정보없음';
+				// console.log("!setMusicalDetail(undefined)" + !setMusicalDetail(undefined));
+				// console.log("!setMusicalDetail()" + !setMusicalDetail(response.data.musicalCast));
+
+			} catch (e) {
 				console.log(e + "실패");
 			}
-			if(setMusicalDetail === null) return '정보없음';
-			console.log("!setMusicalDetail" + !setMusicalDetail === null);
+			
+			
 			// console.log("data없는값:? " + !setMusicalDetail);
 
 			// if ()
@@ -195,9 +204,10 @@ const MusicalDetail = (props) => {
 		}
 	}
 
-	const OnClickReserve = (e) => {
-		console.log("클릭한 뮤지컬 ID값 : " + e);
-		window.localStorage.setItem("seatInfoMode", e); // 흠..?
+
+	const OnClickReserve = (musicalId) => {
+		console.log("예매하기로 넘겨줄 뮤지컬 ID값 : " + musicalId);
+		window.localStorage.setItem("thisMusicalId", musicalId); // 예매페이지로 넘겨줌
 		navigate('/Reservation');
 	}
 	
@@ -207,7 +217,7 @@ const MusicalDetail = (props) => {
 	return(
 		<>
 		<TopButton/>
-		{musicalDetail && musicalDetail.map(e => (        
+		{musicalDetail && musicalDetail.map(e => (
 			<DetailInfoContainer>
 				<p className="musicalTitle">{e.musicalName}</p>
 				<DescInfo>

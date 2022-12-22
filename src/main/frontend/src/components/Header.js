@@ -15,14 +15,23 @@ const Menu = styled.div`
   padding: 10px 30px 15px 0px;
   display: flex;
   justify-content: right;
-    .menu_item {
-        margin-left: 20px;
-        margin-right: 10px;
-        text-decoration: none;
-        font-size: 0.8em;  
-        color: #ffffff;
-      cursor: pointer;
-    }
+  align-items: center;
+  .button {
+    color: #810000;
+    background-color: #ffffff;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+
+  }
+  .menu_item {
+    margin-left: 20px;
+    margin-right: 10px;
+    text-decoration: none;
+    font-size: 0.8em;  
+    color: #ffffff;
+    cursor: pointer;
+  }
 `;
 
 const LogoContainer = styled.div`
@@ -66,12 +75,12 @@ const Header = () => {
 
     // 현재 ID에서 로그아웃하기
     const onClickLogout = () => {
-        window.localStorage.removeItem("whoLogin");
-        window.localStorage.removeItem("whoLoginUserNum");
-        window.localStorage.removeItem("whoPwd");
-        window.localStorage.removeItem("isLogin");
-        navigate('/');
-      }
+      window.localStorage.removeItem("whoLogin");
+      window.localStorage.removeItem("whoLoginUserNum");
+      window.localStorage.removeItem("whoPwd");
+      window.localStorage.removeItem("isLogin");
+      navigate('/');
+    }
 
 
     const onClickAlarm = () => {
@@ -82,47 +91,46 @@ const Header = () => {
 
 
     return(
-        <>
+      <>
         <HeaderContainer>
 
-        <Menu>
-            {!whoLoginNow ?
-            // 로그인하지 않았을 때 => 로그인, 회원가입, 찜하기
-            (<>
-            <Link to={"/Login"} className="menu_item">로그인</Link>
-            <Link to={"/Agree"} className="menu_item">회원가입</Link>
-            <Link to={"/Login"} className="menu_item">찜하기</Link>
-            </>) 
-            : 
-            // 로그인했을 때 => 알림, ~~~님, 로그아웃, 마이페이지, 멤버십
-            (<>
-             <FaBell color="white" onClick={onClickAlarm}/>
-             <div className="menu_item">{whoLoginNow}님</div>
-             <button onClick={onClickLogout} className="menu_item">로그아웃</button>
-             <Link to={"/MyPage"} className="menu_item">마이페이지</Link>
-             <Link to = {"/Membership"} className="menu_item">멤버십</Link>
-            </>)
-            }
-            <Link to = {"/Cs"} className="menu_item">고객센터</Link>
-        </Menu>
-        
-        
-        <LogoContainer>
-            <Link to={"/"} className="logo_link">
-            <img className="logo_img" src={Logo} width={400} height={210}/>
-            </Link>
-        </LogoContainer>
+          <Menu>
+              {!whoLoginNow ?
+              // 로그인하지 않았을 때 => 로그인, 회원가입, 찜하기
+              (<>
+                <Link to={"/Login"} className="menu_item">로그인</Link>
+                <Link to={"/Agree"} className="menu_item">회원가입</Link>
+                <Link to={"/Login"} className="menu_item">예매내역</Link>
+              </>) 
+              : 
+              // 로그인했을 때 => 알림, ~~~님, 로그아웃, 마이페이지, 멤버십
+              (<>
+                <FaBell color="white" onClick={onClickAlarm}/>
+                <div className="menu_item">{whoLoginNow}님</div>
+                <button onClick={onClickLogout} className="button">로그아웃</button>
+                <Link to={"/MyPage"} className="menu_item">마이페이지</Link>
+                <Link to={"/MyPage"} className="menu_item">예매내역</Link>
+              </>)
+              }
+                <Link to = {"/Cs"} className="menu_item">고객센터</Link>
+          </Menu>
+          
+          <LogoContainer>
+              <Link to={"/"} className="logo_link">
+              <img className="logo_img" src={Logo} width={400} height={210}/>
+              </Link>
+          </LogoContainer>
 
-        <Category>
-          <Link to={"/"} className="category_item">뮤지컬</Link>
-          <Link to={"/TheaterSearch"} className="category_item">좌석별 후기</Link>
-          <Link to={"/Reservation"} className="category_item">예매하기</Link>
-        </Category>
+          <Category>
+            <Link to={"/"} className="category_item">뮤지컬</Link>
+            <Link to={"/TheaterSearch"} className="category_item">좌석별 후기</Link>
+            <Link to={"/Reservation"} className="category_item">예매하기</Link>
+          </Category>
 
         </HeaderContainer>
         {alarmModal && <Modal open={alarmModal} close={closeModal} header="확인"><Alarm/></Modal>}
 
-        </>
+      </>
     )
 
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mute.Final.dto.MusicalDetailDTO;
 import com.mute.Final.entity.Musical;
 import com.mute.Final.repository.MusicalRepository;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
@@ -78,16 +79,24 @@ public class MusicalDetailApiService {
 
 //             DB에 저장하기..관람연령만 되려나? 안돼안돼안돼!!!!!!!!!!!!!!
 //            String ageStr = item.getString("prfage");
-//
-//            Musical musicalAge = new Musical();
+//            Musical musical = new Musical(musicalDetailDTO);
+//            musicalRepository.save(musical);
+
+//            musicalRepository.findByMusicalId(item.getString("mt20id"));
 //            musicalAge.setMusicalAge(musicalDetailDTO.getMusicalAge());
 
-//            musicalRepository.save(ageStr);
 //            log.warn("가져온 연령값???????????" + ageStr);
+
 
         } catch (Exception e) {
             e.printStackTrace();
         }
         return list;
     }
+//    public Musical addAge(MusicalDetailDTO musicalDetailDTO) {
+//        Musical musical = Musical.builder(musicalDetailDTO).build();
+//        musical = musicalRepository.save(musical);
+//        return musical;
+//    }
+
 }

@@ -20,6 +20,7 @@ import java.time.LocalDate;
 public class Musical {
 
     @Id
+//    @Column(name = "musical_id", nullable = false)
     private String musicalId; // 공연 ID(PK)
     private String musicalName; // 공연 이름
 
@@ -32,6 +33,7 @@ public class Musical {
     private String musicalStatus; // 공연 상태 (공연예정, 공연중, 공연종료)
     private String musicalPoster; // 공연 포스터
     private String musicalAge; // 공연 관람 연령
+
 
     // api 호출 후 DB에 저장
     public Musical (JSONObject item) {
@@ -48,15 +50,15 @@ public class Musical {
         this.musicalPoster = item.getString("poster");
     }
 
-    public Musical (MusicalDetailDTO musicalDetailDTO) {
-//        MusicalDetailDTO musicalDetailDTO = new MusicalDetailDTO();
-        this.setMusicalAge(musicalDetailDTO.getMusicalAge());
+//    public Musical (MusicalDetailDTO musicalDetailDTO) {
+////        MusicalDetailDTO musicalDetailDTO = new MusicalDetailDTO();
+//        this.musicalAge = musicalDetailDTO.getMusicalAge();
+//        log.warn("세이브됐나? : " + musicalAge); // 안됨. 값은 가져와진다..
+//    }
 
-        log.warn("세이브됐나? : " + musicalAge); // 안됨
-    }
-
-//    public void Musical1 (JSONObject item) {
-//        this.musicalAge = item.getString("prfage");
+//    public static MusicalBuilder builder(MusicalDetailDTO musicalDetailDTO) {
+//        return MusicalBuilder()
+//                .musicalAge(musicalDetailDTO.getMusicalAge());
 //    }
 }
 

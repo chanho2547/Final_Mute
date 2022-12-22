@@ -43,10 +43,8 @@ public class MusicalDetailDTO {
         Object obj = item.getJSONObject("styurls").get("styurl");
         if (obj instanceof String) {
             descImg1 = item.getJSONObject("styurls").getString("styurl");
-            log.warn(descImg1);
         } else if(obj instanceof JSONArray) {
             JSONArray jsonArray = item.getJSONObject("styurls").getJSONArray("styurl");
-
             for (int i = 0; i < jsonArray.length(); i++) {
                 descImg1 = (String) jsonArray.get(0);
                 descImg2 = (String) jsonArray.get(1);

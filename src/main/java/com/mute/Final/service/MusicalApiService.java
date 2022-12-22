@@ -2,6 +2,7 @@ package com.mute.Final.service;
 
 
 import com.mute.Final.dto.MusicalDTO;
+import com.mute.Final.dto.MusicalDetailDTO;
 import com.mute.Final.entity.Musical;
 import com.mute.Final.repository.MusicalRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -81,6 +82,8 @@ public class MusicalApiService {
         for (int i = 0; i < jsonArr.length(); i++) {
             JSONObject item = (JSONObject) jsonArr.get(i);
                 Musical musical = new Musical(item);
+//                MusicalDetailDTO musicalDetailDTO = new MusicalDetailDTO();
+//                musical.setMusicalAge(musicalDetailDTO.getMusicalAge());
                 musicalRepository.save(musical);
         }
 
