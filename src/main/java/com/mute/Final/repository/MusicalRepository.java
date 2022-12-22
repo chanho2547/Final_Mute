@@ -15,7 +15,7 @@ public interface MusicalRepository extends JpaRepository<Musical, String> {
     Musical findByMusicalName(String musicalName);
 
     // 뮤지컬 ID 찾기(Wish 테이블 데이터 추가)
-    Musical findByMusicalId(String musicalId);
+    Musical findByMusicalId(String musicalId); // 도연 - 뮤지컬 후기 작성, 좌석 후기 작성
 
     // 티켓 최근 오픈순 top3
     // 필요한 쿼리 => select * from musical where musical_ticket_start < sysdate() order by musical_ticket_start desc limit 3;

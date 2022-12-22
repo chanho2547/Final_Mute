@@ -20,7 +20,7 @@ public interface ReviewTotalRepository extends JpaRepository<ReviewTotal, Long> 
 //            "order by avg(rm.score_avg_total) desc limit 3", nativeQuery = true)
 //    List<ReviewTotalProjection> findTop3();
 
-    List<ReviewTotal> findByMusicalId(Musical musicalId); // 뮤지컬 총평 후기 view
-    Long deleteByReviewMuId(long reviewMuId); // 뮤지컬 총평 후기 삭제
-    ReviewTotal findByReviewMuId(long reviewMuId);
+    List<ReviewTotal> findByMusicalId(Musical musicalId); // 도연 - 뮤지컬 총평 후기 view
+    Long deleteByReviewMuId(long reviewMuId); // 도연 - 뮤지컬 총평 후기 삭제
+    ReviewTotal findByReviewMuId(long reviewMuId); // 도연 - 뮤지컬 총평 후기 삭제
 }

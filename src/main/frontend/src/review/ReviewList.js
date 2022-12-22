@@ -9,7 +9,6 @@ import Rating from "../util/Rating";
 import styled from "styled-components";
 import { FaStar } from 'react-icons/fa';
 
-
 // 뮤지컬 총평 후기 view - 도연 작업중..
 
 const Container = styled.div`
@@ -68,17 +67,17 @@ const ReviewBox = styled.div`
 const ReviewList = (props) => {
     const navigate = useNavigate();
 
-    let totalScore = 0.0;
-    let totalStory = 0.0;
-    let totalDirect = 0.0;
-    let totalCast = 0.0;
-    let totalNumber = 0.0;
+    let totalScore = 0;
+    let totalStory = 0;
+    let totalDirect = 0;
+    let totalCast = 0;
+    let totalNumber = 0;
 
-    let totalResult = 0.0;
-    let storyResult = 0.0;
-    let directResult = 0.0;
-    let castResult = 0.0;
-    let numberResult = 0.0;
+    let totalResult = 0;
+    let storyResult = 0;
+    let directResult = 0;
+    let castResult = 0;
+    let numberResult = 0;
 
     const member = window.localStorage.getItem("whoLoginUserNum");
     let musicalId = window.localStorage.getItem("musicalId");
@@ -123,7 +122,7 @@ const ReviewList = (props) => {
             try{
                 let response = await MuteApi.ReviewInfo(musicalId);
                 setReviewInfo(response.data);
-                // console.log("후기 불러오기 성공!!");
+                console.log("후기 불러오기 성공!!");
 
             } catch (e) {
                 console.log(e + "후기 불러오기 실패");
@@ -140,11 +139,11 @@ const ReviewList = (props) => {
         castResult = ReviewInfo.map(e => parseFloat(e.scoreCast));
         numberResult = ReviewInfo.map(e => parseFloat(e.scoreNumber));
 
-        totalScore = totalResult.reduce((a, c) => a + c) / totalResult.length;
-        totalStory = storyResult.reduce((a, c) => a + c) / storyResult.length;
-        totalDirect = directResult.reduce((a, c) => a + c) / directResult.length;
-        totalCast = castResult.reduce((a, c) => a + c) / castResult.length;
-        totalNumber = numberResult.reduce((a, c) => a + c) / numberResult.length;
+        totalScore = totalResult.reduce((a, c) => a + c, 0) / totalResult.length;
+        totalStory = storyResult.reduce((a, c) => a + c, 0) / storyResult.length;
+        totalDirect = directResult.reduce((a, c) => a + c, 0) / directResult.length;
+        totalCast = castResult.reduce((a, c) => a + c, 0) / castResult.length;
+        totalNumber = numberResult.reduce((a, c) => a + c, 0) / numberResult.length;
     }
 
 
@@ -172,12 +171,12 @@ const ReviewList = (props) => {
     return(
         <Container>     
         <StarBox>
-            <div className="AvgBox">
-            <p><b className="AvgText">평균 별점 </b><FaStar size="30" color="#FCC419"/>{totalScore}</p>
-            <span><b>스토리 </b><FaStar size="25" color="gray"/>{totalStory}</span>　
-            <span><b>연출 </b><FaStar size="25" color="gray"/>{totalDirect}</span>　
-            <span><b>캐스팅 </b><FaStar size="25" color="gray"/>{totalCast}</span>　
-            <span><b>넘버 </b><FaStar size="25" color="gray"/>{totalNumber}</span>
+            <div className="AvgBox"> 
+            <p><b className="AvgText">평균 별점 </b><FaStar size="30" color="#FCC419"/>{totalScore.toFixed(1)}</p>
+            <span><b>스토리 </b><FaStar size="25" color="gray"/>{totalStory.toFixed(1)}</span>　
+            <span><b>연출 </b><FaStar size="25" color="gray"/>{totalDirect.toFixed(1)}</span>　
+            <span><b>캐스팅 </b><FaStar size="25" color="gray"/>{totalCast.toFixed(1)}</span>　
+            <span><b>넘버 </b><FaStar size="25" color="gray"/>{totalNumber.toFixed(1)}</span>
             </div>
             <button className="writeBtn" onClick={WriteButton}>후기 작성하기</button>
         </StarBox>
