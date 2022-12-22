@@ -55,6 +55,12 @@ const ReviewBox = styled.div`
 
     .text {
         padding: 5px;
+        display : inline-block;
+        width: 150px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        vertical-align: top;
     }
     .date {
         color: lightgray;
@@ -64,19 +70,33 @@ const ReviewBox = styled.div`
         border: solid 0.5px lightgray;
         background-color: white;
     }
-    .like {
-        width: 30px;
-        height: 10px;
-        border-radius: 30px;
-        border: solid 0.5px lightgray;
-        margin-left: 200px;
-    }
-    .dislike {
-        width: 30px;
-        height: 10px;
-        border-radius: 30px;
-        border: solid 0.5px lightgray;
-    }
+    /* .btn-more {
+        display: inline;
+        white-space: normal;
+    } */
+
+    .text .more {
+    display: inline;
+    white-space: normal;
+}
+`;
+
+const Likebtn = styled.button`
+    width: 50px;
+    height: 30px;
+    border-radius: 40px;
+    border: solid 0.5px lightgray;
+    background-color: white;
+    margin-left: 650px;
+`;
+
+const Dislikebtn = styled.button`
+    width: 50px;
+    height: 30px;
+    border-radius: 40px;
+    border: solid 0.5px lightgray;
+    background-color: white;
+    margin-left: 10px;
 `;
 
 const ReviewList = (props) => {
@@ -137,7 +157,7 @@ const ReviewList = (props) => {
             try{
                 let response = await MuteApi.ReviewInfo(musicalId);
                 setReviewInfo(response.data);
-                console.log("후기 불러오기 성공!!");
+                // console.log("후기 불러오기 성공!!");
 
             } catch (e) {
                 console.log(e + "후기 불러오기 실패");
@@ -199,11 +219,22 @@ const ReviewList = (props) => {
         }
     }
 
+    let likeCount = 0;
+    let dislikeCount = 0;
+
     const likebtn = () => {
-        setCount(prevCount => prevCount + 1);
+        likeCount = likeCount + 1;
     }
     const dislikebtn = () => {
-        setCount(prevCount => prevCount - 1);
+        dislikeCount = dislikeCount - 1;
+    }
+
+    const btnMore = document.getElementsByClassName("btn-more")[0];
+
+    btnMore.addEventListener("click", feedContentMore);
+
+    function feedContentMore() {
+    feedMore.classList.add("more");
     }
 
     return(
@@ -223,7 +254,8 @@ const ReviewList = (props) => {
                 <p>{e.reviewMuId}　{e.member}　<FaStar size="20" color="#FCC419"/>{e.scoreAvgTotal} <span className="date">　작성일 {e.writeDate}</span>　
                 <button className="deleteBtn" onClick={()=>OnClickDelete(member, e.reviewMuId)}>삭제</button></p>
                 <p className="myRaing">스토리 <FaStar size="15" color="gray"/>{e.scoreStory} 　연출 <FaStar size="15" color="gray"/>{e.scoreDirect} 　캐스팅 <FaStar size="15" color="gray"/>{e.scoreCast} 　넘버 <FaStar size="15" color="gray"/>{e.scoreNumber}<br/>
-                <p className="text">{e.reviewMuTxt}</p><button className="like" onClick={likebtn}><BiLike/></button ><button className="dislike" onClick={dislikebtn}><BiDislike/></button></p>
+                <p className="text">{e.reviewMuTxt}</p><a href="#" className="btn-more">더보기</a>
+                <Likebtn className="like" onClick={()=>likebtn()}><BiLike size="25"/>{likeCount}</Likebtn ><Dislikebtn className="dislike" onClick={()=>dislikebtn()}><BiDislike size="25"/>{dislikeCount}</Dislikebtn></p>
             </ReviewBox>
         ))}  
         {modalLogin&& <Modal open={modalLogin} close={closeModal} type={true}>로그인이 필요한 서비스입니다.</Modal>}

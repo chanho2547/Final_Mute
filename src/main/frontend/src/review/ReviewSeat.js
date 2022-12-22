@@ -163,7 +163,7 @@ const ReviewSeat = () => {
     // 후기 작성 버튼이 눌려지면 동작하는 함수
     const WriteSeatButton = async() => {
         try {
-            const res =  await MuteApi.WriteSeat(userNum, musicalId, theaterId, mySeat, seatRating, viewRating, soundRating, lightRating, scoreAvgSeat, seatReview);
+            const res =  await MuteApi.WriteSeat(userNum, musicalId, pkNum, seatRating, viewRating, soundRating, lightRating, scoreAvgSeat, seatReview);
             if(res.data === true) {
                 // console.log("텍스트 입력 성공");
                 setWriteModal(true);   
