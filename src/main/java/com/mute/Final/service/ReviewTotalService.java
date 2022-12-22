@@ -3,6 +3,7 @@ import com.mute.Final.dto.ReviewTotalDTO;
 import com.mute.Final.entity.Musical;
 import com.mute.Final.entity.ReviewTotal;
 import com.mute.Final.repository.MusicalRepository;
+import com.mute.Final.repository.ReviewTotalRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
