@@ -230,7 +230,7 @@ const MuteApi =  {
     },
 
     // 회원정보 불러오기
-    userInfo: async function(userId) {
+    userInfoLoad: async function(userId) {
         const ediObj = {
             userId: userId
         }
@@ -255,7 +255,7 @@ const MuteApi =  {
     userImgSave: async function(userId, img) {
         const imgObj = {
             userId: userId,
-            img: img
+            imgName: img
         }
         return await axios.post("user/editImg", imgObj);
     },

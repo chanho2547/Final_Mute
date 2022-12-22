@@ -2,7 +2,9 @@ import AWS from "aws-sdk";
 import styled from "styled-components";
 import MuteApi from "../api/MuteApi";
 
-const Img = styled.div`
+
+const ProImg = ({userId, setUserUrl, setUserImg, userUrl}) => {
+    const Img = styled.div`
     .image-upload {
   width: 120px !important;
   height: 120px !important;
@@ -48,9 +50,6 @@ const Img = styled.div`
   cursor: pointer;
 }
 `;
-
-const ProImg = ({userId, setUserUrl, setUserImg, userUrl}) => {
-
     // 이미지 저장 aws s3
     const bucket = "musicalmate";
 
@@ -97,8 +96,8 @@ const handleFileInput = async(e) => {
 return (
 
     <Img style={userUrl}>
-        <label htmlFor="upload" className="image-upload-wrapper">
         <input type="file" id="upload" accept='image/*' className="image-upload" onChange={handleFileInput} />
+            <label htmlFor="upload" className="image-upload-wrapper">
             <img
                 className="profile-img"
                 src={`https://musicalmate.s3.ap-northeast-2.amazonaws.com/profileimg.png`} />

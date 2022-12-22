@@ -72,7 +72,7 @@ const Edit = () => {
     // }, [])
 
     useEffect(() => {
-        const userInfo = async() => {
+        const userInfoLoad = async() => {
             try {
                 const response = await MuteApi.userInfo(userId);
                 console.log(response.data);
@@ -93,7 +93,7 @@ const Edit = () => {
                 console.log(e);
             }
         }
-        userInfo();
+        userInfoLoad();
     }, [userId]);
 
 
@@ -214,7 +214,6 @@ const Edit = () => {
     return(
         <>
             <ProImg userId={userId} setUserImg={setUserImg} setUserUrl={setUserUrl} userUrl={userUrl}/>
-            
             <div>{userId}님</div>
             <div>
                 <p>이름 {changeName && <span>{nameMsg}</span>}</p>
