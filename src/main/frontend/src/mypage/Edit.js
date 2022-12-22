@@ -4,55 +4,9 @@ import MuteApi from "../api/MuteApi";
 import React from "react";
 import Post from '../login/Post';
 import Modal from "../util/Modal";
-import AWS from "aws-sdk";
-import styled from "styled-components";
+import ProImg from "./ProImg";
 
-const Img = styled.div `
-    .image-upload {
-  width: 120px !important;
-  height: 120px !important;
-  font-size: 100px;
-  text-align: right;
-  min-width: 0 !important;
-  outline: none;
-  background: rgb(0, 0, 0);
-  cursor: inherit;
-  display: block !important;
-  border-radius: 50% !important;
-  cursor: pointer;
-  position: absolute;
-  margin: 0 !important;
-  z-index: -1;
-}
 
-.image-upload-wrapper {
-  position: inherit;
-  width: 120px !important;
-  height: 120px !important;
-  font-size: 100px;
-  text-align: right;
-  min-width: 0 !important;
-  outline: none;
-  background: rgb(255, 255, 255);
-  cursor: inherit;
-  display: block !important;
-  border-radius: 50% !important;
-  cursor: pointer;
-}
-
-.profile-img {
-  position: inherit;
-  width: 120px !important;
-  height: 120px !important;
-  font-size: 100px;
-  min-width: 0 !important;
-  outline: none;
-  cursor: inherit;
-  display: block !important;
-  border-radius: 50% !important;
-  cursor: pointer;
-}
-`;
 
 // 회원정보 수정 페이지
 const Edit = () => {
@@ -61,7 +15,7 @@ const Edit = () => {
     console.log(userId);
 
     const [userImg, setUserImg] = useState(""); 
-    const [url, setUrl] = useState({ background: "url(https://mutemute.s3.ap-northeast-2.amazonaws.com/profileimg.png" + userImg + ")" });
+    const [userUrl, setUserUrl] = useState({ background: "url(https://mutemute.s3.ap-northeast-2.amazonaws.com/profileimg.png" + userImg + ")" });
     const [userName, setUserName] = useState("");
     const [userPwd, setUserPwd] = useState("");
     const [userPhone, setUserPhone] = useState("");
@@ -134,7 +88,7 @@ const Edit = () => {
                 setUserMail(response.data[2]);
                 setUserAddr(response.data[4]);
                 setUserImg(response.data[5]);
-                setUrl({ background: "url(https://mutemute.s3.ap-northeast-2.amazonaws.com/profileimg.png" + response.data[5] + ")"});
+                setUrl({ background: "url(https://musicalmate.s3.ap-northeast-2.amazonaws.com/profileimg.png" + response.data[5] + ")"});
             } catch (e) {
                 console.log(e);
             }
@@ -256,60 +210,10 @@ const Edit = () => {
         }
     }
 
-    // 이미지 저장 aws s3
-
-    const bucket = "mutemute";
-
-    AWS.config.update({
-        region: "ap-northeast-2",
-        credentials: new AWS.CognitoIdentityCredentials({
-            IdentityPoolId: 'ap-northeast-2:b8bdbff5-c873-43a0-b07d-eb28bb5be5e0'
-        }),
-    })
-
-    const handleFileInput = async(e) => {
-        const file = e.target.files[0];
-        const fileName = userId + e.target.files[0].name;
-        
-
-        // s3 sdk에 내장된 업로드 함수
-        const upload = new AWS.S3.ManagedUpload({
-            params: {
-                Bucket: bucket, // 업로드할 aws 버킷명
-                Key: fileName, // 업로드할  파일 이름
-                Body: file, // 업로드할 파일
-            },
-        })
-        const promise = upload.promise()
-
-        promise.then(
-            function (data) {
-                alert("이미지 업로드 성공")
-            },
-            function (err) {
-                return alert("업로드 오류 발생:" + err.message)
-                setUrl("https://mutemute.s3.ap-northeast-2.amazonaws.com/profileimg.png")
-            }
-        )
-        setUserImg(fileName);
-
-        // 서버에 이미지 저장
-        await MuteApi.userImgSave(userId, fileName);
-
-        // 이미지 미리보기
-        const fileUrl = URL.createObjectURL(file);
-        setUrl({backgroundImage: "url(" + fileUrl + ")"});
-    }
+    
     return(
         <>
-            <Img >
-                <input type="file" id="upload" accept='image/*' className="image-upload" onChange={handleFileInput} />
-                <label htmlFor="upload" className="image-upload-wrapper">
-                <img
-                    className="profile-img"
-                    src={`https://mutemute.s3.ap-northeast-2.amazonaws.com/profileimg.png`} />
-                </label>
-            </Img>
+            <ProImg userId={userId} setUserImg={setUserImg} setUserUrl={setUserUrl} userUrl={userUrl}/>
             
             <div>{userId}님</div>
             <div>
