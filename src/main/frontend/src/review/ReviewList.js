@@ -8,6 +8,8 @@ import MuteApi from "../api/MuteApi";
 import Rating from "../util/Rating";
 import styled from "styled-components";
 import { FaStar } from 'react-icons/fa';
+import { BiLike } from 'react-icons/bi';
+import { BiDislike } from 'react-icons/bi';
 
 // 뮤지컬 총평 후기 view - 도연 작업중..
 
@@ -61,6 +63,19 @@ const ReviewBox = styled.div`
         border-radius: 5px;
         border: solid 0.5px lightgray;
         background-color: white;
+    }
+    .like {
+        width: 30px;
+        height: 10px;
+        border-radius: 30px;
+        border: solid 0.5px lightgray;
+        margin-left: 200px;
+    }
+    .dislike {
+        width: 30px;
+        height: 10px;
+        border-radius: 30px;
+        border: solid 0.5px lightgray;
     }
 `;
 
@@ -144,6 +159,22 @@ const ReviewList = (props) => {
         totalDirect = directResult.reduce((a, c) => a + c, 0) / directResult.length;
         totalCast = castResult.reduce((a, c) => a + c, 0) / castResult.length;
         totalNumber = numberResult.reduce((a, c) => a + c, 0) / numberResult.length;
+
+        if (isNaN(totalScore)) {
+            totalScore = 0;
+        }
+        if (isNaN(totalStory)) {
+            totalStory = 0;
+        }
+        if (isNaN(totalDirect)) {
+            totalDirect = 0;
+        }
+        if (isNaN(totalCast)) {
+            totalCast = 0;
+        }
+        if (isNaN(totalNumber)) {
+            totalNumber = 0;
+        }
     }
 
 
@@ -168,6 +199,13 @@ const ReviewList = (props) => {
         }
     }
 
+    const likebtn = () => {
+        setCount(prevCount => prevCount + 1);
+    }
+    const dislikebtn = () => {
+        setCount(prevCount => prevCount - 1);
+    }
+
     return(
         <Container>     
         <StarBox>
@@ -185,7 +223,7 @@ const ReviewList = (props) => {
                 <p>{e.reviewMuId}　{e.member}　<FaStar size="20" color="#FCC419"/>{e.scoreAvgTotal} <span className="date">　작성일 {e.writeDate}</span>　
                 <button className="deleteBtn" onClick={()=>OnClickDelete(member, e.reviewMuId)}>삭제</button></p>
                 <p className="myRaing">스토리 <FaStar size="15" color="gray"/>{e.scoreStory} 　연출 <FaStar size="15" color="gray"/>{e.scoreDirect} 　캐스팅 <FaStar size="15" color="gray"/>{e.scoreCast} 　넘버 <FaStar size="15" color="gray"/>{e.scoreNumber}<br/>
-                <p className="text">{e.reviewMuTxt}</p></p>
+                <p className="text">{e.reviewMuTxt}</p><button className="like" onClick={likebtn}><BiLike/></button ><button className="dislike" onClick={dislikebtn}><BiDislike/></button></p>
             </ReviewBox>
         ))}  
         {modalLogin&& <Modal open={modalLogin} close={closeModal} type={true}>로그인이 필요한 서비스입니다.</Modal>}
