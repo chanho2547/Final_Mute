@@ -2,6 +2,35 @@ import { Link } from "react-router-dom";
 import { useState, useEffect} from "react";
 import MuteApi from "../api/MuteApi";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+
+const MusicalListContainer = styled.div`
+margin-top : 100px;
+margin-left: 400px;
+.musicalList{
+    display: flex;
+    margin-bottom: 70px;
+    .musicalList_img{
+        margin-right: 100px;   
+    }
+    .musicalList_status{
+        margin-top: 120px;
+        margin-right: 100px;
+        font-weight: 600;
+        font-size: 20px;
+    }
+    .musicalList_text{
+        .musicalList_text_name{
+            font-size: 30px;
+            font-weight: 700;
+        }
+        .musicalList_test_date{
+            color: #909090;
+        }
+    }
+}
+
+`;
 
 const MusicalSearchList = () => {
     let navigate = useNavigate();
@@ -30,18 +59,26 @@ const OnClick = (musicalId) => {
 
     return (
         <>
-        <div>
+        <MusicalListContainer>
             {searchList && searchList.map(e => (
                 // 만약 OnClick(e.musicalName)이라고 적으면 로컬스토리지에 musicalName저장됨
                 <div onClick={() => OnClick(e.musicalId)}>
-                <img src= {e.musicalPoster} size width={180} height={250} />
-                <div>{e.musicalName}</div>
-                <div>{e.musicalStart}</div>
-                <div>{e.musicalEnd}</div>
-                <div>{e.theaterName}</div>
+
+                <div className="musicalList">
+
+                <img className="musicalList_img" src= {e.musicalPoster} size width={220} height={300} />
+                <p className="musicalList_status">{e.musicalStatus}</p>
+
+                <div className="musicalList_text">
+                <p className="musicalList_text_name">{e.musicalName}</p>
+                <p className="musicalList_test_date">{e.musicalStart}&nbsp;~&nbsp;{e.musicalEnd}&nbsp;&nbsp;|&nbsp;&nbsp;{e.theaterName}</p>
+                </div>
+
+                </div>
+
                 </div>
             ))}
-        </div>
+        </MusicalListContainer>
         </>
     )
 }

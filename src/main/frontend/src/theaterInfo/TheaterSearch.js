@@ -2,9 +2,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Search from '../images/search.png';
+import TheaterSearchList from "./TheaterSearchList";
 
 const SearchContainer = styled.div`
   margin: auto;
+  margin-top: 70px;
+  margin-bottom: 70px;
   border: 4px solid #810000;
   display: flex;
   width: 580px;
@@ -14,10 +17,16 @@ const SearchContainer = styled.div`
         border: none;
         font-size: 18px;
         margin-left: 15px;
+        :focus{
+           outline: none;
+        }
     }
     .search_button{
         border: none;
         background-color: rgba(0,0,0,0);
+        :hover{
+            cursor: pointer;
+        }
     }
     img{
         width: 25px;
@@ -49,6 +58,14 @@ const onKeyPress = (e) => {
     }
 }
 
+const [theaterList, setTheaterList] = useState(false);
+
+// if(theaterList === true) {
+//     setTheaterList(false)
+// } else {
+//     setTheaterList(true)
+// }
+
 // const highFunction = (e) => {
 //     alert("들어온 값 : "+e);
 // }
@@ -60,6 +77,8 @@ const onKeyPress = (e) => {
         <input className="search_input" onChange={onChangeInput} onKeyDown={onKeyPress} placeholder="극장을 검색하세요"/>
         <button className="search_button" type="button" onClick={onClickInput}><img src={Search}/></button>
         </SearchContainer>
+
+        {theaterList && <TheaterSearchList />}
         </>
     )
 }

@@ -26,6 +26,8 @@ public class TheaterService {
             theaterDTO.setTheaterId(e.getTheaterId());
             theaterDTO.setTheaterName(e.getTheaterName());
             theaterDTO.setTheaterAddr(e.getTheaterAddr());
+            theaterDTO.setTheaterCall(e.getTheaterCall());
+            theaterDTO.setTheaterWeb(e.getTheaterWeb());
             theaterDTO.setTheaterPoster(e.getTheaterPoster());
             theaterDTO.setTheaterSeats(e.getTheaterSeats());
             theaterDTOS.add(theaterDTO);
