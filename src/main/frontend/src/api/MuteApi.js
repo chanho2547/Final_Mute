@@ -52,12 +52,12 @@ const MuteApi =  {
     },
 
      // 좌석 후기 작성 - 도연
-     WriteSeat: async function(userNum, musicalId, theaterId, mySeat, seatRating, viewRating, soundRating, lightRating, scoreAvgSeat, seatReview) {
+     WriteSeat: async function(userNum, musicalId, seatNum, seatRating, viewRating, soundRating, lightRating, scoreAvgSeat, seatReview) {
         const reviewObj = {
             userNum : userNum,
             musicalId : musicalId, 
-            theaterId : theaterId, // 극장
-            seatNum : mySeat, // 좌석
+            // theaterId : theaterId, 
+            seatNum : seatNum, // 좌석
             scoreSeat: seatRating,// 좌석 별점 
             scoreView: viewRating, // 시야 별점
             scoreSound : soundRating, // 음향 별점
@@ -251,6 +251,16 @@ const MuteApi =  {
         return await axios.post("user/saveInfo", ediObj);
     },
 
+    // 서버에 이미지 저장
+    userImgSave: async function(userId, img) {
+        const imgObj = {
+            userId: userId,
+            img: img
+        }
+        return await axios.post("user/editImg", imgObj);
+    },
+
+
     wishCancel: async function(userNum, mt20id) {
         return await axios.delete(`/wish/delete?userNum=${userNum}&musicalId=${mt20id}`)
     },
@@ -266,15 +276,6 @@ const MuteApi =  {
         }
         return await axios.get(`/theater/${mt10id}`, theaterId);
     },
-    // 이미지 저장
-    userImgSave: async function (userId, imgName) {
-        const imgObj = {
-            userId: userId,
-            imgName: imgName
-        }
-        return await axios.post("user/editImg", imgObj)
-    },
-
     // 예약된 좌석 확인
     isReservation : async function (seeDate) {
         const seeDateInfo = {
