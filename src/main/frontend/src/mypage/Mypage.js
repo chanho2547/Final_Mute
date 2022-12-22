@@ -1,6 +1,6 @@
 import React from "react";
 import Edit from "./Edit";
-
+import MyReview from "../review/MyReview";
 import MyWish from "../util/MyWish";
 
 
@@ -14,9 +14,10 @@ const MyPage = () => {
 
             <Edit/>
             <div>
-
+                
             </div>
             <MyWish/>
+            <MyReview/>
         </>
     )
 }

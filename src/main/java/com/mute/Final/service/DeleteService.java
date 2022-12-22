@@ -18,11 +18,9 @@ public class DeleteService {
     private final ReviewSeatRepository reviewSeatRepository; // 좌석 후기
 
     // 총평 후기 삭제
-    public boolean deleteTotal(String member,String reviewMuId) {
+    public boolean deleteTotal(String member, String reviewMuId) {
         try {
-            System.out.println("here ok asdfasdf");
             ReviewTotal reviewTotal =  reviewTotalRepository.findByReviewMuId(Long.parseLong(reviewMuId));
-            System.out.println("findByReviewMuid 12341234 : " + reviewTotal);
 
             if(reviewTotal.getMember().getUserNum().equals(Long.parseLong(member))){
                 Long result = reviewTotalRepository.deleteByReviewMuId(Long.parseLong(reviewMuId));

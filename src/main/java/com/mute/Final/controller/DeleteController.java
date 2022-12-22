@@ -23,8 +23,6 @@ public class DeleteController {
         String member = deleteTotalData.get("member");
         String reviewMuId = deleteTotalData.get("reviewMuId");
 
-        //System.out.println("asdf : " + member + " || " + reviewMuId);
-
         boolean result = deleteService.deleteTotal(member, reviewMuId);
         if(result) {
             return new ResponseEntity(true, HttpStatus.OK);

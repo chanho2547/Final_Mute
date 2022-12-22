@@ -94,6 +94,13 @@ const MuteApi =  {
         return await axios.get(`totalView?musicalId=${musicalId}`);
     },
 
+    // 마이페이지 - 나의 뮤지컬 후기 view - 도연
+    myReview : async function(userNum) {
+        const reviewObj = {
+            member : userNum
+        }
+        return await axios.get(`myTotalView?userNum=${userNum}`);
+    },
 
     // 가입 중복 확인
     memberJoinCheck: async function(uni,type) {

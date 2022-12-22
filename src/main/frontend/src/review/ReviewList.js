@@ -1,11 +1,8 @@
 import React from "react";
-import { useState, useEffect, useMemo } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import Modal from "../util/Modal";
-import ReviewTotal from "./ReviewTotal";
-import axios from "axios";
 import MuteApi from "../api/MuteApi";
-import Rating from "../util/Rating";
 import styled from "styled-components";
 import { FaStar } from 'react-icons/fa';
 import { BiLike } from 'react-icons/bi';

@@ -24,4 +24,5 @@ public interface ReviewTotalRepository extends JpaRepository<ReviewTotal, Long> 
     List<ReviewTotal> findByMusicalId(Musical musicalId); // 도연 - 뮤지컬 총평 후기 view
     Long deleteByReviewMuId(long reviewMuId); // 도연 - 뮤지컬 총평 후기 삭제
     ReviewTotal findByReviewMuId(long reviewMuId); // 도연 - 뮤지컬 총평 후기 삭제
+    List<ReviewTotal> findByMember(Member member); // 도연 - 마이페이지 - 나의 뮤지컬 후기 view
 }
