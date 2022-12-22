@@ -8,5 +8,5 @@ import java.util.List;
 public interface TheaterRepository extends JpaRepository<Theater, String> {
     List<Theater> findByTheaterNameLike(String theaterName);
 
-    Theater findByTheaterId(String theaterId);
+    Theater findByTheaterId(String theaterId); // 도연 - 좌석 후기 작성
 }

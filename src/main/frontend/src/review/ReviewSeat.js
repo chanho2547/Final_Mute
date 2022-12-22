@@ -26,7 +26,7 @@ const SelectSeat = styled.div`
     border: solid 0.5px gray;
     padding: 10px;
     width: 550px;
-    margin-left: 250px;
+    margin-left: 150px;
 
     .SeatBtn {
         border-radius: 5px;
@@ -39,7 +39,7 @@ const SelectSeat = styled.div`
 
 const StarBox = styled.div`
     display: flex;
-    padding-left: 240px;
+    padding-left: 200px;
 
     .AvgText {
         color: #810000;
@@ -105,13 +105,14 @@ const ReviewSeat = () => {
 
     const userNum = window.localStorage.getItem("whoLoginUserNum"); // 지금 로그인한 회원번호
     let musicalId = window.localStorage.getItem("musicalId"); // 지금 선택한 뮤지컬
-    // let theaterFullName = window.localStorage.getItem("theaterFullName"); // 극장 이름
+    let theaterId = window.localStorage.getItem("theaterFullName"); // 극장 이름
     let mySeat = window.localStorage.getItem("whatSeatInfo"); // 극장이름 + 좌석번호(층, 열, 번)
-    // let pkNum = window.localStorage.setItem("whatSeatNum"); // 좌석번호
-
+    let pkNum = window.localStorage.getItem("whatSeatNum"); // 좌석번호
+    
     console.log("회원번호 : " + userNum); 
     console.log("뮤지컬 아이디 : " + musicalId); 
-    // console.log("좌석번호 : "  + pkNum);
+    console.log("내가 선택한 좌석 : " + mySeat); 
+    console.log("좌석번호 : "  + pkNum);
 
      // 취소 버튼 누르면 첫 화면으로..
     const CancelButton = () => {   
@@ -162,7 +163,7 @@ const ReviewSeat = () => {
     // 후기 작성 버튼이 눌려지면 동작하는 함수
     const WriteSeatButton = async() => {
         try {
-            const res =  await MuteApi.WriteSeat(userNum, musicalId, seatNum, seatRating, viewRating, soundRating, lightRating, scoreAvgSeat, seatReview);
+            const res =  await MuteApi.WriteSeat(userNum, musicalId, theaterId, mySeat, seatRating, viewRating, soundRating, lightRating, scoreAvgSeat, seatReview);
             if(res.data === true) {
                 // console.log("텍스트 입력 성공");
                 setWriteModal(true);   
