@@ -5,7 +5,55 @@ import React from "react";
 import Post from '../login/Post';
 import Modal from "../util/Modal";
 import ProImg from "./ProImg";
+import styled from "styled-components";
+import AWS from "aws-sdk";
 
+const Img = styled.div `
+    .image-upload { // 파일선택 버튼
+  width: 120px !important;
+  height: 120px !important;
+  font-size: 100px;
+  text-align: right;
+  min-width: 0 !important;
+  outline: none;
+  background: rgb(0, 0, 0);
+  cursor: inherit;
+  display: block !important;
+  border-radius: 50% !important;
+  cursor: pointer;
+  position: absolute;
+  margin: 0 !important;
+  z-index: -1;
+}
+
+ .image-upload-wrapper {
+   position: inherit;
+   width: 120px !important;
+   height: 120px !important;
+   font-size: 100px;
+   text-align: right;
+   min-width: 0 !important;
+   outline: none;
+   background: rgb(255, 255, 255);
+   cursor: inherit;
+   display: block !important;
+   border-radius: 50% !important;
+   cursor: pointer;
+ }
+
+ .profile-img {
+   position: inherit;
+   width: 120px !important;
+   height: 120px !important;
+   font-size: 100px;
+   min-width: 0 !important;
+   outline: none;
+   cursor: inherit;
+   display: block !important;
+   border-radius: 50% !important;
+   cursor: pointer;
+ }
+ `;
 
 
 // 회원정보 수정 페이지
@@ -15,18 +63,18 @@ const Edit = () => {
     console.log(userId);
 
     const [userImg, setUserImg] = useState(""); 
-    const [userUrl, setUserUrl] = useState({ background: "url(https://mutemute.s3.ap-northeast-2.amazonaws.com/profileimg.png" + userImg + ")" });
+    const [userUrl, setUserUrl] = useState({ backgroundImage: "url(https://mutemute.s3.ap-northeast-2.amazonaws.com/profileimg.png" + userImg + ")" });
     const [userName, setUserName] = useState("");
     const [userPwd, setUserPwd] = useState("");
     const [userPhone, setUserPhone] = useState("");
     const [userMail, setUserMail] = useState("");
-    const [userAddr, setUserAddr] = useState("");
+    //const [userAddr, setUserAddr] = useState("");
 
     const [changeName, setChangeName] = useState("");
     const [changePwd, setChangePwd] = useState("");
     const [changePhone, setChangePhone] = useState("");
     const [changeMail, setChangeMail] = useState("");
-    const [changeAddr, setChangeAddr] = useState("");
+    //const [changeAddr, setChangeAddr] = useState("");
 
     const [nameMsg, setNameMsg] = useState("");
     const [pwdMsg, setPwdMsg] = useState("");
@@ -74,21 +122,21 @@ const Edit = () => {
     useEffect(() => {
         const userInfoLoad = async() => {
             try {
-                const response = await MuteApi.userInfo(userId);
+                const response = await MuteApi.userInfoLoad(userId);
                 console.log(response.data);
                 setChangeName(response.data[0]);
                 setChangePwd(response.data[1]);
                 setChangePhone(response.data[3]);
                 setChangeMail(response.data[2]);
-                setChangeAddr(response.data[4]);
+                //setChangeAddr(response.data[4]);
 
                 setUserName(response.data[0])
                 setUserPwd(response.data[1]);
                 setUserPhone(response.data[3]);
                 setUserMail(response.data[2]);
-                setUserAddr(response.data[4]);
+                //setUserAddr(response.data[4]);
                 setUserImg(response.data[5]);
-                setUserUrl({ background: "url(https://musicalmate.s3.ap-northeast-2.amazonaws.com/profileimg.png" + response.data[5] + ")"});
+                setUserUrl({ backgroundImage: "url(https://musicalmate.s3.ap-northeast-2.amazonaws.com/profileimg.png" + response.data[5] + ")"});
             } catch (e) {
                 console.log(e);
             }
@@ -114,26 +162,26 @@ const Edit = () => {
         else setIsPhone(false);
     }
 
-    // 주소
-    const [enroll_company, setEnroll_company] = useState({
-        address:'',
-    });
-
-    const [popup, setPopup] = useState(false);
-
-    const handleInput = (e) => {
-        console.log(e.target.value);
-        setUserAddr(e.target.value);
-        setEnroll_company({
-            ...enroll_company,
-            [e.target.name]:e.target.value,
-        })
-        console.log(e.target.name);
-    }
-
-    const handleComplete = (data) => {
-        setPopup(!popup);
-    }
+    // // 주소
+    // const [enroll_company, setEnroll_company] = useState({
+    //     address:'',
+    // });
+    //
+    // const [popup, setPopup] = useState(false);
+    //
+    // const handleInput = (e) => {
+    //     console.log(e.target.value);
+    //     setUserAddr(e.target.value);
+    //     setEnroll_company({
+    //         ...enroll_company,
+    //         [e.target.name]:e.target.value,
+    //     })
+    //     console.log(e.target.name);
+    // }
+    //
+    // const handleComplete = (data) => {
+    //     setPopup(!popup);
+    // }
 
     // 전화번호 중복 확인
     const onBlurPhoneCheck = async() => {
@@ -209,11 +257,49 @@ const Edit = () => {
             setCommnet("회원정보 수정에 실패하였습니다.")
         }
     }
+    AWS.config.update({
+        region: "ap-northeast-2",
+        credentials: new AWS.CognitoIdentityCredentials({
+            IdentityPoolId: 'ap-northeast-2:ac1f0e18-a90f-43a3-95f5-8622818831c6'
+        }),
+    })
+
+    const handleFileInput = async(e) => {
+        const file = e.target.files[0]
+
+        const upload = new AWS.S3.ManagedUpload({
+            params: {
+                Bucket: "musicalmate",
+                Key: "profileimg.png",
+                Body: file,
+            },
+        })
+
+        const promise = upload.promise()
+
+        promise.then(
+            function (data) {
+                alert("이미지 업로드 성공")
+                navigate(0);
+            },
+            function (err) {
+                return alert("업로드 오류 발생:" + err.message)
+            }
+        )
+    }
 
     
     return(
         <>
-            <ProImg userId={userId} setUserImg={setUserImg} setUserUrl={setUserUrl} userUrl={userUrl}/>
+            <Img >
+                <input type="file" id="upload" accept='image/*' className="image-upload" onChange={handleFileInput} />
+                <label htmlFor="upload" className="image-upload-wrapper">
+                    <img
+                        className="profile-img"
+                        src={`https://musicalmate.s3.ap-northeast-2.amazonaws.com/profileimg.png`} />
+                </label>
+            </Img>
+            {/* <ProImg userId={userId} setUserImg={setUserImg} setUserUrl={setUserUrl} userUrl={userUrl}/> */}
             <div>{userId}님</div>
             <div>
                 <p>이름 {changeName && <span>{nameMsg}</span>}</p>
@@ -231,12 +317,12 @@ const Edit = () => {
                 <p>Mail {changeMail && <span>{mailMsg}</span>}</p>
                 <input onChange={onChangeMail} value={changeMail} onBlur={onBlurMailCheck} placeholder="메일" />
             </div>
-            <div>
-                <label className="address_search">주소</label><br/>
-                <input className="addr" type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
-                <button onClick={handleComplete}>주소 검색</button>
-                {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}
-            </div>
+            {/*<div>*/}
+            {/*    <label className="address_search">주소</label><br/>*/}
+            {/*    <input className="addr" type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>*/}
+            {/*    <button onClick={handleComplete}>주소 검색</button>*/}
+            {/*    {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}*/}
+            {/*</div>*/}
             <div>
                 <button onClick={onClickSave} disabled={!(isMail && isPhone && isName)}>회원정보수정</button>
             </div>

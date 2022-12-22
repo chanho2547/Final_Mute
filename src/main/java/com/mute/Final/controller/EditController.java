@@ -50,15 +50,15 @@ public class EditController {
         String pwd = userInfo.get("pwd");
         String mail = userInfo.get("mail");
         String phone = userInfo.get("phone");
-        String addr = userInfo.get("addr");
+        //String addr = userInfo.get("addr");
         log.error("아이디 : " + userId);
         log.error("변경 name : " + name);
         log.error("변경 pwd : " + pwd);
         log.error("변경 mail : " + mail);
         log.error("변경 phone : " + phone);
-        log.error("변경 addr : " + addr);
+        //log.error("변경 addr : " + addr);
 
-        boolean result = editService.saveUserInfo(userId, name, pwd, mail, phone, addr);
+        boolean result = editService.saveUserInfo(userId, name, pwd, mail, phone);
         if(result) {
             return new ResponseEntity(true, HttpStatus.OK);
         } else {
