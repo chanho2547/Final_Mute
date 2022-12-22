@@ -88,7 +88,7 @@ const Edit = () => {
                 setUserMail(response.data[2]);
                 setUserAddr(response.data[4]);
                 setUserImg(response.data[5]);
-                setUrl({ background: "url(https://musicalmate.s3.ap-northeast-2.amazonaws.com/profileimg.png" + response.data[5] + ")"});
+                setUserUrl({ background: "url(https://musicalmate.s3.ap-northeast-2.amazonaws.com/profileimg.png" + response.data[5] + ")"});
             } catch (e) {
                 console.log(e);
             }
