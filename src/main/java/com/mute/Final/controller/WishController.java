@@ -17,18 +17,13 @@ public class WishController {
     public WishController(WishService wishService){
         this.wishService = wishService;
     }
-
-//   @GetMapping("/wish/join")
-//    public ResponseEntity<List<?>> wishJoin() {
-//            list = (List<Object>) WishService.getWishOnList();
-//            list.add();
-//    }
-//        return new ResponseEntity<>(list, HttpStatus.OK);
-
-
-
-
-
+    
+    // 조인 쿼리문
+   @GetMapping("/wish/join")
+    public ResponseEntity<List<?>> getWishOnList(@RequestParam int userNum) {
+       List<?> list = wishService.getWishOnList(userNum);
+       return new ResponseEntity<>(list, HttpStatus.OK);
+          }
 
     // ID별 alarm = "on" Select
     @GetMapping("/wish/select")

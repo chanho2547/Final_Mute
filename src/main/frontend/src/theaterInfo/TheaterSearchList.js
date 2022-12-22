@@ -2,9 +2,21 @@ import { Link } from "react-router-dom";
 import { useState, useEffect} from "react";
 import MuteApi from "../api/MuteApi";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 // 공연장 검색 목록
 // theaterSearch.js에 검색창있음
+const TheaterInfo = styled.div`
+margin: auto;
+    .theater_name{
+        color: #810000;
+        font-size: 30px;
+        font-weight: 700;
+    }
+
+`;
+
+
 
 const TheaterSearchList = () => {
     const navigate = useNavigate();
@@ -17,10 +29,12 @@ const TheaterSearchList = () => {
         window.localStorage.setItem("seatInfoMode","후기");
         window.localStorage.setItem("theaterFullName", e); // 공연장 풀네임 
         console.log("입장하는 공연장 이름 : " + e);
-        if(e === "샤롯데시어터"){
+        if(e === "샤롯데씨어터"){
             navigate("/TheaterChar");
         } else if (e === "충무아트센터"){
             navigate("/TheaterChung");
+        } else {
+            alert("서비스 준비 중입니다. 현재 이용 가능한 공연장은 '샤롯데시어터'와 '충무아트센터'입니다.");
         }
     }
 
@@ -44,12 +58,14 @@ const TheaterSearchList = () => {
             {searchInfo && searchInfo.map(inputTheater => (
             <>
                 <div onClick={()=>OnClick(inputTheater.theaterName)}>
-                    <div className="theater">
-                    <img className="theaterPoster" src = {inputTheater.theaterPoster} size width={300} height={240}/>
-                    <div className="theaterName">공연장 이름 : {inputTheater.theaterName}</div>
-                    <div className="theaterAddr">공연장 주소 : {inputTheater.theaterAddr}</div>
-                    <div className="theaterSeats">공연장 좌석 개수 : {inputTheater.theaterSeats}석</div>
-                    </div>
+                    <TheaterInfo>
+                    {/* <img className="theaterPoster" src = {inputTheater.theaterPoster} size width={300} height={240}/> */}
+                    <div className="theater_name">{inputTheater.theaterName}</div>
+                    <div className="theater_addr">주소 {inputTheater.theaterAddr}</div>
+                    <div className="theater_call">연락처 {inputTheater.theaterCall}</div>
+                    <div className="theater_web">홈페이지 <a href={inputTheater.theaterWeb}>{inputTheater.theaterWeb}</a></div>
+                    <div className="theater_seats">좌석수 {inputTheater.theaterSeats}석</div>
+                    </TheaterInfo>
                 </div>
             </>
             ))}

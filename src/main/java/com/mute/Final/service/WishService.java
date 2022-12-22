@@ -25,16 +25,16 @@ public class WishService {
     private final MemberRepository memberRepository;
     private final MusicalRepository musicalRepository;
 
-//    public List<?> getWishOnList(int userNum) {
-//        List<Map<?,?>> result = new ArrayList<>();
-//        Map<String, List<Map<?,?>>> map = new HashMap<>();
-//        map.put("rankingListContent", WishRepository.wishON(userNum));
-//        System.out.println(map);
-//        for(int i = 0; i < map.size(); i++){
-//            result.add(map);
-//        }
-//        return result;
-//    }
+    public List<?> getWishOnList(int userNum) {
+        List<Map<?,?>> result = new ArrayList<>();
+        Map<String, List<Map<?,?>>> map = new HashMap<>();
+        map.put("wishListContent", wishRepository.wishON(userNum));
+        System.out.println(map);
+        for(int i = 0; i < map.size(); i++){
+            result.add(map);
+        }
+        return result;
+    }
 
 
 

@@ -29,6 +29,7 @@ public class MusicalService {
             musicalDTO.setMusicalStart(e.getMusicalStart()); // 공연 시작일
             musicalDTO.setMusicalEnd(e.getMusicalEnd()); // 공연 종료일
             musicalDTO.setTheaterName(e.getTheaterName()); // 공연장 이름
+            musicalDTO.setMusicalStatus(e.getMusicalStatus()); // 공연 상태
             musicalDTO.setMusicalPoster(e.getMusicalPoster()); // 공연 포스터
             musicalDTOS.add(musicalDTO);
         }
