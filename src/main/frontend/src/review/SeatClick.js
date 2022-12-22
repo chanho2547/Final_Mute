@@ -51,8 +51,8 @@ const SeatClick = () => {
         {selectSeat && selectSeat.map(e => (
             <div Onclick={() => Onclick(e.userId)}>
                 {/* <div>좌석번호 : {e.seatNum}</div> */}
-                {/* <p className="seatReview_writer">작성자: {e.userId.replace(e.userId.slice(-2), '***')}</p>
-                <p className="seatReview_Date">작성일 : {e.writeDate.toString().substring(0, 10)}</p> */}
+                <p className="seatReview_writer">작성자: {e.userId.replace(e.userId.slice(-2), '***')}</p>
+                <p className="seatReview_Date">작성일 : {e.writeDate.toString().substring(0, 10)}</p>
                 <p>평균 별점 : {e.scoreAvgSeat}</p>
                 <p>좌석 : {e.scoreSeat}</p>
                 <p>시야 : {e.scoreView}</p>

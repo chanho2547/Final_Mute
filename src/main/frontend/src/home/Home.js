@@ -17,10 +17,18 @@ const SearchContainer = styled.div`
         border: none;
         font-size: 18px;
         margin-left: 15px;
+        :focus{
+           outline: none;
+        }
+
     }
     .search_button{
         border: none;
         background-color: rgba(0,0,0,0);
+        :hover{
+            cursor: pointer;
+        }
+
     }
     img{
         width: 25px;
@@ -121,11 +129,12 @@ const Home = () => {
                 let response = await MuteApi.musicalList(); // 뮤지컬리스트호출 (서버에서 호출 후 바로 db에 저장)
                 let response1 = await MuteApi.openedMusical();
                 let response2 = await MuteApi.openBeforeMusical();
-                // let response3 = await MuteApi.musicalRanking();
+                let response3 = await MuteApi.musicalRanking();
                 setMusicalList(response.data);
                 setOpenedMusical(response1.data);
                 setBeforeMusical(response2.data);
-                // setStarRanking(response3.data);
+                setStarRanking(response3.data);
+                console.log("꺼내야하는 데이터" + response3.data.list.get(0)); // [Object object]
 
             } catch (e) {
                 console.log(e + "뮤지컬 데이터 불러오기 실패");
@@ -193,16 +202,19 @@ const Home = () => {
             <br/><br/>
            
             <div className="musical_title"><p className="musical_title_front">별점이 가장 높은&nbsp;</p><p className="musical_title_back">뮤지컬 TOP3</p></div>
-            {/* <div className="starRanking">
-            {starRanking && starRanking.map(e => (
-                <div  onClick={() => onClick(e.musicalId) }>
-                <img alt="poster" src={e.musicalPoster}/>
-                <p>{e.musicalName}</p>
-                <p>{e.theaterName}</p>
-                <p>{e.musicalStart} ~ {e.musicalEnd}</p>
+
+              {/* rankingListContent */}
+             {/* <div className="starRanking">
+            {starRanking && starRanking.list.rankingListContent.map(rankingListContent => (
+                <div  onClick={() => onClick(rankingListContent.musicalId) }>
+                <img alt="poster" src={rankingListContent.musicalPoster}/>
+                <p>{rankingListContent.musicalName}</p>
+                <p>{rankingListContent.theaterName}</p>
+                <p>{rankingListContent.musicalStart} ~ {rankingListContent.musicalEnd}</p>
                 </div>
+                
             ))}
-            </div> */}
+            </div>  */}
         </MusicalContainer>
 
 

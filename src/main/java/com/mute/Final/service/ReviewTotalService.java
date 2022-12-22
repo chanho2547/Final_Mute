@@ -1,4 +1,5 @@
 package com.mute.Final.service;
+
 import com.mute.Final.dto.ReviewTotalDTO;
 import com.mute.Final.entity.Musical;
 import com.mute.Final.entity.ReviewTotal;
@@ -7,7 +8,6 @@ import com.mute.Final.repository.ReviewTotalRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +22,7 @@ public class ReviewTotalService {
     private final ReviewTotalRepository reviewTotalRepository;
     private final MusicalRepository musicalRepository;
 
-    // 뮤지컬 TOP3 별점 순 조회 // 뮤지컬아이디, 뮤지컬이름, 전체 평균 별점, 총평 후기 개수, 공연 기간, 공연장소
+    // 뮤지컬 TOP3 별점 순 조회
     public List<?> getRankingList() {
         List<Map<?,?>> result = new ArrayList<>();
         Map<String, List<Map<?,?>>> map = new HashMap<>();

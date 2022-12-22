@@ -17,8 +17,7 @@ public class WishController {
     public WishController(WishService wishService){
         this.wishService = wishService;
     }
-    
-    // 조인 쿼리문
+
    @GetMapping("/wish/join")
     public ResponseEntity<List<?>> getWishOnList(@RequestParam int userNum) {
        List<?> list = wishService.getWishOnList(userNum);
@@ -67,7 +66,5 @@ public class WishController {
         String musicalId = wishData.get("musicalId");
         wishService.deleteAlarm(Integer.parseInt(userNum), musicalId);
         return true;
-
     }
-
 }

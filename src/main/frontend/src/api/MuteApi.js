@@ -195,7 +195,7 @@ const MuteApi =  {
     },
 
     musicalRanking: async function() {
-        return await axios.get("/reviewMusical/starRanking");
+        return await axios.get("/starRanking");
     },
 
     wishReg: async function(userNum, mt20id) {
