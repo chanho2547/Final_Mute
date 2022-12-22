@@ -51,55 +51,55 @@ const TabMenu = styled.ul`
 
 const MusicalTab = (props) => {
 
-    const [selectTab, setSelectTab] = useState(0);
+  const [selectTab, setSelectTab] = useState(0);
 
-    const tabArr = [
-        { 
-            tabTitle: (
-                <li className={selectTab === 0 ? "focused" : "submenu"}
-                onClick={()=>selectTabHandler(0)}> 상세정보 </li>
-            ),
-            tabCont:(
-                <MusicalDetailInfo/>
-            )
-        },
-        { 
-            tabTitle: (
-                <li className={selectTab === 1 ? "focused" : "submenu"}
-                onClick={()=>selectTabHandler(1)}> 공연장정보 </li>
-            ),
-            tabCont:(
-                <TheaterDetail theaterId={props.theaterId}/>
-            )
-        },
-        { 
-            tabTitle: (
-                <li className={selectTab === 2 ? "focused" : "submenu"}
-                onClick={()=>selectTabHandler(2)}> 후기 </li>
-            ),
-            tabCont:(
-                <Review/>
-            )
-        }
-    ];
+  const tabArr = [
+    { 
+      tabTitle: (
+          <li className={selectTab === 0 ? "focused" : "submenu"}
+          onClick={()=>selectTabHandler(0)}> 상세정보 </li>
+      ),
+      tabCont:(
+          <MusicalDetailInfo/>
+      )
+    },
+    { 
+      tabTitle: (
+          <li className={selectTab === 1 ? "focused" : "submenu"}
+          onClick={()=>selectTabHandler(1)}> 공연장정보 </li>
+      ),
+      tabCont:(
+          <TheaterDetail theaterId={props.theaterId}/>
+      )
+    },
+    { 
+      tabTitle: (
+          <li className={selectTab === 2 ? "focused" : "submenu"}
+          onClick={()=>selectTabHandler(2)}> 후기 </li>
+      ),
+      tabCont:(
+          <Review/>
+      )
+    }
+  ];
 
-    const selectTabHandler = (index) => {
-        setSelectTab(index);
-    };
+  const selectTabHandler = (index) => {
+    setSelectTab(index);
+  };
 
     
-    return(
-        <>
-            <TabMenu>
-                {tabArr.map((section, index) => {
-                    return section.tabTitle
-                })}
-            </TabMenu>
-            <Desc>
-                {tabArr[selectTab].tabCont}
-            </Desc>
-        </>
-    )
+  return(
+    <>
+      <TabMenu>
+        {tabArr.map((section, index) => {
+            return section.tabTitle
+        })}
+      </TabMenu>
+      <Desc>
+        {tabArr[selectTab].tabCont}
+      </Desc>
+    </>
+  )
 }
 
 export default MusicalTab;
