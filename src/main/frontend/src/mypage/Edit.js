@@ -62,6 +62,7 @@ const Edit = () => {
     const userId = window.localStorage.getItem("whoLogin");
     console.log(userId);
 
+
     const [userImg, setUserImg] = useState(""); 
     const [userUrl, setUserUrl] = useState({ backgroundImage: "url(https://mutemute.s3.ap-northeast-2.amazonaws.com/profileimg.png" + userImg + ")" });
     const [userName, setUserName] = useState("");
@@ -70,6 +71,7 @@ const Edit = () => {
     const [userMail, setUserMail] = useState("");
     //const [userAddr, setUserAddr] = useState("");
 
+    // 변경한 값
     const [changeName, setChangeName] = useState("");
     const [changePwd, setChangePwd] = useState("");
     const [changePhone, setChangePhone] = useState("");
@@ -81,6 +83,7 @@ const Edit = () => {
     const [phoneMsg, setPhoneMsg] = useState("");
     const [mailMsg, setMailMsg] = useState("");
 
+    // 유효성 확인
     const [isName, setIsName] = useState(true);
     const [isPwd, setIsPwd] = useState(true);
     const [isPhone, setIsPhone] = useState(true);
@@ -123,7 +126,6 @@ const Edit = () => {
         const userInfoLoad = async() => {
             try {
                 const response = await MuteApi.userInfoLoad(userId);
-                console.log(response.data);
                 setChangeName(response.data[0]);
                 setChangePwd(response.data[1]);
                 setChangePhone(response.data[3]);
@@ -138,12 +140,10 @@ const Edit = () => {
                 setUserImg(response.data[5]);
                 setUserUrl({ backgroundImage: "url(https://musicalmate.s3.ap-northeast-2.amazonaws.com/profileimg.png" + response.data[5] + ")"});
             } catch (e) {
-                console.log(e);
             }
         }
         userInfoLoad();
     }, [userId]);
-
 
     // 이름 변경
     const onChangeName = (e) => {

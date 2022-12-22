@@ -5,10 +5,7 @@ import com.mute.Final.service.EditService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +41,7 @@ public class EditController {
 
     // 회원 정보 수정
     @PostMapping("/saveInfo")
-    public ResponseEntity<Boolean> userInfoSave(@RequestBody Map<String, String> userInfo) {
+    public ResponseEntity<Boolean> userInfoSave(@RequestParam Map<String, String> userInfo) {
         String userId = userInfo.get("userId");
         String name = userInfo.get("name");
         String pwd = userInfo.get("pwd");
