@@ -204,7 +204,7 @@ const ReviewTotal = (props) => {
                     </MyStar>
                 </StarBox>
                 <TextBox>
-                <input className="text" placeholder="관람하신 뮤지컬의 후기를 작성해주세요. (10자 이상)" value={totalReview} onChange={onChangeTotalReview} patten=".{10,}"></input><br/>
+                <textarea className="text" placeholder="관람하신 뮤지컬의 후기를 작성해주세요. (10자 이상)" value={totalReview} onChange={onChangeTotalReview} patten=".{10,}"></textarea><br/>
                 <div className="hint">{10 > totalReview.length && <span className={`message ${isTotalReview ? 'success' : 'error'}`}>{totalReviewMsg}</span>}</div> 
                 <button className="OKbtn" onClick={WriteTotalButton}>작성하기</button>　
                 <button className="NOKbtn" onClick={CancelButton}>취소하기</button>

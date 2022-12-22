@@ -233,7 +233,7 @@ const ReviewSeat = () => {
                 </MyStar>
             </StarBox>
             <TextBox> 
-            <input className="text" placeholder="관람하신 좌석의 후기를 작성해주세요. (10자 이상)" value={seatReview} onChange={onChangeSeatReview}></input><br/> 
+            <textarea className="text" placeholder="관람하신 좌석의 후기를 작성해주세요. (10자 이상)" value={seatReview} onChange={onChangeSeatReview}></textarea><br/> 
             <div className="hint">{10 > seatReview.length && <span className={`message ${isSeatReview ? 'success' : 'error'}`}>{seatReviewMsg}</span>}</div>
             <button className="OKbtn" onClick={WriteSeatButton}>작성하기</button>　
             <button className="NOKbtn" onClick={CancelButton}>취소하기</button>  
