@@ -6,6 +6,7 @@ import styled from "styled-components";
 import Search from '../images/search.png';
 import TopButton from "../util/TopButton";
 
+
 const SearchContainer = styled.div`
   margin: auto;
   border: 4px solid #810000;
@@ -122,6 +123,7 @@ const Home = () => {
     const [openedMusical, setOpenedMusical] = useState();
     const [openBeforeMusical, setBeforeMusical] = useState();
     const [starRanking, setStarRanking] = useState();
+    const [mywish, setMish] = useState();
 
     useEffect(() => {
         const RankData = async () => {
@@ -134,7 +136,13 @@ const Home = () => {
                 setOpenedMusical(response1.data);
                 setBeforeMusical(response2.data);
                 setStarRanking(response3.data);
-                console.log("꺼내야하는 데이터" + response3.data.list.get(0)); // [Object object]
+                // console.log("꺼내야하는 데이터1" + response3.data.get(0).get("rankingListContent"));
+                // console.log("꺼내야하는 데이터2" + response3.data.list.get(0)); // [Object object]
+                // console.log("꺼내야하는 데이터3" + response3.data.get[0].get("rankingListContent")[0].get("musical_id")); // [Object object]
+                // console.log("꺼내야하는 데이터3" + response3.data.map(e=>e.rankingListContent.map(el=>el.musical_id))); // [Object object]
+                console.log("꺼내야하는 데이터3" + response3.data.map(e=>e.rankingListContent.map(el=>el.map(ele=>ele.musical_id)))); // [Object object]
+                // console.log("꺼내야하는 데이터" + response3.data.list.get(0)); // [Object object]
+                // console.log("꺼내야하는 데이터" + response3.data.list.get(0)); // [Object object]
 
             } catch (e) {
                 console.log(e + "뮤지컬 데이터 불러오기 실패");
@@ -157,11 +165,12 @@ const Home = () => {
     return(
         <>
         <TopButton/>
-        
-        <Link to = "/TheaterChar">샤롯데 좌석 정보</Link> <br></br>
+        {/* {mywish && <MyWish/>} */}
+        <Link to = "/MyWish">wish</Link>
+        {/* <Link to = "/TheaterChar">샤롯데 좌석 정보</Link> <br></br>
         <Link to = "/TheaterChung">충무 좌석 정보</Link> <br></br>
         <Link to = "/Reservation"> 예매 임시 페이지 </Link> <br></br>
-        <Link to = "/TheaterSearch">좌석별 후기 페이지</Link> <br></br>
+        <Link to = "/TheaterSearch">좌석별 후기 페이지</Link> <br></br> */}
         <Link to = "/MusicalListTmp">뮤지컬 목록 임시 페이지</Link> <br></br>
         {/* <Link to = "/PayTest">카카오페이 결제 임시 페이지</Link> */}
         <br/><br/>
@@ -215,10 +224,16 @@ const Home = () => {
                 
             ))}
             </div>  */}
+
+                {/* {starRanking && starRanking.map(e=>e.rankingListContent.map(el=>el.map(ele=>
+                    <>
+                    <div onClick={()=>onClick(ele.musical_id)}>{ele.musical_id}</div>
+                    <div>{ele.musical_start}</div>
+                    </>
+                    )))} */}
+             
         </MusicalContainer>
-
-
-
+        
         </>
     );
 }  

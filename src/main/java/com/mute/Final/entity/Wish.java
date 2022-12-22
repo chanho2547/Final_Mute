@@ -14,7 +14,7 @@ public class Wish {
     @Id
     @GeneratedValue
     private Long indexNum; // PK
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_num") // 회원 번호(FK)
     private Member member; // Member 객체
 //    private Long userNum;

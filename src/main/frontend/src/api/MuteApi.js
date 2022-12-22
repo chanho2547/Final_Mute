@@ -266,7 +266,10 @@ const MuteApi =  {
     },
 
     userWish:async function(userNum) {
-        return await axios.get(`/wish/select/all?userum=${userNum}`)
+        const wishObj = {
+            userNum : userNum
+        }
+        return await axios.get(`/wish/select/all?userNum=${userNum}`)
     },
 
     // 선택된 극장 상세정보 불러오기

@@ -10,7 +10,6 @@ import org.springframework.data.repository.query.Param;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 public interface WishRepository extends JpaRepository<Wish, Long> {
     // 찜한 뮤지컬 중 티켓 오픈 예정 전 목록(알림창)
@@ -22,7 +21,7 @@ public interface WishRepository extends JpaRepository<Wish, Long> {
     List<Map<?,?>> wishON(@Param("user_num") int userNum);
 
 
-//    List<Wish> findByUserNum(int userNum);
+    List<Wish> findByMember(Member member);
 
     @Query(value = "select * from wish where user_num = ?1 and alarm_status = 'ON'", nativeQuery = true)
     List<Wish> findUserNumON(int userNum);

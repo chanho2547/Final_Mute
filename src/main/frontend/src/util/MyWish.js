@@ -8,7 +8,7 @@ const MyWish = () => {
     useEffect(() => {
         const wishInfo = async () => {
             try {
-                console.log("마이페이지 wishList : " + userNum);
+                console.log("마이페이지 wishList userNum: " + userNum);
                 let response = await MuteApi.userWish(userNum);
                 setUserWish(response.data);
             } catch(e) {
@@ -25,10 +25,14 @@ const MyWish = () => {
         <div className="userWish_container">
             {userWish && userWish.map(e => (
                 <div className="userWish">
+                    <p>마이페이지 찜 List</p>
                     <div onClick={() => OnClickWishList(e.userNum)}>
-                     <p>{e.musicalName}</p>
-                     <p>{e.musicalTicketStart}</p>
-                     <p>{e.alarm}</p>   
+                     <img alt="poster" src={e.musicalPoster} />
+                     <p>공연이름 : {e.musicalName}</p>
+                     <p>공연 예매일 : {e.musicalTicketStart}</p>
+                     <p>공연일자 : {e.musicalStart} ~ {e.musicalEnd}</p>
+                     <p>알림 상태 : {e.alarm}</p> 
+                     
                     </div>
                 </div>
             ))}

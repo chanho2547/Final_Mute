@@ -36,7 +36,24 @@ public class WishService {
         return result;
     }
 
-
+    // 마이페이지 찜한 뮤지컬
+    public List<WishDTO> getWishListALl(Member member) {
+        List<WishDTO> wishDTOS = new ArrayList<>();
+        List<Wish> wishList = wishRepository.findByMember(member);
+        for (Wish e : wishList) {
+            WishDTO wishDTO = new WishDTO();
+            wishDTO.setMusicalId(e.getMusical().getMusicalId());
+            wishDTO.setMusicalPoster(e.getMusical().getMusicalPoster());
+            wishDTO.setUserId(e.getMember().getUserId());
+            wishDTO.setMusicalName(e.getMusical().getMusicalName());
+            wishDTO.setMusicalTicketStart(e.getMusical().getMusicalTicketStart());
+            wishDTO.setMusicalStart(e.getMusical().getMusicalStart());
+            wishDTO.setMusicalEnd(e.getMusical().getMusicalEnd());
+            wishDTO.setAlarm(e.getAlarmStatus().toString());
+            wishDTOS.add(wishDTO);
+        }
+        return wishDTOS;
+    }
 
     // ID별 알림 상태 ON인 경우 조회
     public List<WishDTO> getWishList(int userNum) {
