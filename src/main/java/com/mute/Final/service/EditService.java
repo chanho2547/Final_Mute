@@ -56,10 +56,10 @@ public class EditService {
         return true;
     }
     // 프로필 이미지 수정
-    public boolean imgEdit(String userId, String img) {
+    public boolean imgEdit(String userId, String imgName) {
         try {
             Member member = memberRepository.findByUserId(userId);
-            member.setImg(img);
+            member.setImg(imgName);
             Member rst = memberRepository.save(member);
             log.error(rst.toString());
         } catch (Exception e) {

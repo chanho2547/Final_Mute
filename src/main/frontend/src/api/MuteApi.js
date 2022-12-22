@@ -266,14 +266,15 @@ const MuteApi =  {
         }
         return await axios.get(`/theater/${mt10id}`, theaterId);
     },
-    //프로필 이미지 변경
-    changeFace: async function (url, localId) {
-        const faceObj = {
-            url: url,
-            id: localId
-        };
-        return await axios.post("user/editImg", faceObj);
+    // 이미지 저장
+    userImgSave: async function (userId, imgName) {
+        const imgObj = {
+            userId: userId,
+            imgName: imgName
+        }
+        return await axios.post("user/editImg", imgObj)
     },
+
     // 예약된 좌석 확인
     isReservation : async function (seeDate) {
         const seeDateInfo = {

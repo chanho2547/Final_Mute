@@ -7,52 +7,52 @@ import Modal from "../util/Modal";
 import AWS from "aws-sdk";
 import styled from "styled-components";
 
-const Img = styled.div `
-    .image-upload {
-  width: 120px !important;
-  height: 120px !important;
-  font-size: 100px;
-  text-align: right;
-  min-width: 0 !important;
-  outline: none;
-  background: rgb(0, 0, 0);
-  cursor: inherit;
-  display: block !important;
-  border-radius: 50% !important;
-  cursor: pointer;
-  position: absolute;
-  margin: 0 !important;
-  z-index: -1;
-}
-
-.image-upload-wrapper {
-  position: inherit;
-  width: 120px !important;
-  height: 120px !important;
-  font-size: 100px;
-  text-align: right;
-  min-width: 0 !important;
-  outline: none;
-  background: rgb(255, 255, 255);
-  cursor: inherit;
-  display: block !important;
-  border-radius: 50% !important;
-  cursor: pointer;
-}
-
-.profile-img {
-  position: inherit;
-  width: 120px !important;
-  height: 120px !important;
-  font-size: 100px;
-  min-width: 0 !important;
-  outline: none;
-  cursor: inherit;
-  display: block !important;
-  border-radius: 50% !important;
-  cursor: pointer;
-}
-`;
+// const Img = styled.div `
+//     .image-upload {
+//   width: 120px !important;
+//   height: 120px !important;
+//   font-size: 100px;
+//   text-align: right;
+//   min-width: 0 !important;
+//   outline: none;
+//   background: rgb(0, 0, 0);
+//   cursor: inherit;
+//   display: block !important;
+//   border-radius: 50% !important;
+//   cursor: pointer;
+//   position: absolute;
+//   margin: 0 !important;
+//   z-index: -1;
+// }
+//
+// .image-upload-wrapper {
+//   position: inherit;
+//   width: 120px !important;
+//   height: 120px !important;
+//   font-size: 100px;
+//   text-align: right;
+//   min-width: 0 !important;
+//   outline: none;
+//   background: rgb(255, 255, 255);
+//   cursor: inherit;
+//   display: block !important;
+//   border-radius: 50% !important;
+//   cursor: pointer;
+// }
+//
+// .profile-img {
+//   position: inherit;
+//   width: 120px !important;
+//   height: 120px !important;
+//   font-size: 100px;
+//   min-width: 0 !important;
+//   outline: none;
+//   cursor: inherit;
+//   display: block !important;
+//   border-radius: 50% !important;
+//   cursor: pointer;
+// }
+// `;
 
 // 회원정보 수정 페이지
 const Edit = () => {
@@ -61,7 +61,7 @@ const Edit = () => {
     console.log(userId);
 
     const [userImg, setUserImg] = useState(""); 
-    const [url, setUrl] = useState({ background: "url(https://mutemute.s3.ap-northeast-2.amazonaws.com/profileimg.png" + userImg + ")" });
+    const [url, setUrl] = useState({ backgroundImage: "url(https://mutemute.s3.ap-northeast-2.amazonaws.com/profileimg.png" + userImg + ")" });
     const [userName, setUserName] = useState("");
     const [userPwd, setUserPwd] = useState("");
     const [userPhone, setUserPhone] = useState("");
@@ -134,7 +134,7 @@ const Edit = () => {
                 setUserMail(response.data[2]);
                 setUserAddr(response.data[4]);
                 setUserImg(response.data[5]);
-                setUrl({ background: "url(https://mutemute.s3.ap-northeast-2.amazonaws.com/profileimg.png" + userImg + ")"});
+                setUrl({ backgroundImage: "url(https://mutemute.s3.ap-northeast-2.amazonaws.com/profileimg.png" + userImg + ")"});
             } catch (e) {
                 console.log(e);
             }
@@ -263,7 +263,7 @@ const Edit = () => {
     AWS.config.update({
         region: "ap-northeast-2",
         credentials: new AWS.CognitoIdentityCredentials({
-            IdentityPoolId: 'ap-northeast-2:b8bdbff5-c873-43a0-b07d-eb28bb5be5e0'
+            IdentityPoolId: "ap-northeast-2:b8bdbff5-c873-43a0-b07d-eb28bb5be5e0"
         }),
     })
 
@@ -301,10 +301,12 @@ const Edit = () => {
     }
     return(
         <>
-            <Img style={url}>
-                <input type="file" id="upload" className="image-upload" onChange={handleFileInput} />
-                <label htmlFor="upload" className="image-upload-wrapper"></label>
-            </Img>
+            <div className="userImgBox" style={url}>
+                <label>
+                <input type="file" accept="image/*" onChange={handleFileInput} />
+                </label>
+            </div>
+            
             <div>{userId}님</div>
             <div>
                 <p>이름 {changeName && <span>{nameMsg}</span>}</p>
