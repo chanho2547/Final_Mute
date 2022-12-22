@@ -49,7 +49,6 @@ const MyStar = styled.div`
         float: right;
         padding-left: 30px;
     }
-   
 `;
 
 const TextBox = styled.div`
@@ -60,6 +59,7 @@ const TextBox = styled.div`
     height: 250px;
     padding-left: 100px;
     margin: 10px;
+    resize: none;
     }
     .hint {
         color: royalblue;
@@ -86,15 +86,11 @@ const TextBox = styled.div`
     }
 `;
 
-
 const ReviewTotal = (props) => {
     const navigate = useNavigate();
 
-    const userNum = window.localStorage.getItem("whoLoginUserNum");
-    let musicalId = window.localStorage.getItem("musicalId");
-    
-    console.log("회원번호 : " + userNum); // 회원번호
-    console.log("뮤지컬 아이디 : " + musicalId); // 뮤지컬번호
+    const userNum = window.localStorage.getItem("whoLoginUserNum"); // 회원번호
+    let musicalId = window.localStorage.getItem("musicalId"); // 뮤지컬번호
 
     // 취소 버튼 누르면 첫 화면으로..
     const CancelButton = () => {   
@@ -138,10 +134,8 @@ const ReviewTotal = (props) => {
         try {
             const res = await MuteApi.WriteTotal(userNum, musicalId, scoreStory, scoreDirect, scoreCast, scoreNumber, scoreAvgTotal, totalReview);
             if(res.data === true) {
-                // console.log("텍스트 입력 성공");
                 setWriteModal(true);   
             } else {
-                // console.log("텍스트 입력 실패");
             }
         } catch (e) {
             alert("오류 : " + e);
@@ -149,24 +143,19 @@ const ReviewTotal = (props) => {
     };
 
     const highFunction1 = (text) => {
-        // console.log("스토리 별점 가져온 값 : " + text);
         setScoreStory(text);
     }
     const highFunction2 = (text) => {
-        // console.log("연출 별점 가져온 값 : " + text);
         setScoreDirect(text);
     }
     const highFunction3 = (text) => {
-        // console.log("캐스팅 별점 가져온 값 : " + text);
         setScoreCast(text);
     }
     const highFunction4 = (text) => {
-        // console.log("넘버 별점 가져온 값 : " + text);
         setScoreNumber(text);
 
         const arr = [scoreStory, scoreDirect, scoreCast, scoreNumber];
         const avg = arr.reduce((a, c) => a + c) / arr.length
-        // console.log("평균 값 : " + avg);
         setScoreAvgTotal(avg);
     }
 

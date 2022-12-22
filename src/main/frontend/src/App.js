@@ -37,6 +37,7 @@ import MyWish from './util/MyWish';
 import PayEnd from './reservation/payment/PayEnd';
 import SeatClick from './review/SeatClick';
 import ProImg from "./mypage/ProImg";
+import MyReview from './review/MyReview';
 
 
 function App() {
@@ -81,6 +82,9 @@ function App() {
         <Route path="/PayEnd" element={<PayEnd/>} />
         <Route path='/SeatClick' element={<SeatClick/>}/>
         <Route path='/ProImg' element={<ProImg/>} />
+        <Route path='/MyReview' element={<MyReview/>} />
+        
+
       </Routes>
       <Footer/>
       </div>

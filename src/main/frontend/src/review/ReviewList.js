@@ -54,7 +54,7 @@ const ReviewBox = styled.div`
     }
 
     .text {
-        padding: 5px;
+        padding: 10px;
     }
     .date {
         color: lightgray;
@@ -64,6 +64,13 @@ const ReviewBox = styled.div`
         border: solid 0.5px lightgray;
         background-color: white;
     }
+`;
+
+const Morebtn = styled.button`
+    border: none;
+    background-color: white;
+    color: gray;
+    font-size: medium;
 `;
 
 const Likebtn = styled.button`
@@ -86,6 +93,7 @@ const Dislikebtn = styled.button`
 
 const ReviewList = (props) => {
     const navigate = useNavigate();
+    const [count, setCount] = useState(0);
 
     // let totalScore = 0;
     // let totalStory = 0;
@@ -99,12 +107,8 @@ const ReviewList = (props) => {
     // let castResult = 0;
     // let numberResult = 0;
 
-    const member = window.localStorage.getItem("whoLoginUserNum");
-    let musicalId = window.localStorage.getItem("musicalId");
-    // const reviewMuId = window.localStorage.getItem("reviewMuId");
-    
-    console.log("회원번호 : " + member); // 회원번호
-    console.log("뮤지컬 아이디 : " + musicalId); // 뮤지컬번호
+    const member = window.localStorage.getItem("whoLoginUserNum"); // 회원번호
+    let musicalId = window.localStorage.getItem("musicalId"); // 뮤지컬번호
 
     // 모달
     const [modalLogin, setModelLogin] = useState(false); // 로그인 안했을 때
@@ -117,8 +121,6 @@ const ReviewList = (props) => {
 
     const [modalOpen, setModalOpen] = useState(""); // 삭제 버튼 눌렀을 때
     const [modalText, setModalText] = useState(""); // 삭제 모달 텍스트
-
-    const [count, setCount] = useState(0);
 
 
     // 후기 작성 버튼 눌렀을 때 로그인 이면 OK, 로그인 안했으면 모달 띄우기
@@ -142,10 +144,7 @@ const ReviewList = (props) => {
             try{
                 let response = await MuteApi.ReviewInfo(musicalId);
                 setReviewInfo(response.data);
-                // console.log("후기 불러오기 성공!!");
-
             } catch (e) {
-                console.log(e + "후기 불러오기 실패");
             }
         };
         ReviewData();
@@ -186,9 +185,6 @@ const ReviewList = (props) => {
     // 후기 삭제
     const OnClickDelete = async(member, reviewMuId) => {
         try {
-            console.log("후기 삭제 userNum : " + member);
-            console.log("후기 삭제 reviewMuId : " + reviewMuId);
-
             let response = await MuteApi.DeleteTotal(member, reviewMuId);
 
             if(response.data === true) {
@@ -214,7 +210,7 @@ const ReviewList = (props) => {
         dislikeCount = dislikeCount - 1;
     }
 
-
+    
 
     return(
         <Container>     
@@ -233,31 +229,26 @@ const ReviewList = (props) => {
                 <p>{e.reviewMuId}　{e.member}　<FaStar size="20" color="#FCC419"/>{e.scoreAvgTotal} <span className="date">　작성일 {e.writeDate}</span>　
                 <button className="deleteBtn" onClick={()=>OnClickDelete(member, e.reviewMuId)}>삭제</button></p>
                 <p className="myRaing">스토리 <FaStar size="15" color="gray"/>{e.scoreStory} 　연출 <FaStar size="15" color="gray"/>{e.scoreDirect} 　캐스팅 <FaStar size="15" color="gray"/>{e.scoreCast} 　넘버 <FaStar size="15" color="gray"/>{e.scoreNumber}<br/>
-                
-                {/* ----------------------------------- */}
-                {/* <p className="text">{e.reviewMuTxt}</p> */}
-                {/* ------------------------------------- */}
-
-                <p>
+                <p className="text">
                     <span className={e.reviewMuTxt}>{e.reviewMuTxt.substring(30)}</span>
                     {e.reviewMuTxt.length > 30 && (
                         <span className={e.reviewMuTxt.moreButtonWrap}>
                         {"···"}
-                        <button className={e.reviewMuTxt.moreButton}>더보기</button>
+                        <Morebtn className={e.reviewMuTxt.moreButton}>더보기</Morebtn>
                         </span>
                     )}
-                    </p>
-
-
-
-
-                {/* ------------------------------------ */}
-                <Likebtn className="like" onClick={()=>likebtn()}><BiLike size="25"/>{likeCount}</Likebtn ><Dislikebtn className="dislike" onClick={()=>dislikebtn()}><BiDislike size="25"/>{dislikeCount}</Dislikebtn></p>
+                </p>
+                <Likebtn className="like" onClick={()=>likebtn()}><BiLike size="20" color="gray"/>{likeCount}</Likebtn ><Dislikebtn className="dislike" onClick={()=>dislikebtn()}><BiDislike size="20" color="gray"/>{dislikeCount}</Dislikebtn></p>
             </ReviewBox>
         ))}  
+        
         {modalLogin&& <Modal open={modalLogin} close={closeModal} type={true}>로그인이 필요한 서비스입니다.</Modal>}
         {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">{modalText}</Modal>}
+
         </Container>
     );
+
+    
 }
 export default ReviewList;
+

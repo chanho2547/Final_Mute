@@ -74,6 +74,7 @@ const TextBox = styled.div`
     height: 250px;
     padding-left: 100px;
     margin: 10px;
+    resize: none;
     }
     .hint {
         color: royalblue;
@@ -108,11 +109,6 @@ const ReviewSeat = () => {
     let theaterId = window.localStorage.getItem("theaterFullName"); // 극장 이름
     let mySeat = window.localStorage.getItem("whatSeatInfo"); // 극장이름 + 좌석번호(층, 열, 번)
     let pkNum = window.localStorage.getItem("whatSeatNum"); // 좌석번호
-    
-    console.log("회원번호 : " + userNum); 
-    console.log("뮤지컬 아이디 : " + musicalId); 
-    console.log("내가 선택한 좌석 : " + mySeat); 
-    console.log("좌석번호 : "  + pkNum);
 
      // 취소 버튼 누르면 첫 화면으로..
     const CancelButton = () => {   
@@ -165,10 +161,8 @@ const ReviewSeat = () => {
         try {
             const res =  await MuteApi.WriteSeat(userNum, musicalId, pkNum, seatRating, viewRating, soundRating, lightRating, scoreAvgSeat, seatReview);
             if(res.data === true) {
-                // console.log("텍스트 입력 성공");
                 setWriteModal(true);   
             } else {
-                // console.log("텍스트 입력 실패");
             }
         } catch (e) {
             alert("오류 : " + e);
@@ -176,24 +170,19 @@ const ReviewSeat = () => {
     };
 
     const highFunction1 = (text) => {
-        // console.log("좌석 별점 가져온 값 : " + text);
         setSeatRating(text);
     }
     const highFunction2 = (text) => {
-        // console.log("시야 별점 가져온 값 : " + text);
         setViewRating(text);
     }
     const highFunction3 = (text) => {
-        // console.log("음향 별점 가져온 값 : " + text);
         setSoundRating(text);
     }
     const highFunction4 = (text) => {
-        // console.log("조명 별점 가져온 값 : " + text);
         setLightRating(text);
 
         const arr = [seatRating, viewRating, soundRating, lightRating];
         const avg = arr.reduce((a, c) => a + c) / arr.length
-        // console.log("평균 값 : " + avg);
         setScoreAvgSeat(avg);
     }
 
