@@ -39,6 +39,10 @@ function prevAll(element) { // element 이전의 모든 형제노드의 갯수�
     return result.length; 
 }
 
+const onClickSoldOut = () => {
+    alert("onClickSoldOut");
+}
+
 
 // ------ 여기부터 onClickSeat ---------------------
 const onClickSeat = (event) => {
@@ -52,6 +56,7 @@ const onClickSeat = (event) => {
     
     if(grade === "real purple") { grade = "VIP"}
     else if (grade === "real lightgreen") {grade = "R"}
+    else {grade = "SoldOut"}
 
     // 코드를 잘 보면, 부모자식 관계의 className을 보면 row > seats > seat 이다
     // 내가 지금 몇번째 row인지 확인하려고 이전의 row의 갯수를 세는 (이전 모든 형제노드 갯수) 함수를 만들어 놓았으니
@@ -81,8 +86,8 @@ const onClickSeat = (event) => {
 
         //window.localStorage.setItem("selectedSeats", JSON.stringify(arrString));
 
+    
         
-
         if(window.localStorage.getItem(pkNum) === null ){
             console.log("빈좌석 선택");
             event.currentTarget.setAttribute("class","selected");
@@ -244,6 +249,14 @@ const onClickSeat = (event) => {
                     response.data.map((e) => {
                         console.log(e.musicalId);
                         console.log(e.seatNum);
+
+                        if(props.musicalId === e.musicalId) {
+                            document.getElementById(e.seatNum).parentNode.setAttribute('class','disabled');
+                            // document.getElementById(e.seatNum).parentNode.setAttribute('onClick',);
+                            document.getElementById(e.seatNum).parentNode.onclick=onClickSoldOut();
+
+                            console.log("비활성화 PK test : " + e.seatNum);
+                        }
                     })
 
 
@@ -255,18 +268,14 @@ const onClickSeat = (event) => {
             };
             getSoldOutSeat(); // 일단 useEffect니까 호출함
 
-            console.log("[배열 길이]Object.keys(soldOutSeat.current).length : " + Object.keys(soldOutSeat).length);
-            console.log("soldOutSeat.current : " + soldOutSeat );
-            // console.log("soldOutSeat[0].musicalId : " + soldOutSeat[0].musicalId);
-            // console.log("soldOutSeat[0].seatNum" + soldOutSeat[0].seatNum);
 
 
-             for (let i=0 ; i<Object.keys(soldOutSeat).length ; i++) {
-                if(props.musicalId === soldOutSeat[i].musicalId) { // 만약 예매된 좌석중 뮤지컬id가 일치하여 비활성화를 해야할때 
-                    document.getElementById(soldOutSeat[i].seatNum).parentNode.setAttribute('class','real disabled');
-                    console.log("비활성화 PK : " + soldOutSeat[i].seatNum);
-                }
-             }
+            //  for (let i=0 ; i<Object.keys(soldOutSeat).length ; i++) {
+            //     if(props.musicalId === soldOutSeat[i].musicalId) { // 만약 예매된 좌석중 뮤지컬id가 일치하여 비활성화를 해야할때 
+            //         document.getElementById(soldOutSeat[i].seatNum).parentNode.setAttribute('class','disabled');
+            //         console.log("비활성화 PK : " + soldOutSeat[i].seatNum);
+            //     }
+            //  }
 
             
 
