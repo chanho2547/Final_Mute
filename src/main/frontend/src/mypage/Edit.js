@@ -2,9 +2,7 @@ import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import MuteApi from "../api/MuteApi";
 import React from "react";
-import Post from '../login/Post';
 import Modal from "../util/Modal";
-import ProImg from "./ProImg";
 import styled from "styled-components";
 import AWS from "aws-sdk";
 

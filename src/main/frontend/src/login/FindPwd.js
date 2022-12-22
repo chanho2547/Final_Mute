@@ -26,6 +26,8 @@ const FindPwdBlock = styled.div`
             font-weight: 600;
         }
     }
+  
+    
 
     .pwdButton {
         width: 280px;
@@ -111,15 +113,21 @@ const FindPwd = () => {
             <FindPwdBlock>
             <h5>비밀번호 찾기</h5>
             {/* 아이디 입력창 */}
+                <div className="session">
                 <input className="input" placeholder="아이디" value={inputId} onChange={onChangeId}></input>
+                </div>
                 <br/>
 
             {/* 이메일 입력창 */}
+                <div className="session">
                 {inputMail.length > 0 && <span>{mailMsg}</span>}
                 <input className="input" placeholder="이메일" value={inputMail} onChange={onChangeMail} onKeyDown={onKeyDownFindPwd}></input>
+                </div>
                 <br/>
             {/* 비밀번호 찾기 버튼 활성화 */}
+                <div className="session">
                 <button className="pwdButton" onClick={onClickFindPwd}>FIND PASSWORD</button>
+                </div>
             </FindPwdBlock>
             <PageLink>
                 {/* 다른 페이지 연결 */}

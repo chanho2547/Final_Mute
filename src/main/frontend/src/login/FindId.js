@@ -118,16 +118,16 @@ const FindId = () =>{
             <FindIdBlock>
                 <h5>아이디 찾기</h5>
                 {/* 이름 입력창 */}
-                <input className="input" placeholder="이름" value={inputName} onChange={onChangeName}></input>
-                <br/>
+                    <input className="input" placeholder="이름" value={inputName} onChange={onChangeName}></input>
+                    <br/>
 
                 {/* 이메일 입력창 */}
-                {inputMail.length > 0 && <span>{mailMsg}</span>}
-                <input className="input" placeholder="이메일"  value={inputMail} onChange={onChangeMail} onKeyDown={onKeyDownFindId}></input>
-                <br/>
+                    {inputMail.length > 0 && <span>{mailMsg}</span>}
+                    <input className="input" placeholder="이메일"  value={inputMail} onChange={onChangeMail} onKeyDown={onKeyDownFindId}></input>
+                    <br/>
 
                 {/* 아이디 찾기 버튼 활성화 */}
-                <button className="idButton" disabled={!(inputName && isMail)} onClick={onClickFindId} >FIND ID</button>
+                    <button className="idButton" disabled={!(inputName && isMail)} onClick={onClickFindId} >FIND ID</button>
             </FindIdBlock>
 
             <PageLink>
