@@ -44,6 +44,7 @@ margin: auto;
     }
 }
 .musical_name{
+    width: 300px;
     color: #810000;
     font-weight: 700;
     font-size: 20px;
@@ -56,6 +57,7 @@ margin: auto;
 }
 
 .theater_name{
+    width: 300px;
     color: #1b1717;
     margin: 0 50px 0 50px;
 }
@@ -95,6 +97,8 @@ margin: auto;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 const Home = () => {
     let navigate = useNavigate();
+    const [musicalList,setMusicalList] = useState();
+
     const [inputMusical, SetInputMusical] = useState("");
 
     const onChangeInput = (e) => {
@@ -113,9 +117,11 @@ const Home = () => {
     useEffect(() => {
         const RankData = async () => {
             try{
+                let response = await MuteApi.musicalList(); // 뮤지컬리스트호출 (서버에서 호출 후 바로 db에 저장)
                 let response1 = await MuteApi.openedMusical();
                 let response2 = await MuteApi.openBeforeMusical();
                 // let response3 = await MuteApi.musicalRanking();
+                setMusicalList(response.data);
                 setOpenedMusical(response1.data);
                 setBeforeMusical(response2.data);
                 // setStarRanking(response3.data);
@@ -145,7 +151,7 @@ const Home = () => {
         <Link to = "/Reservation"> 예매 임시 페이지 </Link> <br></br>
         <Link to = "/TheaterSearch">좌석별 후기 페이지</Link> <br></br>
         <Link to = "/MusicalListTmp">뮤지컬 목록 임시 페이지</Link> <br></br>
-        <Link to = "/PayTest">카카오페이 결제 임시 페이지</Link>
+        {/* <Link to = "/PayTest">카카오페이 결제 임시 페이지</Link> */}
         <br/><br/>
         
         <SearchContainer>
