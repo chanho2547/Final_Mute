@@ -52,7 +52,7 @@ public class WriteController {
         String scoreLight = writeSeatData.get("scoreLight");
         String scoreAvgSeat = writeSeatData.get("scoreAvgSeat");
         String reviewSeTxt = writeSeatData.get("reviewSeTxt");
-        //
+
         boolean result = writeService.writeSeat(member, musicalId, theaterId, seatNum,scoreSeat, scoreView, scoreSound, scoreLight, scoreAvgSeat, reviewSeTxt);
         if(result) {
             return new ResponseEntity(true, HttpStatus.OK);
