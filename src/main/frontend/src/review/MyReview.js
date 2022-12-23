@@ -40,12 +40,12 @@ const ReviewBox = styled.div`
     }
 `;
 
-const Morebtn = styled.button`
-    border: none;
-    background-color: white;
-    color: gray;
-    font-size: medium;
-`;
+// const Morebtn = styled.button`
+//     border: none;
+//     background-color: white;
+//     color: gray;
+//     font-size: medium;
+// `;
 
 const Likebtn = styled.button`
     width: 50px;
@@ -117,12 +117,12 @@ const MyReview = () => {
                 <p className="myRaing">스토리 <FaStar size="15" color="#FCC419"/>{e.scoreStory} 　연출 <FaStar size="15" color="#FCC419"/>{e.scoreDirect} 　캐스팅 <FaStar size="15" color="#FCC419"/>{e.scoreCast} 　넘버 <FaStar size="15" color="#FCC419"/>{e.scoreNumber}<br/>
                 <p className="text">
                     <span className={e.reviewMuTxt}>{e.reviewMuTxt.substring(30)}</span>
-                    {e.reviewMuTxt.length > 30 && (
+                    {/* {e.reviewMuTxt.length > 30 && (
                         <span className={e.reviewMuTxt.moreButtonWrap}>
                         {"···"}
                         <button className={e.reviewMuTxt.moreButton}>더보기</button>
                         </span>
-                    )}
+                    )} */}
                 </p>
                 <Likebtn className="like"><BiLike size="20" color="gray"/>{}</Likebtn ><Dislikebtn className="dislike"><BiDislike size="20" color="gray"/>{}</Dislikebtn></p>
             </ReviewBox>
