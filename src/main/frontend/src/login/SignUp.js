@@ -7,9 +7,26 @@ import styled from "styled-components";
 
 
 const SignUpBox = styled.div`
+    width: 100%;
     margin-top:50px;
     text-align: center;
+
+    .info_id {
+        position: relative;
+    }
+
+    .info_id .btn {
+        position: absolute;
+        width: 90px;
+        height: 35px;
+        margin-top: 5px;
+        border-radius: 5px;
+        border: none;
+        margin-left: 10px;
+    
+    }
     .input {
+        /* position: relative; */
         width : 270px;
         height : 35px;
         background-color : white;
@@ -34,14 +51,6 @@ const SignUpBox = styled.div`
         color:green;
         text-align: center;
     }
-    .session {
-    margin-top: 8px;
-    p {
-      font-size: 18px;
-      font-weight: 600;
-      line-height: 24px;
-      margin-bottom: 2px;
-    }
 
     .signupButton {
         width: 280px;
@@ -57,11 +66,6 @@ const SignUpBox = styled.div`
             border: none;
             opacity: 1;      
         }
-        &:disabled {
-            background-color: #aaa;
-            color: #eee;
-            cursor: default;
-       }
     }
 `;
 
@@ -289,74 +293,73 @@ const SignUp = () => {
         <div className="container">
             <SignUpBox>
                 <h5>회원가입</h5>
-                <div className="session">
+
                 {/* 아이디 입력창*/}
-                <p>
-                {inputId.length > 0 && <span>{idMsg}</span>}
-                </p>
+                <div className="info_id">
                 <input className="input" placeholder='아이디' value={inputId} onChange={onChangeId}></input>
-                <button type='button' onClick={IdCheck}>중복 확인</button>
+                <button className='btn' type='button' onClick={IdCheck}>중복 확인</button>
+                <div className="hint">
+                    {inputId.length > 0 && <span>{idMsg}</span>}
+                </div>
                 </div>
 
                 {/* 비밀번호 입력창*/}
-                <div className="session">
-                <p>
-                {inputPwd.length > 0 && <span>{pwdMsg}</span>}
-                </p>
-                <input className="input" type='password' placeholder="비밀번호" value={inputPwd} onChange={onChangePwd}></input>
+                <div>
+                    <input className="input" type='password' placeholder="비밀번호" value={inputPwd} onChange={onChangePwd}></input>
+                <div className="hint">  
+                    {inputPwd.length > 0 && <span>{pwdMsg}</span>}
+                </div> 
                 </div>
-
+                    
+              
                 {/* 비밀번호 확인*/}
-                <div className="session">
-                <p>
-                {inputPwdCheck.length > 0 && <span>{pwdCheckMsg}</span>}
-                </p>
-                <input className="input" type='password' placeholder='비밀번호 확인' value={inputPwdCheck} onChange={onChangePwdCheck}></input>
+                <div>
+                    <input className="input" type='password' placeholder='비밀번호 확인' value={inputPwdCheck} onChange={onChangePwdCheck}></input>
                 </div>
-
+                    {inputPwdCheck.length > 0 && <span className="hint">{pwdCheckMsg}</span>}
+                
                 {/* 이름 입력창*/}
-                <div className="session">
-                <input className="input" type='text' placeholder='이름' value={inputName} onChange={onChangeName}></input>
+                <div>
+                    <input className="input" type='text' placeholder='이름' value={inputName} onChange={onChangeName}></input>
                 </div>
 
                 {/* 이메일 입력창 */}
-                <div className="session">
-                <p>
-                {inputMail.length > 0 && <span>{mailMsg}</span>}
-                </p>
+                <div className="info_id">
                 <input className="input" type='mail' placeholder='메일' value={inputMail} onChange={onChangeMail} onBlur={mailCheck}></input>
-                <button type='button' onClick={getAuth}>인증번호 받기</button>
+                <button className='btn' type='button' onClick={getAuth}>인증번호 받기</button>
+                <div className="hint"> 
+                {inputMail.length > 0 && <span>{mailMsg}</span>}
+                </div>
                 </div>
 
-
                 {/* 이메일 인증 확인*/}
-                <div className="session">
-                <p>
-                {inputAuth.length > 0 && <span>{authMsg}</span>}
-                </p>
+                <div className="info_id">
                 <input className="input" type='text' placeholder='인증번호' value={inputAuth} onChange={onChangeAuth}></input>
-                <button type='button' onClick={authCheck} >인증번호 확인</button>
+                    <button className='btn' type='button' onClick={authCheck}>인증번호 확인</button>
+                <div className="hint">  
+                {inputAuth.length > 0 && <span>{authMsg}</span>}
+                </div>           
                 </div>
 
                 {/* 전화번호 입력 */}
-                <div className="session">
-                <p>
-                {inputPhone.length > 0 && <span>{phoneMsg}</span>}
-                </p>
-                <input className="input" type='phone' placeholder="전화번호 '-'제외" value={inputPhone} onChange={onChangePhone} onBlur={phoneCheck}></input>
+                <div>
+                    <input className="input" type='phone' placeholder="전화번호 '-'제외" value={inputPhone} onChange={onChangePhone} onBlur={phoneCheck}></input>
+                <div className="hint">      
+                    {inputPhone.length > 0 && <span className="hint">{phoneMsg}</span>}
+                </div>
                 </div>
 
                 {/* 주소 입력*/}
-                <div className="session">
-                <label className="address_search"></label>
-                <input className="input" type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
-                <button onClick={handleComplete}>주소 검색</button>
+                <div className="info_id">
+                <label className="address_search" ></label>
+                <input className="input" placeholder="주소" type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
+                <button className='btn'type='button' onClick={handleComplete}>주소 검색</button>
                 {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}
                 </div>
 
-
-                <button className="signupButton" onClick={onClickJoin} disabled={!(isId && isPwd && isPwdCheck && isName && isMail && isPhone && isAuth)}>회원가입</button>
-                <div className='footer'>이미 아이디가 있으신가요? <button><div><Link to="/Login" className="link_item"> 로그인</Link></div></button></div>
+                {/* 회원가입버튼 활성화 */}
+                <button className="signupButton" onClick={onClickJoin} disabled={!(isId && isPwd && isPwdCheck && isName && isMail && isAuth)}>회원가입</button>
+                <br/><br/><div className='footer'>이미 아이디가 있으신가요? <button><div><Link to="/Login" className="link_item"> 로그인</Link></div></button></div>
 
                 {/* 모달 */}
                 {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">{comment}</Modal>}

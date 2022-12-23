@@ -5,6 +5,7 @@ import Modal from "../util/Modal";
 import styled from "styled-components";
 
 const FindPwdBlock = styled.div`
+    width: 100%;
     text-align: center;
     margin-top:50px;
     .input {
@@ -25,6 +26,11 @@ const FindPwdBlock = styled.div`
             outline : solid rgb(129,0,0) 1px;
             font-weight: 600;
         }
+    }
+        .hint {
+        font-size : 12px;
+        color:green;
+        text-align: center;
     }
   
     
@@ -68,6 +74,7 @@ const FindPwd = () => {
     const [inputMail, setInputMail] = useState("");
 
     const [mailMsg, setMailMsg] = useState("");
+    const [isMail, setIsMail] = useState(false);
 
     const [comment, setComment] = useState("");
     const [modalOpen, setModalOpen] = useState(false);
@@ -78,8 +85,18 @@ const FindPwd = () => {
     const onChangeId = (e) => {
         setInputId(e.target.value);
     }
+    // 이메일 입력
     const onChangeMail = (e) => {
-        setInputMail(e.target.value);
+        const mailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+        const mailCurrent = e.target.value;
+        setInputMail(mailCurrent);
+        if (!mailRegex.test(mailCurrent)) {
+            setMailMsg("이메일 형식이 올바르지 않습니다.")
+            setIsMail(false);
+        } else {
+            setMailMsg("이메일이 올바르게 입력되었습니다.")
+            setIsMail(true);
+        }
     }
 
     // api 호출
@@ -113,22 +130,21 @@ const FindPwd = () => {
             <FindPwdBlock>
             <h5>비밀번호 찾기</h5>
             {/* 아이디 입력창 */}
-                <div className="session">
+                <div calassName="input">
                 <input className="input" placeholder="아이디" value={inputId} onChange={onChangeId}></input>
                 </div>
-                <br/>
 
             {/* 이메일 입력창 */}
-                <div className="session">
-                {inputMail.length > 0 && <span>{mailMsg}</span>}
                 <input className="input" placeholder="이메일" value={inputMail} onChange={onChangeMail} onKeyDown={onKeyDownFindPwd}></input>
-                </div>
                 <br/>
-            {/* 비밀번호 찾기 버튼 활성화 */}
-                <div className="session">
-                <button className="pwdButton" onClick={onClickFindPwd}>FIND PASSWORD</button>
+                <div className="hint">
+                {inputMail.length > 0 && <span>{mailMsg}</span>}
                 </div>
+               
+            {/* 비밀번호 찾기 버튼 활성화 */}
+                <button className="pwdButton" onClick={onClickFindPwd}>FIND PASSWORD</button>
             </FindPwdBlock>
+
             <PageLink>
                 {/* 다른 페이지 연결 */}
                 <Link to="/SignUp" className="link_item">회원가입</Link>

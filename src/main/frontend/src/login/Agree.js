@@ -5,6 +5,7 @@ import Modal from "../util/Modal";
 
 
 const Container = styled.div`
+    width: 100%;
     margin-top: 50px;
     .text {
         text-align: left;

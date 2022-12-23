@@ -5,6 +5,7 @@ import Modal from "../util/Modal";
 import styled from "styled-components";
 
 const LoginBlock = styled.div`
+    width: 100%;
     margin-top:50px;
     text-align: center;
     .input {

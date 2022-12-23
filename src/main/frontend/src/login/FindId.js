@@ -4,58 +4,67 @@ import MuteApi from "../api/MuteApi";
 import Modal from "../util/Modal";
 import styled from "styled-components";
 
-const FindIdBlock = styled.div`
-  text-align: center;
-  margin-top:50px;
-  .input {
-    width : 270px;
-    height : 35px;
-    background-color : white;
-    border-radius : 5px;
-    border: solid  1.5px #eeeeee;
-    text-align: center;
-    margin : 5px;
-    font-size: 12px;
-    &:hover {
-      border : solid rgb(129,0,0) 1px;
-      color: rgb(129,0,0);
-      font-weight: 600;
-    }
-    &:focus {
-      outline : solid rgb(129,0,0) 1px;
-      font-weight: 600;
-    }
-  }
 
-  .idButton {
-    width: 280px;
-    height: 40px;
-    margin: 10px;
-    color : white;
-    font-weight: 700;
-    opacity: 0.5;
-    background-color: rgb(129,0,0);
-    border-radius: 5px;
-    border: none;
-    &:hover {
-      border: none;
-      opacity: 1;
+const FindIdBlock = styled.div`
+    width: 100%;
+    margin-top:50px;
+    text-align: center;
+    .input {
+        width : 270px;
+        height : 35px;
+        background-color : white;
+        border-radius : 5px;
+        border: solid 1.5px #eeeeee;
+        text-align: center;
+        margin : 5px;
+        font-size: 12px;
+        &:hover {
+            border : solid rgb(129,0,0) 1px;
+            font-weight: 600;
+            color: rgb(129,0,0);
+        }
+        &:focus {
+            outline : solid rgb(129,0,0) 1px;
+            font-weight: 600;
+        }
+    }
+
+    .hint {
+        font-size : 12px;
+        color:green;
+        text-align: center;
+    }
+
+    .idButton {
+        width: 280px;
+        height: 40px;
+        margin: 10px;
+        color : white;
+        font-weight: 700;
+        opacity: 0.5;
+        background-color: rgb(129,0,0);
+        border-radius: 5px;
+        border: none;
+        &:hover {
+            border: none;
+            opacity: 1;
+        }
     }
 `;
 
 const PageLink = styled.div`
-  text-align: center;
-  margin-bottom: 40px;
-  .link_item {
-    margin: 20px;
-    color: rgb(57,62,70);
-    font-size : 14px;
-    text-decoration-line: none;
-    &:hover {
-      color: rgb(129,0,0);
-      font-weight: 600;
+    text-align: center;
+    margin-bottom: 40px;
+    .link_item {
+        margin: 10px;
+        color: rgb(57,62,70);
+        font-size : 14px;
+        text-decoration-line: none;
+        &:hover {
+            color: rgb(129,0,0);
+            font-weight: 600;
+        }
     }
-  }
 `;
 
 const FindId = () =>{
@@ -118,16 +127,19 @@ const FindId = () =>{
             <FindIdBlock>
                 <h5>아이디 찾기</h5>
                 {/* 이름 입력창 */}
+                <div calassName="input">
                     <input className="input" placeholder="이름" value={inputName} onChange={onChangeName}></input>
-                    <br/>
+                </div>
 
                 {/* 이메일 입력창 */}
+                <input className="input" placeholder="이메일" value={inputMail} onChange={onChangeMail} onKeyDown={onKeyDownFindId}></input>
+                <br />
+                <div className="hint">
                     {inputMail.length > 0 && <span>{mailMsg}</span>}
-                    <input className="input" placeholder="이메일"  value={inputMail} onChange={onChangeMail} onKeyDown={onKeyDownFindId}></input>
-                    <br/>
-
+                </div>
+                    
                 {/* 아이디 찾기 버튼 활성화 */}
-                    <button className="idButton" disabled={!(inputName && isMail)} onClick={onClickFindId} >FIND ID</button>
+                <button className="idButton" disabled={!(inputName && isMail)} onClick={onClickFindId} >FIND ID</button>
             </FindIdBlock>
 
             <PageLink>

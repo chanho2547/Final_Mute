@@ -1,10 +1,11 @@
 import {useState} from "react";
 import MuteApi from "../api/MuteApi";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import Modal from "../util/Modal";
 import styled from "styled-components";
 
 const RePwdBlock = styled.div`
+    width: 100%;
     margin-top:50px;
     text-align: center;
     h5 {
@@ -29,6 +30,12 @@ const RePwdBlock = styled.div`
         }
     }
 
+    .hint {
+        font-size : 12px;
+        color:green;
+        text-align: center;
+    }
+
     .rePwdButton {
         width : 280px;
         height : 40px;
@@ -47,19 +54,7 @@ const RePwdBlock = styled.div`
         }
     }
 `;
-const PageLink = styled.div`
-    margin-bottom: 40px;
-    .link_item {
-        margin: 10px;
-        color: rgb(57,62,70);
-        font-size : 14px;
-        text-decoration-line: none;
-        &:hover {
-            color: rgb(129,0,0);
-            font-weight: 600;
-        }
-    }
-`;
+
 const RePwd = () => {
     const navigate = useNavigate();
     // 로그인된 아이디 불러오기
@@ -151,14 +146,20 @@ const RePwd = () => {
             <div>{userId}님</div>
 
             {/* 비밀번호 재설정 */}
-            {newPwd.length > 0 && <span>{pwdMsg}</span>}
             <input className="input" type="password" placeholder="비밀번호" onChange={onChangePwd} value={newPwd}></input>
-            <br/>
+            <br />
+            <div className="hint">
+                {newPwd.length > 0 && <span>{pwdMsg}</span>}
+            </div>
+
             {/* 재설정한 비밀번호 확인*/}
-            {/*<div className="hint">*/}
-            {newPwdChe.length > 0 && <span>{conPwdMsg}</span>}
             <input className="input" type="password" placeholder="비밀번호 확인" onChange={onChangePwdCheck} value={newPwdChe} onKeyDown={onKeyDownRePwd}></input>
-            <br/>
+            <br />
+            <div className="hint">
+            {newPwdChe.length > 0 && <span>{conPwdMsg}</span>}
+            </div>
+
+            {/* 재설정 버튼 활성화 */}
             <button className="rePwdButton" disabled={!(isRePwd && isRePwdCheck)} onClick={()=>onClickRePwd(userId)}>재설정</button>
             </RePwdBlock>
             {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">{comment}</Modal>}

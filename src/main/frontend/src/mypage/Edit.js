@@ -67,7 +67,7 @@ const Edit = () => {
     const [userPwd, setUserPwd] = useState("");
     const [userPhone, setUserPhone] = useState("");
     const [userMail, setUserMail] = useState("");
-    //const [userAddr, setUserAddr] = useState("");
+    const [userAddr, setUserAddr] = useState("");
 
     // 변경한 값
     const [changeName, setChangeName] = useState("");
@@ -123,7 +123,7 @@ const Edit = () => {
                 setUserPwd(response.data[1]);
                 setUserPhone(response.data[3]);
                 setUserMail(response.data[2]);
-                //setUserAddr(response.data[4]);
+                setUserAddr(response.data[4]);
                 setUserImg(response.data[5]);
                 setUserUrl({ backgroundImage: "url(https://musicalmate.s3.ap-northeast-2.amazonaws.com/profileimg.png" + response.data[5] + ")"});
             } catch (e) {
@@ -160,7 +160,7 @@ const Edit = () => {
     // phone 변경
     const onChangePhone = (e) => {
         setChangePhone(e.target.value.replace(/[^0-9]/g, '').replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`));
-        if(e.target.value.length === 0) setIsPhone(true);
+        if(e.target.value.length === 0 || e.target.value.length < 12 || e.target.value.length > 13) setIsPhone(true);
         else setIsPhone(false);
     }
 
@@ -188,7 +188,7 @@ const Edit = () => {
     // 전화번호 중복 확인
     const onBlurPhoneCheck = async() => {
         const memberCheck = await MuteApi.memberJoinCheck(changePhone, "TYPE_PHONE");
-        if(memberCheck.data) {
+        if(memberCheck.data && (changePhone.length === 12 || changePhone.length === 13) && changePhone.indexOf('-') === 3) {
             setPhoneMsg("사용가능한 번호입니다.");
             setIsPhone(true)
         } else if(memberCheck.data && userPhone === changePhone) {
@@ -309,12 +309,10 @@ const Edit = () => {
                 <p>Mail</p>
                 <input value={userMail}  placeholder="메일" readOnly/>
             </div>
-            {/*<div>*/}
-            {/*    <label className="address_search">주소</label><br/>*/}
-            {/*    <input className="addr" type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>*/}
-            {/*    <button onClick={handleComplete}>주소 검색</button>*/}
-            {/*    {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}*/}
-            {/*</div>*/}
+            <div>
+                <p>주소</p>
+                <input value={userAddr} placeholder="주소" readOnly/>
+            </div>
             <div>
                 <button onClick={onClickSave} disabled={!(isPhone && isName)}>회원정보수정</button>
             </div>
