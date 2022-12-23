@@ -121,7 +121,7 @@ const ReviewTotal = (props) => {
     }
     
     const closeModal = () => { // 아니오 눌렀을 때 => 리뷰 리스트로 이동
-        setCount(count + 1);
+        setWriteModal(false);
         navigate("/Review"); 
     }
 

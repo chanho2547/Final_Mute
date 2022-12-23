@@ -12,6 +12,7 @@ const TmpBox = styled.div`
     width: 90%;
     height: fit-content;
     border: 2px solid black;
+    /* margin: auto; */
 `;
 
 const Review = () => {

@@ -136,17 +136,19 @@ const ReviewSeat = () => {
     const [modalTheater, setModelTheater] = useState(false); // 좌석 선택 버튼 눌렀을 때
     const [writeModal, setWriteModal] = useState(false); // 확인 버튼 눌렀을 때
 
+
     const [count, setCount] = useState(0);
 
     const charlotte = () => { // 샤롯데 좌석 선택하러 가기
-        navigate("/TheaterChar"); 
+        window.open('http://localhost:8282/TheaterChar/');
     }
     
     const chungmu = () => { // 충무 좌석 선택하러 가기
-        navigate("/TheaterChung"); 
+        window.open('http://localhost:8282/TheaterChung/');
     }
 
     const closeModal = () => { 
+        setWriteModal(false);
         navigate("/Review"); 
     }
 

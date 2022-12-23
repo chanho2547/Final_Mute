@@ -92,17 +92,17 @@ const ReviewList = (props) => {
     const navigate = useNavigate();
     const [count, setCount] = useState(0);
 
-    // let totalScore = 0;
-    // let totalStory = 0;
-    // let totalDirect = 0;
-    // let totalCast = 0;
-    // let totalNumber = 0;
+    let totalScore = 0;
+    let totalStory = 0;
+    let totalDirect = 0;
+    let totalCast = 0;
+    let totalNumber = 0;
 
-    // let totalResult = 0;
-    // let storyResult = 0;
-    // let directResult = 0;
-    // let castResult = 0;
-    // let numberResult = 0;
+    let totalResult = 0;
+    let storyResult = 0;
+    let directResult = 0;
+    let castResult = 0;
+    let numberResult = 0;
 
     const member = window.localStorage.getItem("whoLoginUserNum"); // 회원번호
     let musicalId = window.localStorage.getItem("musicalId"); // 뮤지컬번호
@@ -148,35 +148,35 @@ const ReviewList = (props) => {
     }, [count]);
 
 
-    // if(ReviewInfo) {
-    //     totalResult = ReviewInfo.map(e => parseFloat(e.scoreAvgTotal));
-    //     storyResult = ReviewInfo.map(e => parseFloat(e.scoreStory));
-    //     directResult = ReviewInfo.map(e => parseFloat(e.scoreDirect));
-    //     castResult = ReviewInfo.map(e => parseFloat(e.scoreCast));
-    //     numberResult = ReviewInfo.map(e => parseFloat(e.scoreNumber));
+    if(ReviewInfo) {
+        totalResult = ReviewInfo.map(e => parseFloat(e.scoreAvgTotal));
+        storyResult = ReviewInfo.map(e => parseFloat(e.scoreStory));
+        directResult = ReviewInfo.map(e => parseFloat(e.scoreDirect));
+        castResult = ReviewInfo.map(e => parseFloat(e.scoreCast));
+        numberResult = ReviewInfo.map(e => parseFloat(e.scoreNumber));
 
-    //     totalScore = totalResult.reduce((a, c) => a + c, 0) / totalResult.length;
-    //     totalStory = storyResult.reduce((a, c) => a + c, 0) / storyResult.length;
-    //     totalDirect = directResult.reduce((a, c) => a + c, 0) / directResult.length;
-    //     totalCast = castResult.reduce((a, c) => a + c, 0) / castResult.length;
-    //     totalNumber = numberResult.reduce((a, c) => a + c, 0) / numberResult.length;
+        totalScore = totalResult.reduce((a, c) => a + c, 0) / totalResult.length;
+        totalStory = storyResult.reduce((a, c) => a + c, 0) / storyResult.length;
+        totalDirect = directResult.reduce((a, c) => a + c, 0) / directResult.length;
+        totalCast = castResult.reduce((a, c) => a + c, 0) / castResult.length;
+        totalNumber = numberResult.reduce((a, c) => a + c, 0) / numberResult.length;
 
-    //     if (isNaN(totalScore)) {
-    //         totalScore = 0;
-    //     }
-    //     if (isNaN(totalStory)) {
-    //         totalStory = 0;
-    //     }
-    //     if (isNaN(totalDirect)) {
-    //         totalDirect = 0;
-    //     }
-    //     if (isNaN(totalCast)) {
-    //         totalCast = 0;
-    //     }
-    //     if (isNaN(totalNumber)) {
-    //         totalNumber = 0;
-    //     }
-    // }
+        if (isNaN(totalScore)) {
+            totalScore = 0;
+        }
+        if (isNaN(totalStory)) {
+            totalStory = 0;
+        }
+        if (isNaN(totalDirect)) {
+            totalDirect = 0;
+        }
+        if (isNaN(totalCast)) {
+            totalCast = 0;
+        }
+        if (isNaN(totalNumber)) {
+            totalNumber = 0;
+        }
+    }
 
 
     // 후기 삭제
@@ -213,11 +213,11 @@ const ReviewList = (props) => {
         <Container>     
         <StarBox>
             <div className="AvgBox"> 
-            {/* <p><b className="AvgText">평균 별점 </b><FaStar size="30" color="#FCC419"/>{totalScore.toFixed(1)}</p>
+            <p><b className="AvgText">평균 별점 </b><FaStar size="30" color="#FCC419"/>{totalScore.toFixed(1)}</p>
             <span><b>스토리 </b><FaStar size="25" color="gray"/>{totalStory.toFixed(1)}</span>　
             <span><b>연출 </b><FaStar size="25" color="gray"/>{totalDirect.toFixed(1)}</span>　
             <span><b>캐스팅 </b><FaStar size="25" color="gray"/>{totalCast.toFixed(1)}</span>　
-            <span><b>넘버 </b><FaStar size="25" color="gray"/>{totalNumber.toFixed(1)}</span> */}
+            <span><b>넘버 </b><FaStar size="25" color="gray"/>{totalNumber.toFixed(1)}</span>
             </div>
             <button className="writeBtn" onClick={WriteButton}>후기 작성하기</button>
         </StarBox>
@@ -248,4 +248,3 @@ const ReviewList = (props) => {
     
 }
 export default ReviewList;
-
