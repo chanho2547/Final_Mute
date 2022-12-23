@@ -2,9 +2,12 @@ package com.mute.Final.service;
 
 import com.mute.Final.dto.ReviewSeatAvgDTO;
 import com.mute.Final.dto.ReviewSeatDTO;
+import com.mute.Final.dto.ReviewTotalDTO;
+import com.mute.Final.entity.Member;
 import com.mute.Final.entity.ReviewSeat;
 import com.mute.Final.entity.ReviewSeatAvg;
 
+import com.mute.Final.entity.ReviewTotal;
 import com.mute.Final.repository.ReviewSeatAvgRepository;
 import com.mute.Final.repository.ReviewSeatRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,9 +31,7 @@ public class ReviewSeatService {
     // 전체 좌석 평균 별점 조회
     public List<ReviewSeatAvgDTO> getReviewAvgList() {
         List<ReviewSeatAvgDTO> reviewSeatAvgDTOS = new ArrayList<>();
-        System.out.println("테스트위치33333");
         List<ReviewSeatAvg> reviewSeatAvgList = reviewSeatAvgRepository.findAvg();
-        System.out.println("테스트위치");
         for(ReviewSeatAvg e : reviewSeatAvgList) {
             ReviewSeatAvgDTO reviewSeatAvgDTO = new ReviewSeatAvgDTO();
             System.out.println("테스트 좌석번호 : "+e.getSeatId());
@@ -48,12 +49,12 @@ public class ReviewSeatService {
     }
 
     // 좌석번호별 개인 후기 전체 조회
-    public List<ReviewSeatDTO> getReviewSeatList(int seatNum) {
+    public List<ReviewSeatDTO> getReviewSeatEachList(int seatNum) {
         List<ReviewSeatDTO> reviewSeatDTOS = new ArrayList<>();
         List<ReviewSeat> reviewSeatList = reviewSeatRepository.findBySeatNum(seatNum);
         for (ReviewSeat e : reviewSeatList) {
             ReviewSeatDTO reviewSeatDTO = new ReviewSeatDTO();
-            reviewSeatDTO.setTheaterName(e.getTheater().getTheaterName()); // 공연장 ID
+            reviewSeatDTO.setTheaterName(e.getTheater().getTheaterName()); // 공연장 이름
             reviewSeatDTO.setMusicalName(e.getMusical().getMusicalName()); // 공연 ID
             reviewSeatDTO.setUserId(e.getMember().getUserId());// 회원 ID
             reviewSeatDTO.setSeatNum(e.getSeatNum()); // 좌석 번호
@@ -73,6 +74,7 @@ public class ReviewSeatService {
         return reviewSeatDTOS;
     }
 
+    // 좌석번호별 평균 후기 view
     public List<?> getReviewSeatAvg(int seatNum) {
         List<Map<?,?>> result = new ArrayList<>();
         Map<String, List<Map<?,?>>> map = new HashMap<>();
@@ -84,7 +86,33 @@ public class ReviewSeatService {
         return result;
     }
 
+    // 마이페이지 좌석 후기 view
+    public List<ReviewSeatDTO> getSeatReviewList(Member member) {
+        List<ReviewSeatDTO> reviewSeatDTOS = new ArrayList<>();
+        List<ReviewSeat> reviewSeatList = reviewSeatRepository.findByMember(member);
+        for(ReviewSeat e : reviewSeatList) {
+            ReviewSeatDTO reviewSeatDTO = new ReviewSeatDTO();
+            reviewSeatDTO.setTheaterName(e.getTheater().getTheaterName()); // 공연장 이름
+            reviewSeatDTO.setSeatNum(e.getSeatNum()); // 좌석 번호
+            reviewSeatDTO.setScoreAvgSeat(e.getScoreAvgSeat()); // 평균 총평 별점
+            reviewSeatDTO.setScoreSeat(e.getScoreSeat()); // 좌석 별점
+            reviewSeatDTO.setScoreView(e.getScoreView()); // 시야 별점
+            reviewSeatDTO.setScoreSound(e.getScoreSound()); // 음향 별점
+            reviewSeatDTO.setScoreLight(e.getScoreLight()); // 조명 별점
+            reviewSeatDTO.setReviewSeTxt(e.getReviewSeTxt()); // 뮤지컬 총평 후기 텍스트
+            reviewSeatDTO.setWriteDate(e.getWriteDate()); // 작성일
+            reviewSeatDTOS.add(reviewSeatDTO);
+        }
+        return reviewSeatDTOS;
+    }
 
+    // 좌석 후기 삭제
+    public void deleteReviewSeat(int userNum, int seatNum){
+        ReviewSeat reviewSeat = new ReviewSeat();
+        System.out.println("userNum : " + userNum);
+        System.out.println("seatNum : " + seatNum);
+        reviewSeatRepository.deleteSeatReview(userNum, seatNum);
+    }
 
 
 

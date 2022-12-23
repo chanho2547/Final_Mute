@@ -206,7 +206,7 @@ const MuteApi =  {
         return await axios.get("/musical/openBeforeMusical");
     },
 
-    musicalRanking: async function() {
+    starRanking: async function() {
         return await axios.get("/starRanking");
     },
 
@@ -278,9 +278,9 @@ const MuteApi =  {
     },
 
     userWish:async function(userNum) {
-        const wishObj = {
-            userNum : userNum
-        }
+        // const wishObj = {
+        //     userNum : userNum
+        // }
         return await axios.get(`/wish/select/all?userNum=${userNum}`)
     },
 
@@ -297,6 +297,18 @@ const MuteApi =  {
             seeDate : seeDate
         }
         return await axios.post("/ticket/get_sold_seat_by_date",seeDateInfo);
+    },
+
+    wishRanking: async function() {
+        return await axios.get("/wish/select/top");
+    },
+
+    myReviewSeat: async function(userNum) {
+        return await axios.get(`/reviewSeat/mypage?userNum=${userNum}`)
+    },
+
+    deleteReviewSeat: async function(userNum, seatNum) {
+        return await axios.delete(`/reviewSeat/delete?userNum=${userNum}&seatNum=${seatNum}`)
     }
 
 }
