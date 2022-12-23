@@ -3,6 +3,7 @@ import styled from "styled-components";
 import MuteApi from "../api/MuteApi";
 import { FaStar } from 'react-icons/fa';
 import Modal from "../util/Modal";
+import { useNavigate } from "react-router-dom";
 
 const SeatReviewTotalContainer = styled.div`
     width: 90%;
@@ -45,7 +46,14 @@ const SeatReviewContainer = styled.div`
     .eachContainer{
         .eachText{
             display: flex;
+            .writer{
+                margin-right: 15px;
+            }
+            .eachAvg{
+                margin-right: 15px;
+            }
             .date{
+                margin-right: 15px;
                 color: #909090;
             }
         }
@@ -57,6 +65,7 @@ const SeatReviewContainer = styled.div`
             }
         }
         .txt{
+            margin-top: 10px;
             margin-bottom: 50px;
         }
         .deleteBtn {
@@ -72,10 +81,8 @@ const SeatClick = () => {
     const [count, setCount] = useState(0);
     const [seatAvg, setSeatAvg] = useState();
     const [selectSeat, setSelectSeat] = useState();
-    // const [removeSeat, setRemoveSeat] = useState();
-
     const [modalLogin, setModelLogin] = useState(false); // 로그인 안했을 때
-    
+    const navigate = useNavigate();
     const closeModal = () => { 
         setModelLogin(false);
         setModalOpen(false);
@@ -88,6 +95,7 @@ const SeatClick = () => {
     let clickSeatNum = window.localStorage.getItem("whatSeatNum");
     let clickSeatInfo = window.localStorage.getItem("whatSeatInfo");
     let userNum = window.localStorage.getItem("whoLoginUserNum"); 
+
 
 
     useEffect(() => {
@@ -114,20 +122,23 @@ const SeatClick = () => {
 
     }
 
-    // 나는 userNum이랑  seatNum으로 후기 삭제해야해,,,
-    const OnClickDelete = async(userNum, seatNum) => {
+    const OnClickDelete = async(userNum, clickSeatNum) => {
         try{
             let response = await MuteApi.deleteReviewSeat(userNum, clickSeatNum);
             if(response.data === true) {
                 setModalOpen(true);
                 setModalText("삭제가 완료되었습니다.");
                 setCount(count + 1);
-                // navigate('/Review');
-
+                let theaterFullName = window.localStorage.getItem("theaterFullName");
+                if(theaterFullName === "샤롯데씨어터"){
+                    navigate("/TheaterChar");
+                } else if (theaterFullName === "충무아트센터"){
+                    navigate("/TheaterChung");
+                }
             }
         } catch (e) {
             setModalOpen(true);
-            setModalText("작성자가 아닙니다. 삭제할 수 없습니다.");   
+            setModalText("작성자가 아닙니다.");   
         }
     }
 

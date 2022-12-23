@@ -16,6 +16,9 @@ const TheaterInfo = styled.div`
             font-size: 30px;
             font-weight: 700;
         }
+        .theater_item{
+            margin: 5px
+        }
 `;
 
 
@@ -62,10 +65,10 @@ const TheaterSearchList = () => {
                 <div onClick={()=>OnClick(inputTheater.theaterName)}>
                     <TheaterInfo>
                     <div className="theater_name">{inputTheater.theaterName}</div>
-                    <div className="theater_addr">주소 {inputTheater.theaterAddr}</div>
-                    <div className="theater_call">연락처 {inputTheater.theaterCall}</div>
-                    <div className="theater_web">홈페이지 <a href={inputTheater.theaterWeb}>{inputTheater.theaterWeb}</a></div>
-                    <div className="theater_seats">좌석수 {inputTheater.theaterSeats}석</div>
+                    <div className="theater_item">주소&nbsp; {inputTheater.theaterAddr}</div>
+                    <div className="theater_item">연락처&nbsp; {inputTheater.theaterCall}</div>
+                    <div className="theater_item">홈페이지&nbsp; <a href={inputTheater.theaterWeb}>{inputTheater.theaterWeb}</a></div>
+                    <div className="theater_item">좌석수&nbsp; {inputTheater.theaterSeats}석</div>
                     </TheaterInfo>
                 </div>
             </>

@@ -113,7 +113,4 @@ public class ReviewSeatService {
         System.out.println("seatNum : " + seatNum);
         reviewSeatRepository.deleteSeatReview(userNum, seatNum);
     }
-
-
-
 }

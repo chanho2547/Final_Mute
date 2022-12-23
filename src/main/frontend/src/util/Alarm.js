@@ -1,10 +1,41 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import MuteApi from "../api/MuteApi";
+
+const AlarmContainer = styled.div`
+    .alarm{
+        .title{
+            font-weight: 600;
+            font-size: 18px;
+        }
+        .textItem{
+            display: flex;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .button{
+            width: 30px;
+            font-size: 21px;
+            font-weight: 700;
+            border-radius: 5px;
+            border: 2px lightgray;
+            :hover{
+                color: #810000;
+                font: white;
+            }
+        }
+    }
+    
+       
+    
+`;
+
 
 const Alarm = (props) => {
     const [alarm, setAlarm] = useState("");
     const [alarmUpdate, setAlarmUpdate] = useState(0);
+    const [none, setNone] = useState("찜한 상품이 없습니다.")
     let userNum =  window.localStorage.getItem("whoLoginUserNum");
 
     useEffect(() => {
@@ -13,6 +44,9 @@ const Alarm = (props) => {
                 console.log("알람페이지 렌더링 userNum: " + userNum);
                 let response = await MuteApi.alarmOn(userNum);
                 setAlarm(response.data);
+                if(setAlarm.length === 0) {
+                    console(none);
+                }
             } catch (e) {
                 console.log(e + "알림정보 가져오기 실패");
             }
@@ -50,19 +84,22 @@ const Alarm = (props) => {
     }
 
     return (
-        <div className="alarm_container">
+        <AlarmContainer>
             {alarm && alarm.map(e =>e.wishListContent.map(el=>
                 <>
                 <div onClick={() => OnClickAlarm(el.musicalId) }>
-                <p>공연 이름 : {el.musicalName}</p> 
-                <p>공연 예매 시작일 : {el.musicalTicketStart}</p> 
-                <p>알림 설정 상태 : {el.alarm}</p> 
+                <p className="alarm">
+                    <p className="title">{el.musicalName}</p>
+                    <p className="textItem">예매 시작일</p><span className="value">{el.musicalTicketStart}</span>
+                    <p className="textItem">알림 설정</p><span className="value">{el.alarm}<button className="btn" onClick={() => OnClickAlarmOff(el.userNum, el.musicalId)}>OFF</button></span>
+                </p>
+                <div/>
+                <div/>
                 </div>
-                <button onClick={() => OnClickAlarmOff(el.userNum, el.musicalId)}>OFF</button>
                 </>
             ))}
 
-        </div>
+        </AlarmContainer>
         
     )
 }
