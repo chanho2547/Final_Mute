@@ -250,15 +250,15 @@ const MuteApi =  {
     },
 
     // 수정한 회원 정보 저장
-    userInfoSave: async function(userId, name, pwd, phone, mail, addr, img) {
+    userInfoSave: async function(userId, name, pwd, phone) {
         const ediObj = {
             userId: userId,
-            userName: name,
-            userPwd: pwd,
-            userPhone: phone,
-            userMail: mail,
-            userAddr: addr,
-            userImg: img
+            name: name,
+            pwd: pwd,
+            phone: phone,
+            //userMail: mail,
+            //userAddr: addr,
+            //userImg: img
         }
         return await axios.post("user/saveInfo", ediObj);
     },

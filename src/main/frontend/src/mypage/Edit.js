@@ -61,7 +61,7 @@ const Edit = () => {
     console.log(userId);
 
 
-    const [userImg, setUserImg] = useState(""); 
+    const [userImg, setUserImg] = useState("");
     const [userUrl, setUserUrl] = useState({ backgroundImage: "url(https://mutemute.s3.ap-northeast-2.amazonaws.com/profileimg.png" + userImg + ")" });
     const [userName, setUserName] = useState("");
     const [userPwd, setUserPwd] = useState("");
@@ -73,13 +73,13 @@ const Edit = () => {
     const [changeName, setChangeName] = useState("");
     const [changePwd, setChangePwd] = useState("");
     const [changePhone, setChangePhone] = useState("");
-    const [changeMail, setChangeMail] = useState("");
+    //const [changeMail, setChangeMail] = useState("");
     //const [changeAddr, setChangeAddr] = useState("");
 
     const [nameMsg, setNameMsg] = useState("");
     const [pwdMsg, setPwdMsg] = useState("");
     const [phoneMsg, setPhoneMsg] = useState("");
-    const [mailMsg, setMailMsg] = useState("");
+   // const [mailMsg, setMailMsg] = useState("");
 
     // 유효성 확인
     const [isName, setIsName] = useState(true);
@@ -94,6 +94,7 @@ const Edit = () => {
         setModalOpen(false);
     };
 
+
     // 회원 탈퇴
     const onClickMemDelete = async() => { // 탈퇴한다고 했을때
         await MuteApi.memberDelete(userId);
@@ -105,29 +106,17 @@ const Edit = () => {
         console.log("탈퇴된겨?" + userId);
         navigate('/');
     }
-    // const [userInfo, setUserInfo] = useState();
 
-    // // 회원정보 불러오기
-    // useEffect(() => {
-    //     const userData = async() => {
-    //         try {
-    //             const response = await MuteApi.userInfo(userId);
-    //             setUserInfo(response.data);
-    //         } catch (e) {
-    //             console.log(e + " 예외발생")
-    //         }
-    //     };
-    //     userData();
-    // }, [])
 
     useEffect(() => {
         const userInfoLoad = async() => {
             try {
                 const response = await MuteApi.userInfoLoad(userId);
+                console.log(response.data);
                 setChangeName(response.data[0]);
                 setChangePwd(response.data[1]);
                 setChangePhone(response.data[3]);
-                setChangeMail(response.data[2]);
+                //setChangeMail(response.data[2]);
                 //setChangeAddr(response.data[4]);
 
                 setUserName(response.data[0])
@@ -138,10 +127,25 @@ const Edit = () => {
                 setUserImg(response.data[5]);
                 setUserUrl({ backgroundImage: "url(https://musicalmate.s3.ap-northeast-2.amazonaws.com/profileimg.png" + response.data[5] + ")"});
             } catch (e) {
+                console.log(e)
             }
         }
         userInfoLoad();
     }, [userId]);
+
+    // 설정 저장
+    const onClickSave = async() => {
+        const saveInfo = await MuteApi.userInfoSave(userId, changeName, changePwd, changePhone, userMail);
+        if(saveInfo.data) {
+            setModalOpen(true);
+            setCommnet("회원정보 수정이 완료되었습니다.");
+            console.log(saveInfo)
+            navigate('/');
+        } else {
+            setModalOpen(true);
+            setCommnet("회원정보 수정에 실패하였습니다.")
+        }
+    }
 
     // 이름 변경
     const onChangeName = (e) => {
@@ -196,37 +200,37 @@ const Edit = () => {
         }
     }
 
-    // 메일 중복 확인
-    const onChangeMail = (e) => {
-        const mailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-        const mailCurrent = e.target.value;
-        setChangeMail(mailCurrent);
-        if(!mailRegex.test(mailCurrent)){
-            setMailMsg('이메일의 형식이 올바르지 않습니다.')
-            setIsMail(false);
-        } else {
-            setMailMsg('이메일의 형식이 올바르게 입력되었습니다.')
-            setIsMail(true);
-        }
-    }
+    // // 메일 중복 확인
+    // const onChangeMail = (e) => {
+    //     const mailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    //     const mailCurrent = e.target.value;
+    //     setChangeMail(mailCurrent);
+    //     if(!mailRegex.test(mailCurrent)){
+    //         setMailMsg('이메일의 형식이 올바르지 않습니다.')
+    //         setIsMail(false);
+    //     } else {
+    //         setMailMsg('이메일의 형식이 올바르게 입력되었습니다.')
+    //         setIsMail(true);
+    //     }
+    // }
 
-    const onBlurMailCheck = async() => {
-        // 가입 여부 확인
-        const memberCheck = await MuteApi.memberJoinCheck(changeMail, "TYPE_MAIL");
-        if (userMail ===  changeMail) {
-            setMailMsg("기존 Mail입니다.");
-            setIsMail(true);
-        } else if(memberCheck.data && !isMail){
-            setMailMsg("이메일의 형식이 올바르지 않습니다.");
-            setIsMail(false);
-        } else if(memberCheck.data && isMail){
-            setMailMsg("사용가능한 Mail입니다.");
-            setIsMail(true);
-        } else {
-            setMailMsg("이미 사용하고 있는 Mail입니다.");
-            setIsMail(false);
-        }
-    }
+    // const onBlurMailCheck = async() => {
+    //     // 가입 여부 확인
+    //     const memberCheck = await MuteApi.memberJoinCheck(changeMail, "TYPE_MAIL");
+    //     if (userMail ===  changeMail) {
+    //         setMailMsg("기존 Mail입니다.");
+    //         setIsMail(true);
+    //     } else if(memberCheck.data && !isMail){
+    //         setMailMsg("이메일의 형식이 올바르지 않습니다.");
+    //         setIsMail(false);
+    //     } else if(memberCheck.data && isMail){
+    //         setMailMsg("사용가능한 Mail입니다.");
+    //         setIsMail(true);
+    //     } else {
+    //         setMailMsg("이미 사용하고 있는 Mail입니다.");
+    //         setIsMail(false);
+    //     }
+    // }
 
     const onBlurNameCheck = async() => {
         const memberCheck = await MuteApi.memberJoinCheck(changeName, "TYPE_NAME");
@@ -242,19 +246,9 @@ const Edit = () => {
         }
     }
 
-    // 설정 저장
-    const onClickSave = async(userId) => {
-        const saveInfo = await MuteApi.userInfoSave(userId, userName, userPwd, userPhone, userMail);
-        if(saveInfo.data) {
-            setModalOpen(true);
-            setCommnet("회원정보 수정이 완료되었습니다.");
-            console.log(saveInfo)
-            navigate('/');
-        } else {
-            setModalOpen(true);
-            setCommnet("회원정보 수정에 실패하였습니다.")
-        }
-    }
+
+
+    // 이미지
     AWS.config.update({
         region: "ap-northeast-2",
         credentials: new AWS.CognitoIdentityCredentials({
@@ -301,7 +295,7 @@ const Edit = () => {
             <div>{userId}님</div>
             <div>
                 <p>이름 {changeName && <span>{nameMsg}</span>}</p>
-                <input onChange={onChangeName} value={changeName} onBlur={onBlurNameCheck} placeholder="닉네임" />
+                <input onChange={onChangeName} value={changeName} onBlur={onBlurNameCheck} placeholder="이름" />
             </div>
             <div>
                 <p>비밀번호 {changePwd && <span>{pwdMsg}</span>}</p>
@@ -312,8 +306,8 @@ const Edit = () => {
                 <input onChange={onChangePhone} value={changePhone} onBlur={onBlurPhoneCheck} placeholder="핸드폰" />
             </div>
             <div>
-                <p>Mail {changeMail && <span>{mailMsg}</span>}</p>
-                <input onChange={onChangeMail} value={changeMail} onBlur={onBlurMailCheck} placeholder="메일" />
+                <p>Mail</p>
+                <input value={userMail}  placeholder="메일" readOnly/>
             </div>
             {/*<div>*/}
             {/*    <label className="address_search">주소</label><br/>*/}
@@ -322,7 +316,7 @@ const Edit = () => {
             {/*    {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}*/}
             {/*</div>*/}
             <div>
-                <button onClick={onClickSave} disabled={!(isMail && isPhone && isName)}>회원정보수정</button>
+                <button onClick={onClickSave} disabled={!(isPhone && isName)}>회원정보수정</button>
             </div>
             <div>
                 <button onClick={onClickMemDelete}>회원탈퇴</button>
