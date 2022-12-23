@@ -101,12 +101,12 @@ const TextBox = styled.div`
     }
 `;
 
-const ReviewSeat = () => {
+const ReviewSeat = (props) => {
     const navigate = useNavigate();
 
     const userNum = window.localStorage.getItem("whoLoginUserNum"); // 지금 로그인한 회원번호
     let musicalId = window.localStorage.getItem("musicalId"); // 지금 선택한 뮤지컬
-    let theaterId = window.localStorage.getItem("theaterFullName"); // 극장 이름
+    // let theaterName = window.localStorage.getItem("theaterFullName"); // 극장 이름
     let mySeat = window.localStorage.getItem("whatSeatInfo"); // 극장이름 + 좌석번호(층, 열, 번)
     let pkNum = window.localStorage.getItem("whatSeatNum"); // 좌석번호
 
@@ -161,7 +161,7 @@ const ReviewSeat = () => {
     // 후기 작성 버튼이 눌려지면 동작하는 함수
     const WriteSeatButton = async() => {
         try {
-            const res =  await MuteApi.WriteSeat(userNum, musicalId, pkNum, seatRating, viewRating, soundRating, lightRating, scoreAvgSeat, seatReview);
+            const res =  await MuteApi.WriteSeat(userNum, musicalId, props.theaterId, pkNum, seatRating, viewRating, soundRating, lightRating, scoreAvgSeat, seatReview);
             if(res.data === true) {
                 setWriteModal(true);   
             } else {
