@@ -2,11 +2,14 @@ package com.mute.Final.service;
 
 import com.mute.Final.dto.MemberDTO;
 import com.mute.Final.entity.Member;
+import com.mute.Final.repository.EditRepository;
 import com.mute.Final.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 
 @Service
@@ -15,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class EditService {
     private final MemberRepository memberRepository;
+    private final EditRepository editRepository;
 
     // 회원정보 불러오기
     public MemberDTO userInfo (String userId) {
@@ -35,23 +39,18 @@ public class EditService {
     }
 
     // 회원 정보 수정
-    public boolean saveUserInfo(String userId, String name, String pwd, String mail, String phone) {
+    public boolean saveUserInfo(String userId, String name, String pwd, String phone) {
         try {
             Member member = memberRepository.findByUserId(userId);
-            log.error("아이디 : " + userId);
-            log.error("변경 name : " + name);
-            log.error("변경 pwd : " + pwd);
-            log.error("변경 mail : " + mail);
-            log.error("변경 phone : " + phone);
-            //log.error("변경 addr : " + addr);
             member.setName(name);
             member.setPwd(pwd);
-            member.setMail(mail);
+            //member.setMail(mail);
             member.setPhone(phone);
             //member.setAddress(addr);
             memberRepository.save(member);
             log.error("저장완료");
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
         return true;

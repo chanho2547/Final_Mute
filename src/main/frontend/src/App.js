@@ -38,6 +38,7 @@ import PayEnd from './reservation/payment/PayEnd';
 import SeatClick from './review/SeatClick';
 import ProImg from "./mypage/ProImg";
 import MyReview from './review/MyReview';
+import TopButton from './util/TopButton';
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
     <>
     <Router>
       <div className='App'>
+      <TopButton/>
       <Header/>
       <Routes>
         <Route path="/" element={<Home />} /> 

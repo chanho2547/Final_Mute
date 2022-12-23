@@ -41,21 +41,21 @@ public class EditController {
 
     // 회원 정보 수정
     @PostMapping("/saveInfo")
-    public ResponseEntity<Boolean> userInfoSave(@RequestParam Map<String, String> userInfo) {
+    public ResponseEntity<Boolean> userInfoSave(@RequestBody Map<String, String> userInfo) {
         String userId = userInfo.get("userId");
         String name = userInfo.get("name");
         String pwd = userInfo.get("pwd");
-        String mail = userInfo.get("mail");
+        //String mail = userInfo.get("mail");
         String phone = userInfo.get("phone");
         //String addr = userInfo.get("addr");
         log.error("아이디 : " + userId);
         log.error("변경 name : " + name);
         log.error("변경 pwd : " + pwd);
-        log.error("변경 mail : " + mail);
+        //log.error("변경 mail : " + mail);
         log.error("변경 phone : " + phone);
         //log.error("변경 addr : " + addr);
 
-        boolean result = editService.saveUserInfo(userId, name, pwd, mail, phone);
+        boolean result = editService.saveUserInfo(userId, name, pwd, phone);
         if(result) {
             return new ResponseEntity(true, HttpStatus.OK);
         } else {

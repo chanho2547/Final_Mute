@@ -36,6 +36,17 @@ public class WishService {
         return result;
     }
 
+    public List<?> getWishTopList() {
+        List<Map<?,?>> result = new ArrayList<>();
+        Map<String, List<Map<?,?>>> map = new HashMap<>();
+        map.put("wishListContent", wishRepository.wishTop3());
+        System.out.println(map);
+        for(int i = 0; i < map.size(); i++){
+            result.add(map);
+        }
+        return result;
+    }
+
     // 마이페이지 찜한 뮤지컬
     public List<WishDTO> getWishListALl(Member member) {
         List<WishDTO> wishDTOS = new ArrayList<>();
