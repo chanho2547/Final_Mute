@@ -7,6 +7,15 @@ import styled from "styled-components";
 import AWS from "aws-sdk";
 
 const Img = styled.div `
+    width: 100%;
+    text-align: center;
+
+    .img {
+        text-align: center;
+        display: inline-block;
+        margin-top: 25px;
+    }
+
     .image-upload { // 파일선택 버튼
   width: 120px !important;
   height: 120px !important;
@@ -52,6 +61,70 @@ const Img = styled.div `
    cursor: pointer;
  }
  `;
+
+const EditBox = styled.div`
+    width: 100%;
+    margin-top:50px;
+    text-align: center;
+    margin-top: 5px;
+
+    .info_id {
+        position: relative;
+    }
+
+    .info_id .btn {
+        position: absolute;
+        width: 90px;
+        height: 35px;
+        margin-top: 5px;
+        border-radius: 5px;
+        border: none;
+        margin-left: 10px;
+    
+    }
+    .input {
+        /* position: relative; */
+        width : 270px;
+        height : 35px;
+        background-color : white;
+        border-radius : 5px;
+        border: solid 1.5px #eeeeee;
+        text-align: center;
+        margin : 5px;
+        font-size: 12px;
+        &:hover {
+            border : solid rgb(129,0,0) 1px;
+            font-weight: 600;
+            color: rgb(129,0,0);
+        } 
+        &:focus {
+            outline : solid rgb(129,0,0) 1px;
+            font-weight: 600;
+        }
+    }
+
+    .hint {
+        font-size : 12px;
+        color:#1B1717;
+        text-align: center;
+    }
+
+    .Button {
+        width: 280px;
+        height: 40px;
+        margin: 10px;
+        color : white;
+        font-weight: 700;
+        opacity: 0.5;
+        background-color: rgb(129,0,0); 
+        border-radius: 5px;
+        border: none;
+        &:hover {
+            border: none;
+            opacity: 1;      
+        }
+    }
+`; 
 
 
 // 회원정보 수정 페이지
@@ -285,30 +358,46 @@ const Edit = () => {
         <>
 
             <Img >
+                <div className="img">
                 <input type="file" id="upload" accept='image/*' className="image-upload" onChange={handleFileInput} />
                 <label htmlFor="upload" className="image-upload-wrapper">
                     <img
                         className="profile-img"
                         src={`https://musicalmate.s3.ap-northeast-2.amazonaws.com/profileimg.png`} />
                 </label>
+                </div>
             </Img>
             {/* <ProImg userId={userId} setUserImg={setUserImg} setUserUrl={setUserUrl} userUrl={userUrl}/> */}
 
-            <div>
-                <p>이름 {changeName && <span>{nameMsg}</span>}</p>
-                <input onChange={onChangeName} value={changeName} onBlur={onBlurNameCheck} placeholder="이름" />
+            <EditBox>
+            {/* 이름 입력창 */}
+            <div className="info_id">
+            <input className="input" onChange={onChangeName} value={changeName} onBlur={onBlurNameCheck} placeholder="이름" />
+            <div className="hint">     
+            {changeName && <span>{nameMsg}</span>}
+            </div>    
             </div>
+
+            {/* 비밀번호 변경*/}
             <div>
-                <p>비밀번호 {changePwd && <span>{pwdMsg}</span>}</p>
-                <input type="password" onChange={onChangePwd} value={changePwd} placeholder="비밀번호" />
+                <input className="input" type="password" onChange={onChangePwd} value={changePwd} placeholder="비밀번호" />
+            <div className="hint">    
+                <p>{changePwd && <span>{pwdMsg}</span>}</p>
             </div>
-            <div>
-                <p>핸드폰 {changePhone && <span>{phoneMsg}</span>}</p>
-                <input onChange={onChangePhone} value={changePhone} onBlur={onBlurPhoneCheck} placeholder="핸드폰" />
             </div>
+
+            {/* 핸드폰 변경 */}
             <div>
-                <p>Mail</p>
-                <input value={userMail}  placeholder="메일" readOnly/>
+                <input className="input" onChange={onChangePhone} value={changePhone} onBlur={onBlurPhoneCheck} placeholder="핸드폰" />
+            <div className="hint">   
+                <p>{changePhone && <span>{phoneMsg}</span>}</p>
+            </div>
+            </div> 
+
+            {/* 메일 변경 */}
+            <div>
+                {/* <p>Mail</p> */}
+                <input className="input" value={userMail}  placeholder="메일" readOnly/>
             </div>
             {/*<div>*/}
             {/*    <label className="address_search">주소</label><br/>*/}
@@ -316,14 +405,15 @@ const Edit = () => {
             {/*    <button onClick={handleComplete}>주소 검색</button>*/}
             {/*    {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}*/}
             {/*</div>*/}
+            
             <div>
-                <button onClick={onClickSave} disabled={!(isPhone && isName)}>회원정보수정</button>
+                <button className="Button" onClick={onClickSave} disabled={!(isPhone && isName)}>회원정보수정</button>
             </div>
             <div>
-                <button onClick={onClickMemDelete}>회원탈퇴</button>
+                <button className="Button" onClick={onClickMemDelete}>회원탈퇴</button>
             </div>
             {modalOpen && <Modal open={modalOpen} close={closeModal} header="탈퇴">{comment}</Modal>}
-
+        </EditBox>
         </>
     )
 }

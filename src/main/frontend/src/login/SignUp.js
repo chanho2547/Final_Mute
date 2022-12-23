@@ -326,7 +326,7 @@ const SignUp = () => {
                 {/* 이메일 입력창 */}
                 <div className="info_id">
                 <input className="input" type='mail' placeholder='메일' value={inputMail} onChange={onChangeMail} onBlur={mailCheck}></input>
-                <button className='btn' type='button' onClick={getAuth}>인증번호 받기</button>
+                <button className='btn' type='button' disabled={!isAuth} onClick={getAuth}>인증번호 받기</button>
                 <div className="hint"> 
                 {inputMail.length > 0 && <span>{mailMsg}</span>}
                 </div>
@@ -335,7 +335,7 @@ const SignUp = () => {
                 {/* 이메일 인증 확인*/}
                 <div className="info_id">
                 <input className="input" type='text' placeholder='인증번호' value={inputAuth} onChange={onChangeAuth}></input>
-                    <button className='btn' type='button' onClick={authCheck}>인증번호 확인</button>
+                    <button className='btn' type='button' disabled={!isAuth}  onClick={authCheck}>인증번호 확인</button>
                 <div className="hint">  
                 {inputAuth.length > 0 && <span>{authMsg}</span>}
                 </div>           
@@ -358,7 +358,7 @@ const SignUp = () => {
                 </div>
 
                 {/* 회원가입버튼 활성화 */}
-                <button className="signupButton" onClick={onClickJoin} disabled={!(isId && isPwd && isPwdCheck && isName && isMail && isAuth)}>회원가입</button>
+                <button className="signupButton" onClick={onClickJoin} disabled={!(isId && isPwd && isPwdCheck && isName && isMail && isPhone && isAuth)}>회원가입</button>
                 <br/><br/><div className='footer'>이미 아이디가 있으신가요? <button><div><Link to="/Login" className="link_item"> 로그인</Link></div></button></div>
 
                 {/* 모달 */}
