@@ -94,6 +94,12 @@ margin: auto;
     margin: auto;
     margin-bottom: 35px
 }
+.wishRanking{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-bottom: 35px;
+}
 .centerBlock{
     background-color: #F4F4F4;
     .musical_title{
@@ -124,6 +130,7 @@ const Home = () => {
     const [openedMusical, setOpenedMusical] = useState();
     const [openBeforeMusical, setBeforeMusical] = useState();
     const [starRanking, setStarRanking] = useState();
+    const [wishRanking, setWishRanking] = useState();
 
     useEffect(() => {
         const RankData = async () => {
@@ -132,10 +139,12 @@ const Home = () => {
                 let response1 = await MuteApi.openedMusical();
                 let response2 = await MuteApi.openBeforeMusical();
                 let response3 = await MuteApi.musicalRanking();
+                let response4 = await MuteApi.wishRanking();
                 setMusicalList(response.data);
                 setOpenedMusical(response1.data);
                 setBeforeMusical(response2.data);
                 setStarRanking(response3.data);
+                setWishRanking(response4.data);
                 console.log("꺼내야하는 데이터" + response3.data.map(e=>e.rankingListContent.map(el=>el.musical_id))); // 요게 맞음 PF195257,PF194963,PF195242
 
             } catch (e) {
@@ -158,10 +167,6 @@ const Home = () => {
 
     return(
         <>
-        {/* <Link to = "/TheaterChar">샤롯데 좌석 정보</Link> <br></br>
-        <Link to = "/TheaterChung">충무 좌석 정보</Link> <br></br>
-        <Link to = "/Reservation"> 예매 임시 페이지 </Link> <br></br>
-        <Link to = "/TheaterSearch">좌석별 후기 페이지</Link> <br></br> */}
         <Link to = "/MusicalListTmp">뮤지컬 목록 임시 페이지</Link> <br></br>
         {/* <Link to = "/PayTest">카카오페이 결제 임시 페이지</Link> */}
         <br/><br/>
@@ -172,6 +177,37 @@ const Home = () => {
         </SearchContainer>
 
         <MusicalContainer>
+        <br/><br/>
+            <div className="musical_title"><p className="musical_title_front">인기가 가장 많은&nbsp;</p><p className="musical_title_back">뮤지컬 TOP3</p></div>
+            <div className="wishRanking">
+            {wishRanking && wishRanking.map(e=>e.wishListContent.map(el=>
+            <>
+            <div onClick={()=>onClick(el.musicalId)}>
+            <img className="musical_img" alt="poster" src={el.musicalPoster} />
+            <p className="musical_name">{el.musicalName}</p>
+            <p className="theater_name">{el.theaterName}</p>
+            <p className="musical_date">{el.musicalStart} ~ {el.musicalEnd}</p>
+            </div>
+            </>
+            ))}
+            </div>
+
+            <br/><br/>
+            <div className="musical_title"><p className="musical_title_front">별점이 가장 높은&nbsp;</p><p className="musical_title_back">뮤지컬 TOP3</p></div>
+            <div className="starRanking">
+            {starRanking && starRanking.map(e=>e.rankingListContent.map(el=>
+            <>
+            <div onClick={()=>onClick(el.musicalId)}>
+            <img className="musical_img" alt="poster" src={el.musical_poster} />
+            <p className="musical_name">{el.musical_name}</p>
+            <p className="theater_name">{el.theater_name}</p>
+            <p className="musical_date">{el.musical_start} ~ {el.musical_end}</p>
+            </div>
+            </>
+            ))}
+            </div>
+
+            <br/><br/>
             <p className="musical_title"><p className="musical_title_front">예매 시작&nbsp;</p><p className="musical_title_back">뮤지컬 TOP3</p></p>
             <div className="openedMusical">
             {openedMusical && openedMusical.map(e => (
@@ -197,21 +233,6 @@ const Home = () => {
                 </div>
             ))}
             </div>
-            </div>
-
-            <br/><br/>
-            <div className="musical_title"><p className="musical_title_front">별점이 가장 높은&nbsp;</p><p className="musical_title_back">뮤지컬 TOP3</p></div>
-            <div className="starRanking">
-            {starRanking && starRanking.map(e=>e.rankingListContent.map(el=>
-            <>
-            <div onClick={()=>onClick(el.musicalId)}>
-            <img className="musical_img" alt="poster" src={el.musical_poster} />
-            <p className="musical_name">{el.musical_name}</p>
-            <p className="theater_name">{el.theater_name}</p>
-            <p className="musical_date">{el.musical_start} ~ {el.musical_end}</p>
-            </div>
-            </>
-            ))}
             </div>
              
         </MusicalContainer>
