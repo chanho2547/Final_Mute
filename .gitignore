@@ -72,6 +72,3 @@ src/main/resources/static/index.html
 
 ### naver mail auth ###
 src/main/resources/application.yml
-
-# AWS S3
-src/main/frontend/src/mypage/ProImg.js

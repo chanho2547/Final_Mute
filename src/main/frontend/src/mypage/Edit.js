@@ -123,7 +123,7 @@ const Edit = () => {
                 setUserPwd(response.data[1]);
                 setUserPhone(response.data[3]);
                 setUserMail(response.data[2]);
-                setUserAddr(response.data[4]);
+                //setUserAddr(response.data[4]);
                 setUserImg(response.data[5]);
                 setUserUrl({ backgroundImage: "url(https://musicalmate.s3.ap-northeast-2.amazonaws.com/profileimg.png" + response.data[5] + ")"});
             } catch (e) {
@@ -309,10 +309,12 @@ const Edit = () => {
                 <p>Mail</p>
                 <input value={userMail}  placeholder="메일" readOnly/>
             </div>
-            <div>
-                <p>주소</p>
-                <input value={userAddr} placeholder="주소" readOnly/>
-            </div>
+            {/*<div>*/}
+            {/*    <label className="address_search">주소</label><br/>*/}
+            {/*    <input className="addr" type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>*/}
+            {/*    <button onClick={handleComplete}>주소 검색</button>*/}
+            {/*    {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}*/}
+            {/*</div>*/}
             <div>
                 <button onClick={onClickSave} disabled={!(isPhone && isName)}>회원정보수정</button>
             </div>
