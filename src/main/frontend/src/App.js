@@ -38,7 +38,7 @@ import PayEnd from './reservation/payment/PayEnd';
 import SeatClick from './review/SeatClick';
 import ProImg from "./mypage/ProImg";
 import MyMuReview from './review/MyMuReview';
-import MySeReview from './review/MySeReview';
+// import MySeReview from './review/MySeReview';
 import TopButton from './util/TopButton';
 
 
@@ -86,7 +86,7 @@ function App() {
         <Route path='/SeatClick' element={<SeatClick/>}/>
         <Route path='/ProImg' element={<ProImg/>} />
         <Route path='/MyMuReview' element={<MyMuReview/>} />
-        <Route path='/MySeReview' element={<MySeReview/>} />
+        {/* <Route path='/MySeReview' element={<MySeReview/>} /> */}
 
       </Routes>
       <Footer/>
