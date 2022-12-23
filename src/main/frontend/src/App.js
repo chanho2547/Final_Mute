@@ -40,6 +40,7 @@ import ProImg from "./mypage/ProImg";
 import MyMuReview from './review/MyMuReview';
 import MySeReview from './review/MySeReview';
 import TopButton from './util/TopButton';
+import MyPageTab from "./mypage/MyPageTab";
 
 
 function App() {
@@ -87,6 +88,7 @@ function App() {
         <Route path='/ProImg' element={<ProImg/>} />
         <Route path='/MyMuReview' element={<MyMuReview/>} />
         <Route path='/MySeReview' element={<MySeReview/>} />
+        <Route path='/MyPageTab' element={<MyPageTab/>} />
 
       </Routes>
       <Footer/>

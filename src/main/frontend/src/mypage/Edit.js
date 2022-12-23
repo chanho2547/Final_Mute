@@ -283,6 +283,7 @@ const Edit = () => {
     
     return(
         <>
+
             <Img >
                 <input type="file" id="upload" accept='image/*' className="image-upload" onChange={handleFileInput} />
                 <label htmlFor="upload" className="image-upload-wrapper">
@@ -292,7 +293,7 @@ const Edit = () => {
                 </label>
             </Img>
             {/* <ProImg userId={userId} setUserImg={setUserImg} setUserUrl={setUserUrl} userUrl={userUrl}/> */}
-            <div>{userId}님</div>
+
             <div>
                 <p>이름 {changeName && <span>{nameMsg}</span>}</p>
                 <input onChange={onChangeName} value={changeName} onBlur={onBlurNameCheck} placeholder="이름" />
