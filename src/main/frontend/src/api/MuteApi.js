@@ -299,6 +299,7 @@ const MuteApi =  {
         return await axios.post("/ticket/get_sold_seat_by_date",seeDateInfo);
     },
 
+    // 찜랭킹 top3
     wishRanking: async function() {
         return await axios.get("/wish/select/top");
     },
