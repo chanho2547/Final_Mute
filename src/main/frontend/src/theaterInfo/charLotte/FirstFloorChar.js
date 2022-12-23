@@ -164,6 +164,7 @@ const onClickSeat = (event) => {
 
         // navigate('/ReviewSeat'); 
         
+        
     }
     
     

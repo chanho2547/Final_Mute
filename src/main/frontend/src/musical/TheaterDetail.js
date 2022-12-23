@@ -27,7 +27,7 @@ const TheaterDetail = (props) => {
                 const response = await MuteApi.theaterDetail(props.theaterId); // 극장 정보 불러오기
                 setTheaterInfo(response.data);
                 console.log("극장ID값: " + props.theaterId);
-                
+
             } catch (e) {  
                 console.log(e + "실패");
             }

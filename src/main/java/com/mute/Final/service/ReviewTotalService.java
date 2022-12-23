@@ -64,6 +64,7 @@ public class ReviewTotalService {
             ReviewTotalDTO reviewTotalDTO = new ReviewTotalDTO();
             reviewTotalDTO.setReviewMuId(e.getReviewMuId()); // 총평 후기 글 번호
             reviewTotalDTO.setMusicalId(e.getMusicalId().getMusicalId()); // 뮤지컬 아이디
+            reviewTotalDTO.setMusicalName(e.getMusicalId().getMusicalName()); // 뮤지컬 제목
             reviewTotalDTO.setMember(e.getMember().getUserId().replaceAll("(?<=.{2}).", "*")); // 회원 아이디
             reviewTotalDTO.setScoreAvgTotal(e.getScoreAvgTotal()); // 평균 총평 별점
             reviewTotalDTO.setScoreStory(e.getScoreStory()); // 스토리 별점

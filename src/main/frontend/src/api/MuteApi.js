@@ -52,11 +52,11 @@ const MuteApi =  {
     },
 
      // 좌석 후기 작성 - 도연
-     WriteSeat: async function(userNum, musicalId, pkNum, seatRating, viewRating, soundRating, lightRating, scoreAvgSeat, seatReview) {
+     WriteSeat: async function(userNum, musicalId, theaterId, pkNum, seatRating, viewRating, soundRating, lightRating, scoreAvgSeat, seatReview) {
         const reviewObj = {
             userNum : userNum,
             musicalId : musicalId, 
-            // theaterId : theaterId, 
+            theaterId : theaterId, 
             seatNum : pkNum, // 좌석
             scoreSeat: seatRating,// 좌석 별점 
             scoreView: viewRating, // 시야 별점

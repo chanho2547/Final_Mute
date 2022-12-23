@@ -78,7 +78,7 @@ const MusicalTab = (props) => {
           onClick={()=>selectTabHandler(2)}> 후기 </li>
       ),
       tabCont:(
-          <Review/>
+          <Review theaterId={props.theaterId}/>
       )
     }
   ];
