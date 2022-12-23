@@ -22,12 +22,14 @@ const SeatReviewAvgContainer = styled.div`
     .avgContainer{
         background-color: #EEEBDD;
         padding: 30px;
+        
         .allAvg{
         color: #810000;
         font-size: 25px;
         font-weight: 800;
             .allAvg_score{
                 color: #1b1717;
+                font-weight: 500;
             }
         }
         .starAvg{
@@ -44,8 +46,11 @@ const SeatReviewAvgContainer = styled.div`
 
 const SeatReviewContainer = styled.div`
     .eachContainer{
+        border:none;
+        border-bottom: 1px solid lightgray;
         .eachText{
             display: flex;
+            margin-top:20px;
             .writer{
                 margin-right: 15px;
             }
@@ -66,7 +71,7 @@ const SeatReviewContainer = styled.div`
         }
         .txt{
             margin-top: 10px;
-            margin-bottom: 50px;
+            margin-bottom: 20px;
         }
         .deleteBtn {
             border-radius: 5px;
@@ -152,12 +157,12 @@ const SeatClick = () => {
             <div onClick={()=>OnClickSeat()}>
 
             <div className="avgContainer">
-                <p className="allAvg">평균 별점<FaStar size="30" color="#FCC419"/><span className="allAvg_score">{el.avgSeat.toFixed(2)}({el.cnt})</span></p>
+                <p className="allAvg">평균 별점&nbsp;<FaStar size="27" color="#FCC419"/>&nbsp;<span className="allAvg_score">{el.avgSeat.toFixed(2)}({el.cnt})</span></p>
                 <div className="starAvg">
-                    <p className="starAvgList"><span className="starAvgList_text">좌석</span><FaStar size="25" color="gray"/>{el.seat.toFixed(1)}</p>
-                    <p className="starAvgList"><span className="starAvgList_text">시야</span><FaStar size="25" color="gray"/>{el.view.toFixed(1)}</p>
-                    <p className="starAvgList"><span className="starAvgList_text">음향</span><FaStar size="25" color="gray"/>{el.sound.toFixed(1)}</p>
-                    <p className="starAvgList"><span className="starAvgList_text">조명</span><FaStar size="25" color="gray"/>{el.light.toFixed(1)}</p>
+                    <p className="starAvgList"><span className="starAvgList_text">좌석&nbsp;</span><FaStar size="23" color="gray"/>&nbsp;{el.seat.toFixed(1)}</p>
+                    <p className="starAvgList"><span className="starAvgList_text">시야&nbsp;</span><FaStar size="23" color="gray"/>&nbsp;{el.view.toFixed(1)}</p>
+                    <p className="starAvgList"><span className="starAvgList_text">음향&nbsp;</span><FaStar size="23" color="gray"/>&nbsp;{el.sound.toFixed(1)}</p>
+                    <p className="starAvgList"><span className="starAvgList_text">조명&nbsp;</span><FaStar size="23" color="gray"/>&nbsp;{el.light.toFixed(1)}</p>
                 </div>
             </div>
 
@@ -176,17 +181,18 @@ const SeatClick = () => {
 
                     <div className="eachText">
                         <p className="writer">{e.userId.replace(e.userId.slice(-2), '***')}</p>
-                        <p className="eachAvg"><FaStar size="15" color="#FCC419"/> {e.scoreAvgSeat}</p>
+                        <p className="eachAvg"><FaStar size="14" color="#FCC419"/> {e.scoreAvgSeat}</p>
                         <p className="date">작성일 {e.writeDate.toString().substring(0, 10)}</p>
+                        <button className="deleteBtn" onClick={() => OnClickDelete(userNum, clickSeatNum)}>삭제</button>
                     </div>
                     
                     <div className="star">
-                        <p className="starList">좌석<FaStar size="15" color="gray"/>{e.scoreSeat.toFixed(1)}</p>
-                        <p className="starList">시야<FaStar size="15" color="gray"/> {e.scoreView.toFixed(1)}</p>
-                        <p className="starList">음향<FaStar size="15" color="gray"/>{e.scoreSound.toFixed(1)}</p>
-                        <p className="starList">조명<FaStar size="15" color="gray"/> {e.scoreLight.toFixed(1)}</p>
+                        <p className="starList">좌석<FaStar size="14" color="gray"/>{e.scoreSeat.toFixed(1)}</p>
+                        <p className="starList">시야<FaStar size="14" color="gray"/> {e.scoreView.toFixed(1)}</p>
+                        <p className="starList">음향<FaStar size="14" color="gray"/>{e.scoreSound.toFixed(1)}</p>
+                        <p className="starList">조명<FaStar size="14" color="gray"/> {e.scoreLight.toFixed(1)}</p>
                     </div>
-                    <button className="deleteBtn" onClick={() => OnClickDelete(userNum, clickSeatNum)}>삭제</button>
+                   
                     <p className="txt">{e.reviewSeTxt}</p>
 
                 </div>

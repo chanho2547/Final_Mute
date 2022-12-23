@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const MusicalListContainer = styled.div`
+width:80%;
 margin-top : 100px;
 margin-left: 400px;
 .musicalList{

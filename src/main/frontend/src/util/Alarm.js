@@ -11,7 +11,7 @@ const AlarmContainer = styled.div`
         }
         .textItem{
             display: flex;
-            font-weight: 600;
+            // font-weight: 600;
             font-size: 16px;
         }
         .button{
@@ -90,8 +90,8 @@ const Alarm = (props) => {
                 <div onClick={() => OnClickAlarm(el.musicalId) }>
                 <p className="alarm">
                     <p className="title">{el.musicalName}</p>
-                    <p className="textItem">예매 시작일</p><span className="value">{el.musicalTicketStart}</span>
-                    <p className="textItem">알림 설정</p><span className="value">{el.alarm}<button className="btn" onClick={() => OnClickAlarmOff(el.userNum, el.musicalId)}>OFF</button></span>
+                    <p className="textItem">예매 시작일<p className="value">{el.musicalTicketStart}</p></p>
+                    <p className="textItem">알림 설정<p className="value">{el.alarm}<button className="btn" onClick={() => OnClickAlarmOff(el.userNum, el.musicalId)}>OFF</button></p></p>
                 </p>
                 <div/>
                 <div/>
