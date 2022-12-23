@@ -1,6 +1,6 @@
 import React from "react";
 import Edit from "./Edit";
-import MyReview from "../review/MyReview";
+import MyReview from "../review/MyMuReview";
 import MyWish from "../util/MyWish";
 
 

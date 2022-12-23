@@ -47,7 +47,7 @@ const Review = (props) => {
             <TmpBox>
             {count === 0 ? <ReviewList propFunction={highFunction}/> : null} 
             {count === 1 ? <ReviewTotal homeFunction={homeFunction} propFunction={highFunction}/> : null}
-            {count === 2 ? <ReviewSeat homeFunction={homeFunction} propFunction={highFunction} theaterId={props.theaterId}/> : null}
+            {count === 2 ? <ReviewSeat homeFunction={homeFunction} propFunction={highFunction} theaterId={props.theaterId} myseat={props.myseat}/> : null}
             </TmpBox>
         </div>
     );

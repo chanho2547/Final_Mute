@@ -65,7 +65,7 @@ const Dislikebtn = styled.button`
     margin-left: 10px;
 `;
 
-const MyReview = () => {
+const MyMuReview = () => {
 
     const member = window.localStorage.getItem("whoLoginUserNum"); // 회원번호
     let musicalId = window.localStorage.getItem("musicalId"); // 뮤지컬번호
@@ -133,4 +133,4 @@ const MyReview = () => {
         </>
     );
 }
-export default MyReview;
+export default MyMuReview;

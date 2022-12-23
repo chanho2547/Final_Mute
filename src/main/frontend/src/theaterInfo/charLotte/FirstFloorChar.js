@@ -26,8 +26,6 @@ const FirstFloorChar = (props) => {
     const [seatView, setSeatView] = useState(false);
     let navigate = useNavigate();
 
-    const [mySeat, setMySeat] = useState(''); // 좌석 후기 작성할 때 좌석 선택
-
 
     let arr = [];
     let arrString;
@@ -46,6 +44,7 @@ const onClickSoldOut = () => {
     alert("onClickSoldOut");
 }
 
+const [mySeat, setMySeat] = useState(''); // 좌석 후기 작성할 때 좌석 선택
 
 // ------ 여기부터 onClickSeat ---------------------
 const onClickSeat = (event) => {
@@ -164,9 +163,13 @@ const onClickSeat = (event) => {
         console.log("선택한 좌석번호 : "  + pkNum);
         let theaterFullName = window.localStorage.getItem("theaterFullName"); // 극장 이름
         window.localStorage.setItem("whatSeatInfo", theaterFullName+" "+floor+"층 "+parentNode+"열 "+seatNum+"번");
+        let mySeat = window.localStorage.getItem("whatSeatInfo"); // 극장이름 + 좌석번호(층, 열, 번)
         
-        setMySeat(true);
+        props.seatFunction(mySeat);
         navigate('/ReviewSeat');
+        
+        // // myseat={props.myseat}
+        // props.addMySeat(window.localStorage.getItem("myseat"));
    
         
         
@@ -202,6 +205,7 @@ const onClickSeat = (event) => {
 
     const [seatReviewInfo,setSeatReviewInfo] = useState();
     const [soldOutSeat,setSoldOutSeat] = useState([]);
+    
 
     useEffect(() => {
         window.localStorage.setItem("floor",1);
@@ -330,6 +334,8 @@ const onClickSeat = (event) => {
 
         // seatInfoMode가 NONE인 경우 => 도연언니
         else {
+            
+            
           
 
         }
