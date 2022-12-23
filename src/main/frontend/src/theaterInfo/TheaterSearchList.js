@@ -8,8 +8,9 @@ import styled from "styled-components";
 // theaterSearch.js에 검색창있음
 const TheaterInfo = styled.div`
     border: 3px solid #810000;
-    width: 80%;
-    margin: auto;
+    width: 70%;
+    margin: 30px auto;
+    padding: 20px;
         .theater_name{
             color: #810000;
             font-size: 30px;

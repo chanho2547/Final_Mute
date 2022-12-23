@@ -13,7 +13,7 @@ const SearchContainer = styled.div`
   display: flex;
   width: 580px;
   height: 60px;
-  margin-top: 50px;
+  margin-top: 70px;
     .search_input{
         width: 550px;
         border: none;

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import MuteApi from "../api/MuteApi";
 import { FaStar } from 'react-icons/fa';
+import Modal from "../util/Modal";
 
 const SeatReviewTotalContainer = styled.div`
     width: 90%;
@@ -58,25 +59,46 @@ const SeatReviewContainer = styled.div`
         .txt{
             margin-bottom: 50px;
         }
+        .deleteBtn {
+            border-radius: 5px;
+            border: solid 0.5px lightgray;
+            background-color: white;
+        }
     }
 
 `;
 
 const SeatClick = () => {
-    const [seatAvg, setseatAvg] = useState();
+    const [count, setCount] = useState(0);
+    const [seatAvg, setSeatAvg] = useState();
     const [selectSeat, setSelectSeat] = useState();
+    // const [removeSeat, setRemoveSeat] = useState();
+
+    const [modalLogin, setModelLogin] = useState(false); // 로그인 안했을 때
+    
+    const closeModal = () => { 
+        setModelLogin(false);
+        setModalOpen(false);
+        setCount(count + 1);
+    }
+    
+    const [modalOpen, setModalOpen] = useState(""); // 삭제 버튼 눌렀을 때
+    const [modalText, setModalText] = useState(""); // 삭제 모달 텍스트
+
     let clickSeatNum = window.localStorage.getItem("whatSeatNum");
     let clickSeatInfo = window.localStorage.getItem("whatSeatInfo");
+    let userNum = window.localStorage.getItem("whoLoginUserNum"); 
 
 
     useEffect(() => {
         const SeatDetailReview = async () => {
             try {
+                console.log("글 삭제할 userNum : " + userNum);
                 console.log("클릭한 좌석번호 : " + clickSeatNum);
                 console.log("클릭한 좌석위치 : " + clickSeatInfo);
                 let response1 = await MuteApi.seatReviewStar(clickSeatNum);
                 let response2 = await MuteApi.seatReview(clickSeatNum);
-                setseatAvg(response1.data);
+                setSeatAvg(response1.data);
                 setSelectSeat(response2.data);
             } catch(e) {
                 console.log(e + "좌석 상세정보 후기 불러오기 실패");
@@ -85,12 +107,29 @@ const SeatClick = () => {
         SeatDetailReview();
     }, []);
 
-    const Onclick = (e) => {
+    const OnClick = (e) => {
     }
 
-    const OnclickSeat = (e) => {
+    const OnClickSeat = (e) => {
 
-    } 
+    }
+
+    // 나는 userNum이랑  seatNum으로 후기 삭제해야해,,,
+    const OnClickDelete = async(userNum, seatNum) => {
+        try{
+            let response = await MuteApi.deleteReviewSeat(userNum, clickSeatNum);
+            if(response.data === true) {
+                setModalOpen(true);
+                setModalText("삭제가 완료되었습니다.");
+                setCount(count + 1);
+                // navigate('/Review');
+
+            }
+        } catch (e) {
+            setModalOpen(true);
+            setModalText("작성자가 아닙니다. 삭제할 수 없습니다.");   
+        }
+    }
 
 
     return(
@@ -99,7 +138,7 @@ const SeatClick = () => {
         <p className="position">{clickSeatInfo}</p>
         {seatAvg && seatAvg.map(e=>e.seatAvgContent.map(el =>
             <>
-            <div onClick={()=>OnclickSeat()}>
+            <div onClick={()=>OnClickSeat()}>
 
             <div className="avgContainer">
                 <p className="allAvg">평균 별점<FaStar size="30" color="#FCC419"/><span className="allAvg_score">{el.avgSeat.toFixed(2)}({el.cnt})</span></p>
@@ -120,7 +159,7 @@ const SeatClick = () => {
         <br />
         <SeatReviewContainer>
         {selectSeat && selectSeat.map(e => (
-            <div Onclick={() => Onclick(e.userId)}>
+            <div Onclick={() => OnClick(e.userId)}>
 
                 <div className="eachContainer">
 
@@ -136,13 +175,15 @@ const SeatClick = () => {
                         <p className="starList">음향<FaStar size="15" color="gray"/>{e.scoreSound.toFixed(1)}</p>
                         <p className="starList">조명<FaStar size="15" color="gray"/> {e.scoreLight.toFixed(1)}</p>
                     </div>
-
+                    <button className="deleteBtn" onClick={() => OnClickDelete(userNum, clickSeatNum)}>삭제</button>
                     <p className="txt">{e.reviewSeTxt}</p>
 
                 </div>
             </div>
         ))}
         </SeatReviewContainer>
+        {modalLogin&& <Modal open={modalLogin} close={closeModal} type={true}>로그인이 필요한 서비스입니다.</Modal>}
+        {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">{modalText}</Modal>}
         </SeatReviewTotalContainer>
     )
 }

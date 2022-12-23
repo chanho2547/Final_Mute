@@ -1,7 +1,8 @@
 import React from "react";
 import Edit from "./Edit";
-import MyReview from "../review/MyMuReview";
+import MyMuReview from "../review/MyMuReview";
 import MyWish from "../util/MyWish";
+import MySeReview from "../review/MySeReview";
 
 
 const MyPage = () => {
@@ -17,7 +18,8 @@ const MyPage = () => {
                 
             </div>
             <MyWish/>
-            <MyReview/>
+            <MyMuReview/>
+            <MySeReview/>
         </>
     )
 }
