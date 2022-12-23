@@ -7,13 +7,14 @@ import styled from "styled-components";
 // 공연장 검색 목록
 // theaterSearch.js에 검색창있음
 const TheaterInfo = styled.div`
-margin: auto;
-    .theater_name{
-        color: #810000;
-        font-size: 30px;
-        font-weight: 700;
-    }
-
+    border: 3px solid #810000;
+    width: 80%;
+    margin: auto;
+        .theater_name{
+            color: #810000;
+            font-size: 30px;
+            font-weight: 700;
+        }
 `;
 
 
@@ -59,7 +60,6 @@ const TheaterSearchList = () => {
             <>
                 <div onClick={()=>OnClick(inputTheater.theaterName)}>
                     <TheaterInfo>
-                    {/* <img className="theaterPoster" src = {inputTheater.theaterPoster} size width={300} height={240}/> */}
                     <div className="theater_name">{inputTheater.theaterName}</div>
                     <div className="theater_addr">주소 {inputTheater.theaterAddr}</div>
                     <div className="theater_call">연락처 {inputTheater.theaterCall}</div>

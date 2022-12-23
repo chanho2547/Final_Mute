@@ -12,10 +12,44 @@ import SelectSeat from "./SelectSeat";
 
 
 // ---- 스타일드 컴포넌트 ----
+const Container = styled.div`
+
+    
+    margin: 0 auto;
+    justify-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    //justify-content: center;
+  
+
+`;
+
 const TmpBox = styled.div`
-    width: 90%;
-    height: fit-content;
+    width: 100%;
+    min-height: 50vh;
+    margin: 0 auto;
     border: 2px solid black;
+`;
+
+const Category = styled.div`
+  width: 1000px;
+  margin: 0 auto;
+  font-size: 1.3em;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 30px;
+  border-bottom: 1px solid #eee;
+  .status {
+    cursor: pointer;
+    text-decoration: none;
+    color: #1b1717;
+  }
+  .status:hover {
+    color: #810000;
+    font-weight: 500;
+  }
 `;
 
 
@@ -215,8 +249,23 @@ const Reservation = () => {
 
 
     return(
-        <>
-        <h1>예매 페이지 입니다</h1>
+        <Container>
+
+        <Category>
+            <div className="status">뮤지컬 선택</div>
+            <div>&gt;</div>
+            <div className="status">날짜 선택</div>
+            <div>&gt;</div>
+            <div className="status">좌석 선택</div>
+            <div>&gt;</div>
+            <div className="status">예매 정보 확인</div>
+            <div>&gt;</div>
+            <div className="status">결제 완료</div>
+        </Category>
+
+        {/* <h1>
+            뮤지컬 선택 &gt; 날짜 선택 &gt; 좌석 선택 &gt; 예매 정보 확인 &gt; 결제 완료
+        </h1> */}
         {/* <button onClick={onClickNext}>다음으로</button> */}
         {/* <button onClick={insertTicketFunction}>결제 임시 버튼</button> */}
         
@@ -232,7 +281,7 @@ const Reservation = () => {
         {count === 4 ? <ReservaionResult resInfo={resInfo} insertTicket={insertTicketFunction}/> : null}
         {count === 5 ? setCount(0) : null}
         </TmpBox>
-        </>
+        </Container>
     );
 }
 

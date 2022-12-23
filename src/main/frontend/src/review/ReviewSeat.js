@@ -110,7 +110,10 @@ const ReviewSeat = (props) => {
     let mySeat = window.localStorage.getItem("whatSeatInfo"); // 극장이름 + 좌석번호(층, 열, 번)
     let pkNum = window.localStorage.getItem("whatSeatNum"); // 좌석번호
 
-     // 취소 버튼 누르면 첫 화면으로..
+    console.log("클릭한 좌석정보 : " + mySeat)
+
+
+    // 취소 버튼 누르면 첫 화면으로..
     const CancelButton = () => {   
         navigate('/Review');
         setCount(count + 1);
@@ -140,13 +143,13 @@ const ReviewSeat = (props) => {
     const [count, setCount] = useState(0);
 
     const charlotte = () => { // 샤롯데 좌석 선택하러 가기
-        navigate('TheaterChar');
+        navigate('/TheaterChar');
         // window.open('http://localhost:8282/TheaterChar/');
         setModelTheater(false);
     }
     
     const chungmu = () => { // 충무 좌석 선택하러 가기
-        navigate('TheaterChung');
+        navigate('/TheaterChung');
         // window.open('http://localhost:8282/TheaterChung/');
         setModelTheater(false);
     }
@@ -214,6 +217,7 @@ const ReviewSeat = (props) => {
             </InfoBox>
             <SelectSeat>
             <button className="SeatBtn" onClick={SeatClick}>좌석 선택하기</button>　<span>선택된 좌석 [{mySeat}]</span>
+            <p>좌석 선택 [<option></option>]</p>
             </SelectSeat>
             <StarBox>
                 <div className="MyAvg"><b className="AvgText">나의 총점</b><br/>　<FaStar size="30" color="#FCC419"/>{scoreAvgSeat}</div>

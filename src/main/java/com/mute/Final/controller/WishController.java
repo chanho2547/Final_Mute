@@ -33,7 +33,6 @@ public class WishController {
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-
     // ID별 alarm = "on", date 비교 Select
     @GetMapping("/wish/select")
     public ResponseEntity<List<?>> getWishOnList(@RequestParam int userNum) {

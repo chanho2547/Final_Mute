@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface WishRepository extends JpaRepository<Wish, Long> {
-    // 찜한 뮤지컬 중 티켓 오픈 예정 전 목록(알림창)
+    // 티켓 오픈 전 알림 on select
     @Query(value = "select w.user_num as userNum, w.musical_id as musicalId, w.alarm_status as alarm, m.musical_ticket_start as musicalTicketStart, m.musical_name as musicalName, m.theater_name as theaterName \n" +
             "from wish w " +
             "join musical m\n" +
@@ -30,16 +30,19 @@ public interface WishRepository extends JpaRepository<Wish, Long> {
             "order by count(w.musical_id) desc limit 3", nativeQuery = true)
     List<Map<?,?>> wishTop3();
 
+    // 알림 off로 update
     @Modifying
     @Transactional
     @Query(value = "update wish set alarm_status = 'OFF' where user_num = ?1 and musical_id = ?2 and alarm_status = 'ON'", nativeQuery = true)
     Integer updateAlarm(int userNum, String musicalId);
 
+    // 찜한 뮤지컬 삭제
     @Modifying
     @Transactional
     @Query(value = "delete from wish where user_num = ?1 and musical_id = ?2", nativeQuery = true)
     void deleteAlarm(int userNum, String musicalId);
 
+    // 찜한 뮤지컬 전체 조회
     List<Wish> findByMember(Member member);
 
 

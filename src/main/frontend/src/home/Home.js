@@ -13,6 +13,7 @@ const SearchContainer = styled.div`
   display: flex;
   width: 580px;
   height: 60px;
+  margin-top: 50px;
     .search_input{
         width: 550px;
         border: none;
@@ -138,7 +139,7 @@ const Home = () => {
                 let response = await MuteApi.musicalList(); // 뮤지컬리스트호출 (서버에서 호출 후 바로 db에 저장)
                 let response1 = await MuteApi.openedMusical();
                 let response2 = await MuteApi.openBeforeMusical();
-                let response3 = await MuteApi.musicalRanking();
+                let response3 = await MuteApi.starRanking();
                 let response4 = await MuteApi.wishRanking();
                 setMusicalList(response.data);
                 setOpenedMusical(response1.data);
@@ -167,10 +168,8 @@ const Home = () => {
 
     return(
         <>
-        <Link to = "/MusicalListTmp">뮤지컬 목록 임시 페이지</Link> <br></br>
+        {/* <Link to = "/MusicalListTmp">뮤지컬 목록 임시 페이지</Link> <br></br> */}
         {/* <Link to = "/PayTest">카카오페이 결제 임시 페이지</Link> */}
-        <br/><br/>
-        
         <SearchContainer>
         <input className="search_input" onChange={onChangeInput} onKeyDown={onKeyPress} placeholder="찾고 싶은 뮤지컬을 검색하세요!"></input>
         <button className="search_button" onClick={onClickInput} ><img src={Search}/></button>

@@ -11,15 +11,27 @@ import java.util.List;
 import java.util.Map;
 
 public interface ReviewSeatRepository extends JpaRepository<ReviewSeat,Long> {
-
+    // 좌석번호별 평균 후기 view
     @Query(value = "select seat_num as seatNum,count(seat_num) as cnt, " +
             "avg(score_avg_seat) as avgSeat, avg(score_light) as light, avg(score_seat) as seat, " +
             "avg(score_sound) as sound, avg(score_view) as view " +
             "from review_seat WHERE seat_num = ?1 " +
             "group by seat_num", nativeQuery = true)
-    List<Map<?,?>> reviewSeatScore(int seatNum); // 좌석번호별 후기 평균
+    List<Map<?,?>> reviewSeatScore(int seatNum);
 
-    List<ReviewSeat> findBySeatNum(int seatNum); // 좌석번호별 개인 후기 전체조회
-    Long deleteByReviewSeId(long reviewSeId); // 좌석 후기 삭제
+    // 좌석번호별 개인별 후기 view
+    List<ReviewSeat> findBySeatNum(int seatNum);
+
+    // 좌석 후기 삭제
+    Long deleteByReviewSeId(long reviewSeId);
+
+    // 마이페이지 좌석 후기 view
+    List<ReviewSeat> findByMember(Member member);
+
+    // 좌석 후기 삭제 => 좌석번호랑 userNum가지고 지우기
+    @Modifying
+    @Transactional
+    @Query(value = "delete from review_seat where user_num = ?1 and seat_num = ?2", nativeQuery = true)
+    void deleteSeatReview(int userNum, int seatNum);
 
 }
