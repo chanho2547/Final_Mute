@@ -29,5 +29,8 @@ public interface MusicalRepository extends JpaRepository<Musical, String> {
     @Query(value = "select * from musical where musical_ticket_start > sysdate() order by musical_ticket_start limit 3", nativeQuery = true)
     List<Musical> findAllSysdateAfter();
 
+//    // 관람연령 "개월 이상" 제외하고 조회
+//    // select * from musical m join musical_detail d on m.musical_id = d.musical_id where musical_age like '%개월 이상';
+//
 
 }

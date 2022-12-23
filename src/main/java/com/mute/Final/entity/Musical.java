@@ -20,7 +20,7 @@ import java.time.LocalDate;
 public class Musical {
 
     @Id
-//    @Column(name = "musical_id", nullable = false)
+    @Column(name = "musical_id", nullable = false)
     private String musicalId; // 공연 ID(PK)
     private String musicalName; // 공연 이름
 
@@ -32,7 +32,11 @@ public class Musical {
     private LocalDate musicalTicketStart; // 공연 예매 시작일
     private String musicalStatus; // 공연 상태 (공연예정, 공연중, 공연종료)
     private String musicalPoster; // 공연 포스터
-    private String musicalAge; // 공연 관람 연령
+//    private String musicalAge; // 공연 관람 연령
+
+//    @OneToOne(mappedBy = "musical", fetch = FetchType.LAZY) // musical 테이블이 주인
+//    private MusicalDetail musicalDetail;
+
 
 
     // api 호출 후 DB에 저장

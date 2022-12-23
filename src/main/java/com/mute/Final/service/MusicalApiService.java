@@ -82,11 +82,27 @@ public class MusicalApiService {
         for (int i = 0; i < jsonArr.length(); i++) {
             JSONObject item = (JSONObject) jsonArr.get(i);
                 Musical musical = new Musical(item);
-//                MusicalDetailDTO musicalDetailDTO = new MusicalDetailDTO();
-//                musical.setMusicalAge(musicalDetailDTO.getMusicalAge());
                 musicalRepository.save(musical);
         }
 
         return musicalListDTOList;
     }
+//
+//    public List<MusicalDTO> musicalAgeList(List<String> musicalAge) {
+//        List<MusicalDTO> musicalDTOS = new ArrayList<>();
+//        List<Musical> musicalList = musicalRepository.findByMusicalAgeNotIn(musicalAge);
+////            List<Musical> musicalList = musicalRepository.findAll();
+//        for (Musical e : musicalList) {
+//            MusicalDTO musicalDTO = new MusicalDTO();
+//            musicalDTO.setMusicalId(e.getMusicalId()); // 공연 고유 번호
+//            musicalDTO.setMusicalName(e.getMusicalName()); // 공연 이름
+//            musicalDTO.setMusicalStart(e.getMusicalStart()); // 공연 시작일
+//            musicalDTO.setMusicalEnd(e.getMusicalEnd()); // 공연 종료일
+//            musicalDTO.setTheaterName(e.getTheaterName()); // 공연장 이름
+//            musicalDTO.setMusicalStatus(e.getMusicalStatus()); // 공연 상태
+//            musicalDTO.setMusicalPoster(e.getMusicalPoster()); // 공연 포스터
+//            musicalDTOS.add(musicalDTO);
+//        }
+//        return musicalDTOS;
+//    }
 }

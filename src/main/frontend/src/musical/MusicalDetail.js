@@ -124,7 +124,7 @@ const ReserveOffbtn = styled.button`
 const MusicalDetail = (props) => {
 	const navigate = useNavigate();
 	const [musicalDetail,setMusicalDetail] = useState();
-	// const [nullData, setNullData] = useState(false);
+
 	const musicalId = window.localStorage.getItem("musicalId"); // 선택한 musicalId
 	const userNum = window.localStorage.getItem("whoLoginUserNum"); // 로그인할 경우 저장한 userNum
 
@@ -159,12 +159,14 @@ const MusicalDetail = (props) => {
 		navigate('/Login'); // 로그인페이지로 이동 
 	}
 
+
 	// 뮤지컬 api 호출
 	useEffect(() => {
 		const MusicalData = async () => {
 			try {
 				const response = await MuteApi.musicalDetail(musicalId); // 받은 musicalId 서버로 넘겨주기
 				setMusicalDetail(response.data);
+				
 
 				console.log("response.data: " + response.data);
 				console.log("뮤지컬아이디: " + response.data.musicalId);
@@ -176,8 +178,7 @@ const MusicalDetail = (props) => {
 				// 	console.log("null 호출 맞음? response.data.musicalCast == null"); // 안찍힘..
 				// } // 얘를 막아놨을떄..?
 				
-				const sysdate = moment().format('YYYY-MM-DD'); // 현재날짜
-				console.log("현재날짜시간 ? " + sysdate);
+			
 				// console.log("" +  (response.data.musicalStart));
 
 
@@ -207,8 +208,18 @@ const MusicalDetail = (props) => {
 			// if ()
 		};
 		MusicalData();
+
 	}, []);
 
+
+	const sysdate = moment().format('YYYY-MM-DD'); // 현재날짜
+	console.log("현재날짜시간 ? " + sysdate);
+
+	const beforeMonth = moment().subtract(1, 'month').format('YYYY-MM-DD');
+	console.log("현재로부터 한달 전 ? " + beforeMonth);
+
+	const ticketStartDate = moment().subtract(1, 'month').format('YYYY-MM-DD');
+	console.log("공연날짜로부터 한달 전 = 티켓시작일 " + ticketStartDate);
 
 	const OnClickWish = async() => {
 			try {
@@ -247,43 +258,35 @@ const MusicalDetail = (props) => {
 					<div>
 						<table>
 							<tr>
-								<td className="title">장소</td>
-								<td>{e.theaterName}</td>
+								<td className="title">장소</td><td>{e.theaterName}</td>
 							</tr>
 							<tr>
-								<td className="title">공연기간</td>
-								<td>{e.musicalStart} ~ {e.musicalEnd}</td>
+								<td className="title">공연기간</td><td>{e.musicalStart} ~ {e.musicalEnd}</td>
 							</tr>
 							<tr>
-								<td className="title">공연시간</td>
-								<td>{e.musicalRuntime}</td>
+								<td className="title">공연시간</td><td>{e.musicalRuntime}</td>
 							</tr>
 							<tr>
-								<td className="title">공연상태</td>
-								<td>{e.musicalStatus}</td>
+								<td className="title">공연상태</td><td>{e.musicalStatus}</td>
 							</tr>
 							<tr>
-								<td className="title">출연진</td>
-								<td>{e.musicalCast}</td>
+								<td className="title">출연진</td><td>{e.musicalCast}</td>
 							</tr>
 							<tr>
-								<td className="title">관람연령</td>
-								<td>{e.musicalAge}</td>
+								<td className="title">관람연령</td><td>{e.musicalAge}</td>
 							</tr>
 							<tr>
-								<td className="title">가격</td>
-								<td>{e.musicalPrice}</td>
+								<td className="title">가격</td><td>{e.musicalPrice}</td>
 							</tr>
 							<tr>
-								<td className="title">공연일정</td>
-								<td>{e.musicalPlan}</td>
+								<td className="title">공연일정</td><td>{e.musicalPlan}</td>
 							</tr>
 						</table>
 						<div className="button">
 							<WishBtn onClick = {() => OnClickWish()} className={(wish ? WishBtn : UnWishBtn)}><img src={wish ? heartIcon : heartIcon2} alt={heartIcon} width="17px"/> 찜하기</WishBtn>
-							<ReserveOnbtn onClick={() => OnClickReserve(e.musicalId)} >예매하기</ReserveOnbtn>
-							{/* className={(  ? ReserveOnbtn : ReserveOffbtn)} */}
-						</div>
+							<ReserveOnbtn onClick={() => OnClickReserve(e.musicalId)}>예매하기</ReserveOnbtn>
+								{/* className={(sysdate > ((e.musicalStart).getDate() - 1) ? ReserveOnbtn : ReserveOffbtn)}						 */}
+								</div>
 					</div>
 					
 				</DescInfo>

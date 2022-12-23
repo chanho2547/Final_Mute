@@ -34,8 +34,8 @@ public class MusicalDetailApiService {
     @Value("${api.serviceKey}")
     private String key;
 
-    @Autowired
-    MusicalRepository musicalRepository;
+//    @Autowired
+//    MusicalDetailRepository musicalDetailRepository;
 
     public String MusicalDetailApi(@PathVariable String mt20id) {
 
@@ -86,6 +86,10 @@ public class MusicalDetailApiService {
 //            musicalAge.setMusicalAge(musicalDetailDTO.getMusicalAge());
 
 //            log.warn("가져온 연령값???????????" + ageStr);
+
+//            MusicalDetail musicalDetail = new MusicalDetail(item);
+//            musicalDetailRepository.save(musicalDetail);
+//            log.warn(musicalDetail.toString());
 
 
         } catch (Exception e) {
