@@ -140,15 +140,20 @@ const ReviewSeat = (props) => {
     const [count, setCount] = useState(0);
 
     const charlotte = () => { // 샤롯데 좌석 선택하러 가기
-        window.open('http://localhost:8282/TheaterChar/');
+        navigate('TheaterChar');
+        // window.open('http://localhost:8282/TheaterChar/');
+        setModelTheater(false);
     }
     
     const chungmu = () => { // 충무 좌석 선택하러 가기
-        window.open('http://localhost:8282/TheaterChung/');
+        navigate('TheaterChung');
+        // window.open('http://localhost:8282/TheaterChung/');
+        setModelTheater(false);
     }
 
     const closeModal = () => { 
         setWriteModal(false);
+        setModelTheater(false);
         navigate("/Review"); 
     }
 
@@ -191,9 +196,9 @@ const ReviewSeat = (props) => {
     // 후기 작성 힌트
     const onChangeSeatReview = (e) => {
         setSeatReview(e.target.value)
-        if(e.target.value.length < 10) {
+        if(e.target.value.length < 5) {
             setIsSeatReview(false);
-            setSeatReviewMsg("후기는 10자 이상 작성해주세요.")
+            setSeatReviewMsg("후기는 5자 이상 작성해주세요.")
         } else {
             setIsSeatReview(true);
         }
@@ -224,13 +229,13 @@ const ReviewSeat = (props) => {
                 </MyStar>
             </StarBox>
             <TextBox> 
-            <textarea className="text" placeholder="관람하신 좌석의 후기를 작성해주세요. (10자 이상)" value={seatReview} onChange={onChangeSeatReview}></textarea><br/> 
-            <div className="hint">{10 > seatReview.length && <span className={`message ${isSeatReview ? 'success' : 'error'}`}>{seatReviewMsg}</span>}</div>
+            <textarea className="text" placeholder="관람하신 좌석의 후기를 작성해주세요. (5자 이상)" value={seatReview} onChange={onChangeSeatReview}></textarea><br/> 
+            <div className="hint">{5 > seatReview.length && <span className={`message ${isSeatReview ? 'success' : 'error'}`}>{seatReviewMsg}</span>}</div>
             <button className="OKbtn" onClick={WriteSeatButton}>작성하기</button>　
             <button className="NOKbtn" onClick={CancelButton}>취소하기</button>  
             </TextBox>  
             
-            {modalTheater && <TheaterModal open={modalTheater} confirm={charlotte} close={chungmu} type={true} header="확인">관람하신 극장을 선택해주세요.</TheaterModal>}
+            {modalTheater && <TheaterModal open={modalTheater} char={charlotte} chungmu={chungmu} close={closeModal} type={true} header="확인">관람하신 극장을 선택해주세요.</TheaterModal>}
             {writeModal&& <Modal open={writeModal} close={closeModal} type={true}>좌석 후기 작성 완료♥</Modal>}
         </Container>
     );

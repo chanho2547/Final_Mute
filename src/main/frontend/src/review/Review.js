@@ -9,10 +9,10 @@ import ReviewTheater from "./TheaterModal";
 // 후기 탭 전체 틀 - 도연 작업 중
 
 const TmpBox = styled.div`
-    width: 90%;
+    width: 100%;
     height: fit-content;
     border: 2px solid black;
-    /* margin: auto; */
+    margin: auto;
 `;
 
 const Review = (props) => {

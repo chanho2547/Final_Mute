@@ -154,7 +154,7 @@ const onClickSeat = (event) => {
         // props.propsFunction(pkNum);
     } 
 
-    else  { // 도연(좌석후기 -> 좌석선택할때 사용)
+    else  { // 도연 (좌석후기 -> 좌석선택할때 사용)
         
 
         window.localStorage.setItem("whatSeatNum", pkNum);

@@ -63,12 +63,12 @@ const ReviewBox = styled.div`
     }
 `;
 
-const Morebtn = styled.button`
-    border: none;
-    background-color: white;
-    color: gray;
-    font-size: medium;
-`;
+// const Morebtn = styled.button`
+//     border: none;
+//     background-color: white;
+//     color: gray;
+//     font-size: medium;
+// `;
 
 const Likebtn = styled.button`
     width: 50px;
@@ -226,14 +226,14 @@ const ReviewList = (props) => {
                 <p>{e.reviewMuId}　{e.member}　<FaStar size="20" color="#FCC419"/>{e.scoreAvgTotal} <span className="date">　작성일 {e.writeDate}</span>　
                 <button className="deleteBtn" onClick={()=>OnClickDelete(member, e.reviewMuId)}>삭제</button></p>
                 <p className="myRaing">스토리 <FaStar size="15" color="gray"/>{e.scoreStory} 　연출 <FaStar size="15" color="gray"/>{e.scoreDirect} 　캐스팅 <FaStar size="15" color="gray"/>{e.scoreCast} 　넘버 <FaStar size="15" color="gray"/>{e.scoreNumber}<br/>
-                <p className="text">
-                    <span className={e.reviewMuTxt}>{e.reviewMuTxt.substring(30)}</span>
+                <p className="text">{e.reviewMuTxt}
+                    {/* <span className={e.reviewMuTxt}>{e.reviewMuTxt.substring(30)}</span>
                     {e.reviewMuTxt.length > 30 && (
                         <span className={e.reviewMuTxt.moreButtonWrap}>
                         {"···"}
                         <Morebtn className={e.reviewMuTxt.moreButton}>더보기</Morebtn>
                         </span>
-                    )}
+                    )} */}
                 </p>
                 <Likebtn className="like" onClick={()=>likebtn()}><BiLike size="20" color="gray"/>{likeCount}</Likebtn ><Dislikebtn className="dislike" onClick={()=>dislikebtn()}><BiDislike size="20" color="gray"/>{dislikeCount}</Dislikebtn></p>
             </ReviewBox>

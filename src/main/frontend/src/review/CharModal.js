@@ -1,11 +1,11 @@
 import React from 'react';
 import '../App';
-import '../util/Modal.css';
+import './CharModal.css';
 
-// 도연 - 좌석 선택 모달
+// 도연 - 샤롯데 좌석선택 모달
 
-const TheaterModal = (props) => {
-    const { open, char, chungmu, close, type, header } = props;
+const CharModal = (props) => {
+    const { open, confirm, close, type, header } = props; 
     return (
         <div className={open ? 'openModal modal' : 'modal'}>
             {open && 
@@ -18,12 +18,12 @@ const TheaterModal = (props) => {
                     </header>
                     <main>{props.children}</main>
                     <footer>
-                        {type && <button onClick={char}>샤롯데씨어터</button>}
-                        <button onClick={chungmu}>충무아트센터</button>
+                    {type && <button onClick={confirm}>선택하기</button>}
+                        <button className='confirm' onClick={close}>취소</button>
                     </footer>
                 </section>
             }
         </div>
     );
 };
-export default TheaterModal;
+export default CharModal;
