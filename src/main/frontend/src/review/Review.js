@@ -19,9 +19,13 @@ const Review = (props) => {
 
     useEffect(()=>{
         window.localStorage.setItem("seatInfoMode","NONE");
+        if(window.localStorage.getItem("countReview") === 2) {
+            setCount(window.localStorage.getItem("countReview"));
+        }
+        
     })
 
-    const [count, setCount] = useState(0)
+    const [count, setCount] = useState(0);
 
     // const onClickBefore = () => {
     //     console.log("현재 카운트 : " + count);
@@ -40,6 +44,9 @@ const Review = (props) => {
     const homeFunction = () => {
         setCount(0);
     }
+    const countFunction =(e) => {
+        setCount(e);
+    }
 
 
     return (
@@ -47,7 +54,7 @@ const Review = (props) => {
             <TmpBox>
             {count === 0 ? <ReviewList propFunction={highFunction}/> : null} 
             {count === 1 ? <ReviewTotal homeFunction={homeFunction} propFunction={highFunction}/> : null}
-            {count === 2 ? <ReviewSeat homeFunction={homeFunction} propFunction={highFunction} theaterId={props.theaterId} myseat={props.myseat}/> : null}
+            {count === 2 ? <ReviewSeat homeFunction={homeFunction} propFunction={highFunction} theaterId={props.theaterId} myseat={props.myseat} countFunction={countFunction}/> : null}
             </TmpBox>
         </div>
     );

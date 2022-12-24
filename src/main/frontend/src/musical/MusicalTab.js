@@ -87,6 +87,12 @@ const MusicalTab = (props) => {
     setSelectTab(index);
   };
 
+  useEffect(()=>{
+    if(props.countReview) {
+      setSelectTab(props.countReview);
+    }
+  })
+
     
   return(
     <>

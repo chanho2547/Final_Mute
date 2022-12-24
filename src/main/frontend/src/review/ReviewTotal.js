@@ -162,12 +162,6 @@ const ReviewTotal = (props) => {
     // 후기 작성 힌트
     const onChangeTotalReview = (e) => {
         setTotalReview(e.target.value)
-        if(e.target.value.length < 5) {
-            setIsTotalReview(false);
-            setTotalReviewMsg("후기는 10자 이상 작성해주세요.")
-        } else {
-            setIsTotalReview(true);
-        }
     }
 
     
@@ -193,8 +187,7 @@ const ReviewTotal = (props) => {
                     </MyStar>
                 </StarBox>
                 <TextBox>
-                <textarea className="text" placeholder="관람하신 뮤지컬의 후기를 작성해주세요. (5자 이상)" value={totalReview} onChange={onChangeTotalReview}></textarea><br/>
-                <div className="hint">{5 > totalReview.length && <span className={`message ${isTotalReview ? 'success' : 'error'}`}>{totalReviewMsg}</span>}</div> 
+                <textarea className="text" placeholder="관람하신 뮤지컬의 후기를 작성해주세요." value={totalReview} onChange={onChangeTotalReview}></textarea><br/>
                 <button className="OKbtn" onClick={WriteTotalButton}>작성하기</button>　
                 <button className="NOKbtn" onClick={CancelButton}>취소하기</button>
                 </TextBox>

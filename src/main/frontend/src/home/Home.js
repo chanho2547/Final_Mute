@@ -134,6 +134,7 @@ const Home = () => {
     const [wishRanking, setWishRanking] = useState();
 
     useEffect(() => {
+        window.localStorage.setItem("countReview",0);
         const RankData = async () => {
             try{
                 let response = await MuteApi.musicalList(); // 뮤지컬리스트호출 (서버에서 호출 후 바로 db에 저장)

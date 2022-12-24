@@ -165,8 +165,11 @@ const onClickSeat = (event) => {
         window.localStorage.setItem("whatSeatInfo", theaterFullName+" "+floor+"층 "+parentNode+"열 "+seatNum+"번");
         let mySeat = window.localStorage.getItem("whatSeatInfo"); // 극장이름 + 좌석번호(층, 열, 번)
         
-        props.seatFunction(mySeat);
-        navigate('/ReviewSeat');
+        console.log("선택한 좌석정보 : "  + mySeat);
+
+        // props.seatFunction(mySeat);
+        window.localStorage.setItem("countReview",2);
+        navigate('/MusicalDetail');
         
         // // myseat={props.myseat}
         // props.addMySeat(window.localStorage.getItem("myseat"));

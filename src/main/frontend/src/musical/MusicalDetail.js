@@ -14,7 +14,6 @@ const DetailInfoContainer = styled.div`
    
 	margin: 40px auto;
 	width: 1024px;
-
 	.musicalTitle {
 		font-weight: 700;
 		font-size: 1.5em;
@@ -26,7 +25,6 @@ const DetailInfoContainer = styled.div`
 		display: flex;
 		float: left;
 		margin-left: 50px;
-
 	}
 `
 
@@ -34,7 +32,6 @@ const DescInfo = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	/* justify-content: center; */
-
 	.poster {
 		width: 300px;
 		height: 400px;
@@ -133,6 +130,8 @@ const MusicalDetail = (props) => {
 	const [modalWishCancel, setModalWishCancel] = useState(false); // 찜 취소했을 때 
 	const [modalNotLogin, setModalNotLogin] = useState(false); // 로그인 안했을 경우
 
+	const [countReview, setCountReview] = useState();
+
 
 	const closeModalWishReg = () => {
 		setModalWishReg(false);
@@ -162,6 +161,12 @@ const MusicalDetail = (props) => {
 
 	// 뮤지컬 api 호출
 	useEffect(() => {
+
+		if(window.localStorage.getItem("countReview")) {
+			setCountReview(window.localStorage.getItem("countReview"));
+		 }
+		 
+   
 		const MusicalData = async () => {
 			try {
 				const response = await MuteApi.musicalDetail(musicalId); // 받은 musicalId 서버로 넘겨주기

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import MuteApi from "../api/MuteApi";
@@ -129,12 +129,6 @@ const ReviewSeat = (props) => {
     const [scoreAvgSeat, setScoreAvgSeat] = useState(''); // 별점 총점
     const [seatReview, setSeatReview] = useState(''); // 뮤지컬 후기 텍스트
 
-    // 오류 메세지
-    const [seatReviewMsg, setSeatReviewMsg] = useState('');
-
-    // 유효성 검사
-    const [isSeatReview, setIsSeatReview] = useState('');
-
     // 모달
     const [modalTheater, setModelTheater] = useState(false); // 좌석 선택 버튼 눌렀을 때
     const [writeModal, setWriteModal] = useState(false); // 확인 버튼 눌렀을 때
@@ -143,15 +137,18 @@ const ReviewSeat = (props) => {
     const [count, setCount] = useState(0);
 
     const charlotte = () => { // 샤롯데 좌석 선택하러 가기
+        setModelTheater(false);
         navigate('/TheaterChar');
         // window.open('http://localhost:8282/TheaterChar/');
-        setModelTheater(false);
+        
+        //window.location.reload(true);
     }
     
     const chungmu = () => { // 충무 좌석 선택하러 가기
         navigate('/TheaterChung');
         // window.open('http://localhost:8282/TheaterChung/');
         setModelTheater(false);
+        window.location.reload(true);
     }
 
     const closeModal = () => { 
@@ -196,17 +193,16 @@ const ReviewSeat = (props) => {
         setScoreAvgSeat(avg);
     }
 
-    // 후기 작성 힌트
+    useEffect(()=> {
+        if(window.localStorage.getItem("countReview") === 2){
+            window.localStorage.removeItem("countReview");
+        }
+    })
+
     const onChangeSeatReview = (e) => {
         setSeatReview(e.target.value)
-        if(e.target.value.length < 5) {
-            setIsSeatReview(false);
-            setSeatReviewMsg("후기는 5자 이상 작성해주세요.")
-        } else {
-            setIsSeatReview(true);
-        }
     }
-   
+
 
     return(
         <Container>
@@ -240,8 +236,7 @@ const ReviewSeat = (props) => {
                 </MyStar>
             </StarBox>
             <TextBox> 
-            <textarea className="text" placeholder="관람하신 좌석의 후기를 작성해주세요. (5자 이상)" value={seatReview} onChange={onChangeSeatReview}></textarea><br/> 
-            <div className="hint">{5 > seatReview.length && <span className={`message ${isSeatReview ? 'success' : 'error'}`}>{seatReviewMsg}</span>}</div>
+            <textarea className="text" placeholder="관람하신 좌석의 후기를 작성해주세요." value={seatReview} onChange={onChangeSeatReview}></textarea><br/> 
             <button className="OKbtn" onClick={WriteSeatButton}>작성하기</button>　
             <button className="NOKbtn" onClick={CancelButton}>취소하기</button>  
             </TextBox>  
