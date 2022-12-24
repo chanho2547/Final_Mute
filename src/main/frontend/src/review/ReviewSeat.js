@@ -139,16 +139,16 @@ const ReviewSeat = (props) => {
     const charlotte = () => { // 샤롯데 좌석 선택하러 가기
         setModelTheater(false);
         navigate('/TheaterChar');
-        // window.open('http://localhost:8282/TheaterChar/');
+   
         
-        //window.location.reload(true);
+
     }
     
     const chungmu = () => { // 충무 좌석 선택하러 가기
         navigate('/TheaterChung');
-        // window.open('http://localhost:8282/TheaterChung/');
+
         setModelTheater(false);
-        // window.location.reload(true);
+
     }
 
     const closeModal = () => { 
@@ -214,15 +214,13 @@ const ReviewSeat = (props) => {
             • 사전 경고에도 불구하고 불량 게시물을 계속적으로 게재한 게시자의 경우 뮤트 후기 게시판 작성 권한이 제한됩니다.
             </InfoBox>
             <SelectSeat>
-            <button className="SeatBtn" onClick={SeatClick}>좌석 선택하기</button>　<span>선택된 좌석 [{mySeat}]</span>
-            
-            <select>
+            <button className="SeatBtn" onClick={SeatClick}>좌석 선택하기</button>　<span>선택된 좌석 [{mySeat}]</span>           
+            {/* <select>
                  <option>공연장 선택</option>
                  <option>샤롯데씨어터</option>
                  <option>충무아트센터</option>
              </select>
-             <input></input>층 <input></input>열 <input></input>번
-
+             <input></input>층 <input></input>열 <input></input>번 */}
             </SelectSeat>
             <StarBox>
                 <div className="MyAvg"><b className="AvgText">나의 총점</b><br/>　<FaStar size="30" color="#FCC419"/>{scoreAvgSeat}</div>

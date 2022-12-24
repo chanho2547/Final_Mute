@@ -10,6 +10,7 @@ import FirstFloorChung from './theaterInfo/chungmuArt/FirstFloorChung';
 import SecondFloorChung from './theaterInfo/chungmuArt/SecondFloorChung';
 import ThirdFloorChung from './theaterInfo/chungmuArt/ThirdFloorChung';
 import Review from './review/Review';
+import ReviewSeat from './review/ReviewSeat';
 import SelectChar from './review/SelectChar';
 import SelectChung from './review/SelectChung';
 import Reservation from './reservation/Reservation';
@@ -43,6 +44,7 @@ import TopButton from './util/TopButton';
 import MyPageTab from "./mypage/MyPageTab";
 
 
+
 function App() {
   return (
     <>
@@ -61,6 +63,7 @@ function App() {
         <Route path='/Login' element={<Login />} />
         <Route path='/SignUp' element={<SignUp />} />
         <Route path='/Review' element={<Review />} />
+        <Route path='/ReviewSeat' element={<ReviewSeat />} />
         <Route path='/SelectChar' element={<SelectChar />} />
         <Route path='/SelectChung' element={<SelectChung />} />
         <Route path='/Reservation' element={<Reservation />} />

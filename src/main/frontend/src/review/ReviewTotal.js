@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import MuteApi from "../api/MuteApi";
@@ -118,6 +118,7 @@ const ReviewTotal = (props) => {
 
     const confirmModal = () => { // 좌석 후기 작성하러 가기 
         props.propFunction(); // 상위 컴포넌트의 함수를 불러 count ++
+        navigate("/ReviewSeat"); 
     }
     
     const closeModal = () => { // 아니오 눌렀을 때 => 리뷰 리스트로 이동
@@ -163,6 +164,17 @@ const ReviewTotal = (props) => {
     const onChangeTotalReview = (e) => {
         setTotalReview(e.target.value)
     }
+
+    useEffect(()=>{
+        window.localStorage.setItem("seatInfoMode","NONE");
+
+        if(window.localStorage.getItem("countReview") === 2) {
+            setCount(window.localStorage.getItem("countReview"));
+            props.countFunction();
+            props.propFunction(); // 상위 컴포넌트의 함수를 불러 count ++
+          
+        }
+    })
 
     
     return(
