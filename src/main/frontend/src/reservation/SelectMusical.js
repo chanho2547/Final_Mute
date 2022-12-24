@@ -119,6 +119,7 @@ const SelectMusical = (props) => {
 
     });
 
+    
     const OnClickPoster = (e) => {
         props.addMusicalName(e.musicalName);
         props.addMusicalId(e.musicalId);

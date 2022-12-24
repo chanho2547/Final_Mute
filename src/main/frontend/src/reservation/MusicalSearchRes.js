@@ -7,6 +7,7 @@ import styled from "styled-components";
 const MusicalListContainer = styled.div`
 margin : 0 auto;
 
+
 .musicalList{
     display: flex;
     margin: 0 auto;

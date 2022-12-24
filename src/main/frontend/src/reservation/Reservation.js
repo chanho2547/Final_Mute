@@ -269,6 +269,7 @@ const Reservation = () => {
         {/* <button onClick={onClickNext}>다음으로</button> */}
         {/* <button onClick={insertTicketFunction}>결제 임시 버튼</button> */}
         
+        
         <TmpBox>
         {/* 각 컴포넌트에서, 기본적으로 highFunction을 넣어줌 (count++) */}
         {/* 각 컴포넌트에서, 추가적으로 예매에 필요한 정보들을 가져오기 위한 함수들을 만듦 */}

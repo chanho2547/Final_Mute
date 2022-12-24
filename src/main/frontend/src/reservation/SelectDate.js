@@ -11,7 +11,6 @@ const Container = styled.div`
 
 
 
-
 const SelectDate = (props) => {
     const [value, onChange] = useState(new Date());
     const onClickNext = () => {
