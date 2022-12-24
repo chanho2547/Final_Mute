@@ -164,7 +164,8 @@ const MusicalDetail = (props) => {
 
 		if(window.localStorage.getItem("countReview")) {
 			setCountReview(window.localStorage.getItem("countReview"));
-		 }
+			navigate('/ReviewSeat');
+		}
 		 
    
 		const MusicalData = async () => {

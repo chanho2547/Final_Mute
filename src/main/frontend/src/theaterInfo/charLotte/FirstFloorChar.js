@@ -167,14 +167,8 @@ const onClickSeat = (event) => {
         
         console.log("선택한 좌석정보 : "  + mySeat);
 
-        // props.seatFunction(mySeat);
-        window.localStorage.setItem("countReview",2);
-        navigate('/MusicalDetail');
-        
-        // // myseat={props.myseat}
-        // props.addMySeat(window.localStorage.getItem("myseat"));
-   
-        
+        window.localStorage.setItem("countReview", 2);
+        navigate('/MusicalDetail'); // 좌석선택하면 뮤지컬디테일로 넘어감
         
     }
     

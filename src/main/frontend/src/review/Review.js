@@ -5,6 +5,7 @@ import ReviewList from "./ReviewList";
 import ReviewTotal from "./ReviewTotal";
 import ReviewSeat from "./ReviewSeat";
 import ReviewTheater from "./TheaterModal";
+import { Link, useNavigate } from "react-router-dom";
 
 // 후기 탭 전체 틀 - 도연 작업 중
 
@@ -16,16 +17,20 @@ const TmpBox = styled.div`
 `;
 
 const Review = (props) => {
+    const navigate = useNavigate();
 
     useEffect(()=>{
         window.localStorage.setItem("seatInfoMode","NONE");
+
         if(window.localStorage.getItem("countReview") === 2) {
-            setCount(window.localStorage.getItem("countReview"));
+            // setCountReview(window.localStorage.getItem("countReview"));
+            setCountReview(true);
+          
         }
-        
     })
 
     const [count, setCount] = useState(0);
+    const [countReview, setCountReview] = useState();
 
     // const onClickBefore = () => {
     //     console.log("현재 카운트 : " + count);
@@ -44,8 +49,8 @@ const Review = (props) => {
     const homeFunction = () => {
         setCount(0);
     }
-    const countFunction =(e) => {
-        setCount(e);
+    const countFunction = () => {
+        setCountReview(countReview + 2);
     }
 
 
@@ -54,7 +59,7 @@ const Review = (props) => {
             <TmpBox>
             {count === 0 ? <ReviewList propFunction={highFunction}/> : null} 
             {count === 1 ? <ReviewTotal homeFunction={homeFunction} propFunction={highFunction}/> : null}
-            {count === 2 ? <ReviewSeat homeFunction={homeFunction} propFunction={highFunction} theaterId={props.theaterId} myseat={props.myseat} countFunction={countFunction}/> : null}
+            {count === 2 ? <ReviewSeat homeFunction={homeFunction} propFunction={highFunction} theaterId={props.theaterId} countFunction={countFunction}/> : null}
             </TmpBox>
         </div>
     );

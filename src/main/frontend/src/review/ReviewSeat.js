@@ -148,7 +148,7 @@ const ReviewSeat = (props) => {
         navigate('/TheaterChung');
         // window.open('http://localhost:8282/TheaterChung/');
         setModelTheater(false);
-        window.location.reload(true);
+        // window.location.reload(true);
     }
 
     const closeModal = () => { 
@@ -202,6 +202,8 @@ const ReviewSeat = (props) => {
     const onChangeSeatReview = (e) => {
         setSeatReview(e.target.value)
     }
+
+
 
 
     return(
