@@ -167,8 +167,8 @@ const onClickSeat = (event) => {
         
         console.log("선택한 좌석정보 : "  + mySeat);
 
-        window.localStorage.setItem("countReview", 2);
-        navigate('/MusicalDetail');
+        // window.localStorage.setItem("countReview", 2);
+        // navigate('/MusicalDetail');
         
     }
     

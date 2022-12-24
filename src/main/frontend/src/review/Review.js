@@ -24,8 +24,8 @@ const Review = (props) => {
 
         if(window.localStorage.getItem("countReview")) {
             setCount(window.localStorage.getItem("countReview"));
-            props.countFunction();
-            props.propFunction(); // 상위 컴포넌트의 함수를 불러 count ++
+            // props.countFunction();
+            // props.propFunction(); // 상위 컴포넌트의 함수를 불러 count ++
           
         }
     })

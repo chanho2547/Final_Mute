@@ -130,6 +130,8 @@ const MusicalDetail = (props) => {
 	const [modalWishCancel, setModalWishCancel] = useState(false); // 찜 취소했을 때 
 	const [modalNotLogin, setModalNotLogin] = useState(false); // 로그인 안했을 경우
 
+	const [countReview, setCountReview] = useState();
+
 
 	const closeModalWishReg = () => {
 		setModalWishReg(false);
@@ -159,6 +161,12 @@ const MusicalDetail = (props) => {
 
 	// 뮤지컬 api 호출
 	useEffect(() => {
+
+		if(window.localStorage.getItem("countReview")) {
+			setCountReview(window.localStorage.getItem("countReview"));
+		 }
+		 
+   
 		const MusicalData = async () => {
 			try {
 				const response = await MuteApi.musicalDetail(musicalId); // 받은 musicalId 서버로 넘겨주기
