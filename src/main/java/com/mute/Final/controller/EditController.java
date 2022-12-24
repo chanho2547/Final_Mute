@@ -67,9 +67,9 @@ public class EditController {
     @PostMapping("/editImg")
     public ResponseEntity<Boolean> ImgSave(@RequestBody Map<String, String> userImg) {
         String userId = userImg.get("userId");
-        String imgName = userImg.get("imgName");
+        String img = userImg.get("imgName");
 
-        boolean result = editService.imgEdit(userId,imgName);
+        boolean result = editService.imgEdit(userId,img);
         if(result) {
             return new ResponseEntity(true, HttpStatus.OK);
         } else {
