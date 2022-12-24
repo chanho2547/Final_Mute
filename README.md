@@ -35,6 +35,7 @@ yarn add react-calendar
 yarn add react-daum-postcode
 yarn add axios
 yarn add aws-sdk
+yarn add react-day-picker date-fns
 
 ## 빌드
 ./gradlew build

@@ -1,18 +1,19 @@
-import { Link } from "react-router-dom";
+
 import { useState, useEffect} from "react";
 import MuteApi from "../api/MuteApi";
-import { useNavigate } from "react-router-dom";
+
 import styled from "styled-components";
 
 const MusicalListContainer = styled.div`
 margin : 0 auto;
 
-
 .musicalList{
     display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     margin: 0 auto;
     .musicalList_img{
-        /* margin-right: 100px;    */
+        margin: 0 auto;
     }
     .musicalList_status{
         /* margin-top: 120px;
@@ -33,25 +34,104 @@ margin : 0 auto;
 
 `;
 
-const Container = styled.div`
-
-
+const MusicalContainer =styled.div`
 margin: 0 auto;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-wrap: wrap;
+.musical_title{
+    display: flex;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 35px;
+    margin: 50px 0 10px 0;
+    .musical_title_front{
+        color: #810000;
+    }
+    .musical_title_back{
+        color: #1b1717;
+    }
+}
+.musical_name{
+    width: 300px;
+    color: #810000;
+    font-weight: 700;
+    font-size: 20px;
+    margin: 0 50px 0 50px;
+}
+.musical_img{
+    width: 300px;
+    height: 400px;
+    margin: 0 auto;
+    justify-content: center;
+
+}
+
+.theater_name{
+    width: 300px;
+    color: #1b1717;
+    margin: 0 50px 0 50px;
+}
+.musical_date{
+    color: #909090;
+    font-size: 13px;
+    margin: 0 50px 0 50px;
+}
+.openedMusical{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+.openBeforeMusical{
+    background-color: #F4F4F4;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    padding-bottom: 35px;
+}
+.starRanking{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-bottom: 35px
+}
+.wishRanking{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-bottom: 35px;
+}
+.centerBlock{
+    background-color: #F4F4F4;
+    .musical_title{
+        padding-top:30px;
+    }
+    .musicalDate{
+        padding-bottom:30px;
+    }
+}
+`;
+
+const Container = styled.div`
+width: fit-content;
+text-align: center;
+margin: 20px auto;
 
 :hover {
     /* background-color: ; */
     opacity: 0.5;
-    background-color: rgba(233,230,213,0.9);
-    color:black;
+    //background-color: rgba(233,230,213,0.9);
+    //color:black;
     cursor: pointer;
 }
 
 `;
 
 const MusicalSearchRes = (props) => {
-    let navigate = useNavigate();
+
     const [searchList, setSearchList] = useState("");
-    let musicalWord = window.localStorage.getItem("inputMusical"); // header에서 입력한 단어
+    let musicalWord = props.searchWord; // header에서 입력한 단어
 
 useEffect(() => {
     const SearchData = async () => {
@@ -64,7 +144,7 @@ useEffect(() => {
         } 
     };
     SearchData();
-}, []);
+},[props.searchWord]);
 
 // 뮤지컬 클릭
 const OnClick = (musicalId,musicalName) => {
@@ -77,26 +157,26 @@ const OnClick = (musicalId,musicalName) => {
 
     return (
         <>
-        <MusicalListContainer>
+        <MusicalContainer>
             {searchList && searchList.map(e => (
                 // 만약 OnClick(e.musicalName)이라고 적으면 로컬스토리지에 musicalName저장됨
                 <Container onClick={() => OnClick(e.musicalId,e.musicalName)}>
 
-                <div className="musicalList">
+                
 
-                <img className="musicalList_img" src= {e.musicalPoster} size width={220} height={300} />
-                <p className="musicalList_status">{e.musicalStatus}</p>
+                <img className="musical_img" src= {e.musicalPoster} />
+                {/* <p className="musicalList_status">{e.musicalStatus}</p> */}
 
-                <div className="musicalList_text">
-                <p className="musicalList_text_name">{e.musicalName}</p>
-                <p className="musicalList_test_date">{e.musicalStart}&nbsp;~&nbsp;{e.musicalEnd}&nbsp;&nbsp;|&nbsp;&nbsp;{e.theaterName}</p>
-                </div>
-
-                </div>
+                
+                <p className="musical_name">{e.musicalName}</p>
+                <p className="musical_date">{e.musicalStart}&nbsp;~&nbsp;{e.musicalEnd}&nbsp;&nbsp;</p>
+                
 
                 </Container>
+
+                
             ))}
-        </MusicalListContainer>
+        </MusicalContainer>
         </>
     )
 }

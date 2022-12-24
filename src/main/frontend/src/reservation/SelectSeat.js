@@ -34,6 +34,7 @@ const SelectSeat = (props) => {
         props.propFunction();
     }
     
+
     return(
         <>
             

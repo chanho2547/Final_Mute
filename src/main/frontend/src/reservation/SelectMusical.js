@@ -17,6 +17,8 @@ const Container = styled.div`
 `;
 
 
+
+
 const MusicalContainer = styled.div`
 
 flex-wrap: wrap;
@@ -48,6 +50,7 @@ const SearchContainer = styled.div`
   display: flex;
   width: 580px;
   height: 60px;
+  margin-bottom: 50px;
     .search_input{
         width: 550px;
         border: none;
@@ -77,18 +80,16 @@ const SearchContainer = styled.div`
 const SelectMusical = (props) => {
 
     const [musicalInfo,setMusicalInfo] = useState();
-    const [openedMusical, setOpenedMusical] = useState();
-    const [openBeforeMusical, setBeforeMusical] = useState();
-    const [musicalList,setMusicalList] = useState();
-    const [starRanking, setStarRanking] = useState();
-    const [musicalSearchList,setMusicalSearchList] = useState(false);
+   
     let navigate = useNavigate();
 
     useEffect(() => {
+        console.log("SelectMusical 랜더링");
         const MusicalData = async () => {
             window.localStorage.setItem("payStatus","no");
             try {
                 let response = await MuteApi.musicalDBList(); // 뮤지컬 리스트 불러오기
+                
                 setMusicalInfo(response.data);
                 
             } catch (e) {  
@@ -117,9 +118,8 @@ const SelectMusical = (props) => {
         // };
         // RankData();
 
-    });
+    },[inputMusical]);
 
-    
     const OnClickPoster = (e) => {
         props.addMusicalName(e.musicalName);
         props.addMusicalId(e.musicalId);
@@ -145,8 +145,8 @@ const SelectMusical = (props) => {
       };
   
       const onClickInput = async() => {
-        window.localStorage.setItem("inputMusical", inputMusical);
-        setMusicalSearchList(true);
+        //window.localStorage.setItem("inputMusical", inputMusical);
+        //setMusicalSearchList(true);
         //navigate("/MusicalSearchList")
       }
 
@@ -158,7 +158,15 @@ const SelectMusical = (props) => {
             <button className="search_button" onClick={onClickInput} ><img src={Search}/></button>
             </SearchContainer>
 
-            {musicalSearchList ? 
+           
+            <MusicalSearchRes propFunction={props.propFunction} addMusicalId={props.addMusicalId} addMusicalName={props.addMusicalName} searchWord={inputMusical}/> 
+             
+              
+                
+                
+                
+
+            {/* {musicalSearchList ? 
             <MusicalSearchRes propFunction={props.propFunction} addMusicalId={props.addMusicalId} addMusicalName={props.addMusicalName}/> :
              musicalInfo && musicalInfo.map(e => (        
                 <MusicalContainer onClick={() => OnClickPoster(e) }>
@@ -169,7 +177,7 @@ const SelectMusical = (props) => {
               
                 </MusicalContainer>)
                 
-            )}
+            )} */}
 
         </Container>
     );
