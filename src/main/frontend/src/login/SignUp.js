@@ -100,6 +100,7 @@ const SignUp = () => {
     const [isMail, setIsMail] = useState(false);
     const [isPhone, setIsPhone] = useState(true);
     const [isAuth, setIsAuth] = useState(false);
+    const [clickAuth, setClickAuth] = useState(false);
 
     // ID 입력
     const onChangeId = (e) => {
@@ -187,6 +188,7 @@ const SignUp = () => {
         const memberCheck = await MuteApi.memberJoinCheck(inputPhone, "TYPE_PHONE");
         if (memberCheck.data) {
             setPhoneMsg("사용가능한 전화번호입니다.");
+            setIsPhone(true);
         } else {
             setPhoneMsg("이미 사용중인 전화번호입니다.");
             setIsPhone(false)
@@ -232,9 +234,11 @@ const SignUp = () => {
         const memberCheck = await MuteApi.memberJoinCheck(inputMail, "TYPE_MAIL");
         if (memberCheck.data && isMail) {
             setMailMsg("사용가능한 Mail입니다.")
+            setClickAuth(true);
         } else {
             setMailMsg("이미 사용중인 Mail입니다.")
             setIsMail(false);
+            setClickAuth(false);
         }
     }
     // 이메일 인증번호 받기
@@ -249,10 +253,14 @@ const SignUp = () => {
         if(serverAuth === inputAuth) {
             setIsAuth(true);
             setAuthMsg("인증번호가 일치합니다.");
+            setModalOpen(true);
+            setComment("인증번호가 일치합니다.")
         }
         else {
             setIsAuth(false);
             setAuthMsg("인증번호가 일치하지않습니다.");
+            setModalOpen(true);
+            setComment("인증번호가 일치하지않습니다.")
         }
     }
     // 인증번호 입력 받기(사용자가 입력하는 인증번호)
@@ -278,9 +286,9 @@ const SignUp = () => {
     const onClickJoin = async() => {
         const memberReg = await MuteApi.signUp(inputId, inputPwd, inputName, inputMail, inputPhone, enroll_company.address);
         if(memberReg.data) {
+            console.log("Mute 회원가입이 완료되었습니다.")
             setModalOpen(true);
             setComment("Mute 회원가입이 완료되었습니다.");
-            console.log("Mute 회원가입이 완료되었습니다.")
             navigate('/Login');
             } else {
                 console.log("회원가입에 실패했습니다. 다시 확인해주세요")
@@ -326,7 +334,7 @@ const SignUp = () => {
                 {/* 이메일 입력창 */}
                 <div className="info_id">
                 <input className="input" type='mail' placeholder='메일' value={inputMail} onChange={onChangeMail} onBlur={mailCheck}></input>
-                <button className='btn' type='button' disabled={!isAuth} onClick={getAuth}>인증번호 받기</button>
+                <button className='btn' type='button' disabled={!clickAuth} onClick={getAuth}>인증번호 받기</button>
                 <div className="hint"> 
                 {inputMail.length > 0 && <span>{mailMsg}</span>}
                 </div>
@@ -335,7 +343,7 @@ const SignUp = () => {
                 {/* 이메일 인증 확인*/}
                 <div className="info_id">
                 <input className="input" type='text' placeholder='인증번호' value={inputAuth} onChange={onChangeAuth}></input>
-                    <button className='btn' type='button' disabled={!isAuth}  onClick={authCheck}>인증번호 확인</button>
+                    <button className='btn' type='button' disabled={!clickAuth}  onClick={authCheck}>인증번호 확인</button>
                 <div className="hint">  
                 {inputAuth.length > 0 && <span>{authMsg}</span>}
                 </div>           
