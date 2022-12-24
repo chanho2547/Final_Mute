@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import MyWish from "../util/MyWish";
 import styled from "styled-components";
 import MyMuReview from "../review/MyMuReview";
+import MySeReview from "../review/MySeReview";
 
 const Desc = styled.div`
     padding: 50px 10px;
@@ -63,7 +64,10 @@ const MyPageTab = () => {
                     onClick={()=>selectTabHandler(1)}> 내가 쓴 후기</li>
             ),
             tabCont:(
+                <>
                 <MyMuReview/>
+                <MySeReview/>
+                </>
             )
         },
         {

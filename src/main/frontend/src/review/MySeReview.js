@@ -7,6 +7,28 @@ import { FaStar } from 'react-icons/fa';
 const ReviewSeContainer = styled.div`
     padding: 10px;
     border: solid 0.5px lightgray;
+
+    .title {
+        color: #810000;
+        font-size: large;
+    }
+    .SeName {
+        font-size: large;
+    }
+    .myRating {
+        padding-left: 33px;
+    }
+    .text {
+        padding: 10px;
+    }
+    .date {
+        color: lightgray;
+    }
+    .deleteBtn {
+        border-radius: 5px;
+        border: solid 0.5px lightgray;
+        background-color: white;
+    }
 `;
 
 const MySeReview = () => {
@@ -32,12 +54,13 @@ const MySeReview = () => {
         <>
         {reviewSe && reviewSe.map(e => (
             <ReviewSeContainer>
-                <p><b><span className="title">좌석 후기 ｜</span><span className="SeName">{e.theaterName}</span></b><span className="date">　작성일 {e.writeDate}</span>　
+                <p><b><span className="title">좌석 후기 ｜</span><span className="SeName">{e.theaterName}</span></b><span className="date">　작성일 {e.writeDate.toString().substring(0, 10)}</span>　
                 <button className="deleteBtn">삭제</button></p>
                 <p className="myRating">좌석 <FaStar size="15" color="#FCC419"/>{e.scoreSeat} 　음향 <FaStar size="15" color="#FCC419"/>{e.scoreSound} 　시야 <FaStar size="15" color="#FCC419"/>{e.scoreView} 　조명 <FaStar size="15" color="#FCC419"/>{e.scoreLight}<br/></p>
                 <p className="text">
                     <span className={e.reviewSeTxt}>{e.reviewSeTxt.substring(30)}</span>
                 </p>
+                
             </ReviewSeContainer>
         ))}
         

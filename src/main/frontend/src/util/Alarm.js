@@ -7,15 +7,15 @@ const AlarmContainer = styled.div`
     .alarm{
         margin-botton: 7px;
         .title{
+            color: #810000;
             font-weight: 600;
             font-size: 18px;
         }
         .textItem{
             display: flex;
-            // font-weight: 600;
             font-size: 16px;
             .btn{
-                width: 50px;
+                width: 40px;
                 font-size: 16px;
                 border-radius: 5px;
                 border: 2px lightgray;
