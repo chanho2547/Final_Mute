@@ -8,9 +8,18 @@ import SelectSeat from "../../reservation/SelectSeat";
 import MuteApi from "../../api/MuteApi";
 import SeatClick from "../../review/SeatClick";
 import { useNavigate } from "react-router-dom";
+import seatColor from "../../images/seatColor.png";
+
 import ReviewSeat from "../../review/ReviewSeat";
 
 let isSeatRender = false; // 무한 루프 Stop
+
+const SeatColor = styled.div`
+margin:auto;
+    .seatColorItem{
+        margin:auto; // 수정,,, 제발 마진 좀 먹어라
+    }
+`;
 
 const SelectSeatBtn = styled.button`
     width: 200px;
@@ -312,19 +321,23 @@ const onClickSeat = (event) => {
             seatReviewInfo && seatReviewInfo.map(e=>{
                 
                 if(e.avgAllSeat < 2) {
-                    document.getElementById(e.seatId).parentNode.setAttribute('class','real red');
+                    // document.getElementById(e.seatId).parentNode.setAttribute('class', 'color : #DE3F2A');
+                    document.getElementById(e.seatId).parentNode.setAttribute('class', 'red');
  
                 } else if (e.avgAllSeat <3) {
-                    document.getElementById(e.seatId).parentNode.setAttribute('class','real orange');
+                    // document.getElementById(e.seatId).parentNode.setAttribute('class','color : #F09C2A');
+                    document.getElementById(e.seatId).parentNode.setAttribute('class','orange');
 
                 } else if (e.avgAllSeat < 4) {
-                    document.getElementById(e.seatId).parentNode.setAttribute('class','real yellow');
+                    // document.getElementById(e.seatId).parentNode.setAttribute('class','color : #FBE567');
+                    document.getElementById(e.seatId).parentNode.setAttribute('class','yellow');
 
                 } else if (e.avgAllSeat < 5) {
-                    document.getElementById(e.seatId).parentNode.setAttribute('class','real lightgreen');
+                    // document.getElementById(e.seatId).parentNode.setAttribute('class','color : #9AD086');
+                    document.getElementById(e.seatId).parentNode.setAttribute('class','lightgreen');
 
                 } else {
-                    document.getElementById(e.seatId).parentNode.setAttribute('class','real green');
+                    document.getElementById(e.seatId).parentNode.setAttribute('class', 'green');
                 }
             })
         }
@@ -351,6 +364,9 @@ const onClickSeat = (event) => {
         {/* <Link to = "/"> Home으로 돌아가기</Link> <br></br>
         <Link to = "/FirstFloorChar">1층보기</Link> <br></br>
         <Link to = "/SecondFloorChar">2층보기</Link> */}
+        <SeatColor>
+        <img className="seatColorItem" alt="color" src={seatColor}size width={150} height={30}/>
+        </SeatColor>
 
         <div className="grid-containder modal-background" id="modal-background">  
         </div>

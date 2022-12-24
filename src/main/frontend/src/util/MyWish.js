@@ -1,6 +1,39 @@
 import { useEffect, useState } from "react";
+import styled from "styled-components";
 import MuteApi from "../api/MuteApi";
 // 마이페이지 wishlist 컴포넌트
+const UserMusicalListContainer = styled.div`
+width:70%;
+.userWishList{
+    display: flex;
+    margin-bottom: 70px;
+
+    .userWishList_name{
+        color: #810000;
+        margin-left: 30px;
+        font-size: 30px;
+        font-weight: 700;
+
+    .userWishList_date{
+        display:flex;
+    }
+
+    .userWishList_ticket{
+        display:flex;
+
+    }
+
+    .userWishList_date{
+        display:flex;
+    }
+
+    .userWishList_alarrm{
+        display:flex;
+    }
+
+    }
+}
+    `;
 
 const MyWish = () => {
     const [userWish, setUserWish] = useState("");
@@ -22,21 +55,20 @@ const MyWish = () => {
     };
 
     return(
-        <div className="userWish_container">
+        <UserMusicalListContainer>
             {userWish && userWish.map(e => (
-                <div className="userWish">
-                    <p>마이페이지 찜 List</p>
                     <div onClick={() => OnClickWishList(e.userNum)}>
-                     <img alt="poster" src={e.musicalPoster} />
-                     <p>공연이름 : {e.musicalName}</p>
-                     <p>공연 예매일 : {e.musicalTicketStart}</p>
-                     <p>공연일자 : {e.musicalStart} ~ {e.musicalEnd}</p>
-                     <p>알림 상태 : {e.alarm}</p> 
+                    <div className="userWishList">
+                     <img alt="userWishListPoster" src={e.musicalPoster} size width={220} height={300}/>
+                     <p className="userWishList_name">{e.musicalName}</p>
+                     <p className="userWishList_ticket">공연 예매일 {e.musicalTicketStart}</p>
+                     <p className="userWishList_date">공연 기간 {e.musicalStart} ~ {e.musicalEnd}</p>
+                     <p className="userWishList_alarrm">알림 상태 {e.alarm}</p> 
                      
                     </div>
                 </div>
             ))}
-        </div>
+        </UserMusicalListContainer>
     )
 }
 

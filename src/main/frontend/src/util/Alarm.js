@@ -5,6 +5,7 @@ import MuteApi from "../api/MuteApi";
 
 const AlarmContainer = styled.div`
     .alarm{
+        margin-botton: 7px;
         .title{
             font-weight: 600;
             font-size: 18px;
@@ -13,17 +14,17 @@ const AlarmContainer = styled.div`
             display: flex;
             // font-weight: 600;
             font-size: 16px;
+            .btn{
+                width: 50px;
+                font-size: 16px;
+                border-radius: 5px;
+                border: 2px lightgray;
+                :hover{
+                    background-color: #810000;
+                    color: white;
+                }
         }
-        .button{
-            width: 30px;
-            font-size: 21px;
-            font-weight: 700;
-            border-radius: 5px;
-            border: 2px lightgray;
-            :hover{
-                color: #810000;
-                font: white;
-            }
+
         }
     }
     
@@ -71,10 +72,10 @@ const Alarm = (props) => {
     const OnClickAlarmOff = (userNum, musicalId) => {
         const AlarmUpdate = async () => {
             try{
-                console.log("2. 알람 업데이트 전 userNum :   " + userNum);
-                console.log("3. 알람 업데이트 전 musicalId :  " + musicalId);
+                // console.log("2. 알람 업데이트 전 userNum :   " + userNum);
+                // console.log("3. 알람 업데이트 전 musicalId :  " + musicalId);
                 let response = await MuteApi.alarmOff(userNum, musicalId);
-                console.log("4. 알람 업데이트 이후 : ", response.data); // 여기까지 잘 들어왔는데 재렌더링이 안됨 why?
+                // console.log("4. 알람 업데이트 이후 : ", response.data); // 여기까지 잘 들어왔는데 재렌더링이 안됨 why?
                 setAlarmUpdate(alarmUpdate+1); // 여기서 똑같이 true라고 들어와서 값이 바뀌었다고 인식하지 못함
             } catch (e) {
                 console.log(e + "알림off 실패")
@@ -90,9 +91,11 @@ const Alarm = (props) => {
                 <div onClick={() => OnClickAlarm(el.musicalId) }>
                 <p className="alarm">
                     <p className="title">{el.musicalName}</p>
-                    <p className="textItem">예매 시작일<p className="value">{el.musicalTicketStart}</p></p>
-                    <p className="textItem">알림 설정<p className="value">{el.alarm}<button className="btn" onClick={() => OnClickAlarmOff(el.userNum, el.musicalId)}>OFF</button></p></p>
+                    <p className="textItem">예매 시작&nbsp;&nbsp;<p className="value">{el.musicalTicketStart}</p></p>
+                    <p className="textItem">알림 설정&nbsp;&nbsp;<p className="value">{el.alarm}&nbsp;<button className="btn" onClick={() => OnClickAlarmOff(el.userNum, el.musicalId)}>OFF</button></p></p>
                 </p>
+                <br />
+                <br />
                 <div/>
                 <div/>
                 </div>
