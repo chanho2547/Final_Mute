@@ -34,4 +34,9 @@ public interface ReviewSeatRepository extends JpaRepository<ReviewSeat,Long> {
     @Query(value = "delete from review_seat where user_num = ?1 and seat_num = ?2", nativeQuery = true)
     void deleteSeatReview(int userNum, int seatNum);
 
+    @Modifying //데이터베이스에 변경을 주는 네이티브 쿼리는 이 어노테이션 필요 (INSERT, UPDATE, DELETE)
+    @Transactional
+    @Query(value = "delete from review_seat where user_num = ?1", nativeQuery = true)
+    void deleteByUserNum(String userId); // 회원탈퇴
+
 }

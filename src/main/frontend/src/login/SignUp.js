@@ -8,12 +8,18 @@ import styled from "styled-components";
 
 const SignUpBox = styled.div`
     width: 100%;
-    margin-top:50px;
+    margin-top:30px;
     text-align: center;
 
+    p{
+        font-weight: 500px;
+        color: #1b1717;
+    }
     .info_id {
         position: relative;
+        
     }
+
 
     .info_id .btn {
         position: absolute;
@@ -300,7 +306,7 @@ const SignUp = () => {
     return (
         <div className="container">
             <SignUpBox>
-                <h5>회원가입</h5>
+                <h2>Mute 회원가입</h2>
 
                 {/* 아이디 입력창*/}
                 <div className="info_id">

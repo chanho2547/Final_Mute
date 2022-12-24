@@ -1,17 +1,20 @@
 import DaumPostcode from "react-daum-postcode";
 import styled from "styled-components";
 
-// const PostStyle = styled.div `
+const PostStyle = styled.div `
+    width: 100%;
+    text-align: center;
 
-//     .postmodal{
-//     background : rgba(0,0,0,0.25);
-//     position : fixed;
-//     left:0;
-//     top:0;
-//     height:50%;
-//     width:50%;
-//     }
-// `; 
+    .postmodal{
+    background : rgba(0,0,0,0.25);
+    position: static;
+    left:0;
+    top:0;
+    height:10%;
+    width:10%;
+    box-sizing: border-box;
+    }
+`; 
 
 // api를 실행할 컴포넌트 
 const Post = (props) => {
@@ -40,12 +43,12 @@ const Post = (props) => {
     }
 
     return (
-        <>
+        <PostStyle>
             <DaumPostcode
                 className="postmodal"
                 autoClose
                 onComplete={complete} />
-        </>
+        </PostStyle>
         
     );
 };

@@ -25,4 +25,9 @@ public interface ReviewTotalRepository extends JpaRepository<ReviewTotal, Long> 
     Long deleteByReviewMuId(long reviewMuId); // 도연 - 뮤지컬 총평 후기 삭제
     ReviewTotal findByReviewMuId(long reviewMuId); // 도연 - 뮤지컬 총평 후기 삭제
     List<ReviewTotal> findByMember(Member member); // 도연 - 마이페이지 - 나의 뮤지컬 후기 view
+
+    @Modifying //데이터베이스에 변경을 주는 네이티브 쿼리는 이 어노테이션 필요 (INSERT, UPDATE, DELETE)
+    @Transactional
+    @Query(value = "delete from review_musical where user_num = ?1", nativeQuery = true)
+    void deleteByUserNum(Member userId); // 회원탈퇴
 }

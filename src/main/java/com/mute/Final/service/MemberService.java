@@ -18,6 +18,13 @@ import java.util.List;
 public class MemberService {
     private final MemberRepository memberRepository;
     private final DeleteRepository deleteRepository;
+    private final TicketRepository ticketRepository;
+    private final ReviewSeatRepository reviewTotalRepository;
+    private final ReviewSeatRepository reviewSeatRepository;
+    private final PayRepository payRepository;
+    private final WishRepository wishRepository;
+
+
     // 로그인 체크
 //    public boolean loginCheck(String userId, String pwd) {
 //        try {
@@ -163,6 +170,26 @@ public class MemberService {
         }
     }
 
+
+    // 회원탈퇴
+    @Transactional
+    public boolean deleteMem(String userId) {
+        log.error("userId : " + userId );
+        try {
+            List<Member> member = deleteRepository.findByUserId(userId);
+            log.error(String.valueOf(userId));
+            //ticketRepository.deleteByUserNum(userId);
+            reviewTotalRepository.deleteByUserNum(userId);
+            reviewSeatRepository.deleteByUserNum(userId);
+            payRepository.deleteByUserNum(userId);
+            wishRepository.deleteByUserNum(userId);
+            memberRepository.deleteByUserId(userId);
+            return true;
+        } catch (Exception e) {
+            log.warn("실패");
+            return false;
+        }
+    }
 //    // 회원탈퇴
 //    @Transactional
 //    public boolean deleteMem(Long userNum) {
@@ -183,16 +210,16 @@ public class MemberService {
 //        }
 //    }
     // 회원탈퇴
-    public boolean deleteMem(String userId) {
-        log.error("Id" + userId);
-
-        List<Member> member = deleteRepository.findByUserId(userId);
-
-        if(member.size() == 1) {
-            memberRepository.deleteAll(member);
-            return true;
-        } else return false;
-    }
+//    public boolean deleteMem(String userId) {
+//        log.error("Id" + userId);
+//
+//        List<Member> member = deleteRepository.findByUserId(userId);
+//
+//        if(member.size() == 1) {
+//            memberRepository.deleteAll(member);
+//            return true;
+//        } else return false;
+//    }
 
     // 아이디 (userId) 입력 -> 회원번호 (userNum) 반환
     public Long findByUserId(String userId) {
