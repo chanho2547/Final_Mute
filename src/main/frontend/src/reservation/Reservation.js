@@ -273,7 +273,7 @@ const Reservation = () => {
         {/* 각 컴포넌트에서, 기본적으로 highFunction을 넣어줌 (count++) */}
         {/* 각 컴포넌트에서, 추가적으로 예매에 필요한 정보들을 가져오기 위한 함수들을 만듦 */}
         {count === 0 ? <SelectMusical propFunction={highFunction} addMusicalId={addMusicalId} addMusicalName={addMusicalName}/> : null}
-        {count === 1 ? <SelectDate propFunction={highFunction} addSeeDate={addSeeDate} addTicketDate={addTicketDate} /> : null }
+        {count === 1 ? <SelectDate propFunction={highFunction} addSeeDate={addSeeDate} addTicketDate={addTicketDate} musicalId={musicalId}/> : null }
         
         {/* 좌석은, 이미 선택된 좌석은 비활성화 해야한다 */}
         {count === 2 ? <SelectSeat propFunction={highFunction} addSeatNum={addSeatNum} addSeatPos={addSeatPos} seatNum={seatNum} seatPos={seatPos} seeDate={seeDate} musicalId={musicalId}/> : null }
