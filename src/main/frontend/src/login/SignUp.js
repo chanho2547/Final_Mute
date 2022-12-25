@@ -23,9 +23,7 @@ const SignUpBox = styled.div`
         width: 50%;
         /* margin-left: 0px; */
     }
-
   
-
     .info_id .btn {
         position: absolute;
         width: 90px;
@@ -290,9 +288,15 @@ const SignUp = () => {
     const [comment, setComment] = useState("");
     const [modalOpen, setModalOpen] = useState(false);
     const [modalJoin, setModalJoin] = useState(false); // 회원가입완료
+    const [memberModalOpen,setMemberModalOpen] = useState(false);
     const closeModal = () => {
         setModalOpen(false);
+
     };
+    const closeMemberModal = () =>{
+        setModalOpen(false);
+        navigate('/Login');
+    }
 
     const closeModalJoin = () => {
         setModalJoin(false);
@@ -300,17 +304,18 @@ const SignUp = () => {
 
     // 회원가입
     const onClickJoin = async() => {
+        try {
          await MuteApi.signUp(inputId, inputPwd, inputName, inputMail, inputPhone, enroll_company.address);
-        // (memberReg.data)
+         //(memberReg.data)
             console.log("Mute 회원가입이 완료되었습니다.")
-            setModalJoin(true);
+            setMemberModalOpen(true);
             setComment("Mute 회원가입이 완료되었습니다.");
             navigate('/Login');
-        //     } else {
-        //         console.log("회원가입에 실패했습니다. 다시 확인해주세요")
-        //         setModalJoin(true);
-        //         setComment("회원가입에 실패했습니다. 다시 확인해주세요.");
-        // }
+            } catch(e) {
+                console.log("회원가입에 실패했습니다. 다시 확인해주세요")
+                setModalJoin(true);
+                setComment("회원가입에 실패했습니다. 다시 확인해주세요.");
+        }
     }
 
     return (
@@ -389,6 +394,8 @@ const SignUp = () => {
 
                 {/* 모달 */}
                 {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">{comment}</Modal>}
+                {/* 회원가입 모달 (close일때 login으로 보내줌)*/}
+                {memberModalOpen && <Modal open={memberModalOpen} close={closeMemberModal} header="확인">{comment}</Modal>}
                 {modalJoin && <Modal open={modalJoin} close={closeModalJoin} header="확인">회원가입에 실패하였습니다.</Modal>}
             </SignUpBox>
         </div>

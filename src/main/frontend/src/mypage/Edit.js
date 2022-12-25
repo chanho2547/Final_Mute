@@ -162,33 +162,38 @@ const Edit = () => {
 
     const [comment, setCommnet] = useState("");
     const [modalOpen, setModalOpen] = useState(false);
-    const [modalEdit, setModalEdit] = useState(false); // 회원정보수정시
-    const [modalDel, setModalDel] = useState(false); // 회원탈퇴
+    const [editModalOpen, setEditModalOpen] = useState(false); // 회원정보수정시
+    const [delModalOpen, setDelModalOpen] = useState(false); // 회원탈퇴
 
     const closeModal = () => {
         setModalOpen(false);
     };
 
-    const closeModalEdit = () => {
-        setModalEdit(false);
+    const closeEditModal= () => {
+        setEditModalOpen(false);
+        navigate('/');
     }
 
-    const closeModalDel = () => {
-        setModalDel(false);
+    const closeDelModal = () => {
+        setDelModalOpen(false);
     }
 
 
     // 회원 탈퇴
     const onClickMemDelete = async() => { // 탈퇴한다고 했을때
+        try {
         await MuteApi.memberDelete(userId);
         window.localStorage.setItem("whoLogin","");
         window.localStorage.setItem("isLogin", "false")
+        setDelModalOpen(true);
         setCommnet("정말 탈퇴 하시겠습니까?😥");
-        setModalOpen(true);
         navigate('/');
         console.log({userId});
         console.log("탈퇴된겨?" + userId);
-
+        } catch (e) {
+            setDelModalOpen(true);
+            setCommnet("탈퇴못해여!!")
+        }
     }
 
 
@@ -221,12 +226,13 @@ const Edit = () => {
     const onClickSave = async() => {
         const saveInfo = await MuteApi.userInfoSave(userId, changeName, changePwd, changePhone, userMail);
         if(saveInfo.data) {
-            setModalOpen(true);
+            setEditModalOpen(true);
             setCommnet("회원정보 수정이 완료되었습니다.");
-            console.log(saveInfo)
             navigate('/');
+            console.log(saveInfo)
+
         } else {
-            setModalOpen(true);
+            setEditModalOpen(true);
             setCommnet("회원정보 수정에 실패하였습니다.")
         }
     }
@@ -423,9 +429,8 @@ const Edit = () => {
                 <button className="Button" onClick={onClickMemDelete}>회원탈퇴</button>
             </div>
             {modalOpen && <Modal open={modalOpen} close={closeModal} header="탈퇴">{comment}</Modal>}
-            {modalEdit && <Modal open={modalEdit} close={closeModalEdit} header="확인">{comment}</Modal>}
-            {modalDel && <Modal open={modalDel} close={closeModalDel} header="확인">{comment}</Modal>}
-            {modalOpen && <DelModal open={modalOpen} confirm={onClickMemDelete} close={closeModal} type={true} header="확인">정말로 탈퇴하시겠습니까?</DelModal>}
+            {editModalOpen && <Modal open={editModalOpen} close={closeEditModal} header="확인">{comment}</Modal>}
+                {delModalOpen && <Modal open={delModalOpen} close={closeDelModal} header="확인">{comment}</Modal>}
             </EditBox>
         </>
     )
