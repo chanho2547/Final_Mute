@@ -22,14 +22,18 @@ const Review = (props) => {
     useEffect(()=>{
         window.localStorage.setItem("seatInfoMode","NONE");
 
-        // if(window.localStorage.getItem("countReview")) {
-        //     setCount(window.localStorage.getItem("countReview"));
+        if(window.localStorage.getItem("countReview") === 2) {
+            // setCount(window.localStorage.getItem("countReview") === 2);
+            // setCountReview(true);
+            props.countFunction();
+            
         
           
-        // }
+        }
     })
 
     const [count, setCount] = useState(0);
+    const [countReview, setCountReview] = useState(0);
 
     const highFunction = () => {
         setCount(count + 1);
@@ -38,7 +42,7 @@ const Review = (props) => {
         setCount();
     }
     const countFunction = () => {
-        setCount(count + 2);
+        setCountReview(countReview + 2);
     }
 
 
@@ -46,8 +50,8 @@ const Review = (props) => {
         <div className="container">
             <TmpBox>
             {count === 0 ? <ReviewList propFunction={highFunction} countFunction={countFunction}/> : null} 
-            {count === 1 ? <ReviewTotal homeFunction={homeFunction} propFunction={highFunction} countFunction={countFunction}/> : null}
-            {count === 2 ? <ReviewSeat homeFunction={homeFunction} propFunction={highFunction} theaterId={props.theaterId} countFunction={countFunction}/> : null}
+            {count === 1 ? <ReviewTotal homeFunction={homeFunction} propFunction={highFunction} /> : null}
+            {count === 2 ? <ReviewSeat homeFunction={homeFunction} propFunction={highFunction} theaterId={props.theaterId} /> : null}
             </TmpBox>
         </div>
     );
