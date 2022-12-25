@@ -6,11 +6,21 @@ import styled from "styled-components";
 
 const MyBox = styled.div `
     width: 1024px;
+    display: flex;
+    justify-content: center;
     text-align: center;
+    flex-direction: column;
+
 
     h3{
         margin-top: 30px;
     }
+`;
+
+const Container = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
 `;
 
 const MyPage = () => {
@@ -18,7 +28,7 @@ const MyPage = () => {
     console.log(userId);
 
     return(
-
+        <Container>
         <MyBox>
             <h3>{userId} 님의 프로필</h3>
             <ProImg/>
@@ -26,6 +36,7 @@ const MyPage = () => {
             <MyPageTab userId={userId}/>
 
         </MyBox>
+        </Container>
     )
 }
 
