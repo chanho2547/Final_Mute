@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {Link, useNavigate } from "react-router-dom";
 import MuteApi from '../api/MuteApi';
 import Post from './Post';
@@ -283,23 +283,28 @@ const SignUp = () => {
     // 모달
     const [comment, setComment] = useState("");
     const [modalOpen, setModalOpen] = useState(false);
+    const [modalJoin, setModalJoin] = useState(false); // 회원가입완료
     const closeModal = () => {
         setModalOpen(false);
     };
 
+    const closeModalJoin = () => {
+        setModalJoin(false);
+    }
+
     // 회원가입
     const onClickJoin = async() => {
-        const memberReg = await MuteApi.signUp(inputId, inputPwd, inputName, inputMail, inputPhone, enroll_company.address);
-        if(memberReg.data) {
+         await MuteApi.signUp(inputId, inputPwd, inputName, inputMail, inputPhone, enroll_company.address);
+        // (memberReg.data)
             console.log("Mute 회원가입이 완료되었습니다.")
-            setModalOpen(true);
+            setModalJoin(true);
             setComment("Mute 회원가입이 완료되었습니다.");
             navigate('/Login');
-            } else {
-                console.log("회원가입에 실패했습니다. 다시 확인해주세요")
-                setModalOpen(true);
-                setComment("회원가입에 실패했습니다. 다시 확인해주세요.");
-        }
+        //     } else {
+        //         console.log("회원가입에 실패했습니다. 다시 확인해주세요")
+        //         setModalJoin(true);
+        //         setComment("회원가입에 실패했습니다. 다시 확인해주세요.");
+        // }
     }
 
     return (
@@ -376,7 +381,7 @@ const SignUp = () => {
 
                 {/* 모달 */}
                 {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">{comment}</Modal>}
-
+                {modalJoin && <Modal open={modalJoin} close={closeModalJoin} header="확인">회원가입에 실패하였습니다.</Modal>}
             </SignUpBox>
         </div>
     )

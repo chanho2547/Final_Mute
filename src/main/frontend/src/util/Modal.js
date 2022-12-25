@@ -12,8 +12,8 @@ const Modal = (props) => {
     const { open, confirm, close, header } = props;
 
     const userId =window.localStorage.getItem("whoLogin");
-    const userPwd =window.localStorage.getItem("whoPwd");
-    const isLogin =window.localStorage.getItem("isLogin");
+    // const userPwd =window.localStorage.getItem("whoPwd");
+    // const isLogin =window.localStorage.getItem("isLogin");
 
     const [comment, setCommnet] = useState("");
     const [modalOpen, setModalOpen] = useState(false);
@@ -22,10 +22,10 @@ const Modal = (props) => {
         setModalOpen(false);
     };
 
-    const onClickLogout = (userId) => {
-        setModalOpen(true);
-        setCommnet("로그아웃되었습니다.");
-    }
+    // const onClickLogout = (userId) => {
+    //     setModalOpen(true);
+    //     setCommnet("로그아웃되었습니다.");
+    // }
 
     // 회원 탈퇴
     const onClickMemDelete = () => { // 탈퇴한다고 했을때
@@ -39,14 +39,14 @@ const Modal = (props) => {
             {open &&
                 <section>
                     <header>
-                        &nbsp;
+                        {header}
                         <button onClick={close}>
                             &times;
                         </button>
                     </header>
                     <main>{props.children}</main>
                     <footer>
-                        {(header === '로그아웃') ?<button onClick={onClickLogout}>로그아웃</button>: ''}
+                        {/*{(header === '로그아웃') ?<button onClick={onClickLogout}>로그아웃</button>: ''}*/}
                         {(header === '탈퇴') ?<button onClick={onClickMemDelete}>네</button>: ''}
                         {(header === '취소'? <button onClick={confirm}>네 </button>:'')}
                         {/* <button onClick={()=>props.close()}>close</button> */}

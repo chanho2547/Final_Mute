@@ -210,40 +210,40 @@ public class MemberService {
 //        }
 //    }
     // 회원탈퇴
-    public boolean deleteMem(String userId) {
-        log.error("Id : " + userId);
-
-        try {
-            List<Member> member = deleteRepository.findByUserId(userId);
-            wishRepository.deleteByUserId((Member) member);
-            ticketRepository.deleteByUserId((Member) member);
-            reviewTotalRepository.deleteByUserId((Member) member);
-            reviewSeatRepository.deleteByUserId((Member) member);
-            payRepository.deleteByUserId((Member) member);
-
-            if (member.size() == 1) {
-                memberRepository.deleteAll(member);
-                return true;
-            }
-            else return false;
-        } catch (Exception e) {
-            log.error("탈퇴 못해?!!!!!!!!!");
-            return false;
-        }
-    }
-
-
-    // 회원탈퇴(디비없는경우)
 //    public boolean deleteMem(String userId) {
-//        log.error("Id" + userId);
+//        log.error("Id : " + userId);
 //
-//        List<Member> member = deleteRepository.findByUserId(userId);
+//        try {
+//            List<Member> member = deleteRepository.findByUserId(userId);
+//            wishRepository.deleteByUserId((Member) member);
+//            ticketRepository.deleteByUserId((Member) member);
+//            reviewTotalRepository.deleteByUserId((Member) member);
+//            reviewSeatRepository.deleteByUserId((Member) member);
+//            payRepository.deleteByUserId((Member) member);
 //
-//        if(member.size() == 1) {
-//            memberRepository.deleteAll(member);
-//            return true;
-//        } else return false;
+//            if (member.size() == 1) {
+//                memberRepository.deleteAll(member);
+//                return true;
+//            }
+//            else return false;
+//        } catch (Exception e) {
+//            log.error("탈퇴 못해?!!!!!!!!!");
+//            return false;
+//        }
 //    }
+
+
+    // 회원탈퇴
+    public boolean deleteMem(String userId) {
+        log.error("Id" + userId);
+
+        List<Member> member = deleteRepository.findByUserId(userId);
+
+        if(member.size() == 1) {
+            memberRepository.deleteAll(member);
+            return true;
+        } else return false;
+    }
     // 아이디 (userId) 입력 -> 회원번호 (userNum) 반환
     public Long findByUserId(String userId) {
         Member member = memberRepository.findByUserId(userId);

@@ -1,7 +1,6 @@
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import MuteApi from "../api/MuteApi";
-import React from "react";
 import Modal from "../util/Modal";
 import styled from "styled-components";
 import AWS from "aws-sdk";
@@ -162,10 +161,20 @@ const Edit = () => {
 
     const [comment, setCommnet] = useState("");
     const [modalOpen, setModalOpen] = useState(false);
+    const [modalEdit, setModalEdit] = useState(false); // 회원정보수정시
+    const [modalDel, setModalDel] = useState(false); // 회원탈퇴
 
-    const closeModal = () => { // 탈퇴 아니오 눌렀을 때
+    const closeModal = () => {
         setModalOpen(false);
     };
+
+    const closeModalEdit = () => {
+        setModalEdit(false);
+    }
+
+    const closeModalDel = () => {
+        setModalDel(false);
+    }
 
 
     // 회원 탈퇴
@@ -173,8 +182,8 @@ const Edit = () => {
         await MuteApi.memberDelete(userId);
         window.localStorage.setItem("whoLogin","");
         window.localStorage.setItem("isLogin", "false")
-        setModalOpen(true);
         setCommnet("정말 탈퇴 하시겠습니까?😥");
+        setModalOpen(true);
         navigate('/');
         console.log({userId});
         console.log("탈퇴된겨?" + userId);
@@ -357,7 +366,6 @@ const Edit = () => {
     
     return(
         <>
-
             <Img >
                 <div className="img">
                 <input type="file" id="upload" accept='image/*' className="image-upload" onChange={handleFileInput} />
@@ -414,7 +422,9 @@ const Edit = () => {
                 <button className="Button" onClick={onClickMemDelete}>회원탈퇴</button>
             </div>
             {modalOpen && <Modal open={modalOpen} close={closeModal} header="탈퇴">{comment}</Modal>}
-        </EditBox>
+            {modalEdit && <Modal open={modalEdit} close={closeModalEdit} header="확인">{comment}</Modal>}
+            {modalDel && <Modal open={modalDel} close={closeModalDel} header="확인">{comment}</Modal>}
+            </EditBox>
         </>
     )
 }
