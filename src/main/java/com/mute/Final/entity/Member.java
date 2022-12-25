@@ -31,4 +31,5 @@ public class Member {
     private LocalDateTime regData; // 가입일
     //private LocalDateTime unRegData; // 탈퇴일
 
+
 }

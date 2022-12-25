@@ -107,7 +107,7 @@ const FindPwd = () => {
             if(res.data) {
                 setModalOpen(true);
                 setComment("비밀번호를 재설정합니다.")
-                window.localStorage.setItem("whoLogin",inputId);
+                //window.localStorage.setItem("whoLogin",inputId);
                 navigate('/RePwd');
             } else {
                 setModalOpen(true);

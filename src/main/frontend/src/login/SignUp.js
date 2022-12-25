@@ -12,15 +12,14 @@ const SignUpBox = styled.div`
     text-align: center;
 
     p{
-        font-weight: 500px;
+        font-weight: 500;
         color: #1b1717;
     }
     .info_id {
         position: relative;
         
     }
-
-
+  
     .info_id .btn {
         position: absolute;
         width: 90px;
@@ -197,7 +196,7 @@ const SignUp = () => {
             setIsPhone(true);
         } else {
             setPhoneMsg("이미 사용중인 전화번호입니다.");
-            setIsPhone(false)
+            setIsPhone(false);
         }
     }
 
