@@ -77,12 +77,13 @@ const MuteApi =  {
     },
 
     // 좌석 후기 삭제 - 도연
-    DeleteSeat : async function(reviewSeId) {
+    DeleteSeat : async function(member, reviewSeId) {
         const reviewObj = {
+            member : member, // 회원 아이디
             reviewSeId : reviewSeId, // 좌석 후기 글 번호
-            // member : member // 회원 아이디
+           
         }
-        return await axios.post("review/deleteSeat", reviewObj);
+        return await axios.post("review/deleteSeat/view", reviewObj);
     },
 
     // 뮤지컬 후기 view - 도연

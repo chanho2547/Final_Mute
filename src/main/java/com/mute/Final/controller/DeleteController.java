@@ -43,4 +43,17 @@ public class DeleteController {
             return new ResponseEntity(false, HttpStatus.BAD_REQUEST);
         }
     }
+
+    // 좌석 후기 삭제(은종)
+    @PostMapping("/deleteSeat/view")
+    public ResponseEntity<Boolean> deleteSeatView(@RequestBody Map<String, String> deleteSeatData) {
+        String member = deleteSeatData.get("member");
+        String reviewSeId = deleteSeatData.get("reviewSeId");
+        boolean result = deleteService.deleteSeatView(member, reviewSeId);
+        if(result) {
+            return new ResponseEntity(true, HttpStatus.OK);
+        } else {
+            return new ResponseEntity(false, HttpStatus.BAD_REQUEST);
+        }
+    }
 }

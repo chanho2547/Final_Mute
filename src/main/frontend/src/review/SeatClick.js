@@ -100,6 +100,7 @@ const SeatClick = () => {
     let clickSeatNum = window.localStorage.getItem("whatSeatNum");
     let clickSeatInfo = window.localStorage.getItem("whatSeatInfo");
     let userNum = window.localStorage.getItem("whoLoginUserNum"); 
+    let member = window.localStorage.getItem("whoLoginUserNum"); 
 
 
 
@@ -118,7 +119,7 @@ const SeatClick = () => {
             }
         };
         SeatDetailReview();
-    }, []);
+    }, [count]);
 
     const OnClick = (e) => {
     }
@@ -127,19 +128,21 @@ const SeatClick = () => {
 
     }
 
-    const OnClickDelete = async(userNum, clickSeatNum) => {
+    const OnClickDelete = async(member, reviewSeId) => {
         try{
-            let response = await MuteApi.deleteReviewSeat(userNum, clickSeatNum);
+            let response = await MuteApi.DeleteSeat(member, reviewSeId);
+            console.log(member);
+            console.log(reviewSeId);
             if(response.data === true) {
                 setModalOpen(true);
                 setModalText("삭제가 완료되었습니다.");
                 setCount(count + 1);
-                let theaterFullName = window.localStorage.getItem("theaterFullName");
-                if(theaterFullName === "샤롯데씨어터"){
-                    navigate("/TheaterChar");
-                } else if (theaterFullName === "충무아트센터"){
-                    navigate("/TheaterChung");
-                }
+                // let theaterFullName = window.localStorage.getItem("theaterFullName");
+                // if(theaterFullName === "샤롯데씨어터"){
+                //     navigate("/TheaterChar");
+                // } else if (theaterFullName === "충무아트센터"){
+                //     navigate("/TheaterChung");
+                // }
             }
         } catch (e) {
             setModalOpen(true);
@@ -183,7 +186,7 @@ const SeatClick = () => {
                         <p className="writer">{e.userId.replace(e.userId.slice(-2), '***')}</p>
                         <p className="eachAvg"><FaStar size="14" color="#FCC419"/> {e.scoreAvgSeat}</p>
                         <p className="date">작성일 {e.writeDate.toString().substring(0, 10)}</p>
-                        <button className="deleteBtn" onClick={() => OnClickDelete(userNum, clickSeatNum)}>삭제</button>
+                        <button className="deleteBtn" onClick={() => OnClickDelete(member, e.reviewSeId)}>삭제</button>
                     </div>
                     
                     <div className="star">

@@ -13,6 +13,7 @@ public class ReviewSeatDTO {
     private String musicalName; // 공연 이름
     private String theaterName; // 공연장 이름
     private String userId; // 회원 ID
+    private String member; // 회원번호
     private LocalDateTime writeDate; // 작성일
     private double scoreAvgSeat; // 개인 평균 좌석 별점
     private int scoreSeat; // 좌석 별점

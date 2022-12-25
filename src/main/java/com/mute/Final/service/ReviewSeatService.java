@@ -57,6 +57,7 @@ public class ReviewSeatService {
             reviewSeatDTO.setTheaterName(e.getTheater().getTheaterName()); // 공연장 이름
             reviewSeatDTO.setMusicalName(e.getMusical().getMusicalName()); // 공연 ID
             reviewSeatDTO.setUserId(e.getMember().getUserId());// 회원 ID
+            reviewSeatDTO.setReviewSeId(e.getReviewSeId());
             reviewSeatDTO.setSeatNum(e.getSeatNum()); // 좌석 번호
             reviewSeatDTO.setWriteDate(e.getWriteDate()); // 작성일
             reviewSeatDTO.setScoreSeat(e.getScoreSeat()); // 좌석 별점

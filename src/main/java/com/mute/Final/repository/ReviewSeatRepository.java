@@ -2,6 +2,7 @@ package com.mute.Final.repository;
 
 import com.mute.Final.entity.Member;
 import com.mute.Final.entity.ReviewSeat;
+import com.mute.Final.entity.ReviewTotal;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -24,6 +25,7 @@ public interface ReviewSeatRepository extends JpaRepository<ReviewSeat,Long> {
 
     // 좌석 후기 삭제
     Long deleteByReviewSeId(long reviewSeId);
+    ReviewSeat findByReviewSeId(long reviewSeId);
 
     // 마이페이지 좌석 후기 view
     List<ReviewSeat> findByMember(Member member);
