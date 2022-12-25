@@ -176,7 +176,7 @@ const onClickSeat = (event) => {
 
         window.localStorage.setItem("countReview", 2);
         let countReview = window.localStorage.getItem("countReview");
-	    navigate('/MusicalDetail');
+	    navigate('/Review');
 		
         
     }

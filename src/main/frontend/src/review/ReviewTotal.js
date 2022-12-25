@@ -160,49 +160,46 @@ const ReviewTotal = (props) => {
         setTotalReview(e.target.value)
     }
 
-    useEffect(()=>{
-        window.localStorage.setItem("seatInfoMode","NONE");
+    // useEffect(()=>{
+    //     window.localStorage.setItem("seatInfoMode","NONE");
 
-        if(window.localStorage.getItem("countReview") === 2) {
-            setCount(window.localStorage.getItem("countReview"));
-            // props.countFunction();
-            // props.propFunction(); // 상위 컴포넌트의 함수를 불러 count ++
+    //     if(window.localStorage.getItem("countReview") === 2) {
+    //         setCount(window.localStorage.getItem("countReview"));
+    //         // props.countFunction();
+    //         // props.propFunction(); // 상위 컴포넌트의 함수를 불러 count ++
           
-        }
-    })
+    //     }
+    // })
 
     
     return(
-        <>
-            <Container>
-                <InfoBox>
-                • 게시판 운영 규칙에 어긋난다고 판단되는 게시글은 사전 통보없이 블라인드 처리될 수 있습니다.<br/>
-                • 특히 티켓 매매 및 양도의 글은 발견 즉시 임의 삭제되며 전화번호, 이메일 등의 개인정보는 악용될 우려가 있으므로 게시를 삼가해주시기 바랍니다.<br/>
-                • 사전 경고에도 불구하고 불량 게시물을 계속적으로 게재한 게시자의 경우 뮤트 후기 게시판 작성 권한이 제한됩니다.
-                </InfoBox>
-                <StarBox>
-                    <div className="MyAvg"><b className="AvgText">나의 총점</b><br/>　<FaStar size="30" color="#FCC419"/>{scoreAvgTotal}</div>
-                    <MyStar>
-                    <div className="MyStar1">
-                    <p>스토리 <Rating value={scoreStory} propFunction={highFunction1}/></p>
-                    <p>캐스팅 <Rating value={scoreCast} propFunction={highFunction3}/></p>
-                    </div>
-                    <div className="MyStar2">
-                    <p>연출 <Rating value={scoreDirect} propFunction={highFunction2}/></p>
-                    <p>넘버 <Rating value={scoreNumber}  propFunction={highFunction4}/></p>
-                    </div>
-                    </MyStar>
-                </StarBox>
-                <TextBox>
-                <textarea className="text" placeholder="관람하신 뮤지컬의 후기를 작성해주세요." value={totalReview} onChange={onChangeTotalReview}></textarea><br/>
-                <button className="OKbtn" onClick={WriteTotalButton}>작성하기</button>　
-                <button className="NOKbtn" onClick={CancelButton}>취소하기</button>
-                </TextBox>
+        <Container>
+            <InfoBox>
+            • 게시판 운영 규칙에 어긋난다고 판단되는 게시글은 사전 통보없이 블라인드 처리될 수 있습니다.<br/>
+            • 특히 티켓 매매 및 양도의 글은 발견 즉시 임의 삭제되며 전화번호, 이메일 등의 개인정보는 악용될 우려가 있으므로 게시를 삼가해주시기 바랍니다.<br/>
+            • 사전 경고에도 불구하고 불량 게시물을 계속적으로 게재한 게시자의 경우 뮤트 후기 게시판 작성 권한이 제한됩니다.
+            </InfoBox>
+            <StarBox>
+                <div className="MyAvg"><b className="AvgText">나의 총점</b><br/>　<FaStar size="30" color="#FCC419"/>{scoreAvgTotal}</div>
+                <MyStar>
+                <div className="MyStar1">
+                <p>스토리 <Rating value={scoreStory} propFunction={highFunction1}/></p>
+                <p>캐스팅 <Rating value={scoreCast} propFunction={highFunction3}/></p>
+                </div>
+                <div className="MyStar2">
+                <p>연출 <Rating value={scoreDirect} propFunction={highFunction2}/></p>
+                <p>넘버 <Rating value={scoreNumber}  propFunction={highFunction4}/></p>
+                </div>
+                </MyStar>
+            </StarBox>
+            <TextBox>
+            <textarea className="text" placeholder="관람하신 뮤지컬의 후기를 작성해주세요." value={totalReview} onChange={onChangeTotalReview}></textarea><br/>
+            <button className="OKbtn" onClick={WriteTotalButton}>작성하기</button>　
+            <button className="NOKbtn" onClick={CancelButton}>취소하기</button>
+            </TextBox>
 
-                {writeModal&& <TotalModal open={writeModal} confirm={confirmModal} close={closeModal} type={true} header="확인">뮤지컬 후기 작성 완료♥</TotalModal>}
-            </Container>
-
-        </>
+            {writeModal&& <TotalModal open={writeModal} confirm={confirmModal} close={closeModal} type={true} header="확인">뮤지컬 후기 작성 완료♥</TotalModal>}
+        </Container>
     );
 }
 
