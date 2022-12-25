@@ -29,7 +29,7 @@ const TmpBox = styled.div`
     width: 100%;
     min-height: 50vh;
     margin: 0 auto;
-    border: 2px solid black;
+    //border: 2px solid black;
 `;
 
 const Category = styled.div`
@@ -40,7 +40,8 @@ const Category = styled.div`
   justify-content: space-evenly;
   align-items: center;
   padding: 30px;
-  border-bottom: 1px solid #eee;
+  margin-bottom: 20px;
+  //border-bottom: 1px solid #eee;
   .status {
     cursor: pointer;
     text-decoration: none;
@@ -78,6 +79,9 @@ const Reservation = () => {
 
     // 다음 화면 돌리기 위한 count
     const [count, setCount] = useState(0);
+
+    // 최종 결제금액을 저장할 곳
+    const [totalPrice,setTotalPrice] = useState();
 
     useEffect(() => {
 
@@ -162,6 +166,9 @@ const Reservation = () => {
     const highFunction = () => {
         setCount(count + 1);
     }
+    const backFunction = () => {
+        setCount(count - 1);
+    }
 
     // 최종 결제확인시 실행되는 버튼 (결제 완료)
     const insertTicketFunction = () => {
@@ -244,7 +251,7 @@ const Reservation = () => {
        userNum : userNum, 
        musicalId : musicalId,
        paymentId : paymentId ,
-       musicalName : musicalName     
+       musicalName : musicalName 
     }
 
 
@@ -277,8 +284,8 @@ const Reservation = () => {
         
         {/* 좌석은, 이미 선택된 좌석은 비활성화 해야한다 */}
         {count === 2 ? <SelectSeat propFunction={highFunction} addSeatNum={addSeatNum} addSeatPos={addSeatPos} seatNum={seatNum} seatPos={seatPos} seeDate={seeDate} musicalId={musicalId}/> : null }
-        {count === 3 ? <Pay propFunction={highFunction} insertTicket={insertTicketFunction} resInfo={resInfo} count={count} /> : null}
-        {count === 4 ? <ReservaionResult resInfo={resInfo} insertTicket={insertTicketFunction}/> : null}
+        {count === 3 ? <Pay propFunction={highFunction} insertTicket={insertTicketFunction} resInfo={resInfo} count={count} backFunction={backFunction} setTotalPrice={setTotalPrice}/> : null}
+        {count === 4 ? <ReservaionResult resInfo={resInfo} insertTicket={insertTicketFunction} totalPrice={totalPrice} /> : null}
         {count === 5 ? setCount(0) : null}
         </TmpBox>
         </Container>

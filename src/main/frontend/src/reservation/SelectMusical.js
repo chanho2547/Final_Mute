@@ -50,7 +50,7 @@ const SearchContainer = styled.div`
   display: flex;
   width: 580px;
   height: 60px;
-  margin-bottom: 50px;
+  margin-bottom: 70px;
     .search_input{
         width: 550px;
         border: none;
@@ -161,24 +161,6 @@ const SelectMusical = (props) => {
            
             <MusicalSearchRes propFunction={props.propFunction} addMusicalId={props.addMusicalId} addMusicalName={props.addMusicalName} searchWord={inputMusical}/> 
              
-              
-                
-                
-                
-
-            {/* {musicalSearchList ? 
-            <MusicalSearchRes propFunction={props.propFunction} addMusicalId={props.addMusicalId} addMusicalName={props.addMusicalName}/> :
-             musicalInfo && musicalInfo.map(e => (        
-                <MusicalContainer onClick={() => OnClickPoster(e) }>
-                <img alt="poster" src={e.musicalPoster}/>
-                <p className="title">{e.musicalName}</p>
-                <p className="theaterName">{e.theaterName}</p>
-                <p className="period">{e.musicalStart}~{e.musicalEnd}</p>
-              
-                </MusicalContainer>)
-                
-            )} */}
-
         </Container>
     );
 }
