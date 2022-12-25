@@ -376,7 +376,8 @@ const SignUp = () => {
                 </div>
 
                 {/* 회원가입버튼 활성화 */}
-                <button className="signupButton" onClick={onClickJoin} disabled={!(isId && isPwd && isPwdCheck && isName && isMail && isPhone && isAuth)}>회원가입</button>
+                {/* disabled={!(isId && isPwd && isPwdCheck && isName && isMail && isPhone && isAuth)} */}
+                <button className="signupButton" onClick={onClickJoin} >회원가입</button>
                 <br/><br/><div className='footer'>이미 아이디가 있으신가요? <button><div><Link to="/Login" className="link_item"> 로그인</Link></div></button></div>
 
                 {/* 모달 */}

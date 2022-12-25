@@ -4,6 +4,7 @@ import MuteApi from "../api/MuteApi";
 import Modal from "../util/Modal";
 import styled from "styled-components";
 import AWS from "aws-sdk";
+import DelModal from "../util/DelModal";
 
 const Img = styled.div `
     width: 100%;
@@ -424,6 +425,7 @@ const Edit = () => {
             {modalOpen && <Modal open={modalOpen} close={closeModal} header="탈퇴">{comment}</Modal>}
             {modalEdit && <Modal open={modalEdit} close={closeModalEdit} header="확인">{comment}</Modal>}
             {modalDel && <Modal open={modalDel} close={closeModalDel} header="확인">{comment}</Modal>}
+            {modalOpen && <DelModal open={modalOpen} confirm={onClickMemDelete} close={closeModal} type={true} header="확인">정말로 탈퇴하시겠습니까?</DelModal>}
             </EditBox>
         </>
     )
