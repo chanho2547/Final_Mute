@@ -297,6 +297,11 @@ const MuteApi =  {
         }
         return await axios.post("/ticket/get_sold_seat_by_date",seeDateInfo);
     },
+    // 예약된 좌석 확인 (all)
+    getResAll : async function () {
+        
+        return await axios.get("/ticket/get_sold_seat");
+    },
 
     // 찜랭킹 top3
     wishRanking: async function() {

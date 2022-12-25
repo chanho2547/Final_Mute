@@ -23,7 +23,7 @@ const MyPage = () => {
             <h3>{userId} 님의 프로필</h3>
             <ProImg/>
             <Link to="/Edit" className="link_item">회원정보수정</Link>
-            <MyPageTab/>
+            <MyPageTab userId={userId}/>
 
         </MyBox>
     )

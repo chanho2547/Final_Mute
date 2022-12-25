@@ -45,7 +45,7 @@ const TabMenu = styled.ul`
 `;
 
 
-const MyPageTab = () => {
+const MyPageTab = (props) => {
 
     const [selectTab, setSelectTab] = useState(0);
 
@@ -56,7 +56,7 @@ const MyPageTab = () => {
                     onClick={()=>selectTabHandler(0)}> 예매내역 </li>
             ),
             tabCont:(
-                <ResInfo /> // 여기에 예매내역 컴포넌트페이지 임포트 해주시면 됩니당
+                <ResInfo userId={props.userId}/> // 여기에 예매내역 컴포넌트페이지 임포트 해주시면 됩니당
             )
         },
         {
