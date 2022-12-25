@@ -63,23 +63,6 @@ const ReviewBox = styled.div`
     }
 `;
 
-const Likebtn = styled.button`
-    width: 50px;
-    height: 30px;
-    border-radius: 40px;
-    border: solid 0.5px lightgray;
-    background-color: white;
-    margin-left: 650px;
-`;
-
-const Dislikebtn = styled.button`
-    width: 50px;
-    height: 30px;
-    border-radius: 40px;
-    border: solid 0.5px lightgray;
-    background-color: white;
-    margin-left: 10px;
-`;
 
 const ReviewList = (props) => {
     const navigate = useNavigate();
@@ -190,18 +173,6 @@ const ReviewList = (props) => {
         }
     }
 
-    let likeCount = 0;
-    let dislikeCount = 0;
-
-    const likebtn = () => {
-        likeCount = likeCount + 1;
-    }
-    const dislikebtn = () => {
-        dislikeCount = dislikeCount - 1;
-    }
-
-    
-
     return(
         <Container>     
         <StarBox>
@@ -221,7 +192,7 @@ const ReviewList = (props) => {
                 <p className="myRaing">스토리 <FaStar size="15" color="gray"/>{e.scoreStory} 　연출 <FaStar size="15" color="gray"/>{e.scoreDirect} 　캐스팅 <FaStar size="15" color="gray"/>{e.scoreCast} 　넘버 <FaStar size="15" color="gray"/>{e.scoreNumber}<br/>
                 <p className="text">{e.reviewMuTxt}
                 </p>
-                <Likebtn className="like" onClick={()=>likebtn()}><BiLike size="20" color="gray"/>{likeCount}</Likebtn ><Dislikebtn className="dislike" onClick={()=>dislikebtn()}><BiDislike size="20" color="gray"/>{dislikeCount}</Dislikebtn></p>
+                </p>
             </ReviewBox>
         ))}  
         
