@@ -172,24 +172,24 @@ public class MemberService {
 
 
     // 회원탈퇴
-    @Transactional
-    public boolean deleteMem(String userId) {
-        log.error("userId : " + userId );
-        try {
-            List<Member> member = deleteRepository.findByUserId(userId);
-            log.error(String.valueOf(userId));
-            //ticketRepository.deleteByUserNum(userId);
-            reviewTotalRepository.deleteByUserNum(userId);
-            reviewSeatRepository.deleteByUserNum(userId);
-            payRepository.deleteByUserNum(userId);
-            wishRepository.deleteByUserNum(userId);
-            memberRepository.deleteByUserId(userId);
-            return true;
-        } catch (Exception e) {
-            log.warn("실패");
-            return false;
-        }
-    }
+//    @Transactional
+//    public boolean deleteMem(String userId) {
+//        log.error("userId : " + userId );
+//        try {
+//            List<Member> member = deleteRepository.findByUserId(userId);
+//            log.error(String.valueOf(userId));
+//            //ticketRepository.deleteByUserNum(userId);
+//            reviewTotalRepository.deleteByUserNum(userId);
+//            reviewSeatRepository.deleteByUserNum(userId);
+//            payRepository.deleteByUserNum(userId);
+//            wishRepository.deleteByUserNum(userId);
+//            memberRepository.deleteByUserId(userId);
+//            return true;
+//        } catch (Exception e) {
+//            log.warn("실패");
+//            return false;
+//        }
+//    }
 //    // 회원탈퇴
 //    @Transactional
 //    public boolean deleteMem(Long userNum) {
@@ -210,16 +210,27 @@ public class MemberService {
 //        }
 //    }
     // 회원탈퇴
-//    public boolean deleteMem(String userId) {
-//        log.error("Id" + userId);
-//
-//        List<Member> member = deleteRepository.findByUserId(userId);
-//
-//        if(member.size() == 1) {
-//            memberRepository.deleteAll(member);
-//            return true;
-//        } else return false;
-//    }
+    public boolean deleteMem(String userId) {
+        log.error("Id" + userId);
+
+        try {
+            List<Member> member = deleteRepository.findByUserId(userId);
+            wishRepository.deleteByUserId((Member) member);
+            ticketRepository.deleteByUserId((Member) member);
+            reviewTotalRepository.deleteByUserId((Member) member);
+            reviewSeatRepository.deleteByUserId((Member) member);
+            payRepository.deleteByUserId((Member) member);
+
+            if (member.size() == 1) {
+                memberRepository.deleteAll(member);
+                return true;
+            }
+            else return false;
+        } catch (Exception e) {
+            log.error("탈퇴 못해?!!!!!!!!!");
+            return false;
+        }
+    }
 
     // 아이디 (userId) 입력 -> 회원번호 (userNum) 반환
     public Long findByUserId(String userId) {

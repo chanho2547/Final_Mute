@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 import styled from "styled-components";
 
 const MyBox = styled.div `
-    width: 100%;
+    width: 1024px;
     text-align: center;
 
     h3{

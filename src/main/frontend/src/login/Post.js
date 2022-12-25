@@ -13,6 +13,7 @@ const PostStyle = styled.div `
     height:10%;
     width:10%;
     box-sizing: border-box;
+
     }
 `; 
 

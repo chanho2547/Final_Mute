@@ -133,14 +133,14 @@ const Login = () => {
                 console.log("로그인 성공");
                 navigate('/');
 
-            } else if(res.data === 300) {
-                setModelText("패스워드를 다시 확인해주세요.");
-                setModalOpen(true);
-                console.log("로그인 실패, 패스워드 불일치");
+            // } else if(res.data === 300) {
+            //     setModelText("패스워드를 다시 확인해주세요.");
+            //     setModalOpen(true);
+            //     console.log("로그인 실패, 패스워드 불일치");
             } else {
-                setModelText("존재하지 않는 아이디입니다.");
+                setModelText("아이디 또는 패스워드를 다시 확인해주세요.");
                 setModalOpen(true);
-                console.log("로그인 실패, 아이디가 없습니다.");
+                console.log("아이디 또는 패스워드를 다시 확인해주세요.");
             }
         } catch (e) {
         }
