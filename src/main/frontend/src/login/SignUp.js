@@ -17,9 +17,15 @@ const SignUpBox = styled.div`
     }
     .info_id {
         position: relative;
-        
     }
+    .post .info_id{
+        display: inline-block;
+        width: 50%;
+        /* margin-left: 0px; */
+    }
+
   
+
     .info_id .btn {
         position: absolute;
         width: 90px;
@@ -368,12 +374,13 @@ const SignUp = () => {
                 </div>
 
                 {/* 주소 입력*/}
+                <div className='post'>
                 <div className="info_id">
                 <label className="address_search" ></label>
                 <input className="input" placeholder="주소" type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
                 <button className='btn'type='button' onClick={handleComplete}>주소 검색</button>
                 {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}
-                </div>
+                </div></div>
 
                 {/* 회원가입버튼 활성화 */}
                 {/* disabled={!(isId && isPwd && isPwdCheck && isName && isMail && isPhone && isAuth)} */}
