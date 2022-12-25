@@ -6,7 +6,6 @@ import styled from "styled-components";
 import Search from '../images/search.png';
 import TopButton from "../util/TopButton";
 
-
 const SearchContainer = styled.div`
   margin: auto;
   border: 4px solid #810000;
@@ -22,7 +21,6 @@ const SearchContainer = styled.div`
         :focus{
            outline: none;
         }
-
     }
     .search_button{
         border: none;
@@ -41,74 +39,55 @@ const SearchContainer = styled.div`
 
 const MusicalContainer =styled.div`
 margin: auto;
-.musical_title{
-    display: flex;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 35px;
-    margin: 50px 0 10px 0;
-    .musical_title_front{
-        color: #810000;
-    }
-    .musical_title_back{
-        color: #1b1717;
-    }
-}
-.musical_name{
-    width: 300px;
-    color: #810000;
-    font-weight: 700;
-    font-size: 20px;
-    margin: 0 50px 0 50px;
-}
-.musical_img{
-    width: 300px;
-    height: 400px;
-    margin: 25px 50px 0 50px;
-}
-
-.theater_name{
-    width: 300px;
-    color: #1b1717;
-    margin: 0 50px 0 50px;
-}
-.musical_date{
-    color: #909090;
-    font-size: 13px;
-    margin: 0 50px 0 50px;
-}
-.openedMusical{
-    display: flex;
-    justify-content: center;
-    margin: auto;
-}
-.openBeforeMusical{
-    background-color: #F4F4F4;
-    display: flex;
-    justify-content: center;
-    margin: auto;
-    padding-bottom: 35px;
-}
-.starRanking{
-    display: flex;
-    justify-content: center;
-    margin: auto;
-    margin-bottom: 35px
-}
-.wishRanking{
-    display: flex;
-    justify-content: center;
-    margin: auto;
-    margin-bottom: 35px;
-}
-.centerBlock{
-    background-color: #F4F4F4;
     .musical_title{
-        padding-top:30px;
+        display: flex;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 35px;
+        margin: 50px 0 10px 0;
+        .musical_title_front{
+            color: #810000;
+        }
+        .musical_title_back{
+            color: #1b1717;
+        }
     }
-    .musicalDate{
-        padding-bottom:30px;
+    .musical_name{
+        width: 300px;
+        color: #810000;
+        font-weight: 700;
+        font-size: 20px;
+        margin: 0 50px 0 50px;
     }
+    .musical_img{
+        width: 300px;
+        height: 400px;
+        margin: 25px 50px 0 50px;
+    }
+
+    .theater_name{
+        width: 300px;
+        color: #1b1717;
+        margin: 0 50px 0 50px;
+    }
+    .musical_date{
+        color: #909090;
+        font-size: 13px;
+        margin: 0 50px 0 50px;
+    }
+    .openedMusical, .openBeforeMusical, .starRanking, .wishRanking{
+        display: flex;
+        justify-content: center;
+        margin: auto;
+    }
+
+    .colorBlock{
+        padding-top: 25px;
+        padding-bottom: 35px;
+        background-color: #F4F4F4;
+        .musical_title{
+            padding-top:30px;
+        }
 }
 `;
 
@@ -169,15 +148,13 @@ const Home = () => {
 
     return(
         <>
-        {/* <Link to = "/MusicalListTmp">뮤지컬 목록 임시 페이지</Link> <br></br> */}
-        {/* <Link to = "/PayTest">카카오페이 결제 임시 페이지</Link> */}
         <SearchContainer>
         <input className="search_input" onChange={onChangeInput} onKeyDown={onKeyPress} placeholder="찾고 싶은 뮤지컬을 검색하세요!"></input>
         <button className="search_button" onClick={onClickInput} ><img src={Search}/></button>
         </SearchContainer>
 
         <MusicalContainer>
-        <br/><br/>
+            <br/><br/>
             <div className="musical_title"><p className="musical_title_front">인기가 가장 많은&nbsp;</p><p className="musical_title_back">뮤지컬 TOP3</p></div>
             <div className="wishRanking">
             {wishRanking && wishRanking.map(e=>e.wishListContent.map(el=>
@@ -193,6 +170,7 @@ const Home = () => {
             </div>
 
             <br/><br/>
+            <div className="colorBlock">
             <div className="musical_title"><p className="musical_title_front">별점이 가장 높은&nbsp;</p><p className="musical_title_back">뮤지컬 TOP3</p></div>
             <div className="starRanking">
             {starRanking && starRanking.map(e=>e.rankingListContent.map(el=>
@@ -205,6 +183,7 @@ const Home = () => {
             </div>
             </>
             ))}
+            </div>
             </div>
 
             <br/><br/>
@@ -221,7 +200,7 @@ const Home = () => {
             </div>
 
             <br/><br/> 
-            <div className="centerBlock">
+            <div className="colorBlock">
             <div className="musical_title"><p className="musical_title_front">예매 예정&nbsp;</p><p className="musical_title_back">뮤지컬 TOP3</p></div>
             <div className="openBeforeMusical"> 
             {openBeforeMusical && openBeforeMusical.map(e => (
@@ -234,7 +213,7 @@ const Home = () => {
             ))}
             </div>
             </div>
-             
+
         </MusicalContainer>
         
         </>

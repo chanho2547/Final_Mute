@@ -16,4 +16,6 @@ public class WishDTO {
     private LocalDate musicalStart; // 공연 시작일
     private LocalDate musicalEnd; // 공연 종료일
     private String alarm; // 알람
+    private String theaterName; // 공연장 이름
+    private String musicalStatus; // 공연 상태
 }

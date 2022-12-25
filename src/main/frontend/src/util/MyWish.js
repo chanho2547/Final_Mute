@@ -3,35 +3,39 @@ import styled from "styled-components";
 import MuteApi from "../api/MuteApi";
 // 마이페이지 wishlist 컴포넌트
 const UserMusicalListContainer = styled.div`
-width:70%;
 .userWishList{
     display: flex;
     margin-bottom: 70px;
+    .poster{
+        width: 150px;
+		height: 300px;
 
-    .userWishList_name{
+    }
+    .musicalName{
         color: #810000;
         margin-left: 30px;
-        font-size: 30px;
+        font-size: 20px;
         font-weight: 700;
-
-    .userWishList_date{
-        display:flex;
     }
+    table {
+		margin-left: 50px;
+		height: 340px;
+		width: 600px;
+		td {
+			vertical-align: top;
+			padding: 5px;
+		}
+        tr {
+            font-weight: 600; 
+        }
 
-    .userWishList_ticket{
-        display:flex;
-
-    }
-
-    .userWishList_date{
-        display:flex;
-    }
-
-    .userWishList_alarrm{
-        display:flex;
-    }
-
-    }
+	}
+	.title {
+		width: 150px;
+		padding-right: 25px;
+		color: #810000;
+		font-weight: 500;
+	}
 }
     `;
 
@@ -59,12 +63,27 @@ const MyWish = () => {
             {userWish && userWish.map(e => (
                     <div onClick={() => OnClickWishList(e.userNum)}>
                     <div className="userWishList">
-                     <img alt="userWishListPoster" src={e.musicalPoster} size width={220} height={300}/>
-                     <p className="userWishList_name">{e.musicalName}</p>
-                     <p className="userWishList_ticket">공연 예매일 {e.musicalTicketStart}</p>
-                     <p className="userWishList_date">공연 기간 {e.musicalStart} ~ {e.musicalEnd}</p>
-                     <p className="userWishList_alarrm">알림 상태 {e.alarm}</p> 
-                     
+                    <div>
+                     <img alt="poster" src={e.musicalPoster}/>
+                     {/* </div>
+                     <p className="musicalName">{e.musicalName}</p>
+                     <div> */}
+                        <table>
+                            <th>{e.musicalName}</th>
+                            <tr>
+								<td className="text">장소</td><td>{e.theaterName}</td>
+							</tr>
+							<tr>
+								<td className="text">공연기간</td><td>{e.musicalStart} ~ {e.musicalEnd}</td>
+							</tr>
+							<tr>
+								<td className="text">공연상태</td><td>{e.musicalStatus}</td>
+                            </tr>
+                            </table>
+                     {/* <p className="userWishList_theaterName">장소 {e.theaterName}</p>
+                     <p className="userWishList_date">공연기간 {e.musicalStart} ~ {e.musicalEnd}</p>
+                     <p className="userWishList_alarrm">공연상태 {e.musicalStatus}</p>    */}
+                     </div>
                     </div>
                 </div>
             ))}

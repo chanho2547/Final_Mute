@@ -57,10 +57,10 @@ public class WishService {
             wishDTO.setMusicalPoster(e.getMusical().getMusicalPoster());
             wishDTO.setUserId(e.getMember().getUserId());
             wishDTO.setMusicalName(e.getMusical().getMusicalName());
-            wishDTO.setMusicalTicketStart(e.getMusical().getMusicalTicketStart());
+            wishDTO.setTheaterName(e.getMusical().getTheaterName());
             wishDTO.setMusicalStart(e.getMusical().getMusicalStart());
             wishDTO.setMusicalEnd(e.getMusical().getMusicalEnd());
-            wishDTO.setAlarm(e.getAlarmStatus().toString());
+            wishDTO.setMusicalStatus(e.getMusical().getMusicalStatus());
             wishDTOS.add(wishDTO);
         }
         return wishDTOS;
