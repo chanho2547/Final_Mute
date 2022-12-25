@@ -26,11 +26,6 @@ const ReviewBox = styled.div`
     .date {
         color: lightgray;
     }
-    .deleteBtn {
-        border-radius: 5px;
-        border: solid 0.5px lightgray;
-        background-color: white;
-    }
 `;
 
 const MyMuReview = () => {
@@ -62,9 +57,7 @@ const MyMuReview = () => {
                 <p><b><span className="title">뮤지컬 후기 ｜</span><span className="MuName">{e.musicalName}</span></b><span className="date">　작성일 {e.writeDate}</span>　
                 </p>
                 <p className="myRaing">스토리 <FaStar size="15" color="#FCC419"/>{e.scoreStory} 　연출 <FaStar size="15" color="#FCC419"/>{e.scoreDirect} 　캐스팅 <FaStar size="15" color="#FCC419"/>{e.scoreCast} 　넘버 <FaStar size="15" color="#FCC419"/>{e.scoreNumber}<br/>
-                <p className="text">
-                    <span className={e.reviewMuTxt}>{e.reviewMuTxt.substring(30)}</span>
-                </p>
+                <p className="text">{e.reviewMuTxt}</p>
                 </p>
             </ReviewBox>
         ))} 

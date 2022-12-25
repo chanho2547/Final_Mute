@@ -88,6 +88,7 @@ const MusicalTab = (props) => {
   };
 
   useEffect(()=>{
+    let countReview = window.localStorage.getItem("countReview");
     if(props.countReview) {
       setSelectTab(props.countReview);
     }

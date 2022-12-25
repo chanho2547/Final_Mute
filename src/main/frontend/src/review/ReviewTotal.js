@@ -13,6 +13,7 @@ import { FaStar } from 'react-icons/fa';
 
 const Container = styled.div`
     padding: 10px;
+    width: fit-content;
 `;
 
 
@@ -94,8 +95,8 @@ const ReviewTotal = (props) => {
 
     // 취소 버튼 누르면 첫 화면으로..
     const CancelButton = () => {   
-        navigate("/Review"); 
-        setCount(count + 1);
+        // navigate("/MusicalDetail"); 
+        // setCount(count + 1);
     }
 
     // 입력받는 부분
@@ -105,12 +106,6 @@ const ReviewTotal = (props) => {
     const [scoreNumber, setScoreNumber] = useState(''); // 넘버 별점
     const [scoreAvgTotal, setScoreAvgTotal] = useState(''); // 별점 총점
     const [totalReview, setTotalReview] = useState(''); // 뮤지컬 후기 텍스트
-
-    // 오류 메세지
-    const [totalReviewMsg, setTotalReviewMsg] = useState('');
-    
-    // 유효성 검사
-    const [isTotalReview, setIsTotalReview] = useState('');
 
     // 모달
     const [writeModal, setWriteModal] = useState(false); // 확인 버튼 눌렀을 때
@@ -123,7 +118,7 @@ const ReviewTotal = (props) => {
     
     const closeModal = () => { // 아니오 눌렀을 때 => 리뷰 리스트로 이동
         setWriteModal(false);
-        navigate("/Review"); 
+        navigate("/MusicalDetail"); 
     }
 
     const [count, setCount] = useState(0);

@@ -12,6 +12,7 @@ import { FaStar } from 'react-icons/fa';
 
 const Container = styled.div`
     padding: 20px;
+    width: fit-content;
 `;
 
 const InfoBox = styled.div`
@@ -26,7 +27,7 @@ const SelectSeat = styled.div`
     border: solid 0.5px gray;
     padding: 10px;
     width: 550px;
-    margin-left: 150px;
+    margin-left: 470px;
 
     .SeatBtn {
         border-radius: 5px;
@@ -38,8 +39,10 @@ const SelectSeat = styled.div`
 `;
 
 const StarBox = styled.div`
+    text-align: center;
     display: flex;
     padding-left: 200px;
+    margin-left: 320px;
 
     .AvgText {
         color: #810000;
@@ -68,6 +71,8 @@ const MyStar = styled.div`
 
 const TextBox = styled.div`
     text-align: center;
+    padding-left: 470px;
+
 
     .text {
     width: 550px;
@@ -215,12 +220,6 @@ const ReviewSeat = (props) => {
             </InfoBox>
             <SelectSeat>
             <button className="SeatBtn" onClick={SeatClick}>좌석 선택하기</button>　<span>선택된 좌석 [{mySeat}]</span>           
-            {/* <select>
-                 <option>공연장 선택</option>
-                 <option>샤롯데씨어터</option>
-                 <option>충무아트센터</option>
-             </select>
-             <input></input>층 <input></input>열 <input></input>번 */}
             </SelectSeat>
             <StarBox>
                 <div className="MyAvg"><b className="AvgText">나의 총점</b><br/>　<FaStar size="30" color="#FCC419"/>{scoreAvgSeat}</div>

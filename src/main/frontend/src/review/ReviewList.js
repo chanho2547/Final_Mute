@@ -13,6 +13,7 @@ import { BiDislike } from 'react-icons/bi';
 const Container = styled.div`
     text-align: left;
     padding: 10px;
+    width: fit-content;
 `;
 
 const StarBox = styled.div`

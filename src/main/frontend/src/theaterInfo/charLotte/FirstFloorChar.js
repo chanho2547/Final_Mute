@@ -53,7 +53,6 @@ const onClickSoldOut = () => {
     alert("onClickSoldOut");
 }
 
-const [mySeat, setMySeat] = useState(''); // 좌석 후기 작성할 때 좌석 선택
 
 // ------ 여기부터 onClickSeat ---------------------
 const onClickSeat = (event) => {
@@ -173,11 +172,12 @@ const onClickSeat = (event) => {
         let theaterFullName = window.localStorage.getItem("theaterFullName"); // 극장 이름
         window.localStorage.setItem("whatSeatInfo", theaterFullName+" "+floor+"층 "+parentNode+"열 "+seatNum+"번");
         let mySeat = window.localStorage.getItem("whatSeatInfo"); // 극장이름 + 좌석번호(층, 열, 번)
-        
         console.log("선택한 좌석정보 : "  + mySeat);
 
         window.localStorage.setItem("countReview", 2);
-        navigate('/MusicalDetail');
+        let countReview = window.localStorage.getItem("countReview");
+	    navigate('/MusicalDetail');
+		
         
     }
     

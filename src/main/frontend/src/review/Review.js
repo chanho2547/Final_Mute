@@ -10,9 +10,9 @@ import { Link, useNavigate } from "react-router-dom";
 // 후기 탭 전체 틀 - 도연 작업 중
 
 const TmpBox = styled.div`
-    width: 100%;
+    width: fit-content;
     height: fit-content;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     margin: auto;
 `;
 
@@ -22,12 +22,11 @@ const Review = (props) => {
     useEffect(()=>{
         window.localStorage.setItem("seatInfoMode","NONE");
 
-        if(window.localStorage.getItem("countReview")) {
-            setCount(window.localStorage.getItem("countReview"));
-            // props.countFunction();
-            // props.propFunction(); // 상위 컴포넌트의 함수를 불러 count ++
+        // if(window.localStorage.getItem("countReview")) {
+        //     setCount(window.localStorage.getItem("countReview"));
+        
           
-        }
+        // }
     })
 
     const [count, setCount] = useState(0);
@@ -36,7 +35,7 @@ const Review = (props) => {
         setCount(count + 1);
     }
     const homeFunction = () => {
-        setCount(0);
+        setCount();
     }
     const countFunction = () => {
         setCount(count + 2);

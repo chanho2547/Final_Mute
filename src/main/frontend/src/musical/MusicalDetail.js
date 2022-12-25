@@ -170,8 +170,9 @@ const MusicalDetail = (props) => {
 	// 뮤지컬 api 호출
 	useEffect(() => {
 
-		if(window.localStorage.getItem("countReview")) {
+		if(window.localStorage.getItem("countReview") === 2) {
 			setCountReview(window.localStorage.getItem("countReview"));
+			props.countReview(true);
 		}
 
 
