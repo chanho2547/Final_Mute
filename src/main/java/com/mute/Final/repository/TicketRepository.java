@@ -17,10 +17,10 @@ public interface TicketRepository extends JpaRepository<Ticket, String> {
 
     Ticket ticket = new Ticket();
 
-//    @Modifying
-//    @Transactional
-//    @Query(value = "delete from ticket where user_num = ?1", nativeQuery = true)
-//    void deleteByUserNum(Member member); // 회원탈퇴
+    @Modifying
+    @Transactional
+    @Query(value = "delete from ticket where user_id = ?1", nativeQuery = true)
+    void deleteByUserId(Member member); // 회원탈퇴
 
 
     List<Ticket> findBySeeDate(LocalDateTime seeDate);

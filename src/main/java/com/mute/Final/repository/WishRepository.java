@@ -47,8 +47,8 @@ public interface WishRepository extends JpaRepository<Wish, Long> {
 
     @Modifying //데이터베이스에 변경을 주는 네이티브 쿼리는 이 어노테이션 필요 (INSERT, UPDATE, DELETE)
     @Transactional
-    @Query(value = "delete from wish where user_num = ?1", nativeQuery = true)
-    void deleteByUserNum(String userId); // 회원탈퇴
+    @Query(value = "delete from wish where user_id = ?1", nativeQuery = true)
+    void deleteByUserId(Member member); // 회원탈퇴
 
 
 }

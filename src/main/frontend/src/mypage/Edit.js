@@ -175,9 +175,10 @@ const Edit = () => {
         window.localStorage.setItem("isLogin", "false")
         setModalOpen(true);
         setCommnet("정말 탈퇴 하시겠습니까?😥");
+        navigate('/');
         console.log({userId});
         console.log("탈퇴된겨?" + userId);
-        navigate('/');
+
     }
 
 

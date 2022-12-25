@@ -46,11 +46,11 @@ public class MemberController {
             }
             else {
                 log.warn("값이 false");
-                return new ResponseEntity(false, HttpStatus.OK);
+                return new ResponseEntity(false, HttpStatus.BAD_REQUEST);
             }
         } catch (Exception e) {
             log.warn("Controller 오류");
-            return new ResponseEntity(false, HttpStatus.OK);
+            return new ResponseEntity(false, HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -66,10 +66,10 @@ public class MemberController {
                 return new ResponseEntity(true, HttpStatus.OK);
             }
             else {
-                return new ResponseEntity(false, HttpStatus.OK);
+                return new ResponseEntity(false, HttpStatus.BAD_REQUEST);
             }
         } catch (Exception e) {
-            return new ResponseEntity(false, HttpStatus.OK);
+            return new ResponseEntity(false, HttpStatus.BAD_REQUEST);
         }
     }
     // ID 찾기
@@ -81,7 +81,7 @@ public class MemberController {
 
         MemberDTO memberDTO = memberService.findId(uni, name, type);
         if(memberDTO.isOk()) return  new ResponseEntity(memberDTO, HttpStatus.OK);
-        else return new ResponseEntity(false, HttpStatus.OK);
+        else return new ResponseEntity(false, HttpStatus.BAD_REQUEST);
     }
 
     // PWD 찾기
@@ -92,7 +92,7 @@ public class MemberController {
 
         boolean result = memberService.findPw(userId, mail);
         if(result == true) return  new ResponseEntity(true, HttpStatus.OK);
-        else return new ResponseEntity(false, HttpStatus.OK);
+        else return new ResponseEntity(false, HttpStatus.BAD_REQUEST);
     }
     // 비밀번호 재설정
     @PostMapping("/re_pwd")
@@ -108,7 +108,7 @@ public class MemberController {
             return new ResponseEntity(true, HttpStatus.OK);
         }
         else {
-            return new ResponseEntity(false, HttpStatus.OK);
+            return new ResponseEntity(false, HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -140,7 +140,7 @@ public class MemberController {
         if(member) {
             return new ResponseEntity(true,HttpStatus.OK);
         } else {
-            return new ResponseEntity(false, HttpStatus.OK);
+            return new ResponseEntity(false, HttpStatus.BAD_REQUEST);
         }
     }
 
