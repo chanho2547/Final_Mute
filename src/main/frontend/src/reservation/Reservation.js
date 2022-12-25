@@ -90,41 +90,13 @@ const Reservation = () => {
             navigate('/Login');
         }
 
-        // 뮤지컬 상세페이지에서 넘겨받은 뮤지컬 아이디
-        // const thisMusicalId = (thisMusicalId) => {
-        //     window.localStorage.getItem("thisMusicalId");
-        //     setMusicalId(thisMusicalId);
-        //     setCount(1); // 날짜선택 화면으로 이동
-        //     console.log("받은 뮤지컬 id -> " + musicalId + ", count ->" + count);
-        // }
-
-        // const thisMusicalId = window.localStorage.getItem("thisMusicalId");
-        // setMusicalId(thisMusicalId);
-        // setCount(count + 1); // 0에서 1더해서 날짜선택 화면(1)으로 이동
-        // console.log("받은 뮤지컬 id -> " + musicalId + ", count ->" + count);
-        // 상세페이지말고 바로 예매하기 들어가도 값이 계속 저장돼있어서 try문 안에 넣기?
-
-        // try {
-        //     const thisMusicalId = window.localStorage.getItem("thisMusicalId");
-        //     setMusicalId(thisMusicalId);
-        //     setCount(1); // 날짜선택 화면으로 이동 - 1로 고정하면 화면이 안바뀜, count + 1하면 계속 다음으로넘어감
-        //     console.log("받은 뮤지컬 id -> " + musicalId + ", count ->" + count);
-        // } catch (e) {
-        //     console.log("[오류] 상세에서 뮤지컬받아오기" + e);
-        // }
-
-
-        /////////////////////////////// 윤정 ////////////////////////////////////////
-        // 이동한 페이지에서 -> 예매하기 메뉴로 클릭이동안됨 (seatInfoMode계속찍어줌)
-        // 이건 원래 예매하기 페이지에서 안됨!
-
         // 상세페이지에서 넘어가면 뮤지컬 이름이 안받아와지는 문제
 
         try {
             const thisMusicalId = window.localStorage.getItem("thisMusicalId");
             if(thisMusicalId != null && thisMusicalId != 'undefined') {
                 setMusicalId(thisMusicalId);
-                // setMusicalId(musicalName);
+                setMusicalName(musicalName);
                 setCount(1); // 날짜선택 화면으로 이동
                 console.log("if받은 뮤지컬 id -> " + musicalId + ", 뮤지컬이름 ->" + musicalName + ", count ->" + count);
                 window.localStorage.removeItem("thisMusicalId");

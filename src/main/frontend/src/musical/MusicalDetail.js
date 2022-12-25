@@ -7,6 +7,8 @@ import heartIcon2 from "../images/heart2.png";
 import { useNavigate } from "react-router-dom";
 import MusicalTab from "./MusicalTab";
 import moment from "moment";
+import Moment from 'react-moment';
+import 'moment/locale/ko';
 
 //////////////// 스타일드 컴포넌트 ////////////////
 
@@ -70,7 +72,7 @@ const WishBtn = styled.button`
 		margin-right: 5px;
 		margin-top: 1px;
 	}
-	
+	cursor: pointer;
 `;
 
 // 찜하기 취소 버튼 스타일
@@ -89,6 +91,7 @@ const UnWishBtn = styled.button`
 		margin-right: 5px;
 		margin-top: 1px;
 	}
+	cursor: pointer;
 `;
 
 // 예매하기 버튼 스타일
@@ -101,6 +104,7 @@ const ReserveOnbtn = styled.button`
 	margin: 10px;
 	color: white; 
 	background-color: #810000;
+	cursor: pointer;
 `;
 
 // 예매예정 버튼 스타일 - 티켓스타트 날짜 이전일 경우
@@ -121,6 +125,9 @@ const ReserveOffbtn = styled.button`
 const MusicalDetail = (props) => {
 	const navigate = useNavigate();
 	const [musicalDetail,setMusicalDetail] = useState();
+	const [emptyData, setEmptyData] = useState("");
+	const [musicalStartDate, setMusicalStartDate] = useState();
+	const [ticketOpenDate, setTicketOpenDate] = useState();
 
 	const musicalId = window.localStorage.getItem("musicalId"); // 선택한 musicalId
 	const userNum = window.localStorage.getItem("whoLoginUserNum"); // 로그인할 경우 저장한 userNum
@@ -158,79 +165,50 @@ const MusicalDetail = (props) => {
 		navigate('/Login'); // 로그인페이지로 이동 
 	}
 
+	
 
 	// 뮤지컬 api 호출
 	useEffect(() => {
 
 		if(window.localStorage.getItem("countReview")) {
 			setCountReview(window.localStorage.getItem("countReview"));
-		 }
-		 
-   
+		}
+
+
+		const sysdate = moment().format('YYYY-MM-DD'); // 현재날짜
+		console.log("현재날짜시간 ? " + sysdate);
+
 		const MusicalData = async () => {
 			try {
 				const response = await MuteApi.musicalDetail(musicalId); // 받은 musicalId 서버로 넘겨주기
 				setMusicalDetail(response.data);
-				
 
-				console.log("response.data: " + response.data);
-				console.log("뮤지컬아이디: " + response.data.musicalId);
-				console.log("뮤지컬이름: " + response.data.musicalName);
-				console.log("출연진: " + response.data.musicalCast); // undefined.. 있는데도 안나오네?
-				console.log("공연시작일: " + response.data.musicalStart); // 티켓시작일은 musicalList에서 받아오거나, 날짜 1month 빼줘야할듯
-				
-				// if(response.data.musicalCast === null && response.data.musicalCast == 'undefined') {
-				// 	console.log("null 호출 맞음? response.data.musicalCast == null"); // 안찍힘..
-				// } // 얘를 막아놨을떄..?
-				
-			
-				// console.log("" +  (response.data.musicalStart));
+				console.log(response.data[0].musicalStart);
+				setMusicalStartDate(response.data[0].musicalStart); // 공연시작일
 
+				const ticketStartDate = 
+				setTicketOpenDate(moment(response.data[0].musicalStart).subtract(1, 'month').format('YYYY-MM-DD'));
 
-
-				// if(response.data.ticketStart > sysdate) {
-
-				// }
-
-
-
-				// if(response.data.value === null) {
-				// 	return '정보없음';
-				// }
-				// console.log("response.data.musicalCast ::: " + response.data.musicalCast);
-				// // if(!setMusicalDetail(undefined)) return '정보없음';
-				// console.log("!setMusicalDetail(undefined)" + !setMusicalDetail(undefined));
-				// console.log("!setMusicalDetail()" + !setMusicalDetail(response.data.musicalCast));
-				
+				// const musicalCastInfo = response.data[0].musicalCast;
+				// const musicalRunInfo = response.data[0].musicalRuntime;
+				//
+				// if (musicalCastInfo === null && musicalCastInfo == 'undefined'
+				// 	|| musicalRunInfo === null && musicalRunInfo == 'undefined')
+				// 	setEmptyData("정보없음");
 
 			} catch (e) {
 				console.log(e + "실패");
 			}
-			
-			
-			// console.log("data없는값:? " + !setMusicalDetail);
-
-			// if ()
 		};
 		MusicalData();
 
 	}, []);
 
-
-	const sysdate = moment().format('YYYY-MM-DD'); // 현재날짜
-	console.log("현재날짜시간 ? " + sysdate);
-
-	const beforeMonth = moment().subtract(1, 'month').format('YYYY-MM-DD');
-	console.log("현재로부터 한달 전 ? " + beforeMonth);
-
-	const ticketStartDate = moment().subtract(1, 'month').format('YYYY-MM-DD');
-	console.log("공연날짜로부터 한달 전 = 티켓시작일 " + ticketStartDate);
-
 	const OnClickWish = async() => {
-			try {
-				const response = await MuteApi.wishReg(userNum, musicalId); // musicalId와 userNum으로 찜 상품 등록
-				setWish(response.data);
-			}
+		try {
+			const response = await MuteApi.wishReg(userNum, musicalId); // musicalId와 userNum으로 찜 상품 등록
+			setWish(response.data);
+		}
 		catch (e) {
 			console.log(e);
 		}
@@ -250,6 +228,7 @@ const MusicalDetail = (props) => {
 		window.localStorage.setItem("thisMusicalId", musicalId); // 예매페이지로 넘겨줌
 		navigate('/Reservation');
 	}
+
 	
 	return(
 		<>
@@ -289,9 +268,8 @@ const MusicalDetail = (props) => {
 						</table>
 						<div className="button">
 							<WishBtn onClick = {() => OnClickWish()} className={(wish ? WishBtn : UnWishBtn)}><img src={wish ? heartIcon : heartIcon2} alt={heartIcon} width="17px"/> 찜하기</WishBtn>
-							<ReserveOnbtn onClick={() => OnClickReserve(e.musicalId)}>예매하기</ReserveOnbtn>
-								{/* className={(sysdate > ((e.musicalStart).getDate() - 1) ? ReserveOnbtn : ReserveOffbtn)}						 */}
-								</div>
+							<ReserveOnbtn onClick={() => OnClickReserve(e.musicalId)}><Moment fromNow>{ticketOpenDate}</Moment> 티켓 오픈</ReserveOnbtn>
+						</div>
 					</div>
 					
 				</DescInfo>
