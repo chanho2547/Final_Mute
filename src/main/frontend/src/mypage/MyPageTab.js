@@ -3,6 +3,7 @@ import MyWish from "../util/MyWish";
 import styled from "styled-components";
 import MyMuReview from "../review/MyMuReview";
 import MySeReview from "../review/MySeReview";
+import ResInfo from "../reservation/ResInfo";
 
 const Desc = styled.div`
     padding: 50px 10px;
@@ -55,7 +56,7 @@ const MyPageTab = () => {
                     onClick={()=>selectTabHandler(0)}> 예매내역 </li>
             ),
             tabCont:(
-                <></> // 여기에 예매내역 컴포넌트페이지 임포트 해주시면 됩니당
+                <ResInfo /> // 여기에 예매내역 컴포넌트페이지 임포트 해주시면 됩니당
             )
         },
         {
