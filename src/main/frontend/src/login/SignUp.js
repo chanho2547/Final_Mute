@@ -294,7 +294,7 @@ const SignUp = () => {
 
     };
     const closeMemberModal = () =>{
-        setModalOpen(false);
+        setMemberModalOpen(false);
         navigate('/Login');
     }
 
@@ -308,13 +308,15 @@ const SignUp = () => {
          await MuteApi.signUp(inputId, inputPwd, inputName, inputMail, inputPhone, enroll_company.address);
          //(memberReg.data)
             console.log("Mute 회원가입이 완료되었습니다.")
+           // alert("Mute 회원가입이 완료되었습니다. :)");
             setMemberModalOpen(true);
             setComment("Mute 회원가입이 완료되었습니다.");
-            navigate('/Login');
+           //navigate('/Login');
             } catch(e) {
                 console.log("회원가입에 실패했습니다. 다시 확인해주세요")
-                setModalJoin(true);
-                setComment("회원가입에 실패했습니다. 다시 확인해주세요.");
+                alert("회원가입에 실패하였습니다. 다시 확인해주세요");
+                // setModalJoin(true);
+                // setComment("회원가입에 실패했습니다. 다시 확인해주세요.");
         }
     }
 

@@ -176,24 +176,26 @@ const Edit = () => {
 
     const closeDelModal = () => {
         setDelModalOpen(false);
+        navigate('/');
     }
 
 
     // 회원 탈퇴
     const onClickMemDelete = async() => { // 탈퇴한다고 했을때
-        try {
+
         await MuteApi.memberDelete(userId);
         window.localStorage.setItem("whoLogin","");
         window.localStorage.setItem("isLogin", "false")
-        setDelModalOpen(true);
-        setCommnet("정말 탈퇴 하시겠습니까?😥");
-        navigate('/');
+        //alert("정말 탈퇴하시겠습니까?😥")
+         setDelModalOpen(true);
+         setCommnet("정말 탈퇴 하시겠습니까?😥");
+        //navigate('/');
         console.log({userId});
         console.log("탈퇴된겨?" + userId);
-        } catch (e) {
-            setDelModalOpen(true);
-            setCommnet("탈퇴못해여!!")
-        }
+        // } catch (e) {
+        //     setDelModalOpen(true);
+        //     setCommnet("탈퇴못해여!!")
+
     }
 
 
@@ -226,9 +228,10 @@ const Edit = () => {
     const onClickSave = async() => {
         const saveInfo = await MuteApi.userInfoSave(userId, changeName, changePwd, changePhone, userMail);
         if(saveInfo.data) {
+            //alert("회원정보 수정이 완료되었습니다.");
             setEditModalOpen(true);
             setCommnet("회원정보 수정이 완료되었습니다.");
-            navigate('/');
+            //navigate('/');
             console.log(saveInfo)
 
         } else {
