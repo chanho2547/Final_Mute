@@ -157,7 +157,7 @@ const Pay = (props) => {
 
             console.log(onClickPay);
             //window.open('http://localhost:8282/pay/'); // 일단 해결은 되지만 맞는건지...axios호출하면 CORS에러 뜸!!
-            popupCenter({url: `http://localhost:8282/pay?price=${totalPrice}`, title: 'payTest', w: 380, h: 400});  
+            popupCenter({url: `http://43.200.215.61:8282/pay?price=${totalPrice}`, title: 'payTest', w: 380, h: 400});
             // 인가요청(/oauth/authorize)은 XMLHttpRequest를 이용한 비동기 통신 방식으로 호출 하시면 안됩니다. 
             // (REST-API방식이라면 UI에서 href로 페이지 이동 처리 해주세요)
             // 카카오측 로그인 및 동의 이후 html 을 전달하는 것이 아니라 소유하신 사이트로 리다이렉트 하고
