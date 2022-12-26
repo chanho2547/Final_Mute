@@ -111,12 +111,9 @@ const ReviewSeat = (props) => {
 
     const userNum = window.localStorage.getItem("whoLoginUserNum"); // 지금 로그인한 회원번호
     let musicalId = window.localStorage.getItem("musicalId"); // 지금 선택한 뮤지컬
-    // let theaterName = window.localStorage.getItem("theaterFullName"); // 극장 이름
     let mySeat = window.localStorage.getItem("whatSeatInfo"); // 극장이름 + 좌석번호(층, 열, 번)
     let pkNum = window.localStorage.getItem("whatSeatNum"); // 좌석번호
-
-    console.log("클릭한 좌석정보 : " + mySeat)
-
+    let theaterId = window.localStorage.getItem("theaterId"); // 극장아이디
 
     // 취소 버튼 누르면 첫 화면으로..
     const CancelButton = () => {   
@@ -125,8 +122,6 @@ const ReviewSeat = (props) => {
     }
 
     // 입력받는 부분
-    // const [theaterId, setTheaterId] = useState(''); // 공연장
-    // const [mySeat, setMySeat] = useState(''); // 좌석
     const [seatRating, setSeatRating] = useState(''); // 좌석 별점
     const [viewRating, setViewRating] = useState(''); // 시야 별점
     const [soundRating, setSoundRating] = useState(''); // 음향 별점
@@ -166,9 +161,9 @@ const ReviewSeat = (props) => {
     // 후기 작성 버튼이 눌려지면 동작하는 함수
     const WriteSeatButton = async() => {
         try {
-            const res =  await MuteApi.WriteSeat(userNum, musicalId, props.theaterId, pkNum, seatRating, viewRating, soundRating, lightRating, scoreAvgSeat, seatReview);
+            const res =  await MuteApi.WriteSeat(userNum, musicalId, theaterId, pkNum, seatRating, viewRating, soundRating, lightRating, scoreAvgSeat, seatReview);
             if(res.data === true) {
-                setWriteModal(true);   
+                setWriteModal(true);  
             } else {
             }
         } catch (e) {
@@ -202,9 +197,6 @@ const ReviewSeat = (props) => {
     const onChangeSeatReview = (e) => {
         setSeatReview(e.target.value)
     }
-
-
-
 
     return(
         <Container>

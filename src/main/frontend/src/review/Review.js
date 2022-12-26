@@ -4,31 +4,24 @@ import styled from "styled-components";
 import ReviewList from "./ReviewList";
 import ReviewTotal from "./ReviewTotal";
 import ReviewSeat from "./ReviewSeat";
-import ReviewTheater from "./TheaterModal";
-import { Link, useNavigate } from "react-router-dom";
 
 // 후기 탭 전체 틀 - 도연 작업 중
 
 const TmpBox = styled.div`
     width: fit-content;
     height: fit-content;
-    /* border: 2px solid black; */
     margin: auto;
 `;
 
 const Review = (props) => {
-    const navigate = useNavigate();
+
+    window.localStorage.setItem("theaterId", props.theaterId); // 극장 아이디
 
     useEffect(()=>{
         window.localStorage.setItem("seatInfoMode","NONE");
 
         if(window.localStorage.getItem("countReview") === 2) {
-            // setCount(window.localStorage.getItem("countReview") === 2);
-            // setCountReview(true);
             props.countFunction();
-            
-        
-          
         }
     })
 
@@ -44,7 +37,6 @@ const Review = (props) => {
     const countFunction = () => {
         setCountReview(countReview + 2);
     }
-
 
     return (
         <div className="container">
