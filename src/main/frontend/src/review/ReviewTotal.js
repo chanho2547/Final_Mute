@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 import MuteApi from "../api/MuteApi";
 import Rating from "../util/Rating";
 import TotalModal from "./TotalModal";
-import Modal from "../util/Modal";
 import { FaStar } from 'react-icons/fa';
 
 

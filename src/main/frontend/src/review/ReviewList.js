@@ -5,8 +5,6 @@ import Modal from "../util/Modal";
 import MuteApi from "../api/MuteApi";
 import styled from "styled-components";
 import { FaStar } from 'react-icons/fa';
-import { BiLike } from 'react-icons/bi';
-import { BiDislike } from 'react-icons/bi';
 
 // 뮤지컬 총평 후기 view - 도연 작업중..
 
