@@ -94,8 +94,7 @@ const ReviewTotal = (props) => {
 
     // 취소 버튼 누르면 첫 화면으로..
     const CancelButton = () => {   
-        // navigate("/MusicalDetail"); 
-        // setCount(count + 1);
+        navigate("/Review"); 
     }
 
     // 입력받는 부분

@@ -144,16 +144,11 @@ const ReviewSeat = (props) => {
     const charlotte = () => { // 샤롯데 좌석 선택하러 가기
         setModelTheater(false);
         navigate('/TheaterChar');
-   
-        
-
     }
     
     const chungmu = () => { // 충무 좌석 선택하러 가기
         navigate('/TheaterChung');
-
         setModelTheater(false);
-
     }
 
     const closeModal = () => { 
