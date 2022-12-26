@@ -135,9 +135,8 @@ const SignUp = () => {
                 setIdMsg("4자리 이상으로 입력해주세요.");
             }
             else {
-                // setIdMsg("이미 사용중인 ID입니다.");
                 setIsId(false);
-                setModalOpen(true);
+                setModalIdOpen(true);
                 setComment("이미 사용중인 아이디입니다.")
             }
         } catch (e) {
@@ -289,6 +288,7 @@ const SignUp = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [modalJoin, setModalJoin] = useState(false); // 회원가입완료
     const [memberModalOpen,setMemberModalOpen] = useState(false);
+    const [modalIdOpen, setModalIdOpen] = useState(false);
     const closeModal = () => {
         setModalOpen(false);
 
@@ -300,6 +300,9 @@ const SignUp = () => {
 
     const closeModalJoin = () => {
         setModalJoin(false);
+    }
+    const closeIdModal = () => {
+        setModalIdOpen(false);
     }
 
     // 회원가입
@@ -390,7 +393,7 @@ const SignUp = () => {
                 </div></div>
 
                 {/* 회원가입버튼 활성화 */}
-                {/* disabled={!(isId && isPwd && isPwdCheck && isName && isMail && isPhone && isAuth)} */}
+                {/* disabled={!(isId && isPwd && isPwdCheck && isName && isMail && isPhone && isAuth)}*/}
                 <button className="signupButton" onClick={onClickJoin} >회원가입</button>
                 <br/><br/><div className='footer'>이미 아이디가 있으신가요? <button><div><Link to="/Login" className="link_item"> 로그인</Link></div></button></div>
 
@@ -399,6 +402,7 @@ const SignUp = () => {
                 {/* 회원가입 모달 (close일때 login으로 보내줌)*/}
                 {memberModalOpen && <Modal open={memberModalOpen} close={closeMemberModal} header="확인">{comment}</Modal>}
                 {modalJoin && <Modal open={modalJoin} close={closeModalJoin} header="확인">회원가입에 실패하였습니다.</Modal>}
+                {modalIdOpen && <Modal open={modalIdOpen} close={closeIdModal} header="확인">{comment}</Modal>}
             </SignUpBox>
         </div>
     )
