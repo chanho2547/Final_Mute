@@ -29,7 +29,5 @@ public class Member {
     private String address; // 주소
     private String img; // 프로필 사진
     private LocalDateTime regData; // 가입일
-    //private LocalDateTime unRegData; // 탈퇴일
-
 
 }

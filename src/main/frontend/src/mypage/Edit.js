@@ -140,19 +140,18 @@ const Edit = () => {
     const [userPwd, setUserPwd] = useState("");
     const [userPhone, setUserPhone] = useState("");
     const [userMail, setUserMail] = useState("");
-    const [userAddr, setUserAddr] = useState("");
+
 
     // 변경한 값
     const [changeName, setChangeName] = useState("");
     const [changePwd, setChangePwd] = useState("");
     const [changePhone, setChangePhone] = useState("");
-    //const [changeMail, setChangeMail] = useState("");
-    //const [changeAddr, setChangeAddr] = useState("");
+
 
     const [nameMsg, setNameMsg] = useState("");
     const [pwdMsg, setPwdMsg] = useState("");
     const [phoneMsg, setPhoneMsg] = useState("");
-   // const [mailMsg, setMailMsg] = useState("");
+
 
     // 유효성 확인
     const [isName, setIsName] = useState(true);
@@ -186,16 +185,9 @@ const Edit = () => {
         await MuteApi.memberDelete(userId);
         window.localStorage.setItem("whoLogin","");
         window.localStorage.setItem("isLogin", "false")
-        //alert("정말 탈퇴하시겠습니까?😥")
          setDelModalOpen(true);
          setCommnet("정말 탈퇴 하시겠습니까?😥");
-        //navigate('/');
-        console.log({userId});
         console.log("탈퇴된겨?" + userId);
-        // } catch (e) {
-        //     setDelModalOpen(true);
-        //     setCommnet("탈퇴못해여!!")
-
     }
 
 
@@ -207,14 +199,12 @@ const Edit = () => {
                 setChangeName(response.data[0]);
                 setChangePwd(response.data[1]);
                 setChangePhone(response.data[3]);
-                //setChangeMail(response.data[2]);
-                //setChangeAddr(response.data[4]);
+
 
                 setUserName(response.data[0])
                 setUserPwd(response.data[1]);
                 setUserPhone(response.data[3]);
                 setUserMail(response.data[2]);
-                //setUserAddr(response.data[4]);
                 setUserImg(response.data[5]);
                 setUserUrl({ backgroundImage: "url(https://musicalmate.s3.ap-northeast-2.amazonaws.com/profileimg.png" + response.data[5] + ")"});
             } catch (e) {
@@ -257,26 +247,7 @@ const Edit = () => {
         else setIsPhone(false);
     }
 
-    // // 주소
-    // const [enroll_company, setEnroll_company] = useState({
-    //     address:'',
-    // });
-    //
-    // const [popup, setPopup] = useState(false);
-    //
-    // const handleInput = (e) => {
-    //     console.log(e.target.value);
-    //     setUserAddr(e.target.value);
-    //     setEnroll_company({
-    //         ...enroll_company,
-    //         [e.target.name]:e.target.value,
-    //     })
-    //     console.log(e.target.name);
-    // }
-    //
-    // const handleComplete = (data) => {
-    //     setPopup(!popup);
-    // }
+
 
     // 전화번호 중복 확인
     const onBlurPhoneCheck = async() => {
@@ -293,37 +264,6 @@ const Edit = () => {
         }
     }
 
-    // // 메일 중복 확인
-    // const onChangeMail = (e) => {
-    //     const mailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-    //     const mailCurrent = e.target.value;
-    //     setChangeMail(mailCurrent);
-    //     if(!mailRegex.test(mailCurrent)){
-    //         setMailMsg('이메일의 형식이 올바르지 않습니다.')
-    //         setIsMail(false);
-    //     } else {
-    //         setMailMsg('이메일의 형식이 올바르게 입력되었습니다.')
-    //         setIsMail(true);
-    //     }
-    // }
-
-    // const onBlurMailCheck = async() => {
-    //     // 가입 여부 확인
-    //     const memberCheck = await MuteApi.memberJoinCheck(changeMail, "TYPE_MAIL");
-    //     if (userMail ===  changeMail) {
-    //         setMailMsg("기존 Mail입니다.");
-    //         setIsMail(true);
-    //     } else if(memberCheck.data && !isMail){
-    //         setMailMsg("이메일의 형식이 올바르지 않습니다.");
-    //         setIsMail(false);
-    //     } else if(memberCheck.data && isMail){
-    //         setMailMsg("사용가능한 Mail입니다.");
-    //         setIsMail(true);
-    //     } else {
-    //         setMailMsg("이미 사용하고 있는 Mail입니다.");
-    //         setIsMail(false);
-    //     }
-    // }
 
     const onBlurNameCheck = async() => {
         const memberCheck = await MuteApi.memberJoinCheck(changeName, "TYPE_NAME");
@@ -338,7 +278,6 @@ const Edit = () => {
             setIsName(false);
         }
     }
-
 
 
     // 이미지
@@ -418,12 +357,6 @@ const Edit = () => {
                 {/* <p>Mail</p> */}
                 <input className="input" value={userMail}  placeholder="메일" readOnly/>
             </div>
-            {/*<div>*/}
-            {/*    <label className="address_search">주소</label><br/>*/}
-            {/*    <input className="addr" type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>*/}
-            {/*    <button onClick={handleComplete}>주소 검색</button>*/}
-            {/*    {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}*/}
-            {/*</div>*/}
             
             <div>
                 <button className="Button" onClick={onClickSave} disabled={!(isPhone && isName)}>회원정보수정</button>

@@ -170,45 +170,6 @@ public class MemberService {
         }
     }
 
-
-    // 회원탈퇴
-//    @Transactional
-//    public boolean deleteMem(String userId) {
-//        log.error("userId : " + userId );
-//        try {
-//            List<Member> member = deleteRepository.findByUserId(userId);
-//            log.error(String.valueOf(userId));
-//            //ticketRepository.deleteByUserNum(userId);
-//            reviewTotalRepository.deleteByUserNum(userId);
-//            reviewSeatRepository.deleteByUserNum(userId);
-//            payRepository.deleteByUserNum(userId);
-//            wishRepository.deleteByUserNum(userId);
-//            memberRepository.deleteByUserId(userId);
-//            return true;
-//        } catch (Exception e) {
-//            log.warn("실패");
-//            return false;
-//        }
-//    }
-//    // 회원탈퇴
-//    @Transactional
-//    public boolean deleteMem(Long userNum) {
-//        log.error("userNum : " + userNum );
-//        try {
-//            Member member = memberRepository.findByUserNum(userNum);
-//            log.error(String.valueOf(userNum));
-//            ticketRepository.deleteByUserNum(member);
-//            reviewTotalRepository.deleteByUserNum(member);
-//            reviewSeatRepository.deleteByUserNum(member);
-//            paymentRepository.deleteByUserNum(member);
-//            wishRepository.deleteByUserNum(member);
-//            memberRepository.deleteByUserNum(member);
-//            return true;
-//        } catch (Exception e) {
-//            log.warn("실패");
-//            return false;
-//        }
-//    }
     // 회원탈퇴
 //    public boolean deleteMem(String userId) {
 //        log.error("Id : " + userId);
@@ -220,7 +181,8 @@ public class MemberService {
 //            reviewTotalRepository.deleteByUserId((Member) member);
 //            reviewSeatRepository.deleteByUserId((Member) member);
 //            payRepository.deleteByUserId((Member) member);
-//
+//            memberRepository.deleteAll(member);
+//            return true;
 //            if (member.size() == 1) {
 //                memberRepository.deleteAll(member);
 //                return true;
