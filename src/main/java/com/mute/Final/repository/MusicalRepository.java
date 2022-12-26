@@ -3,8 +3,6 @@ package com.mute.Final.repository;
 import com.mute.Final.entity.Musical;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-
-import java.time.LocalDateTime;
 import java.util.List;
 
 public interface MusicalRepository extends JpaRepository<Musical, String> {
@@ -28,9 +26,5 @@ public interface MusicalRepository extends JpaRepository<Musical, String> {
     //  List<Musical>findAllByMusicalTicketStartAfter(LocalDateTime now); // 티켓 오픈 예정 순 TOP3 뮤지컬 조회 => error
     @Query(value = "select * from musical where musical_ticket_start > sysdate() order by musical_ticket_start limit 3", nativeQuery = true)
     List<Musical> findAllSysdateAfter();
-
-//    // 관람연령 "개월 이상" 제외하고 조회
-//    // select * from musical m join musical_detail d on m.musical_id = d.musical_id where musical_age like '%개월 이상';
-//
 
 }

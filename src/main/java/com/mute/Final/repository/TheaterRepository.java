@@ -1,6 +1,5 @@
 package com.mute.Final.repository;
 
-import com.mute.Final.entity.Musical;
 import com.mute.Final.entity.Theater;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;

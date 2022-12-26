@@ -1,16 +1,9 @@
 package com.mute.Final.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mute.Final.dto.MusicalDetailDTO;
-import com.mute.Final.entity.Musical;
-import com.mute.Final.repository.MusicalRepository;
-import lombok.Builder;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.XML;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -18,7 +11,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
@@ -33,9 +25,6 @@ public class MusicalDetailApiService {
 
     @Value("${api.serviceKey}")
     private String key;
-
-//    @Autowired
-//    MusicalDetailRepository musicalDetailRepository;
 
     public String MusicalDetailApi(@PathVariable String mt20id) {
 
@@ -77,30 +66,9 @@ public class MusicalDetailApiService {
 
             log.warn(musicalDetailDTO.toString());
 
-//             DB에 저장하기..관람연령만 되려나? 안돼안돼안돼!!!!!!!!!!!!!!
-//            String ageStr = item.getString("prfage");
-//            Musical musical = new Musical(musicalDetailDTO);
-//            musicalRepository.save(musical);
-
-//            musicalRepository.findByMusicalId(item.getString("mt20id"));
-//            musicalAge.setMusicalAge(musicalDetailDTO.getMusicalAge());
-
-//            log.warn("가져온 연령값???????????" + ageStr);
-
-//            MusicalDetail musicalDetail = new MusicalDetail(item);
-//            musicalDetailRepository.save(musicalDetail);
-//            log.warn(musicalDetail.toString());
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
         return list;
     }
-//    public Musical addAge(MusicalDetailDTO musicalDetailDTO) {
-//        Musical musical = Musical.builder(musicalDetailDTO).build();
-//        musical = musicalRepository.save(musical);
-//        return musical;
-//    }
-
 }

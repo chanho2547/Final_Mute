@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import MuteApi from "../api/MuteApi";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import KakaoMap from "./KakaoMap";
 
 /////////// 스타일드 컴포넌트 ///////////

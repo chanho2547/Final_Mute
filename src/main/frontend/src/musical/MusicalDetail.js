@@ -125,7 +125,6 @@ const ReserveOffbtn = styled.button`
 const MusicalDetail = (props) => {
 	const navigate = useNavigate();
 	const [musicalDetail,setMusicalDetail] = useState();
-	const [emptyData, setEmptyData] = useState("");
 	const [musicalStartDate, setMusicalStartDate] = useState();
 	const [ticketOpenDate, setTicketOpenDate] = useState();
 
@@ -175,9 +174,7 @@ const MusicalDetail = (props) => {
 			props.countReview(true);
 		}
 
-
 		const sysdate = moment().format('YYYY-MM-DD'); // 현재날짜
-		console.log("현재날짜시간 ? " + sysdate);
 
 		const MusicalData = async () => {
 			try {
@@ -189,13 +186,6 @@ const MusicalDetail = (props) => {
 
 				const ticketStartDate = 
 				setTicketOpenDate(moment(response.data[0].musicalStart).subtract(1, 'month').format('YYYY-MM-DD'));
-
-				// const musicalCastInfo = response.data[0].musicalCast;
-				// const musicalRunInfo = response.data[0].musicalRuntime;
-				//
-				// if (musicalCastInfo === null && musicalCastInfo == 'undefined'
-				// 	|| musicalRunInfo === null && musicalRunInfo == 'undefined')
-				// 	setEmptyData("정보없음");
 
 			} catch (e) {
 				console.log(e + "실패");
@@ -225,7 +215,6 @@ const MusicalDetail = (props) => {
 	}
 
 	const OnClickReserve = (musicalId) => {
-		console.log("예매하기로 넘겨줄 뮤지컬 ID값 : " + musicalId);
 		window.localStorage.setItem("thisMusicalId", musicalId); // 예매페이지로 넘겨줌
 		navigate('/Reservation');
 	}

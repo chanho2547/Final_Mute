@@ -1,7 +1,6 @@
 package com.mute.Final.entity;
 
 import com.mute.Final.constant.PaymentStatus;
-import com.mute.Final.constant.PaymentStatus;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

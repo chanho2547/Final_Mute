@@ -2,26 +2,15 @@ package com.mute.Final.service;
 
 import com.mute.Final.dto.PayConfirmDTO;
 import com.mute.Final.dto.PayReadyDTO;
-import com.mute.Final.entity.Musical;
-import com.mute.Final.entity.Payment;
-import com.mute.Final.repository.MusicalRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
-
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-
 
 @Service
 @Slf4j
@@ -67,8 +56,8 @@ public class PayService {
         HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<>(params, headers);
 
         PayReadyDTO = restTemplate.postForObject(url + "/ready", body, PayReadyDTO.class);
-        log.info("" + PayReadyDTO);
-        log.info(PayReadyDTO.getNext_redirect_pc_url());
+//        log.info("" + PayReadyDTO);
+//        log.info(PayReadyDTO.getNext_redirect_pc_url());
 
         return PayReadyDTO.getNext_redirect_pc_url(); // 요청 후 응답받는 리다이렉트 url을 리턴함
     }
@@ -76,7 +65,7 @@ public class PayService {
     // 결제 승인 단계
     public PayConfirmDTO PayInfo(String pg_token) {
 
-        log.info("PayConfirmDTO................");
+//        log.info("PayConfirmDTO................");
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -98,7 +87,7 @@ public class PayService {
 
         try {
             PayConfirmDTO = restTemplate.postForObject(url + "/approve", body, PayConfirmDTO.class);
-            log.info("" + PayConfirmDTO);
+//            log.info("" + PayConfirmDTO);
             return PayConfirmDTO;
         } catch (Exception e) {
             e.printStackTrace();

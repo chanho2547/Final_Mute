@@ -3,11 +3,9 @@ import styled from "styled-components";
 import Review from "../review/Review";
 import MusicalDetailInfo from "./MusicalDetailInfo";
 import TheaterDetail from "./TheaterDetail";
-import MuteApi from "../api/MuteApi";
 
 
-
-//// 스타일드 컴포넌트 (수정중) ////
+//// 스타일드 컴포넌트 ////
 
 const Desc = styled.div`
     padding: 50px 10px;
@@ -35,7 +33,7 @@ const TabMenu = styled.ul`
    //선택된 Tab에만 적용되는 CSS
     color: #810000;
     border: 2px solid #810000;
-    border-bottom: 2px solid white;
+    border-bottom: 3px solid white;
     margin-bottom: -2px;
     font-weight: bold;
     position: relative;

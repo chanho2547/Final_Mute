@@ -6,9 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
 import java.time.LocalDate;
 
-
-// 뮤지컬 검색 때문에 임시로 생성
-// 윤정언니 추가하실꺼 있으시면 편하게 추가하세용!!
 @Data
 @RequiredArgsConstructor
 public class MusicalDTO {

@@ -2,14 +2,12 @@ package com.mute.Final.service;
 
 
 import com.mute.Final.dto.MusicalDTO;
-import com.mute.Final.dto.MusicalDetailDTO;
 import com.mute.Final.entity.Musical;
 import com.mute.Final.repository.MusicalRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.XML;
-import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -18,8 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,22 +83,4 @@ public class MusicalApiService {
 
         return musicalListDTOList;
     }
-//
-//    public List<MusicalDTO> musicalAgeList(List<String> musicalAge) {
-//        List<MusicalDTO> musicalDTOS = new ArrayList<>();
-//        List<Musical> musicalList = musicalRepository.findByMusicalAgeNotIn(musicalAge);
-////            List<Musical> musicalList = musicalRepository.findAll();
-//        for (Musical e : musicalList) {
-//            MusicalDTO musicalDTO = new MusicalDTO();
-//            musicalDTO.setMusicalId(e.getMusicalId()); // 공연 고유 번호
-//            musicalDTO.setMusicalName(e.getMusicalName()); // 공연 이름
-//            musicalDTO.setMusicalStart(e.getMusicalStart()); // 공연 시작일
-//            musicalDTO.setMusicalEnd(e.getMusicalEnd()); // 공연 종료일
-//            musicalDTO.setTheaterName(e.getTheaterName()); // 공연장 이름
-//            musicalDTO.setMusicalStatus(e.getMusicalStatus()); // 공연 상태
-//            musicalDTO.setMusicalPoster(e.getMusicalPoster()); // 공연 포스터
-//            musicalDTOS.add(musicalDTO);
-//        }
-//        return musicalDTOS;
-//    }
 }

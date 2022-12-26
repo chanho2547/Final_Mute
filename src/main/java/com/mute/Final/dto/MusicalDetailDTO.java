@@ -1,16 +1,11 @@
 package com.mute.Final.dto;
 
-import com.mute.Final.entity.Musical;
-import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @RequiredArgsConstructor

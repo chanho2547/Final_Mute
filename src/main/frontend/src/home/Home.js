@@ -1,10 +1,8 @@
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import MuteApi from "../api/MuteApi";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Search from '../images/search.png';
-import TopButton from "../util/TopButton";
 
 const SearchContainer = styled.div`
   margin: auto;

@@ -1,6 +1,5 @@
 package com.mute.Final.controller;
 
-import com.mute.Final.dto.PayReadyDTO;
 import com.mute.Final.service.PayService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -8,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.net.URISyntaxException;
 
 @RequiredArgsConstructor
 @Controller // redirect 동작하려면 이걸로!
@@ -22,7 +19,6 @@ public class PayController {
 
     @GetMapping("/pay")
     public String PayReady(@RequestParam String price) {
-        log.info("kakaoPay post..........");
         log.info(payService.PayReady(price));
 
         return "redirect:" + payService.PayReady(price);
@@ -33,7 +29,6 @@ public class PayController {
     // 카카오페이 결제 승인 요청
     @GetMapping("/pay/success")
     public Model paySuccess(@RequestParam("pg_token") String pg_token, Model model) {
-        log.info("kakaoPaySuccess get..............");
         log.info("kakaoPaySuccess pg_token : " + pg_token);
 
         // 결제 정보를 모델에 저장함
