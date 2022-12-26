@@ -72,8 +72,6 @@ const Alarm = (props) => {
     const OnClickAlarmOff = (userNum, musicalId) => {
         const AlarmUpdate = async () => {
             try{
-                // console.log("2. 알람 업데이트 전 userNum :   " + userNum);
-                // console.log("3. 알람 업데이트 전 musicalId :  " + musicalId);
                 let response = await MuteApi.alarmOff(userNum, musicalId);
                 // console.log("4. 알람 업데이트 이후 : ", response.data); // 여기까지 잘 들어왔는데 재렌더링이 안됨 why?
                 setAlarmUpdate(alarmUpdate+1); // 여기서 똑같이 true라고 들어와서 값이 바뀌었다고 인식하지 못함
